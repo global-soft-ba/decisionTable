@@ -2,6 +2,7 @@ package main
 
 import (
 	"decisionTable/model"
+	validator "decisionTable/validator"
 )
 
 type DTableBuilder struct {
@@ -46,16 +47,18 @@ func (d DTableBuilder) AddOutputField(name string, label string, typ string) DTa
 }
 
 func (d DTableBuilder) AddRule(input []model.Entry, output []model.Entry, description string) DTableBuilderInterface {
-
 	r := model.Rule{Description: description, InputEntries: input, OutputEntries: output}
 	d.dTableData.Rules = append(d.dTableData.Rules, r)
 	return d
 }
 
 func (d DTableBuilder) Build() (DecisionTable, []error) {
-	//Validate()
-	//DecisionTable{d.dTableData.Key,...}
 	table := d.createDecisionTable()
+	if valid, errs := d.validate(); valid != true {
+		return table, errs
+	}
+
+	table.valid = true
 	return table, nil
 }
 
@@ -66,10 +69,25 @@ func (d DTableBuilder) createDecisionTable() DecisionTable {
 		hitPolicy:          d.dTableData.HitPolicy,
 		collectOperator:    d.dTableData.CollectOperator,
 		expressionLanguage: d.dTableData.ExpressionLanguage,
+		valid:              false,
 		inputFields:        d.dTableData.InputFields,
 		outputFields:       d.dTableData.OutputFields,
 		rules:              d.dTableData.Rules,
 	}
 
 	return dTable
+}
+
+func (d DTableBuilder) validate() (bool, []error) {
+	//General Validation
+	if valid, err := validator.CreateDTableValidator(d.dTableData).Validate(); valid != true {
+		return valid, err
+	}
+
+	//Expression per Entry Validation
+	if valid, err := validator.CreateDTableExpressionValidator(d.dTableData).Validate(); valid != true {
+		return valid, err
+	}
+
+	return true, []error{}
 }

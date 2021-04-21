@@ -15,10 +15,19 @@ type DecisionTable struct {
 	hitPolicy          string
 	collectOperator    string
 	expressionLanguage string
+	valid              bool
 
 	inputFields  []model.Field
 	outputFields []model.Field
 	rules        []model.Rule
+}
+
+func (d DecisionTable) ExpressionLanguage() string {
+	return d.expressionLanguage
+}
+
+func (d DecisionTable) Valid() bool {
+	return d.valid
 }
 
 func (d DecisionTable) Key() string {
