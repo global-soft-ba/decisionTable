@@ -1,19 +1,24 @@
 package main
 
-import "decisionTable/model"
+import (
+	"decisionTable/model"
+)
 
-type Builder struct{
-	dtable DecisionTable
+func CreateDecisionTable() DTableBuilderInterface {
+	d := DTableBuilder{}
+	return d
 }
 
-type DecisionTable struct{
-	key string
-	name string
-	hitPolicy string
-	collectOperator string
-	inputs []model.Input
-	outputs []model.Output
-	rules []model.Rule
+type DecisionTable struct {
+	key                string
+	name               string
+	hitPolicy          string
+	collectOperator    string
+	expressionLanguage string
+
+	inputFields  []model.Field
+	outputFields []model.Field
+	rules        []model.Rule
 }
 
 func (d DecisionTable) Key() string {
@@ -32,12 +37,12 @@ func (d DecisionTable) CollectOperator() string {
 	return d.collectOperator
 }
 
-func (d DecisionTable) Inputs() []model.Input {
-	return d.inputs
+func (d DecisionTable) InputFields() []model.Field {
+	return d.inputFields
 }
 
-func (d DecisionTable) Outputs() []model.Output {
-	return d.outputs
+func (d DecisionTable) OutputFields() []model.Field {
+	return d.outputFields
 }
 
 func (d DecisionTable) Rules() []model.Rule {

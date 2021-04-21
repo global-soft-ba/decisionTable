@@ -1,7 +1,7 @@
 package model
 
-type Rule struct{
-	description string
-	inputEntries []InputEntry
-	outputEntries []OutputEntry
+type Rule struct {
+	Description   string
+	InputEntries  []Entry
+	OutputEntries []Entry
 }
