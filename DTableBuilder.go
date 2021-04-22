@@ -29,8 +29,8 @@ func (d DTableBuilder) SetCollectOperator(collector string) DTableBuilderInterfa
 	return d
 }
 
-func (d DTableBuilder) SetExpressionLanguage(lang string) DTableBuilderInterface {
-	d.dTableData.ExpressionLanguage = lang
+func (d DTableBuilder) SetDTableStandard(lang string) DTableBuilderInterface {
+	d.dTableData.DTableStandard = lang
 	return d
 }
 
@@ -64,15 +64,15 @@ func (d DTableBuilder) Build() (DecisionTable, []error) {
 
 func (d DTableBuilder) createDecisionTable() DecisionTable {
 	dTable := DecisionTable{
-		key:                d.dTableData.Key,
-		name:               d.dTableData.Name,
-		hitPolicy:          d.dTableData.HitPolicy,
-		collectOperator:    d.dTableData.CollectOperator,
-		expressionLanguage: d.dTableData.ExpressionLanguage,
-		valid:              false,
-		inputFields:        d.dTableData.InputFields,
-		outputFields:       d.dTableData.OutputFields,
-		rules:              d.dTableData.Rules,
+		key:             d.dTableData.Key,
+		name:            d.dTableData.Name,
+		hitPolicy:       d.dTableData.HitPolicy,
+		collectOperator: d.dTableData.CollectOperator,
+		DTableStandard:  d.dTableData.DTableStandard,
+		valid:           false,
+		inputFields:     d.dTableData.InputFields,
+		outputFields:    d.dTableData.OutputFields,
+		rules:           d.dTableData.Rules,
 	}
 
 	return dTable
@@ -81,11 +81,6 @@ func (d DTableBuilder) createDecisionTable() DecisionTable {
 func (d DTableBuilder) validate() (bool, []error) {
 	//General Validation
 	if valid, err := validator.CreateDTableValidator(d.dTableData).Validate(); valid != true {
-		return valid, err
-	}
-
-	//Expression per Entry Validation
-	if valid, err := validator.CreateDTableExpressionValidator(d.dTableData).Validate(); valid != true {
 		return valid, err
 	}
 

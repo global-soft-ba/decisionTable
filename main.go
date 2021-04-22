@@ -1,20 +1,24 @@
 package main
 
 import (
+	"decisionTable/constant"
 	"decisionTable/model"
 	"fmt"
 )
 
 func main() {
 	fmt.Println("Hello World")
-	t, _ := CreateDecisionTable().
-		SetName("test").SetExpressionLanguage("GRULE").
-		AddInputField("name", "person", "string").
-		AddOutputField("out2", "properties", "string").
+	t, err := CreateDecisionTable().
+		SetName("test").SetDTableStandard(constant.DecisionTableStandardGrule).
+		SetDefinitionKey("Key1").
+		SetHitPolicy("FIRST").
+		AddInputField("name", "person", "STRING").
+		AddOutputField("out2", "properties", "STRING").
 		AddRule(
-			[]model.Entry{model.Entry{Expression: "Markus", ExpressionLanguage: "GRULE"}},    //In
-			[]model.Entry{model.Entry{Expression: "Du Kalbei", ExpressionLanguage: "GRULE"}}, //Out
+			[]model.Entry{model.Entry{Expression: "=\"Max\"", ExpressionLanguage: "GRL"}}, //In
+			[]model.Entry{model.Entry{Expression: "Dear Max", ExpressionLanguage: "GRL"}}, //Out
 			"salutation").
 		Build()
 	fmt.Println(t)
+	fmt.Println(err)
 }

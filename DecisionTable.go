@@ -10,12 +10,12 @@ func CreateDecisionTable() DTableBuilderInterface {
 }
 
 type DecisionTable struct {
-	key                string
-	name               string
-	hitPolicy          string
-	collectOperator    string
-	expressionLanguage string
-	valid              bool
+	key             string
+	name            string
+	hitPolicy       string
+	collectOperator string
+	DTableStandard  string
+	valid           bool
 
 	inputFields  []model.Field
 	outputFields []model.Field
@@ -23,7 +23,7 @@ type DecisionTable struct {
 }
 
 func (d DecisionTable) ExpressionLanguage() string {
-	return d.expressionLanguage
+	return d.DTableStandard
 }
 
 func (d DecisionTable) Valid() bool {
