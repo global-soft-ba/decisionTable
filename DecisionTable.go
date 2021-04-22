@@ -12,22 +12,14 @@ func CreateDecisionTable() DTableBuilderInterface {
 type DecisionTable struct {
 	key             string
 	name            string
-	hitPolicy       string
-	collectOperator string
-	DTableStandard  string
+	hitPolicy       model.HitPolicy
+	collectOperator model.CollectOperator
+	dTableStandard  model.DTableStandard
 	valid           bool
 
 	inputFields  []model.Field
 	outputFields []model.Field
 	rules        []model.Rule
-}
-
-func (d DecisionTable) ExpressionLanguage() string {
-	return d.DTableStandard
-}
-
-func (d DecisionTable) Valid() bool {
-	return d.valid
 }
 
 func (d DecisionTable) Key() string {
@@ -38,12 +30,20 @@ func (d DecisionTable) Name() string {
 	return d.name
 }
 
-func (d DecisionTable) HitPolicy() string {
+func (d DecisionTable) HitPolicy() model.HitPolicy {
 	return d.hitPolicy
 }
 
-func (d DecisionTable) CollectOperator() string {
+func (d DecisionTable) CollectOperator() model.CollectOperator {
 	return d.collectOperator
+}
+
+func (d DecisionTable) DTableStandard() model.DTableStandard {
+	return d.dTableStandard
+}
+
+func (d DecisionTable) Valid() bool {
+	return d.valid
 }
 
 func (d DecisionTable) InputFields() []model.Field {

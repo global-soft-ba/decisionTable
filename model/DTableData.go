@@ -3,9 +3,9 @@ package model
 type DTableData struct {
 	Key             string
 	Name            string
-	HitPolicy       string
-	CollectOperator string
-	DTableStandard  string
+	HitPolicy       HitPolicy
+	CollectOperator CollectOperator
+	DTableStandard  DTableStandard
 
 	InputFields  []Field
 	OutputFields []Field

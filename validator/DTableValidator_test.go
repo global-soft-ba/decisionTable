@@ -1,7 +1,6 @@
 package validator
 
 import (
-	"decisionTable/constant"
 	"decisionTable/model"
 	"reflect"
 	"testing"
@@ -19,29 +18,29 @@ func TestDTableValidator_Validate(t *testing.T) {
 			table: model.DTableData{
 				"test1",
 				"TableOne",
-				"FIRST",
-				"",
-				constant.DecisionTableStandardGrule,
+				model.First,
+				model.List,
+				model.GRULE,
 				[]model.Field{{
 					Name:  "I1",
 					Label: "L1",
-					Typ:   "STRING",
+					Typ:   model.String,
 				},
 				},
 				[]model.Field{{
 					Name:  "O1",
 					Label: "L1",
-					Typ:   "FLOAT",
+					Typ:   model.Float,
 				}},
 				[]model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{{
 						Expression:         " =3",
-						ExpressionLanguage: "GRL",
+						ExpressionLanguage: model.GRL,
 					}},
 					OutputEntries: []model.Entry{{
 						Expression:         "4",
-						ExpressionLanguage: "GRL",
+						ExpressionLanguage: model.GRL,
 					}},
 				}},
 			},
@@ -49,103 +48,67 @@ func TestDTableValidator_Validate(t *testing.T) {
 			want1: nil,
 		},
 		{
-			name: "Empty Fields",
+			name: "Wrong hit policy for the DTableStandard",
 			table: model.DTableData{
+				"test1",
+				"TableOne",
+				model.Any,
 				"",
-				"",
-				"",
-				"",
-				"",
+				model.GRULE,
 				[]model.Field{{
 					Name:  "I1",
 					Label: "L1",
-					Typ:   "STRING",
+					Typ:   model.String,
 				},
 				},
 				[]model.Field{{
 					Name:  "O1",
 					Label: "L1",
-					Typ:   "FLOAT",
+					Typ:   model.Integer,
 				}},
 				[]model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{{
 						Expression:         " =3",
-						ExpressionLanguage: "GRL",
+						ExpressionLanguage: model.GRL,
 					}},
 					OutputEntries: []model.Entry{{
 						Expression:         "4",
-						ExpressionLanguage: "GRL",
-					}},
-				}},
-			},
-			want: false,
-			want1: []error{ErrDTableNameEmpty, ErrDTableKeyEmpty, ErrDTableStandardInvalid,
-				ErrDTableHitPolicy, ErrDTableFieldTypInvalid, ErrDTableFieldTypInvalid,
-				ErrDTableEntryExpressionLangInvalid, ErrDTableEntryExpressionLangInvalid},
-		},
-		{
-			name: "Empty CollectOperators DMN",
-			table: model.DTableData{
-				"K1",
-				"N1",
-				constant.CollectOperatorPolicy,
-				"",
-				constant.DecisionTableStandardDMN,
-				[]model.Field{{
-					Name:  "I1",
-					Label: "L1",
-					Typ:   "STRING",
-				},
-				},
-				[]model.Field{{
-					Name:  "O1",
-					Label: "L1",
-					Typ:   "INTEGER",
-				}},
-				[]model.Rule{{
-					Description: "R1",
-					InputEntries: []model.Entry{{
-						Expression:         " =3",
-						ExpressionLanguage: "FEEL",
-					}},
-					OutputEntries: []model.Entry{{
-						Expression:         "4",
-						ExpressionLanguage: "JUEL",
+						ExpressionLanguage: model.GRL,
 					}},
 				}},
 			},
 			want:  false,
-			want1: []error{ErrDTableEmptyCollectOperator},
+			want1: []error{ErrDTableHitPolicy},
 		},
 		{
 			name: "Wrong CollectOperators DMN",
 			table: model.DTableData{
 				"K1",
 				"N1",
-				constant.CollectOperatorPolicy,
+				model.Collect,
 				"XYZ",
-				constant.DecisionTableStandardDMN,
+				model.DMN,
 				[]model.Field{{
 					Name:  "I1",
 					Label: "L1",
-					Typ:   "STRING",
+					Typ:   model.String,
 				},
 				},
 				[]model.Field{{
 					Name:  "O1",
 					Label: "L1",
-					Typ:   "INTEGER",
+					Typ:   model.Integer,
 				}},
 				[]model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{{
 						Expression:         " =3",
-						ExpressionLanguage: "FEEL",
+						ExpressionLanguage: model.FEEL,
 					}},
 					OutputEntries: []model.Entry{{
 						Expression:         "4",
-						ExpressionLanguage: "JUEL",
+						ExpressionLanguage: model.Juel,
 					}},
 				}},
 			},
@@ -157,9 +120,9 @@ func TestDTableValidator_Validate(t *testing.T) {
 			table: model.DTableData{
 				"K1",
 				"N1",
-				"FIRST",
+				model.First,
 				"",
-				constant.DecisionTableStandardGrule,
+				model.GRULE,
 				[]model.Field{},
 				[]model.Field{},
 				[]model.Rule{{
@@ -176,29 +139,29 @@ func TestDTableValidator_Validate(t *testing.T) {
 			table: model.DTableData{
 				"K1",
 				"N1",
-				"FIRST",
+				model.First,
 				"",
-				constant.DecisionTableStandardGrule,
+				model.GRULE,
 				[]model.Field{{
 					Name:  "I1",
 					Label: "L1",
-					Typ:   "DOUBLE",
+					Typ:   model.Double,
 				},
 				},
 				[]model.Field{{
 					Name:  "",
 					Label: "L1",
-					Typ:   "INTEGER",
+					Typ:   model.Integer,
 				}},
 				[]model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{{
 						Expression:         " =3",
-						ExpressionLanguage: "GRL",
+						ExpressionLanguage: model.GRL,
 					}},
 					OutputEntries: []model.Entry{{
 						Expression:         "4",
-						ExpressionLanguage: "GRL",
+						ExpressionLanguage: model.GRL,
 					}},
 				}},
 			},
@@ -210,28 +173,28 @@ func TestDTableValidator_Validate(t *testing.T) {
 			table: model.DTableData{
 				"K1",
 				"N1",
-				"FIRST",
+				model.First,
 				"",
-				constant.DecisionTableStandardGrule,
+				model.GRULE,
 				[]model.Field{{
 					Name:  "I1",
 					Label: "L1",
-					Typ:   "STRING",
+					Typ:   model.String,
 				},
 				},
 				[]model.Field{{
 					Name:  "O2",
 					Label: "L1",
-					Typ:   "INTEGER",
+					Typ:   model.Integer,
 				}},
 				[]model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{{
 						Expression:         " =3",
-						ExpressionLanguage: "GRL",
+						ExpressionLanguage: model.GRL,
 					}, {
 						Expression:         " =3",
-						ExpressionLanguage: "GRL",
+						ExpressionLanguage: model.GRL,
 					}},
 					OutputEntries: []model.Entry{},
 				}},
@@ -244,29 +207,29 @@ func TestDTableValidator_Validate(t *testing.T) {
 			table: model.DTableData{
 				"K1",
 				"N1",
-				"FIRST",
+				model.First,
 				"",
-				constant.DecisionTableStandardGrule,
+				model.GRULE,
 				[]model.Field{{
 					Name:  "I1",
 					Label: "L1",
-					Typ:   "STRING",
+					Typ:   model.String,
 				},
 				},
 				[]model.Field{{
 					Name:  "O2",
 					Label: "L1",
-					Typ:   "INTEGER",
+					Typ:   model.Integer,
 				}},
 				[]model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{{
 						Expression:         " =3",
-						ExpressionLanguage: "FEEL",
+						ExpressionLanguage: model.FEEL,
 					}},
 					OutputEntries: []model.Entry{{
 						Expression:         " =3",
-						ExpressionLanguage: "GRL",
+						ExpressionLanguage: model.GRL,
 					}},
 				}},
 			},

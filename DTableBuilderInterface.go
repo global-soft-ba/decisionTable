@@ -6,12 +6,12 @@ import (
 
 type DTableBuilderInterface interface {
 	Build() (DecisionTable, []error)
-	SetDTableStandard(lang string) DTableBuilderInterface
 	SetDefinitionKey(key string) DTableBuilderInterface
 	SetName(name string) DTableBuilderInterface
-	SetHitPolicy(policy string) DTableBuilderInterface
-	SetCollectOperator(collector string) DTableBuilderInterface
-	AddInputField(name string, label string, typ string) DTableBuilderInterface
-	AddOutputField(name string, label string, typ string) DTableBuilderInterface
+	SetDTableStandard(lang model.DTableStandard) DTableBuilderInterface
+	SetHitPolicy(policy model.HitPolicy) DTableBuilderInterface
+	SetCollectOperator(collector model.CollectOperator) DTableBuilderInterface
+	AddInputField(name string, label string, typ model.VariableTyp) DTableBuilderInterface
+	AddOutputField(name string, label string, typ model.VariableTyp) DTableBuilderInterface
 	AddRule(input []model.Entry, output []model.Entry, description string) DTableBuilderInterface
 }

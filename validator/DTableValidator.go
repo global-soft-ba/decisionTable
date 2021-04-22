@@ -1,20 +1,19 @@
 package validator
 
 import (
-	"decisionTable/constant"
+	conf "decisionTable/config"
 	"decisionTable/model"
 	"errors"
+	"fmt"
 )
 
 var (
-	ErrDTableNameEmpty            = errors.New("name of decision table is required")
-	ErrDTableKeyEmpty             = errors.New("definition key of decision table is required")
-	ErrDTableStandardInvalid      = errors.New("missing or invalid table standard")
-	ErrDTableHitPolicy            = errors.New("hit policy of decision table is invalid")
-	ErrDTableCollectOperator      = errors.New("collect operator of decision table is invalid")
-	ErrDTableEmptyCollectOperator = errors.New("collect operator of decision table cannot be empty for the hit policy")
-	ErrDTableInputEmpty           = errors.New("at least one input is required")
-	ErrDTableOutputEmpty          = errors.New("at least one output is required")
+	ErrDTableNameEmpty       = errors.New("name of decision table is required")
+	ErrDTableKeyEmpty        = errors.New("definition key of decision table is required")
+	ErrDTableHitPolicy       = errors.New("hit policy of decision table is invalid")
+	ErrDTableCollectOperator = errors.New("collect operator of decision table is invalid")
+	ErrDTableInputEmpty      = errors.New("at least one input is required")
+	ErrDTableOutputEmpty     = errors.New("at least one output is required")
 
 	ErrDTableFieldNameEmpty  = errors.New("field name is empty")
 	ErrDTableFieldLabelEmpty = errors.New("field label is empty")
@@ -40,8 +39,8 @@ func (d DTableValidator) Validate() (bool, []error) {
 	var v = d
 	v = v.collectValidationResult(v.validateName)
 	v = v.collectValidationResult(v.validateKey)
-	v = v.collectValidationResult(v.validateTableStandard)
 	v = v.collectValidationResult(v.validateHitPolicy)
+	v = v.collectValidationResult(v.validateCollectOperator)
 	v = v.collectValidationResults(v.validateInput)
 	v = v.collectValidationResults(v.validateOutput)
 	v = v.collectValidationResults(v.validateRuleSchema)
@@ -85,24 +84,19 @@ func (d DTableValidator) validateKey() (bool, error) {
 	return true, nil
 }
 
-func (d DTableValidator) validateTableStandard() (bool, error) {
-	if _, ok := constant.DTableStandards[d.dTable.DTableStandard]; !ok {
-		return false, ErrDTableStandardInvalid
-	}
-	return true, nil
-}
-
 func (d DTableValidator) validateHitPolicy() (bool, error) {
-	if _, ok := constant.AllowedConfigForStandard[d.dTable.DTableStandard].HitPolicies[d.dTable.HitPolicy]; !ok {
+	test := conf.DTableConfig[d.dTable.DTableStandard]
+	fmt.Println(test)
+	if _, ok := conf.DTableConfig[d.dTable.DTableStandard].HitPolicies[d.dTable.HitPolicy]; !ok {
 		return false, ErrDTableHitPolicy
 	}
 
-	if d.dTable.HitPolicy == constant.CollectOperatorPolicy {
-		if len(d.dTable.CollectOperator) == 0 {
-			return false, ErrDTableEmptyCollectOperator
-		}
+	return true, nil
+}
 
-		if _, ok := constant.AllowedConfigForStandard[d.dTable.DTableStandard].CollectOperators[d.dTable.CollectOperator]; !ok {
+func (d DTableValidator) validateCollectOperator() (bool, error) {
+	if d.dTable.HitPolicy == model.Collect {
+		if _, ok := conf.DTableConfig[d.dTable.DTableStandard].CollectOperators[d.dTable.CollectOperator]; !ok {
 			return false, ErrDTableCollectOperator
 		}
 	}
@@ -208,7 +202,7 @@ func (d DTableValidator) checkFields(f model.Field) (bool, error) {
 		return false, ErrDTableFieldLabelEmpty
 	}
 
-	if _, ok := constant.AllowedConfigForStandard[d.dTable.DTableStandard].VariableType[f.Typ]; !ok {
+	if _, ok := conf.DTableConfig[d.dTable.DTableStandard].VariableType[f.Typ]; !ok {
 		return false, ErrDTableFieldTypInvalid
 	}
 
@@ -219,13 +213,13 @@ func (d DTableValidator) checkRule(r model.Rule) (bool, []error) {
 	var errResult []error
 
 	for _, v := range r.InputEntries {
-		if _, ok := constant.AllowedConfigForStandard[d.dTable.DTableStandard].ExpressionLanguage[v.ExpressionLanguage]; !ok {
+		if _, ok := conf.DTableConfig[d.dTable.DTableStandard].ExpressionLanguage[v.ExpressionLanguage]; !ok {
 			errResult = append(errResult, ErrDTableEntryExpressionLangInvalid)
 		}
 	}
 
 	for _, v := range r.OutputEntries {
-		if _, ok := constant.AllowedConfigForStandard[d.dTable.DTableStandard].ExpressionLanguage[v.ExpressionLanguage]; !ok {
+		if _, ok := conf.DTableConfig[d.dTable.DTableStandard].ExpressionLanguage[v.ExpressionLanguage]; !ok {
 			errResult = append(errResult, ErrDTableEntryExpressionLangInvalid)
 		}
 	}

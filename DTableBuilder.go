@@ -2,7 +2,7 @@ package main
 
 import (
 	"decisionTable/model"
-	validator "decisionTable/validator"
+	"decisionTable/validator"
 )
 
 type DTableBuilder struct {
@@ -19,28 +19,28 @@ func (d DTableBuilder) SetName(name string) DTableBuilderInterface {
 	return d
 }
 
-func (d DTableBuilder) SetHitPolicy(policy string) DTableBuilderInterface {
+func (d DTableBuilder) SetHitPolicy(policy model.HitPolicy) DTableBuilderInterface {
 	d.dTableData.HitPolicy = policy
 	return d
 }
 
-func (d DTableBuilder) SetCollectOperator(collector string) DTableBuilderInterface {
+func (d DTableBuilder) SetCollectOperator(collector model.CollectOperator) DTableBuilderInterface {
 	d.dTableData.CollectOperator = collector
 	return d
 }
 
-func (d DTableBuilder) SetDTableStandard(lang string) DTableBuilderInterface {
+func (d DTableBuilder) SetDTableStandard(lang model.DTableStandard) DTableBuilderInterface {
 	d.dTableData.DTableStandard = lang
 	return d
 }
 
-func (d DTableBuilder) AddInputField(name string, label string, typ string) DTableBuilderInterface {
+func (d DTableBuilder) AddInputField(name string, label string, typ model.VariableTyp) DTableBuilderInterface {
 	field := model.Field{Name: name, Label: label, Typ: typ}
 	d.dTableData.InputFields = append(d.dTableData.InputFields, field)
 	return d
 }
 
-func (d DTableBuilder) AddOutputField(name string, label string, typ string) DTableBuilderInterface {
+func (d DTableBuilder) AddOutputField(name string, label string, typ model.VariableTyp) DTableBuilderInterface {
 	field := model.Field{Name: name, Label: label, Typ: typ}
 	d.dTableData.OutputFields = append(d.dTableData.OutputFields, field)
 	return d
@@ -68,7 +68,7 @@ func (d DTableBuilder) createDecisionTable() DecisionTable {
 		name:            d.dTableData.Name,
 		hitPolicy:       d.dTableData.HitPolicy,
 		collectOperator: d.dTableData.CollectOperator,
-		DTableStandard:  d.dTableData.DTableStandard,
+		dTableStandard:  d.dTableData.DTableStandard,
 		valid:           false,
 		inputFields:     d.dTableData.InputFields,
 		outputFields:    d.dTableData.OutputFields,
