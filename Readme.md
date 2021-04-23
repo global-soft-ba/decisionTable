@@ -1,10 +1,10 @@
 # Decision Table Representation
 A representation of a decision table with: 
 * simple data structure
-* support of DMN and GRULE table standardization
-* no execution - only representation of decision tables 
-* value object characteristics
-## Decision Table Example
+* no execution - only representation
+* support of DMN and GRULE notation standards
+
+## Table Example
 ![Image of Decision Table](img.png)
 
 ## Code Example
