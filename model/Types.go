@@ -10,13 +10,13 @@ const (
 type HitPolicy string
 
 const (
-	Unique      HitPolicy = "Unique"
-	First       HitPolicy = "First"
-	Priority    HitPolicy = "Priority"
-	Any         HitPolicy = "Any"
+	Unique      HitPolicy = "Unique"   // Rules do not overlap. Only a single rule can match.
+	First       HitPolicy = "First"    // Rules are evaluated from top to bottom. Rules may overlap, but only the first match counts.
+	Priority    HitPolicy = "Priority" // Rule outputs are prioritized. Rules may overlap, but only the match with the highest output priority counts.
+	Any         HitPolicy = "Any"      // Multiple matching rules must not make a difference: all matching rules must lead to the same output.
 	RuleOrder   HitPolicy = "Rule Order"
 	OutputOrder HitPolicy = "Output Order"
-	Collect     HitPolicy = "Collect"
+	Collect     HitPolicy = "Collect" // The output of all matching rules is aggregated by means of an operator:
 )
 
 type ExpressionLanguage string

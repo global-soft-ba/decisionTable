@@ -57,6 +57,7 @@ var gruleStandard = DTableConfig{
 	},
 
 	HitPolicies: map[model.HitPolicy]string{
+		model.Unique:   "",
 		model.First:    "",
 		model.Priority: "",
 	},
