@@ -10,12 +10,12 @@ func CreateDecisionTable() DTableBuilderInterface {
 }
 
 type DecisionTable struct {
-	key             string
-	name            string
-	hitPolicy       model.HitPolicy
-	collectOperator model.CollectOperator
-	dTableStandard  model.DTableStandard
-	valid           bool
+	key              string
+	name             string
+	hitPolicy        model.HitPolicy
+	collectOperator  model.CollectOperator
+	notationStandard model.DTableStandard
+	valid            bool
 
 	inputFields  []model.Field
 	outputFields []model.Field
@@ -38,8 +38,8 @@ func (d DecisionTable) CollectOperator() model.CollectOperator {
 	return d.collectOperator
 }
 
-func (d DecisionTable) DTableStandard() model.DTableStandard {
-	return d.dTableStandard
+func (d DecisionTable) NotationStandard() model.DTableStandard {
+	return d.notationStandard
 }
 
 func (d DecisionTable) Valid() bool {

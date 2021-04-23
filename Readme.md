@@ -58,3 +58,33 @@ Multiple result tables may return the output of multiple rules. The hit policies
 
 ### Examples
 Examples can be found here: [Camunda Page](https://camunda.com/best-practices/choosing-the-dmn-hit-policy/#_knowing_the_dmn_hit_policy_strong_basics_strong)
+
+## Variable Types
+The allowed types of input or output variables differs on the selected notation standard of a decision table:
+
+Variable Types | DMN Notation | GRL Notation
+------------ | ---------------|--------------
+Boolean|X|X
+String|X|X
+Integer|X|X
+Float||X   
+Long|X|    
+Double|X|  
+Date|X|X    
+
+## Expression Languages
+The expresion language defined the functions and comparisons of a single rule entry. It depends on the chosen table notations standard.
+
+Expression Language | DMN Notation | GRL Notation   
+------------ | ---------------|--------------  	
+GRL| |X
+FEEL|X|       
+Javascript|X|
+Python|X|     
+Groovy|X|     
+JRuby|X|      
+Juel|X|       
+       
+More Details can be found here:
+* [GRULE](http://hyperjumptech.viewdocs.io/grule-rule-engine/GRL_en/)
+* [Decision Model and Notation DMN (OMG)](https://www.omg.org/spec/DMN/1.2/PDF)

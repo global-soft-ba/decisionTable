@@ -1,11 +1,11 @@
 package model
 
 type DTableData struct {
-	Key             string
-	Name            string
-	HitPolicy       HitPolicy
-	CollectOperator CollectOperator
-	DTableStandard  DTableStandard
+	Key              string
+	Name             string
+	HitPolicy        HitPolicy
+	CollectOperator  CollectOperator
+	NotationStandard DTableStandard
 
 	InputFields  []Field
 	OutputFields []Field

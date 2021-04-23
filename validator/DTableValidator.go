@@ -85,9 +85,9 @@ func (d DTableValidator) validateKey() (bool, error) {
 }
 
 func (d DTableValidator) validateHitPolicy() (bool, error) {
-	test := conf.NotationStandards[d.dTable.DTableStandard]
+	test := conf.NotationStandards[d.dTable.NotationStandard]
 	fmt.Println(test)
-	if _, ok := conf.NotationStandards[d.dTable.DTableStandard].HitPolicies[d.dTable.HitPolicy]; !ok {
+	if _, ok := conf.NotationStandards[d.dTable.NotationStandard].HitPolicies[d.dTable.HitPolicy]; !ok {
 		return false, ErrDTableHitPolicy
 	}
 
@@ -96,7 +96,7 @@ func (d DTableValidator) validateHitPolicy() (bool, error) {
 
 func (d DTableValidator) validateCollectOperator() (bool, error) {
 	if d.dTable.HitPolicy == model.Collect {
-		if _, ok := conf.NotationStandards[d.dTable.DTableStandard].CollectOperators[d.dTable.CollectOperator]; !ok {
+		if _, ok := conf.NotationStandards[d.dTable.NotationStandard].CollectOperators[d.dTable.CollectOperator]; !ok {
 			return false, ErrDTableCollectOperator
 		}
 	}
@@ -202,7 +202,7 @@ func (d DTableValidator) checkFields(f model.Field) (bool, error) {
 		return false, ErrDTableFieldLabelEmpty
 	}
 
-	if _, ok := conf.NotationStandards[d.dTable.DTableStandard].VariableType[f.Typ]; !ok {
+	if _, ok := conf.NotationStandards[d.dTable.NotationStandard].VariableType[f.Typ]; !ok {
 		return false, ErrDTableFieldTypInvalid
 	}
 
@@ -213,13 +213,13 @@ func (d DTableValidator) checkRule(r model.Rule) (bool, []error) {
 	var errResult []error
 
 	for _, v := range r.InputEntries {
-		if _, ok := conf.NotationStandards[d.dTable.DTableStandard].ExpressionLanguage[v.ExpressionLanguage]; !ok {
+		if _, ok := conf.NotationStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage]; !ok {
 			errResult = append(errResult, ErrDTableEntryExpressionLangInvalid)
 		}
 	}
 
 	for _, v := range r.OutputEntries {
-		if _, ok := conf.NotationStandards[d.dTable.DTableStandard].ExpressionLanguage[v.ExpressionLanguage]; !ok {
+		if _, ok := conf.NotationStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage]; !ok {
 			errResult = append(errResult, ErrDTableEntryExpressionLangInvalid)
 		}
 	}

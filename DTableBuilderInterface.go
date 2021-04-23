@@ -8,7 +8,7 @@ type DTableBuilderInterface interface {
 	Build() (DecisionTable, []error)
 	SetDefinitionKey(key string) DTableBuilderInterface
 	SetName(name string) DTableBuilderInterface
-	SetDTableStandard(lang model.DTableStandard) DTableBuilderInterface
+	SetNotationStandard(lang model.DTableStandard) DTableBuilderInterface
 	SetHitPolicy(policy model.HitPolicy) DTableBuilderInterface
 	SetCollectOperator(collector model.CollectOperator) DTableBuilderInterface
 	AddInputField(name string, label string, typ model.VariableTyp) DTableBuilderInterface

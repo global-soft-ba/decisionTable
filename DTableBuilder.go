@@ -29,8 +29,8 @@ func (d DTableBuilder) SetCollectOperator(collector model.CollectOperator) DTabl
 	return d
 }
 
-func (d DTableBuilder) SetDTableStandard(lang model.DTableStandard) DTableBuilderInterface {
-	d.dTableData.DTableStandard = lang
+func (d DTableBuilder) SetNotationStandard(lang model.DTableStandard) DTableBuilderInterface {
+	d.dTableData.NotationStandard = lang
 	return d
 }
 
@@ -64,15 +64,15 @@ func (d DTableBuilder) Build() (DecisionTable, []error) {
 
 func (d DTableBuilder) createDecisionTable() DecisionTable {
 	dTable := DecisionTable{
-		key:             d.dTableData.Key,
-		name:            d.dTableData.Name,
-		hitPolicy:       d.dTableData.HitPolicy,
-		collectOperator: d.dTableData.CollectOperator,
-		dTableStandard:  d.dTableData.DTableStandard,
-		valid:           false,
-		inputFields:     d.dTableData.InputFields,
-		outputFields:    d.dTableData.OutputFields,
-		rules:           d.dTableData.Rules,
+		key:              d.dTableData.Key,
+		name:             d.dTableData.Name,
+		hitPolicy:        d.dTableData.HitPolicy,
+		collectOperator:  d.dTableData.CollectOperator,
+		notationStandard: d.dTableData.NotationStandard,
+		valid:            false,
+		inputFields:      d.dTableData.InputFields,
+		outputFields:     d.dTableData.OutputFields,
+		rules:            d.dTableData.Rules,
 	}
 
 	return dTable

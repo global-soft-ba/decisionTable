@@ -48,7 +48,7 @@ func TestDTableValidator_Validate(t *testing.T) {
 			want1: nil,
 		},
 		{
-			name: "Wrong hit policy for the DTableStandard",
+			name: "Wrong hit policy for the NotationStandard",
 			table: model.DTableData{
 				"test1",
 				"TableOne",
