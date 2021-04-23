@@ -1,29 +1,42 @@
 # Decision Table Representation
+A representation of a decision table with: 
 * simple data structure
 * support of DMN and GRULE table standardization
 * no execution - only representation of decision tables 
 * value object characteristics
+## Decision Table Example
+![Image of Decision Table](img.png)
+
+## Code Example
 ```
 CreateDecisionTable().
-    SetName("Salutation").
-    SetDefinitionKey("4711-ZXY-ZXXX-293").
-    SetDTableStandard(model.GRULE).
-    SetHitPolicy(model.First).
-    AddInputField("age", "person", model.String).
-    AddOutputField("salutation", "Header", model.String).
-    AddRule(
-        []model.Entry{model.Entry{Expression: ">30", ExpressionLanguage:model.GRL}}, //In
-        []model.Entry{model.Entry{Expression: "Dear Customer", ExpressionLanguage:model.GRL}}, //Out
-        "salutation formal").
-    AddRule(
-        []model.Entry{model.Entry{Expression: ">18 && <=30", ExpressionLanguage: model.GRL}}, //In
-        []model.Entry{model.Entry{Expression: "Hi", ExpressionLanguage: model.GRL}}, //Out
-        "salutation informal").
-    AddRule(
-        []model.Entry{model.Entry{Expression: "<=18", ExpressionLanguage: model.GRL}}, //In
-        []model.Entry{model.Entry{Expression: "YOLO", ExpressionLanguage: model.GRL}}, //Out
-        "salutation teenHipp").
-    Build()
+		SetName("Determine Employee").
+		SetDefinitionKey("determineEmployee").
+		SetNotationStandard(model.GRULE).
+		SetHitPolicy(model.Unique).
+		AddInputField("Type of claim", "claim", model.String).
+		AddInputField("Expenditure of claim", "claim", model.Integer).
+		AddOutputField("Responsible employee", "Employee", model.String).
+		AddOutputField("4 eyes principle", "Employee", model.Boolean).
+		AddRule(
+			[]model.Entry{model.Entry{Expression: "Car Accident", ExpressionLanguage: model.GRL},
+				          model.Entry{Expression: "<1000", ExpressionLanguage:model.GRL}},
+			[]model.Entry{model.Entry{Expression: "Müller", ExpressionLanguage:model.GRL},
+				          model.Entry{Expression: "false", ExpressionLanguage:model.GRL}},
+			"").
+		AddRule(
+			[]model.Entry{model.Entry{Expression: "Car Accident", ExpressionLanguage:model.GRL},
+				          model.Entry{Expression: "[1000..10000]", ExpressionLanguage:model.GRL}},
+			[]model.Entry{model.Entry{Expression: "Meier", ExpressionLanguage:model.GRL},
+				          model.Entry{Expression: "false", ExpressionLanguage:model.GRL}},
+			"").
+		AddRule(
+			[]model.Entry{model.Entry{Expression: "Car Accident", ExpressionLanguage:model.GRL},
+				          model.Entry{Expression: ">=10000", ExpressionLanguage:model.GRL}},
+			[]model.Entry{model.Entry{Expression: "Schmidt", ExpressionLanguage:model.GRL},
+				          model.Entry{Expression: "true", ExpressionLanguage:model.GRL}},
+			"").
+	Build()
 ```
 
 We assume that the frontend will represent a decision table as a kind of table. In case, that a user changes something in the frontend table, we drop the old decision table representation and rebuild from the new 
