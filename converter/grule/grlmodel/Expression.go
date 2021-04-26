@@ -1,4 +1,4 @@
-package model
+package grlmodel
 
 type Expression struct {
 	Name       string

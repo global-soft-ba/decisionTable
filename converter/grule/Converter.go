@@ -2,29 +2,39 @@ package grule
 
 import (
 	"decisionTable/converter"
+	"decisionTable/converter/grule/grlmodel"
 	"decisionTable/converter/grule/mapper"
 	"decisionTable/converter/grule/templates"
 	"decisionTable/model"
 	"html/template"
 )
 
-type DTableToGruleConverter struct {
+func CreateDTableToGrlConverter() Converter {
+	return Converter{}
 }
 
-func (c DTableToGruleConverter) Convert(data model.DTableData) ([]byte, error) {
+type Converter struct {
+}
+
+func (c Converter) Convert(data model.DTableData) ([]string, error) {
 	if data.NotationStandard != model.GRULE {
-		return []byte{}, converter.ErrDTableNotationStandard
+		return []string{}, converter.ErrDTableNotationStandard
 	}
 
-	_, err := mapper.DTableToGrlMapper{}.MapToRuleSet(data)
+	grlModel, err := mapper.CreateGruleMapper().MapToRuleSet(data)
 	if err != nil {
-		return []byte{}, err
+		return []string{}, err
 	}
 
-	return []byte{}, nil
+	result, err := c.converting(grlModel)
+	if err != nil {
+		return []string{}, err
+	}
+
+	return result, nil
 }
 
-func (c DTableToGruleConverter) converting(data model.DTableData) ([]byte, error) {
+func (c Converter) converting(ruleSet grlmodel.RuleSet) ([]string, error) {
 	/*
 
 		var result []byte
@@ -43,10 +53,10 @@ func (c DTableToGruleConverter) converting(data model.DTableData) ([]byte, error
 		}
 
 		return result, nil*/
-	return []byte{}, nil
+	return []string{}, nil
 }
 
-func (c DTableToGruleConverter) selectPolicyTemplate(hitPolicy model.HitPolicy) (string, error) {
+func (c Converter) selectPolicyTemplate(hitPolicy model.HitPolicy) (string, error) {
 	switch hitPolicy {
 	case model.Unique:
 		return templates.UNIQUE, nil
@@ -60,15 +70,15 @@ func (c DTableToGruleConverter) selectPolicyTemplate(hitPolicy model.HitPolicy) 
 	}
 }
 
-func (c DTableToGruleConverter) loadTokenTemplates() (template.Template, error) {
+func (c Converter) loadTokenTemplates() (template.Template, error) {
 
 	return template.Template{}, nil
 }
 
-func (c DTableToGruleConverter) checkForInterference(table model.DTableData) bool {
+func (c Converter) checkForInterference(table model.DTableData) bool {
 	return false
 }
 
-func (c DTableToGruleConverter) createRuleEntry() {
+func (c Converter) createRuleEntry() {
 
 }

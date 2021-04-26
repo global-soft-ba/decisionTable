@@ -11,5 +11,5 @@ var (
 )
 
 type DTableConverterInterface interface {
-	Convert(data model.DTableData) ([]byte, error)
+	Convert(data model.DTableData) ([]string, error)
 }
