@@ -1,7 +1,13 @@
 package main
 
 import (
+	"decisionTable/converter"
 	"decisionTable/model"
+	"errors"
+)
+
+var (
+	ErrDTableNotValid = errors.New("decision table must be valid before converting")
 )
 
 func CreateDecisionTable() DTableBuilderInterface {
@@ -56,4 +62,23 @@ func (d DecisionTable) OutputFields() []model.Field {
 
 func (d DecisionTable) Rules() []model.Rule {
 	return d.rules
+}
+
+func (d DecisionTable) Convert(converter converter.DTableConverterInterface) ([]byte, error) {
+
+	if !d.valid {
+		return []byte{}, ErrDTableNotValid
+	}
+
+	dTable := model.DTableData{
+		Key:              d.key,
+		Name:             d.name,
+		HitPolicy:        d.hitPolicy,
+		CollectOperator:  d.collectOperator,
+		NotationStandard: d.notationStandard,
+		InputFields:      d.inputFields,
+		OutputFields:     d.outputFields,
+		Rules:            d.rules,
+	}
+	return converter.Convert(dTable)
 }
