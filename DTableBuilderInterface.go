@@ -13,5 +13,11 @@ type DTableBuilderInterface interface {
 	SetCollectOperator(collector model.CollectOperator) DTableBuilderInterface
 	AddInputField(name string, label string, typ model.VariableTyp) DTableBuilderInterface
 	AddOutputField(name string, label string, typ model.VariableTyp) DTableBuilderInterface
-	AddRule(input []model.Entry, output []model.Entry, description string) DTableBuilderInterface
+	AddRule(description string) DTableRuleBuilderInterface
+}
+
+type DTableRuleBuilderInterface interface {
+	AddInputEntry(expr string, exprLang model.ExpressionLanguage) DTableRuleBuilderInterface
+	AddOutputEntry(expr string, exprLang model.ExpressionLanguage) DTableRuleBuilderInterface
+	BuildRule() DTableBuilderInterface
 }

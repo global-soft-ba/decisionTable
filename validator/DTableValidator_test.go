@@ -34,14 +34,12 @@ func TestDTableValidator_Validate(t *testing.T) {
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
-					InputEntries: []model.Entry{{
-						Expression:         " =3",
-						ExpressionLanguage: model.GRL,
-					}},
-					OutputEntries: []model.Entry{{
-						Expression:         "4",
-						ExpressionLanguage: model.GRL,
-					}},
+					InputEntries: []model.Entry{
+						model.CreateEntry(" =3", model.GRL),
+					},
+					OutputEntries: []model.Entry{
+						model.CreateEntry(">3", model.GRL),
+					},
 				}},
 			},
 			want:  true,
@@ -67,14 +65,11 @@ func TestDTableValidator_Validate(t *testing.T) {
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
-					InputEntries: []model.Entry{{
-						Expression:         " =3",
-						ExpressionLanguage: model.GRL,
-					}},
-					OutputEntries: []model.Entry{{
-						Expression:         "4",
-						ExpressionLanguage: model.GRL,
-					}},
+					InputEntries: []model.Entry{
+						model.CreateEntry(" =3", model.GRL)},
+					OutputEntries: []model.Entry{
+						model.CreateEntry("4", model.GRL),
+					},
 				}},
 			},
 			want:  false,
@@ -101,14 +96,10 @@ func TestDTableValidator_Validate(t *testing.T) {
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
-					InputEntries: []model.Entry{{
-						Expression:         " =3",
-						ExpressionLanguage: model.FEEL,
-					}},
-					OutputEntries: []model.Entry{{
-						Expression:         "4",
-						ExpressionLanguage: model.Juel,
-					}},
+					InputEntries: []model.Entry{
+						model.CreateEntry(" =3", model.FEEL)},
+					OutputEntries: []model.Entry{
+						model.CreateEntry("4", model.FEEL)},
 				}},
 			},
 			want:  false,
@@ -152,14 +143,10 @@ func TestDTableValidator_Validate(t *testing.T) {
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
-					InputEntries: []model.Entry{{
-						Expression:         " =3",
-						ExpressionLanguage: model.GRL,
-					}},
-					OutputEntries: []model.Entry{{
-						Expression:         "4",
-						ExpressionLanguage: model.GRL,
-					}},
+					InputEntries: []model.Entry{
+						model.CreateEntry(" =3", model.GRL)},
+					OutputEntries: []model.Entry{
+						model.CreateEntry("4", model.GRL)},
 				}},
 			},
 			want:  false,
@@ -185,13 +172,9 @@ func TestDTableValidator_Validate(t *testing.T) {
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
-					InputEntries: []model.Entry{{
-						Expression:         " =3",
-						ExpressionLanguage: model.GRL,
-					}, {
-						Expression:         " =3",
-						ExpressionLanguage: model.GRL,
-					}},
+					InputEntries: []model.Entry{
+						model.CreateEntry(" =3", model.GRL),
+						model.CreateEntry(" =3", model.GRL)},
 					OutputEntries: []model.Entry{},
 				}},
 			},
@@ -218,14 +201,10 @@ func TestDTableValidator_Validate(t *testing.T) {
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
-					InputEntries: []model.Entry{{
-						Expression:         " =3",
-						ExpressionLanguage: model.FEEL,
-					}},
-					OutputEntries: []model.Entry{{
-						Expression:         " =3",
-						ExpressionLanguage: model.GRL,
-					}},
+					InputEntries: []model.Entry{
+						model.CreateEntry(" =3", model.GRL)},
+					OutputEntries: []model.Entry{
+						model.CreateEntry(" =3", model.FEEL)},
 				}},
 			},
 			want:  false,
@@ -277,14 +256,10 @@ func TestDTableValidator_ValidateInterferences(t *testing.T) {
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
-					InputEntries: []model.Entry{{
-						Expression:         " =3",
-						ExpressionLanguage: model.GRL,
-					}},
-					OutputEntries: []model.Entry{{
-						Expression:         "4",
-						ExpressionLanguage: model.GRL,
-					}},
+					InputEntries: []model.Entry{
+						model.CreateEntry(" =3", model.GRL)},
+					OutputEntries: []model.Entry{
+						model.CreateEntry("4", model.GRL)},
 				}},
 			},
 			want: false,
@@ -322,14 +297,12 @@ func TestDTableValidator_ValidateInterferences(t *testing.T) {
 					}},
 				Rules: []model.Rule{{
 					Description: "R1",
-					InputEntries: []model.Entry{{
-						Expression:         " =3",
-						ExpressionLanguage: model.GRL,
-					}},
-					OutputEntries: []model.Entry{{
-						Expression:         "4",
-						ExpressionLanguage: model.GRL,
-					}},
+					InputEntries: []model.Entry{
+						model.CreateEntry(" =3", model.GRL),
+					},
+					OutputEntries: []model.Entry{
+						model.CreateEntry("4", model.GRL),
+					},
 				}},
 			},
 			want: true,

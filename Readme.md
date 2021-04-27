@@ -18,25 +18,25 @@ CreateDecisionTable().
 		AddInputField("Expenditure of claim", "claim", model.Integer).
 		AddOutputField("Responsible employee", "Employee", model.String).
 		AddOutputField("4 eyes principle", "Employee", model.Boolean).
-		AddRule(
-			[]model.Entry{model.Entry{Expression: "Car Accident", ExpressionLanguage: model.GRL},
-				          model.Entry{Expression: "<1000", ExpressionLanguage:model.GRL}},
-			[]model.Entry{model.Entry{Expression: "Müller", ExpressionLanguage:model.GRL},
-				          model.Entry{Expression: "false", ExpressionLanguage:model.GRL}},
-			"").
-		AddRule(
-			[]model.Entry{model.Entry{Expression: "Car Accident", ExpressionLanguage:model.GRL},
-				          model.Entry{Expression: "[1000..10000]", ExpressionLanguage:model.GRL}},
-			[]model.Entry{model.Entry{Expression: "Meier", ExpressionLanguage:model.GRL},
-				          model.Entry{Expression: "false", ExpressionLanguage:model.GRL}},
-			"").
-		AddRule(
-			[]model.Entry{model.Entry{Expression: "Car Accident", ExpressionLanguage:model.GRL},
-				          model.Entry{Expression: ">=10000", ExpressionLanguage:model.GRL}},
-			[]model.Entry{model.Entry{Expression: "Schmidt", ExpressionLanguage:model.GRL},
-				          model.Entry{Expression: "true", ExpressionLanguage:model.GRL}},
-			"").
-	Build()
+		AddRule("R1").
+			AddInputEntry("Car Accident", model.GRL).
+			AddInputEntry("<1000", model.GRL).
+			AddOutputEntry("Müller", model.GRL).
+			AddOutputEntry("false", model.GRL).
+			BuildRule().
+		AddRule("R2").
+			AddInputEntry("Car Accident", model.GRL).
+			AddInputEntry("[1000..10000]", model.GRL).
+			AddOutputEntry("Meier", model.GRL).
+			AddOutputEntry("false", model.GRL).
+			BuildRule().
+		AddRule("R3").
+			AddInputEntry("Car Accident", model.GRL).
+			AddInputEntry(">=10000", model.GRL).
+			AddOutputEntry("Schmidt", model.GRL).
+			AddOutputEntry("true", model.GRL).
+			BuildRule().
+		Build()
 ```
 
 We assume that the frontend will represent a decision table as a kind of table. In case, that a user changes something in the frontend table, we drop the old decision table representation and rebuild from the new 

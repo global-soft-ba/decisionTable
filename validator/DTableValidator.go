@@ -213,13 +213,13 @@ func (d DTableValidator) checkRule(r model.Rule) (bool, []error) {
 	var errResult []error
 
 	for _, v := range r.InputEntries {
-		if _, ok := conf.NotationStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage]; !ok {
+		if _, ok := conf.NotationStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage()]; !ok {
 			errResult = append(errResult, ErrDTableEntryExpressionLangInvalid)
 		}
 	}
 
 	for _, v := range r.OutputEntries {
-		if _, ok := conf.NotationStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage]; !ok {
+		if _, ok := conf.NotationStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage()]; !ok {
 			errResult = append(errResult, ErrDTableEntryExpressionLangInvalid)
 		}
 	}

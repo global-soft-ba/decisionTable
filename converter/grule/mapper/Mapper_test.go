@@ -38,14 +38,12 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 					}},
 					Rules: []model.Rule{{
 						Description: "R1",
-						InputEntries: []model.Entry{{
-							Expression:         "==3",
-							ExpressionLanguage: model.GRL,
-						}},
-						OutputEntries: []model.Entry{{
-							Expression:         "4",
-							ExpressionLanguage: model.GRL,
-						}},
+						InputEntries: []model.Entry{
+							model.CreateEntry("==3", model.GRL),
+						},
+						OutputEntries: []model.Entry{
+							model.CreateEntry("4", model.GRL),
+						},
 					}},
 				}},
 			want: grlmodel.RuleSet{
@@ -66,7 +64,8 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 			},
 			wantErr: false,
 		},
-		{name: "Valid Multi Row Table",
+		{
+			name: "Valid Multi Row Table",
 			args: args{
 				data: model.DTableData{
 					Key:              "test1",
@@ -102,24 +101,12 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						{
 							Description: "R1",
 							InputEntries: []model.Entry{
-								{
-									Expression:         "==3",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         "==3",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry("==3", model.GRL),
+								model.CreateEntry("==3", model.GRL),
 							},
 							OutputEntries: []model.Entry{
-								{
-									Expression:         "4",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         "4",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry("4", model.GRL),
+								model.CreateEntry("4", model.GRL),
 							},
 						}},
 				}},
@@ -146,7 +133,8 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 			},
 			wantErr: false,
 		},
-		{name: "Valid Multi Row and Rule Table with First Policy",
+		{
+			name: "Valid Multi Row and Rule Table with First Policy",
 			args: args{
 				data: model.DTableData{
 					Key:              "test1",
@@ -182,47 +170,23 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						{
 							Description: "R1",
 							InputEntries: []model.Entry{
-								{
-									Expression:         "==3",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         "==3",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry("==3", model.GRL),
+								model.CreateEntry("==3", model.GRL),
 							},
 							OutputEntries: []model.Entry{
-								{
-									Expression:         "4",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         "4",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry("4", model.GRL),
+								model.CreateEntry("4", model.GRL),
 							},
 						},
 						{
 							Description: "R2",
 							InputEntries: []model.Entry{
-								{
-									Expression:         ">3",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         ">3",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry(">3", model.GRL),
+								model.CreateEntry(">3", model.GRL),
 							},
 							OutputEntries: []model.Entry{
-								{
-									Expression:         "5",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         "5",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry("5", model.GRL),
+								model.CreateEntry("5", model.GRL),
 							},
 						},
 					},
@@ -263,7 +227,8 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 			},
 			wantErr: false,
 		},
-		{name: "Invalid Multi Row Table",
+		{
+			name: "Invalid Multi Row Table",
 			args: args{
 				data: model.DTableData{
 					Key:              "test1",
@@ -287,28 +252,20 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 					}},
 					Rules: []model.Rule{{
 						Description: "R1",
-						InputEntries: []model.Entry{{
-							Expression:         "==3",
-							ExpressionLanguage: model.GRL,
+						InputEntries: []model.Entry{
+							model.CreateEntry("==3", model.GRL),
+							model.CreateEntry("==3", model.GRL),
 						},
-							{
-								Expression:         "==3",
-								ExpressionLanguage: model.GRL,
-							}},
-						OutputEntries: []model.Entry{{
-							Expression:         "4",
-							ExpressionLanguage: model.GRL,
-						},
-							{
-								Expression:         "4",
-								ExpressionLanguage: model.GRL,
-							}},
+						OutputEntries: []model.Entry{
+							model.CreateEntry("4", model.GRL),
+							model.CreateEntry("4", model.GRL)},
 					}},
 				}},
 			want:    grlmodel.RuleSet{},
 			wantErr: true,
 		},
-		{name: "Valid Multi Row and Multi Rule Table with Priority Policy",
+		{
+			name: "Valid Multi Row and Multi Rule Table with Priority Policy",
 			args: args{
 				data: model.DTableData{
 					Key:              "test1",
@@ -344,47 +301,23 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						{
 							Description: "R1",
 							InputEntries: []model.Entry{
-								{
-									Expression:         "==3",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         "==3",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry("==3", model.GRL),
+								model.CreateEntry("==3", model.GRL),
 							},
 							OutputEntries: []model.Entry{
-								{
-									Expression:         "4",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         "4",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry("4", model.GRL),
+								model.CreateEntry("4", model.GRL),
 							},
 						},
 						{
 							Description: "R2",
 							InputEntries: []model.Entry{
-								{
-									Expression:         ">3",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         ">3",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry(">3", model.GRL),
+								model.CreateEntry(">3", model.GRL),
 							},
 							OutputEntries: []model.Entry{
-								{
-									Expression:         "5",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         "5",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry("5", model.GRL),
+								model.CreateEntry("5", model.GRL),
 							},
 						},
 					},
@@ -425,7 +358,8 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 			},
 			wantErr: false,
 		},
-		{name: "Valid Multi Row and Multi Rule Table with First Policy",
+		{
+			name: "Valid Multi Row and Multi Rule Table with First Policy",
 			args: args{
 				data: model.DTableData{
 					Key:              "test1",
@@ -461,70 +395,34 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						{
 							Description: "R1",
 							InputEntries: []model.Entry{
-								{
-									Expression:         "==3",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         "==3",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry("==3", model.GRL),
+								model.CreateEntry("==3", model.GRL),
 							},
 							OutputEntries: []model.Entry{
-								{
-									Expression:         "4",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         "4",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry("4", model.GRL),
+								model.CreateEntry("4", model.GRL),
 							},
 						},
 						{
 							Description: "R2",
 							InputEntries: []model.Entry{
-								{
-									Expression:         ">3",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         ">3",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry(">3", model.GRL),
+								model.CreateEntry(">3", model.GRL),
 							},
 							OutputEntries: []model.Entry{
-								{
-									Expression:         "5",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         "5",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry("5", model.GRL),
+								model.CreateEntry("5", model.GRL),
 							},
 						},
 						{
 							Description: "R3",
 							InputEntries: []model.Entry{
-								{
-									Expression:         ">3",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         ">3",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry(">3", model.GRL),
+								model.CreateEntry(">3", model.GRL),
 							},
 							OutputEntries: []model.Entry{
-								{
-									Expression:         "5",
-									ExpressionLanguage: model.GRL,
-								},
-								{
-									Expression:         "5",
-									ExpressionLanguage: model.GRL,
-								},
+								model.CreateEntry("5", model.GRL),
+								model.CreateEntry("5", model.GRL),
 							},
 						},
 					},

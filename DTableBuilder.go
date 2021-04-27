@@ -46,10 +46,15 @@ func (d DTableBuilder) AddOutputField(name string, label string, typ model.Varia
 	return d
 }
 
-func (d DTableBuilder) AddRule(input []model.Entry, output []model.Entry, description string) DTableBuilderInterface {
-	r := model.Rule{Description: description, InputEntries: input, OutputEntries: output}
-	d.dTableData.Rules = append(d.dTableData.Rules, r)
-	return d
+func (d DTableBuilder) AddRule(description string) DTableRuleBuilderInterface {
+	ruleBuilder := DTableRuleBuilder{
+		input:       []model.Entry{},
+		output:      []model.Entry{},
+		description: description,
+		builder:     d,
+	}
+
+	return ruleBuilder
 }
 
 func (d DTableBuilder) Build() (DecisionTable, []error) {
@@ -80,4 +85,30 @@ func (d DTableBuilder) createDecisionTable() DecisionTable {
 	}
 
 	return dTable
+}
+
+type DTableRuleBuilder struct {
+	input  []model.Entry
+	output []model.Entry
+
+	description string
+	builder     DTableBuilder
+}
+
+func (r DTableRuleBuilder) AddInputEntry(expr string, exprLang model.ExpressionLanguage) DTableRuleBuilderInterface {
+	entry := model.CreateEntry(expr, exprLang)
+	r.input = append(r.input, entry)
+	return r
+}
+
+func (r DTableRuleBuilder) AddOutputEntry(expr string, exprLang model.ExpressionLanguage) DTableRuleBuilderInterface {
+	entry := model.CreateEntry(expr, exprLang)
+	r.output = append(r.output, entry)
+	return r
+}
+
+func (r DTableRuleBuilder) BuildRule() DTableBuilderInterface {
+	rule := model.Rule{Description: r.description, InputEntries: r.input, OutputEntries: r.output}
+	r.builder.dTableData.Rules = append(r.builder.dTableData.Rules, rule)
+	return r.builder
 }

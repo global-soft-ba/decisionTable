@@ -84,7 +84,7 @@ func (c Mapper) mapToExpression(entry model.Entry, field model.Field) (grlmodel.
 	expr := grlmodel.Expression{
 		Name:       field.Name,
 		Identifier: field.Label,
-		Expression: entry.Expression,
+		Expression: entry.Expression(),
 	}
 
 	return expr, nil
