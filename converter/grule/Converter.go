@@ -11,12 +11,13 @@ import (
 )
 
 const (
-	Rule        = "Rule"
-	RuleName    = "RuleName"
-	Salience    = "Salience"
-	Expressions = "Expressions"
-	Assignments = "Assignments"
-	Entries     = "Entries"
+	Rule         = "Rule"
+	RuleName     = "RuleName"
+	Salience     = "Salience"
+	Expressions  = "Expressions"
+	Assignments  = "Assignments"
+	Entries      = "Entries"
+	Interference = "Interference"
 )
 
 func CreateDTableToGrlConverter() Converter {
@@ -47,7 +48,7 @@ func (c Converter) Convert(data model.DTableData) ([]string, error) {
 func (c Converter) createRuleSet(ruleSet grlmodel.RuleSet) ([]string, error) {
 	var result []string
 
-	tmpl, err := c.buildTemplate(ruleSet.HitPolicy)
+	tmpl, err := c.buildTemplate(ruleSet.HitPolicy, ruleSet.Interference)
 	if err != nil {
 		return []string{}, err
 	}
@@ -64,7 +65,7 @@ func (c Converter) createRuleSet(ruleSet grlmodel.RuleSet) ([]string, error) {
 	return result, nil
 }
 
-func (c Converter) buildTemplate(hitPolicy model.HitPolicy) (*template.Template, error) {
+func (c Converter) buildTemplate(hitPolicy model.HitPolicy, interference bool) (*template.Template, error) {
 
 	var t *template.Template
 
@@ -92,6 +93,10 @@ func (c Converter) buildTemplate(hitPolicy model.HitPolicy) (*template.Template,
 	if err != nil {
 		return &template.Template{}, err
 	}
+	_, err = t.New(Interference).Parse(c.buildInterferenceTemplate(interference))
+	if err != nil {
+		return &template.Template{}, err
+	}
 
 	return t, err
 }
@@ -109,6 +114,11 @@ func (c Converter) buildPolicyTemplate(hitPolicy model.HitPolicy) string {
 	}
 }
 
-func (c Converter) checkForInterference(table model.DTableData) bool {
-	return false
+func (c Converter) buildInterferenceTemplate(interference bool) string {
+	switch interference {
+	case true:
+		return templates.INTERFERENCE
+	default:
+		return templates.NONINTERFERENCE
+	}
 }

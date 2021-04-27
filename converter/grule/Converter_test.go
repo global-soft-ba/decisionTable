@@ -23,6 +23,7 @@ func TestConverter_converting(t *testing.T) {
 				Name:            "TableOne",
 				HitPolicy:       model.First,
 				CollectOperator: model.List,
+				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
 						"0",
@@ -38,7 +39,7 @@ func TestConverter_converting(t *testing.T) {
 					},
 				},
 			}},
-			want:    []string{"rule row_0 \"R1\" salience 0\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;"},
+			want:    []string{"rule row_0 \"R1\" salience 0\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  complete();"},
 			wantErr: false,
 		},
 		{name: "Valid Convert Single Expressions",
@@ -47,6 +48,7 @@ func TestConverter_converting(t *testing.T) {
 				Name:            "TableOne",
 				HitPolicy:       model.First,
 				CollectOperator: model.List,
+				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
 						"0",
@@ -60,7 +62,7 @@ func TestConverter_converting(t *testing.T) {
 					},
 				},
 			}},
-			want:    []string{"rule row_0 \"R1\" salience 0\nwhen \n   L1.I1 ==3\nthen \n  L1.O1 =4;"},
+			want:    []string{"rule row_0 \"R1\" salience 0\nwhen \n   L1.I1 ==3\nthen \n  L1.O1 =4;\n  complete();"},
 			wantErr: false,
 		},
 		{name: "Valid Convert Multiple Expressions and Assignments",
@@ -69,6 +71,7 @@ func TestConverter_converting(t *testing.T) {
 				Name:            "TableOne",
 				HitPolicy:       model.First,
 				CollectOperator: model.List,
+				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
 						"0",
@@ -87,7 +90,7 @@ func TestConverter_converting(t *testing.T) {
 					},
 				},
 			}},
-			want:    []string{"rule row_0 \"R1\" salience 0\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;"},
+			want:    []string{"rule row_0 \"R1\" salience 0\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;\n  complete();"},
 			wantErr: false,
 		},
 		{name: "Valid Convert Multiple Rules, Expressions and Assignments with FirstPolicy",
@@ -96,6 +99,7 @@ func TestConverter_converting(t *testing.T) {
 				Name:            "TableOne",
 				HitPolicy:       model.First,
 				CollectOperator: model.List,
+				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
 						"0",
@@ -144,9 +148,9 @@ func TestConverter_converting(t *testing.T) {
 					},
 				},
 			}},
-			want: []string{"rule row_0 \"R1\" salience 2\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;",
-				"rule row_1 \"R2\" salience 1\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;",
-				"rule row_2 \"R3\" salience 0\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;"},
+			want: []string{"rule row_0 \"R1\" salience 2\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;\n  complete();",
+				"rule row_1 \"R2\" salience 1\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;\n  complete();",
+				"rule row_2 \"R3\" salience 0\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;\n  complete();"},
 			wantErr: false,
 		},
 		{name: "Valid Convert Multiple Rules, Expressions and Assignments with PriorityPolicy",
@@ -155,6 +159,7 @@ func TestConverter_converting(t *testing.T) {
 				Name:            "TableOne",
 				HitPolicy:       model.Priority,
 				CollectOperator: model.List,
+				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
 						"0",
@@ -203,9 +208,9 @@ func TestConverter_converting(t *testing.T) {
 					},
 				},
 			}},
-			want: []string{"rule row_0 \"R1\" salience 0\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;",
-				"rule row_1 \"R2\" salience 1\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;",
-				"rule row_2 \"R3\" salience 2\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;"},
+			want: []string{"rule row_0 \"R1\" salience 0\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;\n  complete();",
+				"rule row_1 \"R2\" salience 1\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;\n  complete();",
+				"rule row_2 \"R3\" salience 2\nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;\n  complete();"},
 			wantErr: false,
 		},
 		{name: "Valid Convert Multiple Rules, Expressions and Assignments with wrong Policy",
@@ -214,6 +219,7 @@ func TestConverter_converting(t *testing.T) {
 				Name:            "TableOne",
 				HitPolicy:       model.Any,
 				CollectOperator: model.List,
+				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
 						"0",
@@ -262,9 +268,9 @@ func TestConverter_converting(t *testing.T) {
 					},
 				},
 			}},
-			want: []string{"rule row_0 \"R1\" \nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;",
-				"rule row_1 \"R2\" \nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;",
-				"rule row_2 \"R3\" \nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;"},
+			want: []string{"rule row_0 \"R1\" \nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;\n  complete();",
+				"rule row_1 \"R2\" \nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;\n  complete();",
+				"rule row_2 \"R3\" \nwhen \n   L1.I1 ==3\n   && L1.I2 >3\n   && L1.I3 >4\nthen \n  L1.O1 =4;\n  L1.O1 =4;\n  complete();"},
 			wantErr: false,
 		},
 	}
