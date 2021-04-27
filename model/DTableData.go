@@ -6,6 +6,7 @@ type DTableData struct {
 	HitPolicy        HitPolicy
 	CollectOperator  CollectOperator
 	NotationStandard DTableStandard
+	Interferences    bool
 
 	InputFields  []Field
 	OutputFields []Field

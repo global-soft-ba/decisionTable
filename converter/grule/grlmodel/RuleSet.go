@@ -7,5 +7,6 @@ type RuleSet struct {
 	Name            string
 	HitPolicy       model.HitPolicy
 	CollectOperator model.CollectOperator
+	Interference    bool
 	Rules           []Rule
 }

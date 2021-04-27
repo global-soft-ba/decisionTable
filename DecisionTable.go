@@ -21,6 +21,7 @@ type DecisionTable struct {
 	hitPolicy        model.HitPolicy
 	collectOperator  model.CollectOperator
 	notationStandard model.DTableStandard
+	interferences    bool
 	valid            bool
 
 	inputFields  []model.Field
@@ -64,6 +65,10 @@ func (d DecisionTable) Rules() []model.Rule {
 	return d.rules
 }
 
+func (d DecisionTable) Interferences() bool {
+	return d.interferences
+}
+
 func (d DecisionTable) Convert(converter converter.DTableConverterInterface) ([]string, error) {
 
 	if !d.valid {
@@ -78,6 +83,7 @@ func (d DecisionTable) Convert(converter converter.DTableConverterInterface) ([]
 		NotationStandard: d.notationStandard,
 		InputFields:      d.inputFields,
 		OutputFields:     d.outputFields,
+		Interferences:    d.interferences,
 		Rules:            d.rules,
 	}
 	return converter.Convert(dTable)

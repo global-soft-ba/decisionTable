@@ -16,23 +16,23 @@ func TestDTableValidator_Validate(t *testing.T) {
 		{
 			name: "Valid Grule Table",
 			table: model.DTableData{
-				"test1",
-				"TableOne",
-				model.First,
-				model.List,
-				model.GRULE,
-				[]model.Field{{
+				Key:              "test1",
+				Name:             "TableOne",
+				HitPolicy:        model.First,
+				CollectOperator:  model.List,
+				NotationStandard: model.GRULE,
+				InputFields: []model.Field{{
 					Name:  "I1",
 					Label: "L1",
 					Typ:   model.String,
 				},
 				},
-				[]model.Field{{
+				OutputFields: []model.Field{{
 					Name:  "O1",
 					Label: "L1",
 					Typ:   model.Float,
 				}},
-				[]model.Rule{{
+				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{{
 						Expression:         " =3",
@@ -50,23 +50,22 @@ func TestDTableValidator_Validate(t *testing.T) {
 		{
 			name: "Wrong hit policy for the NotationStandard",
 			table: model.DTableData{
-				"test1",
-				"TableOne",
-				model.Any,
-				"",
-				model.GRULE,
-				[]model.Field{{
+				Key:              "test1",
+				Name:             "TableOne",
+				HitPolicy:        model.Any,
+				NotationStandard: model.GRULE,
+				InputFields: []model.Field{{
 					Name:  "I1",
 					Label: "L1",
 					Typ:   model.String,
 				},
 				},
-				[]model.Field{{
+				OutputFields: []model.Field{{
 					Name:  "O1",
 					Label: "L1",
 					Typ:   model.Integer,
 				}},
-				[]model.Rule{{
+				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{{
 						Expression:         " =3",
@@ -84,23 +83,23 @@ func TestDTableValidator_Validate(t *testing.T) {
 		{
 			name: "Wrong CollectOperators DMN",
 			table: model.DTableData{
-				"K1",
-				"N1",
-				model.Collect,
-				"XYZ",
-				model.DMN,
-				[]model.Field{{
+				Key:              "K1",
+				Name:             "N1",
+				HitPolicy:        model.Collect,
+				CollectOperator:  "XYZ",
+				NotationStandard: model.DMN,
+				InputFields: []model.Field{{
 					Name:  "I1",
 					Label: "L1",
 					Typ:   model.String,
 				},
 				},
-				[]model.Field{{
+				OutputFields: []model.Field{{
 					Name:  "O1",
 					Label: "L1",
 					Typ:   model.Integer,
 				}},
-				[]model.Rule{{
+				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{{
 						Expression:         " =3",
@@ -118,14 +117,13 @@ func TestDTableValidator_Validate(t *testing.T) {
 		{
 			name: "Empty input and output fields",
 			table: model.DTableData{
-				"K1",
-				"N1",
-				model.First,
-				"",
-				model.GRULE,
-				[]model.Field{},
-				[]model.Field{},
-				[]model.Rule{{
+				Key:              "K1",
+				Name:             "N1",
+				HitPolicy:        model.First,
+				NotationStandard: model.GRULE,
+				InputFields:      []model.Field{},
+				OutputFields:     []model.Field{},
+				Rules: []model.Rule{{
 					Description:   "R1",
 					InputEntries:  []model.Entry{},
 					OutputEntries: []model.Entry{},
@@ -137,23 +135,22 @@ func TestDTableValidator_Validate(t *testing.T) {
 		{
 			name: "Wrong Field definition",
 			table: model.DTableData{
-				"K1",
-				"N1",
-				model.First,
-				"",
-				model.GRULE,
-				[]model.Field{{
+				Key:              "K1",
+				Name:             "N1",
+				HitPolicy:        model.First,
+				NotationStandard: model.GRULE,
+				InputFields: []model.Field{{
 					Name:  "I1",
 					Label: "L1",
 					Typ:   model.Double,
 				},
 				},
-				[]model.Field{{
+				OutputFields: []model.Field{{
 					Name:  "",
 					Label: "L1",
 					Typ:   model.Integer,
 				}},
-				[]model.Rule{{
+				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{{
 						Expression:         " =3",
@@ -171,23 +168,22 @@ func TestDTableValidator_Validate(t *testing.T) {
 		{
 			name: "Wrong rule data schemas",
 			table: model.DTableData{
-				"K1",
-				"N1",
-				model.First,
-				"",
-				model.GRULE,
-				[]model.Field{{
+				Key:              "K1",
+				Name:             "N1",
+				HitPolicy:        model.First,
+				NotationStandard: model.GRULE,
+				InputFields: []model.Field{{
 					Name:  "I1",
 					Label: "L1",
 					Typ:   model.String,
 				},
 				},
-				[]model.Field{{
+				OutputFields: []model.Field{{
 					Name:  "O2",
 					Label: "L1",
 					Typ:   model.Integer,
 				}},
-				[]model.Rule{{
+				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{{
 						Expression:         " =3",
@@ -205,23 +201,22 @@ func TestDTableValidator_Validate(t *testing.T) {
 		{
 			name: "Wrong rule expression language",
 			table: model.DTableData{
-				"K1",
-				"N1",
-				model.First,
-				"",
-				model.GRULE,
-				[]model.Field{{
+				Key:              "K1",
+				Name:             "N1",
+				HitPolicy:        model.First,
+				NotationStandard: model.GRULE,
+				InputFields: []model.Field{{
 					Name:  "I1",
 					Label: "L1",
 					Typ:   model.String,
 				},
 				},
-				[]model.Field{{
+				OutputFields: []model.Field{{
 					Name:  "O2",
 					Label: "L1",
 					Typ:   model.Integer,
 				}},
-				[]model.Rule{{
+				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{{
 						Expression:         " =3",
@@ -249,6 +244,104 @@ func TestDTableValidator_Validate(t *testing.T) {
 			}
 			if !reflect.DeepEqual(got1, tt.want1) {
 				t.Errorf("Validate() got1 = %v, want %v", got1, tt.want1)
+			}
+		})
+	}
+}
+
+func TestDTableValidator_ValidateInterferences(t *testing.T) {
+
+	tests := []struct {
+		name  string
+		field model.DTableData
+		want  bool
+	}{
+		{
+			name: "Valid Table Without Interferences",
+			field: model.DTableData{
+				Key:              "test1",
+				Name:             "TableOne",
+				HitPolicy:        model.First,
+				CollectOperator:  model.List,
+				NotationStandard: model.GRULE,
+				InputFields: []model.Field{{
+					Name:  "I1",
+					Label: "L1",
+					Typ:   model.String,
+				},
+				},
+				OutputFields: []model.Field{{
+					Name:  "O1",
+					Label: "L1",
+					Typ:   model.Float,
+				}},
+				Rules: []model.Rule{{
+					Description: "R1",
+					InputEntries: []model.Entry{{
+						Expression:         " =3",
+						ExpressionLanguage: model.GRL,
+					}},
+					OutputEntries: []model.Entry{{
+						Expression:         "4",
+						ExpressionLanguage: model.GRL,
+					}},
+				}},
+			},
+			want: false,
+		},
+		{
+			name: "Valid Table Without Interferences",
+			field: model.DTableData{
+				Key:              "test1",
+				Name:             "TableOne",
+				HitPolicy:        model.First,
+				CollectOperator:  model.List,
+				NotationStandard: model.GRULE,
+				InputFields: []model.Field{
+					{
+						Name:  "I1",
+						Label: "L1",
+						Typ:   model.String,
+					},
+					{
+						Name:  "I2",
+						Label: "L1",
+						Typ:   model.String,
+					},
+				},
+				OutputFields: []model.Field{
+					{
+						Name:  "O1",
+						Label: "L1",
+						Typ:   model.Float,
+					},
+					{
+						Name:  "I2",
+						Label: "L1",
+						Typ:   model.String,
+					}},
+				Rules: []model.Rule{{
+					Description: "R1",
+					InputEntries: []model.Entry{{
+						Expression:         " =3",
+						ExpressionLanguage: model.GRL,
+					}},
+					OutputEntries: []model.Entry{{
+						Expression:         "4",
+						ExpressionLanguage: model.GRL,
+					}},
+				}},
+			},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			d := DTableValidator{
+				dTable: tt.field,
+			}
+			if got := d.ValidateInterferences(); got != tt.want {
+				t.Errorf("ValidateInterferences() = %v, want %v", got, tt.want)
 			}
 		})
 	}

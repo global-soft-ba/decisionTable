@@ -53,12 +53,15 @@ func (d DTableBuilder) AddRule(input []model.Entry, output []model.Entry, descri
 }
 
 func (d DTableBuilder) Build() (DecisionTable, []error) {
-	table := d.createDecisionTable()
-	if valid, errs := d.validate(); valid != true {
-		return table, errs
+	validtr := validator.CreateDTableValidator(d.dTableData)
+
+	valid, err := validtr.Validate()
+	if valid != true {
+		return DecisionTable{}, err
 	}
 
-	table.valid = true
+	table := d.createDecisionTable()
+	table.interferences = validtr.ValidateInterferences()
 	return table, nil
 }
 
@@ -69,20 +72,12 @@ func (d DTableBuilder) createDecisionTable() DecisionTable {
 		hitPolicy:        d.dTableData.HitPolicy,
 		collectOperator:  d.dTableData.CollectOperator,
 		notationStandard: d.dTableData.NotationStandard,
-		valid:            false,
+		valid:            true,
+		interferences:    false,
 		inputFields:      d.dTableData.InputFields,
 		outputFields:     d.dTableData.OutputFields,
 		rules:            d.dTableData.Rules,
 	}
 
 	return dTable
-}
-
-func (d DTableBuilder) validate() (bool, []error) {
-	//General Validation
-	if valid, err := validator.CreateDTableValidator(d.dTableData).Validate(); valid != true {
-		return valid, err
-	}
-
-	return true, []error{}
 }

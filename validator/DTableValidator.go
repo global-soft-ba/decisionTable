@@ -230,3 +230,25 @@ func (d DTableValidator) checkRule(r model.Rule) (bool, []error) {
 
 	return true, nil
 }
+
+func (d DTableValidator) ValidateInterferences() bool {
+	output := d.dTable.OutputFields
+
+	for _, val := range d.dTable.InputFields {
+		if d.containsField(val, output) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (d DTableValidator) containsField(field model.Field, fields []model.Field) bool {
+	for _, val := range fields {
+		if (val.Label == field.Label) && (val.Name == field.Name) {
+			return true
+		}
+
+	}
+	return false
+}

@@ -23,6 +23,7 @@ func (c Mapper) MapToRuleSet(data model.DTableData) (grlmodel.RuleSet, error) {
 		Name:            data.Name,
 		HitPolicy:       data.HitPolicy,
 		CollectOperator: data.CollectOperator,
+		Interference:    data.Interferences,
 		Rules:           []grlmodel.Rule{},
 	}
 
@@ -34,7 +35,6 @@ func (c Mapper) MapToRuleSet(data model.DTableData) (grlmodel.RuleSet, error) {
 		}
 		result.Rules = append(result.Rules, rule)
 	}
-
 	return result, nil
 }
 
