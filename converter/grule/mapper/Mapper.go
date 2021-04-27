@@ -9,6 +9,7 @@ import (
 
 var (
 	ErrMapperIndexOutOfBound = errors.New("index of input or output fields is out of bound ")
+	ErrEmptyExpression       = errors.New("empty expression detected and will be skiped")
 )
 
 func CreateGruleMapper() Mapper {
@@ -72,10 +73,15 @@ func (c Mapper) mapToExpressions(entries []model.Entry, fields []model.Field) ([
 			return []grlmodel.Expression{}, ErrMapperIndexOutOfBound
 		}
 		entry, err := c.mapToExpression(val, fields[i])
-		if err != nil {
+
+		if err != nil && err != ErrEmptyExpression {
 			return []grlmodel.Expression{}, err
 		}
-		result = append(result, entry)
+
+		//EmptyEntries will be droped
+		if err != ErrEmptyExpression {
+			result = append(result, entry)
+		}
 	}
 	return result, nil
 }
@@ -85,6 +91,9 @@ func (c Mapper) mapToExpression(entry model.Entry, field model.Field) (grlmodel.
 		Name:       field.Name,
 		Identifier: field.Label,
 		Expression: entry.Expression(),
+	}
+	if entry.EmptyExpression() {
+		return grlmodel.Expression{}, ErrEmptyExpression
 	}
 
 	return expr, nil
