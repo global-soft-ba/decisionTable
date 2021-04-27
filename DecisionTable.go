@@ -64,10 +64,10 @@ func (d DecisionTable) Rules() []model.Rule {
 	return d.rules
 }
 
-func (d DecisionTable) Convert(converter converter.DTableConverterInterface) ([]byte, error) {
+func (d DecisionTable) Convert(converter converter.DTableConverterInterface) ([]string, error) {
 
 	if !d.valid {
-		return []byte{}, ErrDTableNotValid
+		return []string{}, ErrDTableNotValid
 	}
 
 	dTable := model.DTableData{

@@ -1,3 +1,3 @@
 package templates
 
-const PRIORITY = ``
+const PRIORITY = `{{define "SALIENCE"}}salience {{.Salience}}{{end}}`

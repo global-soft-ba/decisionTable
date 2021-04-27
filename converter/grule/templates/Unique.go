@@ -6,4 +6,8 @@ package templates
 
 */
 
-const UNIQUE = ``
+/* Would be correct for real unique => No Salience needed */
+/* const UNIQUE = `{{define "SALIENCE"}} {{end}}` */
+
+// UNIQUE Case with fallback in case of overlapping expressions
+const UNIQUE = `{{define "SALIENCE"}}salience {{.Salience}} {{end}}`

@@ -1,3 +1,3 @@
 package templates
 
-const FIRST = ``
+const FIRST = `{{define "SALIENCE"}}salience {{.InvSalience}}{{end}}`

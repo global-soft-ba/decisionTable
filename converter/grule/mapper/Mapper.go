@@ -26,8 +26,9 @@ func (c Mapper) MapToRuleSet(data model.DTableData) (grlmodel.RuleSet, error) {
 		Rules:           []grlmodel.Rule{},
 	}
 
+	maxRules := len(data.Rules)
 	for i, val := range data.Rules {
-		rule, err := c.mapToRule(i, val, data.InputFields, data.OutputFields)
+		rule, err := c.mapToRule(i, maxRules, val, data.InputFields, data.OutputFields)
 		if err != nil {
 			return grlmodel.RuleSet{}, err
 		}
@@ -37,11 +38,12 @@ func (c Mapper) MapToRuleSet(data model.DTableData) (grlmodel.RuleSet, error) {
 	return result, nil
 }
 
-func (c Mapper) mapToRule(id int, rule model.Rule, inputFields []model.Field, outputFields []model.Field) (grlmodel.Rule, error) {
+func (c Mapper) mapToRule(columId int, maxRules int, rule model.Rule, inputFields []model.Field, outputFields []model.Field) (grlmodel.Rule, error) {
 	r := grlmodel.Rule{
-		Name:        strconv.Itoa(id),
+		Name:        strconv.Itoa(columId),
 		Description: rule.Description,
-		Salience:    id,
+		Salience:    columId,
+		InvSalience: maxRules - columId - 1, //Necessary for HitPolicies
 		Expressions: nil,
 		Assignments: nil,
 	}

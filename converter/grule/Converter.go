@@ -1,12 +1,22 @@
 package grule
 
 import (
+	"bytes"
 	"decisionTable/converter"
 	"decisionTable/converter/grule/grlmodel"
 	"decisionTable/converter/grule/mapper"
 	"decisionTable/converter/grule/templates"
 	"decisionTable/model"
-	"html/template"
+	"text/template"
+)
+
+const (
+	Rule        = "Rule"
+	RuleName    = "RuleName"
+	Salience    = "Salience"
+	Expressions = "Expressions"
+	Assignments = "Assignments"
+	Entries     = "Entries"
 )
 
 func CreateDTableToGrlConverter() Converter {
@@ -26,7 +36,7 @@ func (c Converter) Convert(data model.DTableData) ([]string, error) {
 		return []string{}, err
 	}
 
-	result, err := c.converting(grlModel)
+	result, err := c.createRuleSet(grlModel)
 	if err != nil {
 		return []string{}, err
 	}
@@ -34,51 +44,71 @@ func (c Converter) Convert(data model.DTableData) ([]string, error) {
 	return result, nil
 }
 
-func (c Converter) converting(ruleSet grlmodel.RuleSet) ([]string, error) {
-	/*
+func (c Converter) createRuleSet(ruleSet grlmodel.RuleSet) ([]string, error) {
+	var result []string
 
-		var result []byte
-		templateRaw,err := c.selectPolicyTemplate(data.HitPolicy)
+	tmpl, err := c.buildTemplate(ruleSet.HitPolicy)
+	if err != nil {
+		return []string{}, err
+	}
+	for _, v := range ruleSet.Rules {
+		var tpl bytes.Buffer
+		err = tmpl.Execute(&tpl, v)
 		if err != nil {
-			return []byte{}, err
+			return []string{}, err
 		}
 
-		t, err := template.New("Rule").Parse(templateRaw)
+		result = append(result, tpl.String())
+	}
 
-		//2.) Convertiere jede Regel gemäß dem Template
-
-		for k, v := range data.Rules {
-
-			// Execute Template ()
-		}
-
-		return result, nil*/
-	return []string{}, nil
+	return result, nil
 }
 
-func (c Converter) selectPolicyTemplate(hitPolicy model.HitPolicy) (string, error) {
+func (c Converter) buildTemplate(hitPolicy model.HitPolicy) (*template.Template, error) {
+
+	var t *template.Template
+
+	t, err := template.New(Rule).Parse(templates.RULE)
+	if err != nil {
+		return &template.Template{}, err
+	}
+	_, err = t.New(RuleName).Parse(templates.RULENAME)
+	if err != nil {
+		return &template.Template{}, err
+	}
+	_, err = t.New(Expressions).Parse(templates.WHEN)
+	if err != nil {
+		return &template.Template{}, err
+	}
+	_, err = t.New(Assignments).Parse(templates.THEN)
+	if err != nil {
+		return &template.Template{}, err
+	}
+	_, err = t.New(Entries).Parse(templates.ENTRY)
+	if err != nil {
+		return &template.Template{}, err
+	}
+	_, err = t.New(Salience).Parse(c.buildPolicyTemplate(hitPolicy))
+	if err != nil {
+		return &template.Template{}, err
+	}
+
+	return t, err
+}
+
+func (c Converter) buildPolicyTemplate(hitPolicy model.HitPolicy) string {
 	switch hitPolicy {
 	case model.Unique:
-		return templates.UNIQUE, nil
+		return templates.UNIQUE
 	case model.First:
-		return templates.FIRST, nil
+		return templates.FIRST
 	case model.Priority:
-		return templates.PRIORITY, nil
-
+		return templates.PRIORITY
 	default:
-		return "", converter.ErrDTableHitPolicy
+		return templates.DEFAULT
 	}
-}
-
-func (c Converter) loadTokenTemplates() (template.Template, error) {
-
-	return template.Template{}, nil
 }
 
 func (c Converter) checkForInterference(table model.DTableData) bool {
 	return false
-}
-
-func (c Converter) createRuleEntry() {
-
 }
