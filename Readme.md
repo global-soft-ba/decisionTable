@@ -14,28 +14,25 @@ CreateDecisionTable().
 		SetDefinitionKey("determineEmployee").
 		SetNotationStandard(model.GRULE).
 		SetHitPolicy(model.Unique).
-		AddInputField("Type of claim", "claim", model.String).
-		AddInputField("Expenditure of claim", "claim", model.Integer).
-		AddOutputField("Responsible employee", "Employee", model.String).
-		AddOutputField("4 eyes principle", "Employee", model.Boolean).
+		AddInputField("TypeOfClaim", "claim", model.String).
+		AddInputField("ExpenditureOfClaim", "claim", model.Integer).
+		AddOutputField("ResponsibleEmployee", "Employee", model.String).
+		AddOutputField("4EyesPrinciple", "Employee", model.Boolean).
 		AddRule("R1").
-			AddInputEntry("Car Accident", model.GRL).
-			AddInputEntry("<1000", model.GRL).
-			AddOutputEntry("Müller", model.GRL).
-			AddOutputEntry("false", model.GRL).
-			BuildRule().
+          AddInputEntry(`"Car Accident"`, model.SFEEL).
+          AddInputEntry("<1000", model.SFEEL).
+          AddOutputEntry(`"Müller"`, model.SFEEL).
+          AddOutputEntry("false", model.SFEEL).BuildRule().
 		AddRule("R2").
-			AddInputEntry("Car Accident", model.GRL).
-			AddInputEntry("[1000..10000]", model.GRL).
-			AddOutputEntry("Meier", model.GRL).
-			AddOutputEntry("false", model.GRL).
-			BuildRule().
+          AddInputEntry(`"Car Accident"`, model.SFEEL).
+          AddInputEntry("[1000..10000]", model.SFEEL).
+          AddOutputEntry(`"Meier"`, model.SFEEL).
+          AddOutputEntry("false", model.SFEEL).BuildRule().
 		AddRule("R3").
-			AddInputEntry("Car Accident", model.GRL).
-			AddInputEntry(">=10000", model.GRL).
-			AddOutputEntry("Schmidt", model.GRL).
-			AddOutputEntry("true", model.GRL).
-			BuildRule().
+          AddInputEntry("-", model.SFEEL).
+          AddInputEntry(">=10000", model.SFEEL).
+          AddOutputEntry("-", model.SFEEL).
+          AddOutputEntry("true", model.SFEEL).BuildRule().
 		Build()
 ```
 
@@ -90,7 +87,7 @@ The expresion language defined the functions and comparisons of a single rule en
 
 Expression Language | DMN Notation | GRL Notation   
 ------------ | ---------------|--------------  	
-GRL| |X
+SFEEL| |X
 FEEL|X|       
 Javascript|X|
 Python|X|     
@@ -101,3 +98,6 @@ Juel|X|
 More Details can be found here:
 * [GRULE](http://hyperjumptech.viewdocs.io/grule-rule-engine/GRL_en/)
 * [Decision Model and Notation DMN (OMG)](https://www.omg.org/spec/DMN/1.2/PDF)
+
+# SFEEL INPUT EXPRESSIONS
+* [Simple Friendly Enough Expression Language (SFEEL)](https://docs.camunda.org/manual/7.4/reference/dmn11/feel/language-elements/)
