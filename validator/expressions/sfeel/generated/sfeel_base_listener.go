@@ -21,11 +21,17 @@ func (s *BaseSFeelListener) EnterEveryRule(ctx antlr.ParserRuleContext) {}
 // ExitEveryRule is called when any rule is exited.
 func (s *BaseSFeelListener) ExitEveryRule(ctx antlr.ParserRuleContext) {}
 
-// EnterStart is called when production start is entered.
-func (s *BaseSFeelListener) EnterStart(ctx *StartContext) {}
+// EnterInputEntry is called when production inputEntry is entered.
+func (s *BaseSFeelListener) EnterInputEntry(ctx *InputEntryContext) {}
 
-// ExitStart is called when production start is exited.
-func (s *BaseSFeelListener) ExitStart(ctx *StartContext) {}
+// ExitInputEntry is called when production inputEntry is exited.
+func (s *BaseSFeelListener) ExitInputEntry(ctx *InputEntryContext) {}
+
+// EnterOutputEntry is called when production outputEntry is entered.
+func (s *BaseSFeelListener) EnterOutputEntry(ctx *OutputEntryContext) {}
+
+// ExitOutputEntry is called when production outputEntry is exited.
+func (s *BaseSFeelListener) ExitOutputEntry(ctx *OutputEntryContext) {}
 
 // EnterNumber is called when production number is entered.
 func (s *BaseSFeelListener) EnterNumber(ctx *NumberContext) {}
@@ -69,17 +75,17 @@ func (s *BaseSFeelListener) EnterOp(ctx *OpContext) {}
 // ExitOp is called when production op is exited.
 func (s *BaseSFeelListener) ExitOp(ctx *OpContext) {}
 
-// EnterComparisonnumber is called when production comparisonnumber is entered.
-func (s *BaseSFeelListener) EnterComparisonnumber(ctx *ComparisonnumberContext) {}
-
-// ExitComparisonnumber is called when production comparisonnumber is exited.
-func (s *BaseSFeelListener) ExitComparisonnumber(ctx *ComparisonnumberContext) {}
-
 // EnterComparisondatetime is called when production comparisondatetime is entered.
 func (s *BaseSFeelListener) EnterComparisondatetime(ctx *ComparisondatetimeContext) {}
 
 // ExitComparisondatetime is called when production comparisondatetime is exited.
 func (s *BaseSFeelListener) ExitComparisondatetime(ctx *ComparisondatetimeContext) {}
+
+// EnterComparisonnumber is called when production comparisonnumber is entered.
+func (s *BaseSFeelListener) EnterComparisonnumber(ctx *ComparisonnumberContext) {}
+
+// ExitComparisonnumber is called when production comparisonnumber is exited.
+func (s *BaseSFeelListener) ExitComparisonnumber(ctx *ComparisonnumberContext) {}
 
 // EnterRanges is called when production ranges is entered.
 func (s *BaseSFeelListener) EnterRanges(ctx *RangesContext) {}
@@ -165,8 +171,20 @@ func (s *BaseSFeelListener) EnterNegationRule(ctx *NegationRuleContext) {}
 // ExitNegationRule is called when production NegationRule is exited.
 func (s *BaseSFeelListener) ExitNegationRule(ctx *NegationRuleContext) {}
 
-// EnterEmptyRule is called when production EmptyRule is entered.
-func (s *BaseSFeelListener) EnterEmptyRule(ctx *EmptyRuleContext) {}
+// EnterEmptyInputRule is called when production EmptyInputRule is entered.
+func (s *BaseSFeelListener) EnterEmptyInputRule(ctx *EmptyInputRuleContext) {}
 
-// ExitEmptyRule is called when production EmptyRule is exited.
-func (s *BaseSFeelListener) ExitEmptyRule(ctx *EmptyRuleContext) {}
+// ExitEmptyInputRule is called when production EmptyInputRule is exited.
+func (s *BaseSFeelListener) ExitEmptyInputRule(ctx *EmptyInputRuleContext) {}
+
+// EnterOutputAssignment is called when production OutputAssignment is entered.
+func (s *BaseSFeelListener) EnterOutputAssignment(ctx *OutputAssignmentContext) {}
+
+// ExitOutputAssignment is called when production OutputAssignment is exited.
+func (s *BaseSFeelListener) ExitOutputAssignment(ctx *OutputAssignmentContext) {}
+
+// EnterEmptyOutputRule is called when production EmptyOutputRule is entered.
+func (s *BaseSFeelListener) EnterEmptyOutputRule(ctx *EmptyOutputRuleContext) {}
+
+// ExitEmptyOutputRule is called when production EmptyOutputRule is exited.
+func (s *BaseSFeelListener) ExitEmptyOutputRule(ctx *EmptyOutputRuleContext) {}

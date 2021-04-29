@@ -16,70 +16,78 @@ var _ = reflect.Copy
 var _ = strconv.Itoa
 
 var parserATN = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 21, 153,
+	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 21, 169,
 	4, 2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 4, 7, 9, 7,
 	4, 8, 9, 8, 4, 9, 9, 9, 4, 10, 9, 10, 4, 11, 9, 11, 4, 12, 9, 12, 4, 13,
 	9, 13, 4, 14, 9, 14, 4, 15, 9, 15, 4, 16, 9, 16, 4, 17, 9, 17, 4, 18, 9,
-	18, 4, 19, 9, 19, 4, 20, 9, 20, 4, 21, 9, 21, 3, 2, 3, 2, 3, 2, 3, 3, 3,
-	3, 3, 4, 3, 4, 3, 5, 3, 5, 3, 6, 3, 6, 3, 7, 3, 7, 3, 7, 3, 7, 5, 7, 58,
-	10, 7, 3, 8, 3, 8, 5, 8, 62, 10, 8, 3, 9, 3, 9, 3, 10, 3, 10, 3, 10, 3,
-	11, 3, 11, 3, 11, 3, 12, 3, 12, 5, 12, 74, 10, 12, 3, 13, 3, 13, 3, 14,
-	3, 14, 3, 14, 3, 14, 3, 14, 3, 14, 3, 15, 3, 15, 3, 15, 3, 15, 3, 15, 3,
-	15, 3, 15, 3, 16, 3, 16, 3, 16, 5, 16, 94, 10, 16, 3, 17, 3, 17, 3, 17,
-	3, 17, 5, 17, 100, 10, 17, 3, 17, 3, 17, 3, 17, 7, 17, 105, 10, 17, 12,
-	17, 14, 17, 108, 11, 17, 3, 18, 3, 18, 3, 18, 3, 18, 3, 18, 3, 18, 7, 18,
-	116, 10, 18, 12, 18, 14, 18, 119, 11, 18, 3, 19, 3, 19, 3, 19, 3, 19, 5,
-	19, 125, 10, 19, 3, 19, 3, 19, 3, 19, 7, 19, 130, 10, 19, 12, 19, 14, 19,
-	133, 11, 19, 3, 20, 3, 20, 3, 20, 3, 20, 3, 20, 3, 20, 5, 20, 141, 10,
-	20, 3, 20, 3, 20, 3, 21, 3, 21, 3, 21, 3, 21, 3, 21, 3, 21, 5, 21, 151,
-	10, 21, 3, 21, 2, 5, 32, 34, 36, 22, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20,
-	22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 2, 5, 3, 2, 8, 9, 3, 2, 12, 15,
-	3, 2, 16, 17, 2, 154, 2, 42, 3, 2, 2, 2, 4, 45, 3, 2, 2, 2, 6, 47, 3, 2,
-	2, 2, 8, 49, 3, 2, 2, 2, 10, 51, 3, 2, 2, 2, 12, 57, 3, 2, 2, 2, 14, 61,
-	3, 2, 2, 2, 16, 63, 3, 2, 2, 2, 18, 65, 3, 2, 2, 2, 20, 68, 3, 2, 2, 2,
-	22, 73, 3, 2, 2, 2, 24, 75, 3, 2, 2, 2, 26, 77, 3, 2, 2, 2, 28, 83, 3,
-	2, 2, 2, 30, 93, 3, 2, 2, 2, 32, 95, 3, 2, 2, 2, 34, 109, 3, 2, 2, 2, 36,
-	120, 3, 2, 2, 2, 38, 134, 3, 2, 2, 2, 40, 150, 3, 2, 2, 2, 42, 43, 5, 40,
-	21, 2, 43, 44, 7, 2, 2, 3, 44, 3, 3, 2, 2, 2, 45, 46, 9, 2, 2, 2, 46, 5,
-	3, 2, 2, 2, 47, 48, 7, 10, 2, 2, 48, 7, 3, 2, 2, 2, 49, 50, 7, 11, 2, 2,
-	50, 9, 3, 2, 2, 2, 51, 52, 7, 20, 2, 2, 52, 11, 3, 2, 2, 2, 53, 58, 5,
-	8, 5, 2, 54, 58, 5, 6, 4, 2, 55, 58, 5, 10, 6, 2, 56, 58, 5, 4, 3, 2, 57,
-	53, 3, 2, 2, 2, 57, 54, 3, 2, 2, 2, 57, 55, 3, 2, 2, 2, 57, 56, 3, 2, 2,
-	2, 58, 13, 3, 2, 2, 2, 59, 62, 5, 18, 10, 2, 60, 62, 5, 20, 11, 2, 61,
-	59, 3, 2, 2, 2, 61, 60, 3, 2, 2, 2, 62, 15, 3, 2, 2, 2, 63, 64, 9, 3, 2,
-	2, 64, 17, 3, 2, 2, 2, 65, 66, 5, 16, 9, 2, 66, 67, 5, 4, 3, 2, 67, 19,
-	3, 2, 2, 2, 68, 69, 5, 16, 9, 2, 69, 70, 5, 10, 6, 2, 70, 21, 3, 2, 2,
-	2, 71, 74, 5, 26, 14, 2, 72, 74, 5, 28, 15, 2, 73, 71, 3, 2, 2, 2, 73,
-	72, 3, 2, 2, 2, 74, 23, 3, 2, 2, 2, 75, 76, 9, 4, 2, 2, 76, 25, 3, 2, 2,
-	2, 77, 78, 5, 24, 13, 2, 78, 79, 5, 4, 3, 2, 79, 80, 7, 3, 2, 2, 80, 81,
-	5, 4, 3, 2, 81, 82, 5, 24, 13, 2, 82, 27, 3, 2, 2, 2, 83, 84, 5, 24, 13,
-	2, 84, 85, 5, 10, 6, 2, 85, 86, 7, 3, 2, 2, 86, 87, 5, 10, 6, 2, 87, 88,
-	3, 2, 2, 2, 88, 89, 5, 24, 13, 2, 89, 29, 3, 2, 2, 2, 90, 94, 5, 32, 17,
-	2, 91, 94, 5, 34, 18, 2, 92, 94, 5, 36, 19, 2, 93, 90, 3, 2, 2, 2, 93,
-	91, 3, 2, 2, 2, 93, 92, 3, 2, 2, 2, 94, 31, 3, 2, 2, 2, 95, 99, 8, 17,
-	1, 2, 96, 100, 5, 4, 3, 2, 97, 100, 5, 18, 10, 2, 98, 100, 5, 26, 14, 2,
-	99, 96, 3, 2, 2, 2, 99, 97, 3, 2, 2, 2, 99, 98, 3, 2, 2, 2, 100, 106, 3,
-	2, 2, 2, 101, 102, 12, 4, 2, 2, 102, 103, 7, 18, 2, 2, 103, 105, 5, 32,
-	17, 5, 104, 101, 3, 2, 2, 2, 105, 108, 3, 2, 2, 2, 106, 104, 3, 2, 2, 2,
-	106, 107, 3, 2, 2, 2, 107, 33, 3, 2, 2, 2, 108, 106, 3, 2, 2, 2, 109, 110,
-	8, 18, 1, 2, 110, 111, 5, 6, 4, 2, 111, 117, 3, 2, 2, 2, 112, 113, 12,
-	4, 2, 2, 113, 114, 7, 18, 2, 2, 114, 116, 5, 34, 18, 5, 115, 112, 3, 2,
-	2, 2, 116, 119, 3, 2, 2, 2, 117, 115, 3, 2, 2, 2, 117, 118, 3, 2, 2, 2,
-	118, 35, 3, 2, 2, 2, 119, 117, 3, 2, 2, 2, 120, 124, 8, 19, 1, 2, 121,
-	125, 5, 10, 6, 2, 122, 125, 5, 20, 11, 2, 123, 125, 5, 28, 15, 2, 124,
-	121, 3, 2, 2, 2, 124, 122, 3, 2, 2, 2, 124, 123, 3, 2, 2, 2, 125, 131,
-	3, 2, 2, 2, 126, 127, 12, 4, 2, 2, 127, 128, 7, 18, 2, 2, 128, 130, 5,
-	36, 19, 5, 129, 126, 3, 2, 2, 2, 130, 133, 3, 2, 2, 2, 131, 129, 3, 2,
-	2, 2, 131, 132, 3, 2, 2, 2, 132, 37, 3, 2, 2, 2, 133, 131, 3, 2, 2, 2,
-	134, 135, 7, 19, 2, 2, 135, 140, 7, 4, 2, 2, 136, 141, 5, 12, 7, 2, 137,
-	141, 5, 14, 8, 2, 138, 141, 5, 22, 12, 2, 139, 141, 5, 30, 16, 2, 140,
-	136, 3, 2, 2, 2, 140, 137, 3, 2, 2, 2, 140, 138, 3, 2, 2, 2, 140, 139,
-	3, 2, 2, 2, 141, 142, 3, 2, 2, 2, 142, 143, 7, 5, 2, 2, 143, 39, 3, 2,
-	2, 2, 144, 151, 5, 12, 7, 2, 145, 151, 5, 14, 8, 2, 146, 151, 5, 22, 12,
-	2, 147, 151, 5, 30, 16, 2, 148, 151, 5, 38, 20, 2, 149, 151, 7, 6, 2, 2,
-	150, 144, 3, 2, 2, 2, 150, 145, 3, 2, 2, 2, 150, 146, 3, 2, 2, 2, 150,
-	147, 3, 2, 2, 2, 150, 148, 3, 2, 2, 2, 150, 149, 3, 2, 2, 2, 151, 41, 3,
-	2, 2, 2, 13, 57, 61, 73, 93, 99, 106, 117, 124, 131, 140, 150,
+	18, 4, 19, 9, 19, 4, 20, 9, 20, 4, 21, 9, 21, 4, 22, 9, 22, 4, 23, 9, 23,
+	3, 2, 3, 2, 3, 2, 3, 3, 3, 3, 3, 3, 3, 4, 3, 4, 3, 5, 3, 5, 3, 6, 3, 6,
+	3, 7, 3, 7, 3, 8, 3, 8, 3, 8, 3, 8, 5, 8, 65, 10, 8, 3, 9, 3, 9, 5, 9,
+	69, 10, 9, 3, 10, 3, 10, 3, 11, 3, 11, 3, 11, 3, 12, 3, 12, 3, 12, 3, 13,
+	3, 13, 5, 13, 81, 10, 13, 3, 14, 3, 14, 3, 15, 3, 15, 3, 15, 3, 15, 3,
+	15, 3, 15, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 17, 3, 17,
+	3, 17, 5, 17, 101, 10, 17, 3, 18, 3, 18, 3, 18, 3, 18, 5, 18, 107, 10,
+	18, 3, 18, 3, 18, 3, 18, 7, 18, 112, 10, 18, 12, 18, 14, 18, 115, 11, 18,
+	3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 3, 19, 7, 19, 123, 10, 19, 12, 19, 14,
+	19, 126, 11, 19, 3, 20, 3, 20, 3, 20, 3, 20, 5, 20, 132, 10, 20, 3, 20,
+	3, 20, 3, 20, 7, 20, 137, 10, 20, 12, 20, 14, 20, 140, 11, 20, 3, 21, 3,
+	21, 3, 21, 3, 21, 3, 21, 3, 21, 5, 21, 148, 10, 21, 3, 21, 3, 21, 3, 22,
+	3, 22, 3, 22, 3, 22, 3, 22, 3, 22, 5, 22, 158, 10, 22, 3, 23, 3, 23, 3,
+	23, 3, 23, 5, 23, 164, 10, 23, 3, 23, 5, 23, 167, 10, 23, 3, 23, 2, 5,
+	34, 36, 38, 24, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30,
+	32, 34, 36, 38, 40, 42, 44, 2, 5, 3, 2, 8, 9, 3, 2, 12, 15, 3, 2, 16, 17,
+	2, 172, 2, 46, 3, 2, 2, 2, 4, 49, 3, 2, 2, 2, 6, 52, 3, 2, 2, 2, 8, 54,
+	3, 2, 2, 2, 10, 56, 3, 2, 2, 2, 12, 58, 3, 2, 2, 2, 14, 64, 3, 2, 2, 2,
+	16, 68, 3, 2, 2, 2, 18, 70, 3, 2, 2, 2, 20, 72, 3, 2, 2, 2, 22, 75, 3,
+	2, 2, 2, 24, 80, 3, 2, 2, 2, 26, 82, 3, 2, 2, 2, 28, 84, 3, 2, 2, 2, 30,
+	90, 3, 2, 2, 2, 32, 100, 3, 2, 2, 2, 34, 102, 3, 2, 2, 2, 36, 116, 3, 2,
+	2, 2, 38, 127, 3, 2, 2, 2, 40, 141, 3, 2, 2, 2, 42, 157, 3, 2, 2, 2, 44,
+	166, 3, 2, 2, 2, 46, 47, 5, 42, 22, 2, 47, 48, 7, 2, 2, 3, 48, 3, 3, 2,
+	2, 2, 49, 50, 5, 44, 23, 2, 50, 51, 7, 2, 2, 3, 51, 5, 3, 2, 2, 2, 52,
+	53, 9, 2, 2, 2, 53, 7, 3, 2, 2, 2, 54, 55, 7, 10, 2, 2, 55, 9, 3, 2, 2,
+	2, 56, 57, 7, 11, 2, 2, 57, 11, 3, 2, 2, 2, 58, 59, 7, 20, 2, 2, 59, 13,
+	3, 2, 2, 2, 60, 65, 5, 10, 6, 2, 61, 65, 5, 8, 5, 2, 62, 65, 5, 12, 7,
+	2, 63, 65, 5, 6, 4, 2, 64, 60, 3, 2, 2, 2, 64, 61, 3, 2, 2, 2, 64, 62,
+	3, 2, 2, 2, 64, 63, 3, 2, 2, 2, 65, 15, 3, 2, 2, 2, 66, 69, 5, 20, 11,
+	2, 67, 69, 5, 22, 12, 2, 68, 66, 3, 2, 2, 2, 68, 67, 3, 2, 2, 2, 69, 17,
+	3, 2, 2, 2, 70, 71, 9, 3, 2, 2, 71, 19, 3, 2, 2, 2, 72, 73, 5, 18, 10,
+	2, 73, 74, 5, 12, 7, 2, 74, 21, 3, 2, 2, 2, 75, 76, 5, 18, 10, 2, 76, 77,
+	5, 6, 4, 2, 77, 23, 3, 2, 2, 2, 78, 81, 5, 28, 15, 2, 79, 81, 5, 30, 16,
+	2, 80, 78, 3, 2, 2, 2, 80, 79, 3, 2, 2, 2, 81, 25, 3, 2, 2, 2, 82, 83,
+	9, 4, 2, 2, 83, 27, 3, 2, 2, 2, 84, 85, 5, 26, 14, 2, 85, 86, 5, 6, 4,
+	2, 86, 87, 7, 3, 2, 2, 87, 88, 5, 6, 4, 2, 88, 89, 5, 26, 14, 2, 89, 29,
+	3, 2, 2, 2, 90, 91, 5, 26, 14, 2, 91, 92, 5, 12, 7, 2, 92, 93, 7, 3, 2,
+	2, 93, 94, 5, 12, 7, 2, 94, 95, 3, 2, 2, 2, 95, 96, 5, 26, 14, 2, 96, 31,
+	3, 2, 2, 2, 97, 101, 5, 34, 18, 2, 98, 101, 5, 36, 19, 2, 99, 101, 5, 38,
+	20, 2, 100, 97, 3, 2, 2, 2, 100, 98, 3, 2, 2, 2, 100, 99, 3, 2, 2, 2, 101,
+	33, 3, 2, 2, 2, 102, 106, 8, 18, 1, 2, 103, 107, 5, 6, 4, 2, 104, 107,
+	5, 22, 12, 2, 105, 107, 5, 28, 15, 2, 106, 103, 3, 2, 2, 2, 106, 104, 3,
+	2, 2, 2, 106, 105, 3, 2, 2, 2, 107, 113, 3, 2, 2, 2, 108, 109, 12, 4, 2,
+	2, 109, 110, 7, 18, 2, 2, 110, 112, 5, 34, 18, 5, 111, 108, 3, 2, 2, 2,
+	112, 115, 3, 2, 2, 2, 113, 111, 3, 2, 2, 2, 113, 114, 3, 2, 2, 2, 114,
+	35, 3, 2, 2, 2, 115, 113, 3, 2, 2, 2, 116, 117, 8, 19, 1, 2, 117, 118,
+	5, 8, 5, 2, 118, 124, 3, 2, 2, 2, 119, 120, 12, 4, 2, 2, 120, 121, 7, 18,
+	2, 2, 121, 123, 5, 36, 19, 5, 122, 119, 3, 2, 2, 2, 123, 126, 3, 2, 2,
+	2, 124, 122, 3, 2, 2, 2, 124, 125, 3, 2, 2, 2, 125, 37, 3, 2, 2, 2, 126,
+	124, 3, 2, 2, 2, 127, 131, 8, 20, 1, 2, 128, 132, 5, 12, 7, 2, 129, 132,
+	5, 20, 11, 2, 130, 132, 5, 30, 16, 2, 131, 128, 3, 2, 2, 2, 131, 129, 3,
+	2, 2, 2, 131, 130, 3, 2, 2, 2, 132, 138, 3, 2, 2, 2, 133, 134, 12, 4, 2,
+	2, 134, 135, 7, 18, 2, 2, 135, 137, 5, 38, 20, 5, 136, 133, 3, 2, 2, 2,
+	137, 140, 3, 2, 2, 2, 138, 136, 3, 2, 2, 2, 138, 139, 3, 2, 2, 2, 139,
+	39, 3, 2, 2, 2, 140, 138, 3, 2, 2, 2, 141, 142, 7, 19, 2, 2, 142, 147,
+	7, 4, 2, 2, 143, 148, 5, 14, 8, 2, 144, 148, 5, 16, 9, 2, 145, 148, 5,
+	24, 13, 2, 146, 148, 5, 32, 17, 2, 147, 143, 3, 2, 2, 2, 147, 144, 3, 2,
+	2, 2, 147, 145, 3, 2, 2, 2, 147, 146, 3, 2, 2, 2, 148, 149, 3, 2, 2, 2,
+	149, 150, 7, 5, 2, 2, 150, 41, 3, 2, 2, 2, 151, 158, 5, 14, 8, 2, 152,
+	158, 5, 16, 9, 2, 153, 158, 5, 24, 13, 2, 154, 158, 5, 32, 17, 2, 155,
+	158, 5, 40, 21, 2, 156, 158, 7, 6, 2, 2, 157, 151, 3, 2, 2, 2, 157, 152,
+	3, 2, 2, 2, 157, 153, 3, 2, 2, 2, 157, 154, 3, 2, 2, 2, 157, 155, 3, 2,
+	2, 2, 157, 156, 3, 2, 2, 2, 158, 43, 3, 2, 2, 2, 159, 164, 5, 10, 6, 2,
+	160, 164, 5, 8, 5, 2, 161, 164, 5, 12, 7, 2, 162, 164, 5, 6, 4, 2, 163,
+	159, 3, 2, 2, 2, 163, 160, 3, 2, 2, 2, 163, 161, 3, 2, 2, 2, 163, 162,
+	3, 2, 2, 2, 164, 167, 3, 2, 2, 2, 165, 167, 7, 6, 2, 2, 166, 163, 3, 2,
+	2, 2, 166, 165, 3, 2, 2, 2, 167, 45, 3, 2, 2, 2, 15, 64, 68, 80, 100, 106,
+	113, 124, 131, 138, 147, 157, 163, 166,
 }
 var literalNames = []string{
 	"", "'..'", "'('", "')'", "'-'", "", "", "", "", "", "'<'", "'<='", "'>'",
@@ -92,10 +100,11 @@ var symbolicNames = []string{
 }
 
 var ruleNames = []string{
-	"start", "number", "strings", "bools", "datetime", "equalcomparison", "comparison",
-	"op", "comparisonnumber", "comparisondatetime", "ranges", "rop", "rangenumber",
-	"rangedatetime", "disjunctions", "disjunctionsNumber", "disjunctionsString",
-	"disjunctionsDateTime", "negation", "expression",
+	"inputEntry", "outputEntry", "number", "strings", "bools", "datetime",
+	"equalcomparison", "comparison", "op", "comparisondatetime", "comparisonnumber",
+	"ranges", "rop", "rangenumber", "rangedatetime", "disjunctions", "disjunctionsNumber",
+	"disjunctionsString", "disjunctionsDateTime", "negation", "inputexpression",
+	"outputexpression",
 }
 
 type SFeelParser struct {
@@ -153,103 +162,105 @@ const (
 
 // SFeelParser rules.
 const (
-	SFeelParserRULE_start                = 0
-	SFeelParserRULE_number               = 1
-	SFeelParserRULE_strings              = 2
-	SFeelParserRULE_bools                = 3
-	SFeelParserRULE_datetime             = 4
-	SFeelParserRULE_equalcomparison      = 5
-	SFeelParserRULE_comparison           = 6
-	SFeelParserRULE_op                   = 7
-	SFeelParserRULE_comparisonnumber     = 8
+	SFeelParserRULE_inputEntry           = 0
+	SFeelParserRULE_outputEntry          = 1
+	SFeelParserRULE_number               = 2
+	SFeelParserRULE_strings              = 3
+	SFeelParserRULE_bools                = 4
+	SFeelParserRULE_datetime             = 5
+	SFeelParserRULE_equalcomparison      = 6
+	SFeelParserRULE_comparison           = 7
+	SFeelParserRULE_op                   = 8
 	SFeelParserRULE_comparisondatetime   = 9
-	SFeelParserRULE_ranges               = 10
-	SFeelParserRULE_rop                  = 11
-	SFeelParserRULE_rangenumber          = 12
-	SFeelParserRULE_rangedatetime        = 13
-	SFeelParserRULE_disjunctions         = 14
-	SFeelParserRULE_disjunctionsNumber   = 15
-	SFeelParserRULE_disjunctionsString   = 16
-	SFeelParserRULE_disjunctionsDateTime = 17
-	SFeelParserRULE_negation             = 18
-	SFeelParserRULE_expression           = 19
+	SFeelParserRULE_comparisonnumber     = 10
+	SFeelParserRULE_ranges               = 11
+	SFeelParserRULE_rop                  = 12
+	SFeelParserRULE_rangenumber          = 13
+	SFeelParserRULE_rangedatetime        = 14
+	SFeelParserRULE_disjunctions         = 15
+	SFeelParserRULE_disjunctionsNumber   = 16
+	SFeelParserRULE_disjunctionsString   = 17
+	SFeelParserRULE_disjunctionsDateTime = 18
+	SFeelParserRULE_negation             = 19
+	SFeelParserRULE_inputexpression      = 20
+	SFeelParserRULE_outputexpression     = 21
 )
 
-// IStartContext is an interface to support dynamic dispatch.
-type IStartContext interface {
+// IInputEntryContext is an interface to support dynamic dispatch.
+type IInputEntryContext interface {
 	antlr.ParserRuleContext
 
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
-	// IsStartContext differentiates from other interfaces.
-	IsStartContext()
+	// IsInputEntryContext differentiates from other interfaces.
+	IsInputEntryContext()
 }
 
-type StartContext struct {
+type InputEntryContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
 }
 
-func NewEmptyStartContext() *StartContext {
-	var p = new(StartContext)
+func NewEmptyInputEntryContext() *InputEntryContext {
+	var p = new(InputEntryContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = SFeelParserRULE_start
+	p.RuleIndex = SFeelParserRULE_inputEntry
 	return p
 }
 
-func (*StartContext) IsStartContext() {}
+func (*InputEntryContext) IsInputEntryContext() {}
 
-func NewStartContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *StartContext {
-	var p = new(StartContext)
+func NewInputEntryContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *InputEntryContext {
+	var p = new(InputEntryContext)
 
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = SFeelParserRULE_start
+	p.RuleIndex = SFeelParserRULE_inputEntry
 
 	return p
 }
 
-func (s *StartContext) GetParser() antlr.Parser { return s.parser }
+func (s *InputEntryContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *StartContext) Expression() IExpressionContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IExpressionContext)(nil)).Elem(), 0)
+func (s *InputEntryContext) Inputexpression() IInputexpressionContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IInputexpressionContext)(nil)).Elem(), 0)
 
 	if t == nil {
 		return nil
 	}
 
-	return t.(IExpressionContext)
+	return t.(IInputexpressionContext)
 }
 
-func (s *StartContext) EOF() antlr.TerminalNode {
+func (s *InputEntryContext) EOF() antlr.TerminalNode {
 	return s.GetToken(SFeelParserEOF, 0)
 }
 
-func (s *StartContext) GetRuleContext() antlr.RuleContext {
+func (s *InputEntryContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *StartContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+func (s *InputEntryContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *StartContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *InputEntryContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterStart(s)
+		listenerT.EnterInputEntry(s)
 	}
 }
 
-func (s *StartContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *InputEntryContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitStart(s)
+		listenerT.ExitInputEntry(s)
 	}
 }
 
-func (p *SFeelParser) Start() (localctx IStartContext) {
-	localctx = NewStartContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 0, SFeelParserRULE_start)
+func (p *SFeelParser) InputEntry() (localctx IInputEntryContext) {
+	localctx = NewInputEntryContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 0, SFeelParserRULE_inputEntry)
 
 	defer func() {
 		p.ExitRule()
@@ -269,11 +280,116 @@ func (p *SFeelParser) Start() (localctx IStartContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(40)
-		p.Expression()
+		p.SetState(44)
+		p.Inputexpression()
 	}
 	{
-		p.SetState(41)
+		p.SetState(45)
+		p.Match(SFeelParserEOF)
+	}
+
+	return localctx
+}
+
+// IOutputEntryContext is an interface to support dynamic dispatch.
+type IOutputEntryContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsOutputEntryContext differentiates from other interfaces.
+	IsOutputEntryContext()
+}
+
+type OutputEntryContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyOutputEntryContext() *OutputEntryContext {
+	var p = new(OutputEntryContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = SFeelParserRULE_outputEntry
+	return p
+}
+
+func (*OutputEntryContext) IsOutputEntryContext() {}
+
+func NewOutputEntryContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *OutputEntryContext {
+	var p = new(OutputEntryContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SFeelParserRULE_outputEntry
+
+	return p
+}
+
+func (s *OutputEntryContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *OutputEntryContext) Outputexpression() IOutputexpressionContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IOutputexpressionContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IOutputexpressionContext)
+}
+
+func (s *OutputEntryContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *OutputEntryContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *OutputEntryContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *OutputEntryContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterOutputEntry(s)
+	}
+}
+
+func (s *OutputEntryContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitOutputEntry(s)
+	}
+}
+
+func (p *SFeelParser) OutputEntry() (localctx IOutputEntryContext) {
+	localctx = NewOutputEntryContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 2, SFeelParserRULE_outputEntry)
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(47)
+		p.Outputexpression()
+	}
+	{
+		p.SetState(48)
 		p.Match(SFeelParserEOF)
 	}
 
@@ -348,7 +464,7 @@ func (s *NumberContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *SFeelParser) Number() (localctx INumberContext) {
 	localctx = NewNumberContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 2, SFeelParserRULE_number)
+	p.EnterRule(localctx, 4, SFeelParserRULE_number)
 	var _la int
 
 	defer func() {
@@ -369,7 +485,7 @@ func (p *SFeelParser) Number() (localctx INumberContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(43)
+		p.SetState(50)
 		_la = p.GetTokenStream().LA(1)
 
 		if !(_la == SFeelParserINTEGER || _la == SFeelParserFLOAT) {
@@ -447,7 +563,7 @@ func (s *StringsContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *SFeelParser) Strings() (localctx IStringsContext) {
 	localctx = NewStringsContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 4, SFeelParserRULE_strings)
+	p.EnterRule(localctx, 6, SFeelParserRULE_strings)
 
 	defer func() {
 		p.ExitRule()
@@ -467,7 +583,7 @@ func (p *SFeelParser) Strings() (localctx IStringsContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(45)
+		p.SetState(52)
 		p.Match(SFeelParserSTRING)
 	}
 
@@ -538,7 +654,7 @@ func (s *BoolsContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *SFeelParser) Bools() (localctx IBoolsContext) {
 	localctx = NewBoolsContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 6, SFeelParserRULE_bools)
+	p.EnterRule(localctx, 8, SFeelParserRULE_bools)
 
 	defer func() {
 		p.ExitRule()
@@ -558,7 +674,7 @@ func (p *SFeelParser) Bools() (localctx IBoolsContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(47)
+		p.SetState(54)
 		p.Match(SFeelParserBOOL)
 	}
 
@@ -629,7 +745,7 @@ func (s *DatetimeContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *SFeelParser) Datetime() (localctx IDatetimeContext) {
 	localctx = NewDatetimeContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 8, SFeelParserRULE_datetime)
+	p.EnterRule(localctx, 10, SFeelParserRULE_datetime)
 
 	defer func() {
 		p.ExitRule()
@@ -649,7 +765,7 @@ func (p *SFeelParser) Datetime() (localctx IDatetimeContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(49)
+		p.SetState(56)
 		p.Match(SFeelParserDATEANDTIME)
 	}
 
@@ -756,7 +872,7 @@ func (s *EqualcomparisonContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *SFeelParser) Equalcomparison() (localctx IEqualcomparisonContext) {
 	localctx = NewEqualcomparisonContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 10, SFeelParserRULE_equalcomparison)
+	p.EnterRule(localctx, 12, SFeelParserRULE_equalcomparison)
 
 	defer func() {
 		p.ExitRule()
@@ -775,31 +891,31 @@ func (p *SFeelParser) Equalcomparison() (localctx IEqualcomparisonContext) {
 	}()
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(55)
+	p.SetState(62)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case SFeelParserBOOL:
 		{
-			p.SetState(51)
+			p.SetState(58)
 			p.Bools()
 		}
 
 	case SFeelParserSTRING:
 		{
-			p.SetState(52)
+			p.SetState(59)
 			p.Strings()
 		}
 
 	case SFeelParserDATEANDTIME:
 		{
-			p.SetState(53)
+			p.SetState(60)
 			p.Datetime()
 		}
 
 	case SFeelParserINTEGER, SFeelParserFLOAT:
 		{
-			p.SetState(54)
+			p.SetState(61)
 			p.Number()
 		}
 
@@ -848,16 +964,6 @@ func NewComparisonContext(parser antlr.Parser, parent antlr.ParserRuleContext, i
 
 func (s *ComparisonContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ComparisonContext) Comparisonnumber() IComparisonnumberContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComparisonnumberContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IComparisonnumberContext)
-}
-
 func (s *ComparisonContext) Comparisondatetime() IComparisondatetimeContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComparisondatetimeContext)(nil)).Elem(), 0)
 
@@ -866,6 +972,16 @@ func (s *ComparisonContext) Comparisondatetime() IComparisondatetimeContext {
 	}
 
 	return t.(IComparisondatetimeContext)
+}
+
+func (s *ComparisonContext) Comparisonnumber() IComparisonnumberContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComparisonnumberContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IComparisonnumberContext)
 }
 
 func (s *ComparisonContext) GetRuleContext() antlr.RuleContext {
@@ -890,7 +1006,7 @@ func (s *ComparisonContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *SFeelParser) Comparison() (localctx IComparisonContext) {
 	localctx = NewComparisonContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 12, SFeelParserRULE_comparison)
+	p.EnterRule(localctx, 14, SFeelParserRULE_comparison)
 
 	defer func() {
 		p.ExitRule()
@@ -908,21 +1024,21 @@ func (p *SFeelParser) Comparison() (localctx IComparisonContext) {
 		}
 	}()
 
-	p.SetState(59)
+	p.SetState(66)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 1, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(57)
-			p.Comparisonnumber()
+			p.SetState(64)
+			p.Comparisondatetime()
 		}
 
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(58)
-			p.Comparisondatetime()
+			p.SetState(65)
+			p.Comparisonnumber()
 		}
 
 	}
@@ -1006,7 +1122,7 @@ func (s *OpContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *SFeelParser) Op() (localctx IOpContext) {
 	localctx = NewOpContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 14, SFeelParserRULE_op)
+	p.EnterRule(localctx, 16, SFeelParserRULE_op)
 	var _la int
 
 	defer func() {
@@ -1027,7 +1143,7 @@ func (p *SFeelParser) Op() (localctx IOpContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(61)
+		p.SetState(68)
 		_la = p.GetTokenStream().LA(1)
 
 		if !(((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<SFeelParserLESS)|(1<<SFeelParserLESSEQ)|(1<<SFeelParserGREATER)|(1<<SFeelParserGREATEREQ))) != 0) {
@@ -1036,117 +1152,6 @@ func (p *SFeelParser) Op() (localctx IOpContext) {
 			p.GetErrorHandler().ReportMatch(p)
 			p.Consume()
 		}
-	}
-
-	return localctx
-}
-
-// IComparisonnumberContext is an interface to support dynamic dispatch.
-type IComparisonnumberContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// IsComparisonnumberContext differentiates from other interfaces.
-	IsComparisonnumberContext()
-}
-
-type ComparisonnumberContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-}
-
-func NewEmptyComparisonnumberContext() *ComparisonnumberContext {
-	var p = new(ComparisonnumberContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = SFeelParserRULE_comparisonnumber
-	return p
-}
-
-func (*ComparisonnumberContext) IsComparisonnumberContext() {}
-
-func NewComparisonnumberContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ComparisonnumberContext {
-	var p = new(ComparisonnumberContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = SFeelParserRULE_comparisonnumber
-
-	return p
-}
-
-func (s *ComparisonnumberContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *ComparisonnumberContext) Op() IOpContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IOpContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IOpContext)
-}
-
-func (s *ComparisonnumberContext) Number() INumberContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*INumberContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(INumberContext)
-}
-
-func (s *ComparisonnumberContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *ComparisonnumberContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *ComparisonnumberContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterComparisonnumber(s)
-	}
-}
-
-func (s *ComparisonnumberContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitComparisonnumber(s)
-	}
-}
-
-func (p *SFeelParser) Comparisonnumber() (localctx IComparisonnumberContext) {
-	localctx = NewComparisonnumberContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 16, SFeelParserRULE_comparisonnumber)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.EnterOuterAlt(localctx, 1)
-	{
-		p.SetState(63)
-		p.Op()
-	}
-	{
-		p.SetState(64)
-		p.Number()
 	}
 
 	return localctx
@@ -1252,12 +1257,123 @@ func (p *SFeelParser) Comparisondatetime() (localctx IComparisondatetimeContext)
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(66)
+		p.SetState(70)
 		p.Op()
 	}
 	{
-		p.SetState(67)
+		p.SetState(71)
 		p.Datetime()
+	}
+
+	return localctx
+}
+
+// IComparisonnumberContext is an interface to support dynamic dispatch.
+type IComparisonnumberContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsComparisonnumberContext differentiates from other interfaces.
+	IsComparisonnumberContext()
+}
+
+type ComparisonnumberContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyComparisonnumberContext() *ComparisonnumberContext {
+	var p = new(ComparisonnumberContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = SFeelParserRULE_comparisonnumber
+	return p
+}
+
+func (*ComparisonnumberContext) IsComparisonnumberContext() {}
+
+func NewComparisonnumberContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ComparisonnumberContext {
+	var p = new(ComparisonnumberContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SFeelParserRULE_comparisonnumber
+
+	return p
+}
+
+func (s *ComparisonnumberContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *ComparisonnumberContext) Op() IOpContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IOpContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IOpContext)
+}
+
+func (s *ComparisonnumberContext) Number() INumberContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*INumberContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(INumberContext)
+}
+
+func (s *ComparisonnumberContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *ComparisonnumberContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *ComparisonnumberContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterComparisonnumber(s)
+	}
+}
+
+func (s *ComparisonnumberContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitComparisonnumber(s)
+	}
+}
+
+func (p *SFeelParser) Comparisonnumber() (localctx IComparisonnumberContext) {
+	localctx = NewComparisonnumberContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 20, SFeelParserRULE_comparisonnumber)
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(73)
+		p.Op()
+	}
+	{
+		p.SetState(74)
+		p.Number()
 	}
 
 	return localctx
@@ -1343,7 +1459,7 @@ func (s *RangesContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *SFeelParser) Ranges() (localctx IRangesContext) {
 	localctx = NewRangesContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 20, SFeelParserRULE_ranges)
+	p.EnterRule(localctx, 22, SFeelParserRULE_ranges)
 
 	defer func() {
 		p.ExitRule()
@@ -1361,20 +1477,20 @@ func (p *SFeelParser) Ranges() (localctx IRangesContext) {
 		}
 	}()
 
-	p.SetState(71)
+	p.SetState(78)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 2, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(69)
+			p.SetState(76)
 			p.Rangenumber()
 		}
 
 	case 2:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(70)
+			p.SetState(77)
 			p.Rangedatetime()
 		}
 
@@ -1451,7 +1567,7 @@ func (s *RopContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *SFeelParser) Rop() (localctx IRopContext) {
 	localctx = NewRopContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 22, SFeelParserRULE_rop)
+	p.EnterRule(localctx, 24, SFeelParserRULE_rop)
 	var _la int
 
 	defer func() {
@@ -1472,7 +1588,7 @@ func (p *SFeelParser) Rop() (localctx IRopContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(73)
+		p.SetState(80)
 		_la = p.GetTokenStream().LA(1)
 
 		if !(_la == SFeelParserRANGEIN || _la == SFeelParserRANGEOUT) {
@@ -1592,7 +1708,7 @@ func (s *RangenumberContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *SFeelParser) Rangenumber() (localctx IRangenumberContext) {
 	localctx = NewRangenumberContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 24, SFeelParserRULE_rangenumber)
+	p.EnterRule(localctx, 26, SFeelParserRULE_rangenumber)
 
 	defer func() {
 		p.ExitRule()
@@ -1612,23 +1728,23 @@ func (p *SFeelParser) Rangenumber() (localctx IRangenumberContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(75)
+		p.SetState(82)
 		p.Rop()
 	}
 	{
-		p.SetState(76)
+		p.SetState(83)
 		p.Number()
 	}
 	{
-		p.SetState(77)
+		p.SetState(84)
 		p.Match(SFeelParserT__0)
 	}
 	{
-		p.SetState(78)
+		p.SetState(85)
 		p.Number()
 	}
 	{
-		p.SetState(79)
+		p.SetState(86)
 		p.Rop()
 	}
 
@@ -1741,7 +1857,7 @@ func (s *RangedatetimeContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *SFeelParser) Rangedatetime() (localctx IRangedatetimeContext) {
 	localctx = NewRangedatetimeContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 26, SFeelParserRULE_rangedatetime)
+	p.EnterRule(localctx, 28, SFeelParserRULE_rangedatetime)
 
 	defer func() {
 		p.ExitRule()
@@ -1761,25 +1877,25 @@ func (p *SFeelParser) Rangedatetime() (localctx IRangedatetimeContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(81)
+		p.SetState(88)
 		p.Rop()
 	}
 
 	{
-		p.SetState(82)
+		p.SetState(89)
 		p.Datetime()
 	}
 	{
-		p.SetState(83)
+		p.SetState(90)
 		p.Match(SFeelParserT__0)
 	}
 	{
-		p.SetState(84)
+		p.SetState(91)
 		p.Datetime()
 	}
 
 	{
-		p.SetState(86)
+		p.SetState(93)
 		p.Rop()
 	}
 
@@ -1876,7 +1992,7 @@ func (s *DisjunctionsContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *SFeelParser) Disjunctions() (localctx IDisjunctionsContext) {
 	localctx = NewDisjunctionsContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 28, SFeelParserRULE_disjunctions)
+	p.EnterRule(localctx, 30, SFeelParserRULE_disjunctions)
 
 	defer func() {
 		p.ExitRule()
@@ -1895,24 +2011,24 @@ func (p *SFeelParser) Disjunctions() (localctx IDisjunctionsContext) {
 	}()
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(91)
+	p.SetState(98)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 3, p.GetParserRuleContext()) {
 	case 1:
 		{
-			p.SetState(88)
+			p.SetState(95)
 			p.disjunctionsNumber(0)
 		}
 
 	case 2:
 		{
-			p.SetState(89)
+			p.SetState(96)
 			p.disjunctionsString(0)
 		}
 
 	case 3:
 		{
-			p.SetState(90)
+			p.SetState(97)
 			p.disjunctionsDateTime(0)
 		}
 
@@ -2046,8 +2162,8 @@ func (p *SFeelParser) disjunctionsNumber(_p int) (localctx IDisjunctionsNumberCo
 	localctx = NewDisjunctionsNumberContext(p, p.GetParserRuleContext(), _parentState)
 	var _prevctx IDisjunctionsNumberContext = localctx
 	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
-	_startState := 30
-	p.EnterRecursionRule(localctx, 30, SFeelParserRULE_disjunctionsNumber, _p)
+	_startState := 32
+	p.EnterRecursionRule(localctx, 32, SFeelParserRULE_disjunctionsNumber, _p)
 
 	defer func() {
 		p.UnrollRecursionContexts(_parentctx)
@@ -2068,25 +2184,25 @@ func (p *SFeelParser) disjunctionsNumber(_p int) (localctx IDisjunctionsNumberCo
 	var _alt int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(97)
+	p.SetState(104)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case SFeelParserINTEGER, SFeelParserFLOAT:
 		{
-			p.SetState(94)
+			p.SetState(101)
 			p.Number()
 		}
 
 	case SFeelParserLESS, SFeelParserLESSEQ, SFeelParserGREATER, SFeelParserGREATEREQ:
 		{
-			p.SetState(95)
+			p.SetState(102)
 			p.Comparisonnumber()
 		}
 
 	case SFeelParserRANGEIN, SFeelParserRANGEOUT:
 		{
-			p.SetState(96)
+			p.SetState(103)
 			p.Rangenumber()
 		}
 
@@ -2095,7 +2211,7 @@ func (p *SFeelParser) disjunctionsNumber(_p int) (localctx IDisjunctionsNumberCo
 	}
 
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(104)
+	p.SetState(111)
 	p.GetErrorHandler().Sync(p)
 	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 5, p.GetParserRuleContext())
 
@@ -2107,22 +2223,22 @@ func (p *SFeelParser) disjunctionsNumber(_p int) (localctx IDisjunctionsNumberCo
 			_prevctx = localctx
 			localctx = NewDisjunctionsNumberContext(p, _parentctx, _parentState)
 			p.PushNewRecursionContext(localctx, _startState, SFeelParserRULE_disjunctionsNumber)
-			p.SetState(99)
+			p.SetState(106)
 
 			if !(p.Precpred(p.GetParserRuleContext(), 2)) {
 				panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
 			}
 			{
-				p.SetState(100)
+				p.SetState(107)
 				p.Match(SFeelParserDISJUNCTION)
 			}
 			{
-				p.SetState(101)
+				p.SetState(108)
 				p.disjunctionsNumber(3)
 			}
 
 		}
-		p.SetState(106)
+		p.SetState(113)
 		p.GetErrorHandler().Sync(p)
 		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 5, p.GetParserRuleContext())
 	}
@@ -2235,8 +2351,8 @@ func (p *SFeelParser) disjunctionsString(_p int) (localctx IDisjunctionsStringCo
 	localctx = NewDisjunctionsStringContext(p, p.GetParserRuleContext(), _parentState)
 	var _prevctx IDisjunctionsStringContext = localctx
 	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
-	_startState := 32
-	p.EnterRecursionRule(localctx, 32, SFeelParserRULE_disjunctionsString, _p)
+	_startState := 34
+	p.EnterRecursionRule(localctx, 34, SFeelParserRULE_disjunctionsString, _p)
 
 	defer func() {
 		p.UnrollRecursionContexts(_parentctx)
@@ -2258,12 +2374,12 @@ func (p *SFeelParser) disjunctionsString(_p int) (localctx IDisjunctionsStringCo
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(108)
+		p.SetState(115)
 		p.Strings()
 	}
 
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(115)
+	p.SetState(122)
 	p.GetErrorHandler().Sync(p)
 	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 6, p.GetParserRuleContext())
 
@@ -2275,22 +2391,22 @@ func (p *SFeelParser) disjunctionsString(_p int) (localctx IDisjunctionsStringCo
 			_prevctx = localctx
 			localctx = NewDisjunctionsStringContext(p, _parentctx, _parentState)
 			p.PushNewRecursionContext(localctx, _startState, SFeelParserRULE_disjunctionsString)
-			p.SetState(110)
+			p.SetState(117)
 
 			if !(p.Precpred(p.GetParserRuleContext(), 2)) {
 				panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
 			}
 			{
-				p.SetState(111)
+				p.SetState(118)
 				p.Match(SFeelParserDISJUNCTION)
 			}
 			{
-				p.SetState(112)
+				p.SetState(119)
 				p.disjunctionsString(3)
 			}
 
 		}
-		p.SetState(117)
+		p.SetState(124)
 		p.GetErrorHandler().Sync(p)
 		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 6, p.GetParserRuleContext())
 	}
@@ -2423,8 +2539,8 @@ func (p *SFeelParser) disjunctionsDateTime(_p int) (localctx IDisjunctionsDateTi
 	localctx = NewDisjunctionsDateTimeContext(p, p.GetParserRuleContext(), _parentState)
 	var _prevctx IDisjunctionsDateTimeContext = localctx
 	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
-	_startState := 34
-	p.EnterRecursionRule(localctx, 34, SFeelParserRULE_disjunctionsDateTime, _p)
+	_startState := 36
+	p.EnterRecursionRule(localctx, 36, SFeelParserRULE_disjunctionsDateTime, _p)
 
 	defer func() {
 		p.UnrollRecursionContexts(_parentctx)
@@ -2445,25 +2561,25 @@ func (p *SFeelParser) disjunctionsDateTime(_p int) (localctx IDisjunctionsDateTi
 	var _alt int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(122)
+	p.SetState(129)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case SFeelParserDATEANDTIME:
 		{
-			p.SetState(119)
+			p.SetState(126)
 			p.Datetime()
 		}
 
 	case SFeelParserLESS, SFeelParserLESSEQ, SFeelParserGREATER, SFeelParserGREATEREQ:
 		{
-			p.SetState(120)
+			p.SetState(127)
 			p.Comparisondatetime()
 		}
 
 	case SFeelParserRANGEIN, SFeelParserRANGEOUT:
 		{
-			p.SetState(121)
+			p.SetState(128)
 			p.Rangedatetime()
 		}
 
@@ -2472,7 +2588,7 @@ func (p *SFeelParser) disjunctionsDateTime(_p int) (localctx IDisjunctionsDateTi
 	}
 
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(129)
+	p.SetState(136)
 	p.GetErrorHandler().Sync(p)
 	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 8, p.GetParserRuleContext())
 
@@ -2484,22 +2600,22 @@ func (p *SFeelParser) disjunctionsDateTime(_p int) (localctx IDisjunctionsDateTi
 			_prevctx = localctx
 			localctx = NewDisjunctionsDateTimeContext(p, _parentctx, _parentState)
 			p.PushNewRecursionContext(localctx, _startState, SFeelParserRULE_disjunctionsDateTime)
-			p.SetState(124)
+			p.SetState(131)
 
 			if !(p.Precpred(p.GetParserRuleContext(), 2)) {
 				panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
 			}
 			{
-				p.SetState(125)
+				p.SetState(132)
 				p.Match(SFeelParserDISJUNCTION)
 			}
 			{
-				p.SetState(126)
+				p.SetState(133)
 				p.disjunctionsDateTime(3)
 			}
 
 		}
-		p.SetState(131)
+		p.SetState(138)
 		p.GetErrorHandler().Sync(p)
 		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 8, p.GetParserRuleContext())
 	}
@@ -2611,7 +2727,7 @@ func (s *NegationContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *SFeelParser) Negation() (localctx INegationContext) {
 	localctx = NewNegationContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 36, SFeelParserRULE_negation)
+	p.EnterRule(localctx, 38, SFeelParserRULE_negation)
 
 	defer func() {
 		p.ExitRule()
@@ -2631,109 +2747,109 @@ func (p *SFeelParser) Negation() (localctx INegationContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(132)
+		p.SetState(139)
 		p.Match(SFeelParserNEGATION)
 	}
 	{
-		p.SetState(133)
+		p.SetState(140)
 		p.Match(SFeelParserT__1)
 	}
-	p.SetState(138)
+	p.SetState(145)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 9, p.GetParserRuleContext()) {
 	case 1:
 		{
-			p.SetState(134)
+			p.SetState(141)
 			p.Equalcomparison()
 		}
 
 	case 2:
 		{
-			p.SetState(135)
+			p.SetState(142)
 			p.Comparison()
 		}
 
 	case 3:
 		{
-			p.SetState(136)
+			p.SetState(143)
 			p.Ranges()
 		}
 
 	case 4:
 		{
-			p.SetState(137)
+			p.SetState(144)
 			p.Disjunctions()
 		}
 
 	}
 	{
-		p.SetState(140)
+		p.SetState(147)
 		p.Match(SFeelParserT__2)
 	}
 
 	return localctx
 }
 
-// IExpressionContext is an interface to support dynamic dispatch.
-type IExpressionContext interface {
+// IInputexpressionContext is an interface to support dynamic dispatch.
+type IInputexpressionContext interface {
 	antlr.ParserRuleContext
 
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
-	// IsExpressionContext differentiates from other interfaces.
-	IsExpressionContext()
+	// IsInputexpressionContext differentiates from other interfaces.
+	IsInputexpressionContext()
 }
 
-type ExpressionContext struct {
+type InputexpressionContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
 }
 
-func NewEmptyExpressionContext() *ExpressionContext {
-	var p = new(ExpressionContext)
+func NewEmptyInputexpressionContext() *InputexpressionContext {
+	var p = new(InputexpressionContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = SFeelParserRULE_expression
+	p.RuleIndex = SFeelParserRULE_inputexpression
 	return p
 }
 
-func (*ExpressionContext) IsExpressionContext() {}
+func (*InputexpressionContext) IsInputexpressionContext() {}
 
-func NewExpressionContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ExpressionContext {
-	var p = new(ExpressionContext)
+func NewInputexpressionContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *InputexpressionContext {
+	var p = new(InputexpressionContext)
 
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = SFeelParserRULE_expression
+	p.RuleIndex = SFeelParserRULE_inputexpression
 
 	return p
 }
 
-func (s *ExpressionContext) GetParser() antlr.Parser { return s.parser }
+func (s *InputexpressionContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ExpressionContext) CopyFrom(ctx *ExpressionContext) {
+func (s *InputexpressionContext) CopyFrom(ctx *InputexpressionContext) {
 	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
 }
 
-func (s *ExpressionContext) GetRuleContext() antlr.RuleContext {
+func (s *InputexpressionContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *ExpressionContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+func (s *InputexpressionContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
 type DisjunctionRuleContext struct {
-	*ExpressionContext
+	*InputexpressionContext
 }
 
 func NewDisjunctionRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *DisjunctionRuleContext {
 	var p = new(DisjunctionRuleContext)
 
-	p.ExpressionContext = NewEmptyExpressionContext()
+	p.InputexpressionContext = NewEmptyInputexpressionContext()
 	p.parser = parser
-	p.CopyFrom(ctx.(*ExpressionContext))
+	p.CopyFrom(ctx.(*InputexpressionContext))
 
 	return p
 }
@@ -2765,15 +2881,15 @@ func (s *DisjunctionRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 }
 
 type ComparisionsRuleContext struct {
-	*ExpressionContext
+	*InputexpressionContext
 }
 
 func NewComparisionsRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *ComparisionsRuleContext {
 	var p = new(ComparisionsRuleContext)
 
-	p.ExpressionContext = NewEmptyExpressionContext()
+	p.InputexpressionContext = NewEmptyInputexpressionContext()
 	p.parser = parser
-	p.CopyFrom(ctx.(*ExpressionContext))
+	p.CopyFrom(ctx.(*InputexpressionContext))
 
 	return p
 }
@@ -2804,46 +2920,46 @@ func (s *ComparisionsRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
-type EmptyRuleContext struct {
-	*ExpressionContext
+type EmptyInputRuleContext struct {
+	*InputexpressionContext
 }
 
-func NewEmptyRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EmptyRuleContext {
-	var p = new(EmptyRuleContext)
+func NewEmptyInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EmptyInputRuleContext {
+	var p = new(EmptyInputRuleContext)
 
-	p.ExpressionContext = NewEmptyExpressionContext()
+	p.InputexpressionContext = NewEmptyInputexpressionContext()
 	p.parser = parser
-	p.CopyFrom(ctx.(*ExpressionContext))
+	p.CopyFrom(ctx.(*InputexpressionContext))
 
 	return p
 }
 
-func (s *EmptyRuleContext) GetRuleContext() antlr.RuleContext {
+func (s *EmptyInputRuleContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *EmptyRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *EmptyInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterEmptyRule(s)
+		listenerT.EnterEmptyInputRule(s)
 	}
 }
 
-func (s *EmptyRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *EmptyInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitEmptyRule(s)
+		listenerT.ExitEmptyInputRule(s)
 	}
 }
 
 type NegationRuleContext struct {
-	*ExpressionContext
+	*InputexpressionContext
 }
 
 func NewNegationRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *NegationRuleContext {
 	var p = new(NegationRuleContext)
 
-	p.ExpressionContext = NewEmptyExpressionContext()
+	p.InputexpressionContext = NewEmptyInputexpressionContext()
 	p.parser = parser
-	p.CopyFrom(ctx.(*ExpressionContext))
+	p.CopyFrom(ctx.(*InputexpressionContext))
 
 	return p
 }
@@ -2875,15 +2991,15 @@ func (s *NegationRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 }
 
 type EqualcomparisonRuleContext struct {
-	*ExpressionContext
+	*InputexpressionContext
 }
 
 func NewEqualcomparisonRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EqualcomparisonRuleContext {
 	var p = new(EqualcomparisonRuleContext)
 
-	p.ExpressionContext = NewEmptyExpressionContext()
+	p.InputexpressionContext = NewEmptyInputexpressionContext()
 	p.parser = parser
-	p.CopyFrom(ctx.(*ExpressionContext))
+	p.CopyFrom(ctx.(*InputexpressionContext))
 
 	return p
 }
@@ -2915,15 +3031,15 @@ func (s *EqualcomparisonRuleContext) ExitRule(listener antlr.ParseTreeListener) 
 }
 
 type RangeRuleContext struct {
-	*ExpressionContext
+	*InputexpressionContext
 }
 
 func NewRangeRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *RangeRuleContext {
 	var p = new(RangeRuleContext)
 
-	p.ExpressionContext = NewEmptyExpressionContext()
+	p.InputexpressionContext = NewEmptyInputexpressionContext()
 	p.parser = parser
-	p.CopyFrom(ctx.(*ExpressionContext))
+	p.CopyFrom(ctx.(*InputexpressionContext))
 
 	return p
 }
@@ -2954,9 +3070,9 @@ func (s *RangeRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
-func (p *SFeelParser) Expression() (localctx IExpressionContext) {
-	localctx = NewExpressionContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 38, SFeelParserRULE_expression)
+func (p *SFeelParser) Inputexpression() (localctx IInputexpressionContext) {
+	localctx = NewInputexpressionContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 40, SFeelParserRULE_inputexpression)
 
 	defer func() {
 		p.ExitRule()
@@ -2974,14 +3090,14 @@ func (p *SFeelParser) Expression() (localctx IExpressionContext) {
 		}
 	}()
 
-	p.SetState(148)
+	p.SetState(155)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 10, p.GetParserRuleContext()) {
 	case 1:
 		localctx = NewEqualcomparisonRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(142)
+			p.SetState(149)
 			p.Equalcomparison()
 		}
 
@@ -2989,7 +3105,7 @@ func (p *SFeelParser) Expression() (localctx IExpressionContext) {
 		localctx = NewComparisionsRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(143)
+			p.SetState(150)
 			p.Comparison()
 		}
 
@@ -2997,7 +3113,7 @@ func (p *SFeelParser) Expression() (localctx IExpressionContext) {
 		localctx = NewRangeRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(144)
+			p.SetState(151)
 			p.Ranges()
 		}
 
@@ -3005,7 +3121,7 @@ func (p *SFeelParser) Expression() (localctx IExpressionContext) {
 		localctx = NewDisjunctionRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 4)
 		{
-			p.SetState(145)
+			p.SetState(152)
 			p.Disjunctions()
 		}
 
@@ -3013,15 +3129,15 @@ func (p *SFeelParser) Expression() (localctx IExpressionContext) {
 		localctx = NewNegationRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 5)
 		{
-			p.SetState(146)
+			p.SetState(153)
 			p.Negation()
 		}
 
 	case 6:
-		localctx = NewEmptyRuleContext(p, localctx)
+		localctx = NewEmptyInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 6)
 		{
-			p.SetState(147)
+			p.SetState(154)
 			p.Match(SFeelParserT__3)
 		}
 
@@ -3030,23 +3146,247 @@ func (p *SFeelParser) Expression() (localctx IExpressionContext) {
 	return localctx
 }
 
+// IOutputexpressionContext is an interface to support dynamic dispatch.
+type IOutputexpressionContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsOutputexpressionContext differentiates from other interfaces.
+	IsOutputexpressionContext()
+}
+
+type OutputexpressionContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyOutputexpressionContext() *OutputexpressionContext {
+	var p = new(OutputexpressionContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = SFeelParserRULE_outputexpression
+	return p
+}
+
+func (*OutputexpressionContext) IsOutputexpressionContext() {}
+
+func NewOutputexpressionContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *OutputexpressionContext {
+	var p = new(OutputexpressionContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SFeelParserRULE_outputexpression
+
+	return p
+}
+
+func (s *OutputexpressionContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *OutputexpressionContext) CopyFrom(ctx *OutputexpressionContext) {
+	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
+}
+
+func (s *OutputexpressionContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *OutputexpressionContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+type OutputAssignmentContext struct {
+	*OutputexpressionContext
+}
+
+func NewOutputAssignmentContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *OutputAssignmentContext {
+	var p = new(OutputAssignmentContext)
+
+	p.OutputexpressionContext = NewEmptyOutputexpressionContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*OutputexpressionContext))
+
+	return p
+}
+
+func (s *OutputAssignmentContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *OutputAssignmentContext) Bools() IBoolsContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IBoolsContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IBoolsContext)
+}
+
+func (s *OutputAssignmentContext) Strings() IStringsContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IStringsContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IStringsContext)
+}
+
+func (s *OutputAssignmentContext) Datetime() IDatetimeContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDatetimeContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IDatetimeContext)
+}
+
+func (s *OutputAssignmentContext) Number() INumberContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*INumberContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(INumberContext)
+}
+
+func (s *OutputAssignmentContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterOutputAssignment(s)
+	}
+}
+
+func (s *OutputAssignmentContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitOutputAssignment(s)
+	}
+}
+
+type EmptyOutputRuleContext struct {
+	*OutputexpressionContext
+}
+
+func NewEmptyOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EmptyOutputRuleContext {
+	var p = new(EmptyOutputRuleContext)
+
+	p.OutputexpressionContext = NewEmptyOutputexpressionContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*OutputexpressionContext))
+
+	return p
+}
+
+func (s *EmptyOutputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EmptyOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterEmptyOutputRule(s)
+	}
+}
+
+func (s *EmptyOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitEmptyOutputRule(s)
+	}
+}
+
+func (p *SFeelParser) Outputexpression() (localctx IOutputexpressionContext) {
+	localctx = NewOutputexpressionContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 42, SFeelParserRULE_outputexpression)
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.SetState(164)
+	p.GetErrorHandler().Sync(p)
+
+	switch p.GetTokenStream().LA(1) {
+	case SFeelParserINTEGER, SFeelParserFLOAT, SFeelParserSTRING, SFeelParserBOOL, SFeelParserDATEANDTIME:
+		localctx = NewOutputAssignmentContext(p, localctx)
+		p.EnterOuterAlt(localctx, 1)
+		p.SetState(161)
+		p.GetErrorHandler().Sync(p)
+
+		switch p.GetTokenStream().LA(1) {
+		case SFeelParserBOOL:
+			{
+				p.SetState(157)
+				p.Bools()
+			}
+
+		case SFeelParserSTRING:
+			{
+				p.SetState(158)
+				p.Strings()
+			}
+
+		case SFeelParserDATEANDTIME:
+			{
+				p.SetState(159)
+				p.Datetime()
+			}
+
+		case SFeelParserINTEGER, SFeelParserFLOAT:
+			{
+				p.SetState(160)
+				p.Number()
+			}
+
+		default:
+			panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+		}
+
+	case SFeelParserT__3:
+		localctx = NewEmptyOutputRuleContext(p, localctx)
+		p.EnterOuterAlt(localctx, 2)
+		{
+			p.SetState(163)
+			p.Match(SFeelParserT__3)
+		}
+
+	default:
+		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+	}
+
+	return localctx
+}
+
 func (p *SFeelParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex int) bool {
 	switch ruleIndex {
-	case 15:
+	case 16:
 		var t *DisjunctionsNumberContext = nil
 		if localctx != nil {
 			t = localctx.(*DisjunctionsNumberContext)
 		}
 		return p.DisjunctionsNumber_Sempred(t, predIndex)
 
-	case 16:
+	case 17:
 		var t *DisjunctionsStringContext = nil
 		if localctx != nil {
 			t = localctx.(*DisjunctionsStringContext)
 		}
 		return p.DisjunctionsString_Sempred(t, predIndex)
 
-	case 17:
+	case 18:
 		var t *DisjunctionsDateTimeContext = nil
 		if localctx != nil {
 			t = localctx.(*DisjunctionsDateTimeContext)

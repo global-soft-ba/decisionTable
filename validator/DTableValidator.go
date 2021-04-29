@@ -210,13 +210,14 @@ func (d DTableValidator) checkFields(f model.Field) (bool, error) {
 
 func (d DTableValidator) checkRule(r model.Rule) (bool, []error) {
 	var errResult []error
+	parser := expr.CreateParser()
 
 	for _, v := range r.InputEntries {
 		if _, ok := conf.NotationStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage()]; !ok {
 			errResult = append(errResult, ErrDTableEntryExpressionLangInvalid)
 		}
 
-		if ok, err := d.checkExpressions(v); !ok {
+		if ok, err := parser.ValidateInputEntry(v); !ok {
 			errResult = append(errResult, err...)
 		}
 	}
@@ -225,6 +226,10 @@ func (d DTableValidator) checkRule(r model.Rule) (bool, []error) {
 		if _, ok := conf.NotationStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage()]; !ok {
 			errResult = append(errResult, ErrDTableEntryExpressionLangInvalid)
 		}
+
+		if ok, err := parser.ValidateOutputEntry(v); !ok {
+			errResult = append(errResult, err...)
+		}
 	}
 
 	if len(errResult) != 0 {
@@ -232,11 +237,6 @@ func (d DTableValidator) checkRule(r model.Rule) (bool, []error) {
 	}
 
 	return true, nil
-}
-
-func (d DTableValidator) checkExpressions(e model.Entry) (bool, []error) {
-	parser := expr.CreateParser()
-	return parser.ValidateEntry(e)
 }
 
 func (d DTableValidator) ValidateInterferences() bool {

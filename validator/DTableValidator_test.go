@@ -32,15 +32,35 @@ func TestDTableValidator_Validate(t *testing.T) {
 					Label: "L1",
 					Typ:   model.Float,
 				}},
-				Rules: []model.Rule{{
-					Description: "R1",
-					InputEntries: []model.Entry{
-						model.CreateEntry("3", model.SFEEL),
+				Rules: []model.Rule{
+					{
+						Description: "R1",
+						InputEntries: []model.Entry{
+							model.CreateEntry("<3", model.SFEEL),
+						},
+						OutputEntries: []model.Entry{
+							model.CreateEntry("-", model.SFEEL),
+						},
 					},
-					OutputEntries: []model.Entry{
-						model.CreateEntry(">3", model.SFEEL),
+					{
+						Description: "R2",
+						InputEntries: []model.Entry{
+							model.CreateEntry("<=3", model.SFEEL),
+						},
+						OutputEntries: []model.Entry{
+							model.CreateEntry(`"yes"`, model.SFEEL),
+						},
 					},
-				}},
+					{
+						Description: "R3",
+						InputEntries: []model.Entry{
+							model.CreateEntry("not(47)", model.SFEEL),
+						},
+						OutputEntries: []model.Entry{
+							model.CreateEntry(`"no"`, model.SFEEL),
+						},
+					},
+				},
 			},
 			want:  true,
 			want1: nil,
@@ -146,7 +166,8 @@ func TestDTableValidator_Validate(t *testing.T) {
 					InputEntries: []model.Entry{
 						model.CreateEntry(">3", model.SFEEL)},
 					OutputEntries: []model.Entry{
-						model.CreateEntry("4", model.SFEEL)},
+						model.CreateEntry("3", model.SFEEL),
+					},
 				}},
 			},
 			want:  false,
@@ -159,11 +180,12 @@ func TestDTableValidator_Validate(t *testing.T) {
 				Name:             "N1",
 				HitPolicy:        model.First,
 				NotationStandard: model.GRULE,
-				InputFields: []model.Field{{
-					Name:  "I1",
-					Label: "L1",
-					Typ:   model.String,
-				},
+				InputFields: []model.Field{
+					{
+						Name:  "I1",
+						Label: "L1",
+						Typ:   model.String,
+					},
 				},
 				OutputFields: []model.Field{{
 					Name:  "O2",
@@ -173,8 +195,8 @@ func TestDTableValidator_Validate(t *testing.T) {
 				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{
-						model.CreateEntry(">3", model.SFEEL),
-						model.CreateEntry("-", model.SFEEL)},
+						model.CreateEntry("<3", model.SFEEL),
+						model.CreateEntry(">3", model.SFEEL)},
 					OutputEntries: []model.Entry{},
 				}},
 			},
@@ -263,49 +285,6 @@ func TestDTableValidator_ValidateInterferences(t *testing.T) {
 				}},
 			},
 			want: false,
-		},
-		{
-			name: "Valid Table Without Interferences",
-			field: model.DTableData{
-				Key:              "test1",
-				Name:             "TableOne",
-				HitPolicy:        model.First,
-				CollectOperator:  model.List,
-				NotationStandard: model.GRULE,
-				InputFields: []model.Field{
-					{
-						Name:  "I1",
-						Label: "L1",
-						Typ:   model.String,
-					},
-					{
-						Name:  "I2",
-						Label: "L1",
-						Typ:   model.String,
-					},
-				},
-				OutputFields: []model.Field{
-					{
-						Name:  "O1",
-						Label: "L1",
-						Typ:   model.Float,
-					},
-					{
-						Name:  "I2",
-						Label: "L1",
-						Typ:   model.String,
-					}},
-				Rules: []model.Rule{{
-					Description: "R1",
-					InputEntries: []model.Entry{
-						model.CreateEntry(" =3", model.SFEEL),
-					},
-					OutputEntries: []model.Entry{
-						model.CreateEntry("4", model.SFEEL),
-					},
-				}},
-			},
-			want: true,
 		},
 	}
 	for _, tt := range tests {

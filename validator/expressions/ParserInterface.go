@@ -3,5 +3,6 @@ package expressions
 import "decisionTable/model"
 
 type ParserInterface interface {
-	ValidateEntry(entry model.Entry) (bool, error)
+	ValidateInputEntry(entry model.Entry) (bool, error)
+	ValidateOutputEntry(entry model.Entry) (bool, error)
 }

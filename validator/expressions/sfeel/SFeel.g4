@@ -34,7 +34,7 @@ NEGATION: 'not';
 
 
 DATEANDTIME: 'DateAndTime("'FORMAT'")' ;
-    FORMAT: YYYY'-'MM'-'DD'T'HH'-'MMM'-'SS;
+    FORMAT: YYYY'-'MM'-'DD'T'HH':'MMM':'SS;
     fragment YYYY: '0'..'9''0'..'9''0'..'9''1'..'9' | '0'..'9''0'..'9''1'..'9''0'..'9' | '0'..'9''1'..'9''0'..'9''0'..'9' | '1'..'9''0'..'9''0'..'9''0'..'9';
     fragment MM:  '0''1'..'9' | '1''0'..'2';
     fragment DD:  '0''1'..'9' | '1'..'2''0'..'9' | '3''0'..'1';
@@ -42,7 +42,11 @@ DATEANDTIME: 'DateAndTime("'FORMAT'")' ;
     fragment MMM: '0''0'..'9' | '1'..'5''0'..'9';
     fragment SS:  '0''0'..'9' | '1'..'5''0'..'9';
 
-start: expression EOF;
+
+// Parser Start
+
+inputEntry: inputexpression EOF;
+outputEntry: outputexpression EOF;
 
 number: (INTEGER|FLOAT);
 strings: STRING;
@@ -51,10 +55,10 @@ datetime: DATEANDTIME;
 
 equalcomparison : (bools|strings|datetime|number) ;
 
-comparison: comparisonnumber | comparisondatetime;
+comparison:  comparisondatetime | comparisonnumber;
     op:(LESS | LESSEQ | GREATER | GREATEREQ);
-    comparisonnumber:   op number;
     comparisondatetime: op datetime;
+    comparisonnumber:   op number;
 
 ranges: rangenumber | rangedatetime;
     rop: (RANGEIN | RANGEOUT);
@@ -80,12 +84,17 @@ negation
     : NEGATION'('(equalcomparison|comparison|ranges|disjunctions)')'
     ;
 
-expression
+inputexpression
     : equalcomparison                               # EqualcomparisonRule
     | comparison                                    # ComparisionsRule
-    | ranges                                         # RangeRule
+    | ranges                                        # RangeRule
     | disjunctions                                  # DisjunctionRule
     | negation                                      # NegationRule
-    | '-'                                           # EmptyRule
+    | '-'                                           # EmptyInputRule
     ;
 
+
+outputexpression
+    : (bools|strings|datetime|number)               # OutputAssignment
+    | '-'                                           # EmptyOutputRule
+    ;

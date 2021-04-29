@@ -8,8 +8,11 @@ import "github.com/antlr/antlr4/runtime/Go/antlr"
 type SFeelListener interface {
 	antlr.ParseTreeListener
 
-	// EnterStart is called when entering the start production.
-	EnterStart(c *StartContext)
+	// EnterInputEntry is called when entering the inputEntry production.
+	EnterInputEntry(c *InputEntryContext)
+
+	// EnterOutputEntry is called when entering the outputEntry production.
+	EnterOutputEntry(c *OutputEntryContext)
 
 	// EnterNumber is called when entering the number production.
 	EnterNumber(c *NumberContext)
@@ -32,11 +35,11 @@ type SFeelListener interface {
 	// EnterOp is called when entering the op production.
 	EnterOp(c *OpContext)
 
-	// EnterComparisonnumber is called when entering the comparisonnumber production.
-	EnterComparisonnumber(c *ComparisonnumberContext)
-
 	// EnterComparisondatetime is called when entering the comparisondatetime production.
 	EnterComparisondatetime(c *ComparisondatetimeContext)
+
+	// EnterComparisonnumber is called when entering the comparisonnumber production.
+	EnterComparisonnumber(c *ComparisonnumberContext)
 
 	// EnterRanges is called when entering the ranges production.
 	EnterRanges(c *RangesContext)
@@ -80,11 +83,20 @@ type SFeelListener interface {
 	// EnterNegationRule is called when entering the NegationRule production.
 	EnterNegationRule(c *NegationRuleContext)
 
-	// EnterEmptyRule is called when entering the EmptyRule production.
-	EnterEmptyRule(c *EmptyRuleContext)
+	// EnterEmptyInputRule is called when entering the EmptyInputRule production.
+	EnterEmptyInputRule(c *EmptyInputRuleContext)
 
-	// ExitStart is called when exiting the start production.
-	ExitStart(c *StartContext)
+	// EnterOutputAssignment is called when entering the OutputAssignment production.
+	EnterOutputAssignment(c *OutputAssignmentContext)
+
+	// EnterEmptyOutputRule is called when entering the EmptyOutputRule production.
+	EnterEmptyOutputRule(c *EmptyOutputRuleContext)
+
+	// ExitInputEntry is called when exiting the inputEntry production.
+	ExitInputEntry(c *InputEntryContext)
+
+	// ExitOutputEntry is called when exiting the outputEntry production.
+	ExitOutputEntry(c *OutputEntryContext)
 
 	// ExitNumber is called when exiting the number production.
 	ExitNumber(c *NumberContext)
@@ -107,11 +119,11 @@ type SFeelListener interface {
 	// ExitOp is called when exiting the op production.
 	ExitOp(c *OpContext)
 
-	// ExitComparisonnumber is called when exiting the comparisonnumber production.
-	ExitComparisonnumber(c *ComparisonnumberContext)
-
 	// ExitComparisondatetime is called when exiting the comparisondatetime production.
 	ExitComparisondatetime(c *ComparisondatetimeContext)
+
+	// ExitComparisonnumber is called when exiting the comparisonnumber production.
+	ExitComparisonnumber(c *ComparisonnumberContext)
 
 	// ExitRanges is called when exiting the ranges production.
 	ExitRanges(c *RangesContext)
@@ -155,6 +167,12 @@ type SFeelListener interface {
 	// ExitNegationRule is called when exiting the NegationRule production.
 	ExitNegationRule(c *NegationRuleContext)
 
-	// ExitEmptyRule is called when exiting the EmptyRule production.
-	ExitEmptyRule(c *EmptyRuleContext)
+	// ExitEmptyInputRule is called when exiting the EmptyInputRule production.
+	ExitEmptyInputRule(c *EmptyInputRuleContext)
+
+	// ExitOutputAssignment is called when exiting the OutputAssignment production.
+	ExitOutputAssignment(c *OutputAssignmentContext)
+
+	// ExitEmptyOutputRule is called when exiting the EmptyOutputRule production.
+	ExitEmptyOutputRule(c *EmptyOutputRuleContext)
 }
