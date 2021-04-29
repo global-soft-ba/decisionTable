@@ -10,18 +10,13 @@ type DTableConfig struct {
 }
 
 var NotationStandards = map[model.DTableStandard]DTableConfig{
-	model.GRULE: gruleStandard,
-	model.DMN:   dmnStandard,
+	model.GRULE: gruleConfig,
+	model.DMN:   dmnConfig,
 }
 
-var dmnStandard = DTableConfig{
+var dmnConfig = DTableConfig{
 	ExpressionLanguage: map[model.ExpressionLanguage]string{
-		model.FEEL:       "",
-		model.Javascript: "",
-		model.Python:     "",
-		model.Groovy:     "",
-		model.JRuby:      "",
-		model.Juel:       "",
+		model.FEEL: "",
 	},
 
 	HitPolicies: map[model.HitPolicy]string{
@@ -51,9 +46,9 @@ var dmnStandard = DTableConfig{
 		model.Date:    "",
 	}}
 
-var gruleStandard = DTableConfig{
+var gruleConfig = DTableConfig{
 	ExpressionLanguage: map[model.ExpressionLanguage]string{
-		model.GRL: "",
+		model.SFEEL: "",
 	},
 
 	HitPolicies: map[model.HitPolicy]string{

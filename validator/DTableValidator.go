@@ -3,8 +3,8 @@ package validator
 import (
 	conf "decisionTable/config"
 	"decisionTable/model"
+	expr "decisionTable/validator/expressions/sfeel"
 	"errors"
-	"fmt"
 )
 
 var (
@@ -85,8 +85,7 @@ func (d DTableValidator) validateKey() (bool, error) {
 }
 
 func (d DTableValidator) validateHitPolicy() (bool, error) {
-	test := conf.NotationStandards[d.dTable.NotationStandard]
-	fmt.Println(test)
+
 	if _, ok := conf.NotationStandards[d.dTable.NotationStandard].HitPolicies[d.dTable.HitPolicy]; !ok {
 		return false, ErrDTableHitPolicy
 	}
@@ -216,6 +215,10 @@ func (d DTableValidator) checkRule(r model.Rule) (bool, []error) {
 		if _, ok := conf.NotationStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage()]; !ok {
 			errResult = append(errResult, ErrDTableEntryExpressionLangInvalid)
 		}
+
+		if ok, err := d.checkExpressions(v); !ok {
+			errResult = append(errResult, err...)
+		}
 	}
 
 	for _, v := range r.OutputEntries {
@@ -229,6 +232,11 @@ func (d DTableValidator) checkRule(r model.Rule) (bool, []error) {
 	}
 
 	return true, nil
+}
+
+func (d DTableValidator) checkExpressions(e model.Entry) (bool, []error) {
+	parser := expr.CreateParser()
+	return parser.ValidateEntry(e)
 }
 
 func (d DTableValidator) ValidateInterferences() bool {

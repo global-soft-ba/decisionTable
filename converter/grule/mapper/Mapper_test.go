@@ -39,10 +39,10 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 					Rules: []model.Rule{{
 						Description: "R1",
 						InputEntries: []model.Entry{
-							model.CreateEntry("==3", model.GRL),
+							model.CreateEntry("==3", model.SFEEL),
 						},
 						OutputEntries: []model.Entry{
-							model.CreateEntry("4", model.GRL),
+							model.CreateEntry("4", model.SFEEL),
 						},
 					}},
 				}},
@@ -101,12 +101,12 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						{
 							Description: "R1",
 							InputEntries: []model.Entry{
-								model.CreateEntry("==3", model.GRL),
-								model.CreateEntry("==3", model.GRL),
+								model.CreateEntry("==3", model.SFEEL),
+								model.CreateEntry("==3", model.SFEEL),
 							},
 							OutputEntries: []model.Entry{
-								model.CreateEntry("4", model.GRL),
-								model.CreateEntry("4", model.GRL),
+								model.CreateEntry("4", model.SFEEL),
+								model.CreateEntry("4", model.SFEEL),
 							},
 						}},
 				}},
@@ -170,23 +170,23 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						{
 							Description: "R1",
 							InputEntries: []model.Entry{
-								model.CreateEntry("==3", model.GRL),
-								model.CreateEntry("==3", model.GRL),
+								model.CreateEntry("==3", model.SFEEL),
+								model.CreateEntry("==3", model.SFEEL),
 							},
 							OutputEntries: []model.Entry{
-								model.CreateEntry("4", model.GRL),
-								model.CreateEntry("4", model.GRL),
+								model.CreateEntry("4", model.SFEEL),
+								model.CreateEntry("4", model.SFEEL),
 							},
 						},
 						{
 							Description: "R2",
 							InputEntries: []model.Entry{
-								model.CreateEntry(">3", model.GRL),
-								model.CreateEntry(">3", model.GRL),
+								model.CreateEntry(">3", model.SFEEL),
+								model.CreateEntry(">3", model.SFEEL),
 							},
 							OutputEntries: []model.Entry{
-								model.CreateEntry("5", model.GRL),
-								model.CreateEntry("5", model.GRL),
+								model.CreateEntry("5", model.SFEEL),
+								model.CreateEntry("5", model.SFEEL),
 							},
 						},
 					},
@@ -253,12 +253,12 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 					Rules: []model.Rule{{
 						Description: "R1",
 						InputEntries: []model.Entry{
-							model.CreateEntry("==3", model.GRL),
-							model.CreateEntry("==3", model.GRL),
+							model.CreateEntry("==3", model.SFEEL),
+							model.CreateEntry("==3", model.SFEEL),
 						},
 						OutputEntries: []model.Entry{
-							model.CreateEntry("4", model.GRL),
-							model.CreateEntry("4", model.GRL)},
+							model.CreateEntry("4", model.SFEEL),
+							model.CreateEntry("4", model.SFEEL)},
 					}},
 				}},
 			want:    grlmodel.RuleSet{},
@@ -301,23 +301,23 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						{
 							Description: "R1",
 							InputEntries: []model.Entry{
-								model.CreateEntry("==3", model.GRL),
-								model.CreateEntry("==3", model.GRL),
+								model.CreateEntry("==3", model.SFEEL),
+								model.CreateEntry("==3", model.SFEEL),
 							},
 							OutputEntries: []model.Entry{
-								model.CreateEntry("4", model.GRL),
-								model.CreateEntry("4", model.GRL),
+								model.CreateEntry("4", model.SFEEL),
+								model.CreateEntry("4", model.SFEEL),
 							},
 						},
 						{
 							Description: "R2",
 							InputEntries: []model.Entry{
-								model.CreateEntry(">3", model.GRL),
-								model.CreateEntry(">3", model.GRL),
+								model.CreateEntry(">3", model.SFEEL),
+								model.CreateEntry(">3", model.SFEEL),
 							},
 							OutputEntries: []model.Entry{
-								model.CreateEntry("5", model.GRL),
-								model.CreateEntry("5", model.GRL),
+								model.CreateEntry("5", model.SFEEL),
+								model.CreateEntry("5", model.SFEEL),
 							},
 						},
 					},
@@ -395,34 +395,34 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						{
 							Description: "R1",
 							InputEntries: []model.Entry{
-								model.CreateEntry("==3", model.GRL),
-								model.CreateEntry("==3", model.GRL),
+								model.CreateEntry("==3", model.SFEEL),
+								model.CreateEntry("==3", model.SFEEL),
 							},
 							OutputEntries: []model.Entry{
-								model.CreateEntry("4", model.GRL),
-								model.CreateEntry("4", model.GRL),
+								model.CreateEntry("4", model.SFEEL),
+								model.CreateEntry("4", model.SFEEL),
 							},
 						},
 						{
 							Description: "R2",
 							InputEntries: []model.Entry{
-								model.CreateEntry(">3", model.GRL),
-								model.CreateEntry(">3", model.GRL),
+								model.CreateEntry(">3", model.SFEEL),
+								model.CreateEntry(">3", model.SFEEL),
 							},
 							OutputEntries: []model.Entry{
-								model.CreateEntry("5", model.GRL),
-								model.CreateEntry("5", model.GRL),
+								model.CreateEntry("5", model.SFEEL),
+								model.CreateEntry("5", model.SFEEL),
 							},
 						},
 						{
 							Description: "R3",
 							InputEntries: []model.Entry{
-								model.CreateEntry(">3", model.GRL),
-								model.CreateEntry(">3", model.GRL),
+								model.CreateEntry(">3", model.SFEEL),
+								model.CreateEntry(">3", model.SFEEL),
 							},
 							OutputEntries: []model.Entry{
-								model.CreateEntry("5", model.GRL),
-								model.CreateEntry("5", model.GRL),
+								model.CreateEntry("5", model.SFEEL),
+								model.CreateEntry("5", model.SFEEL),
 							},
 						},
 					},
@@ -513,12 +513,12 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						{
 							Description: "R1",
 							InputEntries: []model.Entry{
-								model.CreateEntry("==3", model.GRL),
-								model.CreateEntry("-", model.GRL),
+								model.CreateEntry("==3", model.SFEEL),
+								model.CreateEntry("-", model.SFEEL),
 							},
 							OutputEntries: []model.Entry{
-								model.CreateEntry("-", model.GRL),
-								model.CreateEntry("4", model.GRL),
+								model.CreateEntry("-", model.SFEEL),
+								model.CreateEntry("4", model.SFEEL),
 							},
 						},
 					},

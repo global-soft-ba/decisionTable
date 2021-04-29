@@ -35,10 +35,10 @@ func TestDTableValidator_Validate(t *testing.T) {
 				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{
-						model.CreateEntry(" =3", model.GRL),
+						model.CreateEntry("3", model.SFEEL),
 					},
 					OutputEntries: []model.Entry{
-						model.CreateEntry(">3", model.GRL),
+						model.CreateEntry(">3", model.SFEEL),
 					},
 				}},
 			},
@@ -66,9 +66,9 @@ func TestDTableValidator_Validate(t *testing.T) {
 				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{
-						model.CreateEntry(" =3", model.GRL)},
+						model.CreateEntry("3", model.SFEEL)},
 					OutputEntries: []model.Entry{
-						model.CreateEntry("4", model.GRL),
+						model.CreateEntry("4", model.SFEEL),
 					},
 				}},
 			},
@@ -97,7 +97,7 @@ func TestDTableValidator_Validate(t *testing.T) {
 				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{
-						model.CreateEntry(" =3", model.FEEL)},
+						model.CreateEntry("3", model.FEEL)},
 					OutputEntries: []model.Entry{
 						model.CreateEntry("4", model.FEEL)},
 				}},
@@ -144,9 +144,9 @@ func TestDTableValidator_Validate(t *testing.T) {
 				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{
-						model.CreateEntry(" =3", model.GRL)},
+						model.CreateEntry(">3", model.SFEEL)},
 					OutputEntries: []model.Entry{
-						model.CreateEntry("4", model.GRL)},
+						model.CreateEntry("4", model.SFEEL)},
 				}},
 			},
 			want:  false,
@@ -173,8 +173,8 @@ func TestDTableValidator_Validate(t *testing.T) {
 				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{
-						model.CreateEntry(" =3", model.GRL),
-						model.CreateEntry(" =3", model.GRL)},
+						model.CreateEntry(">3", model.SFEEL),
+						model.CreateEntry("-", model.SFEEL)},
 					OutputEntries: []model.Entry{},
 				}},
 			},
@@ -202,9 +202,9 @@ func TestDTableValidator_Validate(t *testing.T) {
 				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{
-						model.CreateEntry(" =3", model.GRL)},
+						model.CreateEntry("3", model.FEEL)},
 					OutputEntries: []model.Entry{
-						model.CreateEntry(" =3", model.FEEL)},
+						model.CreateEntry("3", model.SFEEL)},
 				}},
 			},
 			want:  false,
@@ -257,9 +257,9 @@ func TestDTableValidator_ValidateInterferences(t *testing.T) {
 				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{
-						model.CreateEntry(" =3", model.GRL)},
+						model.CreateEntry(" =3", model.SFEEL)},
 					OutputEntries: []model.Entry{
-						model.CreateEntry("4", model.GRL)},
+						model.CreateEntry("4", model.SFEEL)},
 				}},
 			},
 			want: false,
@@ -298,10 +298,10 @@ func TestDTableValidator_ValidateInterferences(t *testing.T) {
 				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{
-						model.CreateEntry(" =3", model.GRL),
+						model.CreateEntry(" =3", model.SFEEL),
 					},
 					OutputEntries: []model.Entry{
-						model.CreateEntry("4", model.GRL),
+						model.CreateEntry("4", model.SFEEL),
 					},
 				}},
 			},

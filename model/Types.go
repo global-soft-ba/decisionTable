@@ -22,7 +22,7 @@ const (
 type ExpressionLanguage string
 
 const (
-	GRL        ExpressionLanguage = "GRL"
+	SFEEL      ExpressionLanguage = "sFeel"
 	FEEL       ExpressionLanguage = "Feel"
 	Javascript ExpressionLanguage = "javascript"
 	Python     ExpressionLanguage = "python"

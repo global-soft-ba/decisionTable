@@ -19,20 +19,20 @@ func TestDecisionTable(t *testing.T) {
 		AddOutputField("Responsible employee", "Employee", model.String).
 		AddOutputField("4 eyes principle", "Employee", model.Boolean).
 		AddRule("R1").
-		AddInputEntry("Car Accident", model.GRL).
-		AddInputEntry("<1000", model.GRL).
-		AddOutputEntry("Müller", model.GRL).
-		AddOutputEntry("false", model.GRL).BuildRule().
+		AddInputEntry(`"Car Accident"`, model.SFEEL).
+		AddInputEntry("<1000", model.SFEEL).
+		AddOutputEntry(`"Müller"`, model.SFEEL).
+		AddOutputEntry("false", model.SFEEL).BuildRule().
 		AddRule("R2").
-		AddInputEntry("Car Accident", model.GRL).
-		AddInputEntry("[1000..10000]", model.GRL).
-		AddOutputEntry("Meier", model.GRL).
-		AddOutputEntry("false", model.GRL).BuildRule().
+		AddInputEntry(`"Car Accident"`, model.SFEEL).
+		AddInputEntry("[1000..10000]", model.SFEEL).
+		AddOutputEntry(`"Meier"`, model.SFEEL).
+		AddOutputEntry(`"false"`, model.SFEEL).BuildRule().
 		AddRule("R3").
-		AddInputEntry("Car Accident", model.GRL).
-		AddInputEntry(">=10000", model.GRL).
-		AddOutputEntry("Schmidt", model.GRL).
-		AddOutputEntry("true", model.GRL).BuildRule().
+		AddInputEntry(`"Car Accident"`, model.SFEEL).
+		AddInputEntry(">=10000", model.SFEEL).
+		AddOutputEntry(`"Schmidt"`, model.SFEEL).
+		AddOutputEntry("true", model.SFEEL).BuildRule().
 		Build()
 
 	if got := testTable.valid; got != true {
@@ -49,8 +49,8 @@ func TestDecisionTableEmptyEntry(t *testing.T) {
 		AddInputField("Type of claim", "claim", model.String).
 		AddOutputField("Responsible employee", "Employee", model.String).
 		AddRule("R1").
-		AddInputEntry("Car Accident", model.GRL).
-		AddOutputEntry("-", model.GRL).
+		AddInputEntry(`"Car Accident"`, model.SFEEL).
+		AddOutputEntry("-", model.SFEEL).
 		BuildRule().
 		Build()
 
@@ -71,20 +71,20 @@ func TestDecisionTable_Convert(t *testing.T) {
 		AddOutputField("ResponsibleEmployee", "Employee", model.String).
 		AddOutputField("4EyesPrinciple", "Employee", model.Boolean).
 		AddRule("R1").
-		AddInputEntry("==\"Car Accident\"", model.GRL).
-		AddInputEntry("< 1000", model.GRL).
-		AddOutputEntry("=Müller", model.GRL).
-		AddOutputEntry("=false", model.GRL).BuildRule().
+		AddInputEntry(`"Car Accident"`, model.SFEEL).
+		AddInputEntry("<1000", model.SFEEL).
+		AddOutputEntry(`"Müller"`, model.SFEEL).
+		AddOutputEntry("false", model.SFEEL).BuildRule().
 		AddRule("R2").
-		AddInputEntry("==\"Car Accident\"", model.GRL).
-		AddInputEntry("[1000..10000]", model.GRL).
-		AddOutputEntry("=Meier", model.GRL).
-		AddOutputEntry("=false", model.GRL).BuildRule().
+		AddInputEntry(`"Car Accident"`, model.SFEEL).
+		AddInputEntry("[1000..10000]", model.SFEEL).
+		AddOutputEntry(`"Meier"`, model.SFEEL).
+		AddOutputEntry("false", model.SFEEL).BuildRule().
 		AddRule("R3").
-		AddInputEntry("-", model.GRL).
-		AddInputEntry(">= 10000", model.GRL).
-		AddOutputEntry("-", model.GRL).
-		AddOutputEntry("=true", model.GRL).BuildRule().
+		AddInputEntry("-", model.SFEEL).
+		AddInputEntry(">=10000", model.SFEEL).
+		AddOutputEntry("-", model.SFEEL).
+		AddOutputEntry("true", model.SFEEL).BuildRule().
 		Build()
 
 	type args struct {
