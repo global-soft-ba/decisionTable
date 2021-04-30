@@ -24,7 +24,7 @@ var (
 	ErrDTableEntryExpressionLangInvalid      = errors.New("entry expression language of the table standard is invalid")
 )
 
-func CreateDTableValidator(dTable model.TableData, prsFac expression.ParserFactory) ValidatorInterface {
+func CreateDecisionTableValidator(dTable model.TableData, prsFac expression.ParserFactory) ValidatorInterface {
 	r := Validator{dTable: dTable, prs: prsFac, valid: false, errs: []error{}}
 	return r
 }
@@ -265,7 +265,7 @@ func (d Validator) validateOutputEntry(v model.Entry) (bool, []error) {
 	return true, nil
 }
 
-func (d Validator) ValidateInterferences() bool {
+func (d Validator) ValidateContainsInterferences() bool {
 	output := d.dTable.OutputFields
 
 	for _, val := range d.dTable.InputFields {

@@ -20,7 +20,7 @@ const (
 	Interference = "Interference"
 )
 
-func CreateDecisionTableToGrlConverter() Converter {
+func CreateConverter() Converter {
 	return Converter{}
 }
 

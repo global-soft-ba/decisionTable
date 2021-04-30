@@ -293,8 +293,8 @@ func TestDTableValidator_ValidateInterferences(t *testing.T) {
 			d := Validator{
 				dTable: tt.field,
 			}
-			if got := d.ValidateInterferences(); got != tt.want {
-				t.Errorf("ValidateInterferences() = %v, want %v", got, tt.want)
+			if got := d.ValidateContainsInterferences(); got != tt.want {
+				t.Errorf("ValidateContainsInterferences() = %v, want %v", got, tt.want)
 			}
 		})
 	}
