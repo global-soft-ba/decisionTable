@@ -60,7 +60,7 @@ func (d DecisionTableBuilder) AddRule(description string) DecisionTableRuleBuild
 
 func (d DecisionTableBuilder) Build() (DecisionTable, []error) {
 	parsers := expression.CreateParserFactory()
-	validtr := validator.CreateDTableValidator(d.dTableData, parsers)
+	validtr := validator.CreateDecisionTableValidator(d.dTableData, parsers)
 
 	valid, err := validtr.Validate()
 	if valid != true {
@@ -68,7 +68,7 @@ func (d DecisionTableBuilder) Build() (DecisionTable, []error) {
 	}
 
 	table := d.createDecisionTable()
-	table.interferences = validtr.ValidateInterferences()
+	table.interferences = validtr.ValidateContainsInterferences()
 	return table, nil
 }
 
