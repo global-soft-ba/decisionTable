@@ -2,19 +2,19 @@ package types
 
 import "decisionTable/model"
 
-type DecisionTableConfig struct {
+type TableConfigStandard struct {
 	ExpressionLanguage map[model.ExpressionLanguage]string
 	HitPolicies        map[model.HitPolicy]string
 	CollectOperators   map[model.CollectOperator]string
 	VariableType       map[model.VariableTyp]string
 }
 
-var DecisionTableStandards = map[model.DTableStandard]DecisionTableConfig{
+var DecisionTableStandards = map[model.DTableStandard]TableConfigStandard{
 	model.GRULE: grule,
 	model.DMN:   dmn,
 }
 
-var dmn = DecisionTableConfig{
+var dmn = TableConfigStandard{
 	ExpressionLanguage: map[model.ExpressionLanguage]string{
 		model.FEEL: "",
 	},
@@ -46,7 +46,7 @@ var dmn = DecisionTableConfig{
 		model.Date:    "",
 	}}
 
-var grule = DecisionTableConfig{
+var grule = TableConfigStandard{
 	ExpressionLanguage: map[model.ExpressionLanguage]string{
 		model.SFEEL: "",
 	},
