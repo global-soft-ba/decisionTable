@@ -38,14 +38,14 @@ type Validator struct {
 
 func (d Validator) Validate() (bool, []error) {
 	var v = d
-	v = v.collectValidationResult(v.validateName)
-	v = v.collectValidationResult(v.validateKey)
-	v = v.collectValidationResult(v.validateHitPolicy)
-	v = v.collectValidationResult(v.validateCollectOperator)
-	v = v.collectValidationResults(v.validateInput)
-	v = v.collectValidationResults(v.validateOutput)
-	v = v.collectValidationResults(v.validateRuleSchema)
-	v = v.collectValidationResults(v.validateRules)
+	v = v.executeValidation(v.validateName)
+	v = v.executeValidation(v.validateKey)
+	v = v.executeValidation(v.validateHitPolicy)
+	v = v.executeValidation(v.validateCollectOperator)
+	v = v.executeValidation(v.validateInput)
+	v = v.executeValidation(v.validateOutput)
+	v = v.executeValidation(v.validateRuleSchema)
+	v = v.executeValidation(v.validateRules)
 
 	if len(v.errs) == 0 {
 		v.valid = true
@@ -53,16 +53,7 @@ func (d Validator) Validate() (bool, []error) {
 	return v.valid, v.errs
 }
 
-func (d Validator) collectValidationResult(v func() (bool, error)) Validator {
-	if ok, err := v(); !ok {
-		d.valid = false
-		d.errs = append(d.errs, err)
-	}
-
-	return d
-}
-
-func (d Validator) collectValidationResults(v func() (bool, []error)) Validator {
+func (d Validator) executeValidation(v func() (bool, []error)) Validator {
 	if ok, err := v(); !ok {
 		d.valid = false
 		d.errs = append(d.errs, err...)
@@ -71,33 +62,33 @@ func (d Validator) collectValidationResults(v func() (bool, []error)) Validator 
 	return d
 }
 
-func (d Validator) validateName() (bool, error) {
+func (d Validator) validateName() (bool, []error) {
 	if len(d.dTable.Name) == 0 {
-		return false, ErrDTableNameEmpty
+		return false, []error{ErrDTableNameEmpty}
 	}
 	return true, nil
 }
 
-func (d Validator) validateKey() (bool, error) {
+func (d Validator) validateKey() (bool, []error) {
 	if len(d.dTable.Key) == 0 {
-		return false, ErrDTableKeyEmpty
+		return false, []error{ErrDTableKeyEmpty}
 	}
 	return true, nil
 }
 
-func (d Validator) validateHitPolicy() (bool, error) {
+func (d Validator) validateHitPolicy() (bool, []error) {
 
 	if _, ok := conf.DecisionTableStandards[d.dTable.NotationStandard].HitPolicies[d.dTable.HitPolicy]; !ok {
-		return false, ErrDTableHitPolicy
+		return false, []error{ErrDTableHitPolicy}
 	}
 
 	return true, nil
 }
 
-func (d Validator) validateCollectOperator() (bool, error) {
+func (d Validator) validateCollectOperator() (bool, []error) {
 	if d.dTable.HitPolicy == model.Collect {
 		if _, ok := conf.DecisionTableStandards[d.dTable.NotationStandard].CollectOperators[d.dTable.CollectOperator]; !ok {
-			return false, ErrDTableCollectOperator
+			return false, []error{ErrDTableCollectOperator}
 		}
 	}
 
