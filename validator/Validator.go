@@ -3,7 +3,7 @@ package validator
 import (
 	conf "decisionTable/config"
 	"decisionTable/model"
-	expr "decisionTable/validator/expressions/sfeel"
+	"decisionTable/validator/expression"
 	"errors"
 )
 
@@ -24,18 +24,19 @@ var (
 	ErrDTableEntryExpressionLangInvalid      = errors.New("entry expression language of the table standard is invalid")
 )
 
-func CreateDTableValidator(dTable model.DTableData) DTableValidatorInterface {
-	r := DTableValidator{dTable: dTable, valid: false, errs: []error{}}
+func CreateDTableValidator(dTable model.TableData, prsFac expression.ParserFactory) ValidatorInterface {
+	r := Validator{dTable: dTable, prs: prsFac, valid: false, errs: []error{}}
 	return r
 }
 
-type DTableValidator struct {
-	dTable model.DTableData
+type Validator struct {
+	dTable model.TableData
+	prs    expression.ParserFactory
 	valid  bool
 	errs   []error
 }
 
-func (d DTableValidator) Validate() (bool, []error) {
+func (d Validator) Validate() (bool, []error) {
 	var v = d
 	v = v.collectValidationResult(v.validateName)
 	v = v.collectValidationResult(v.validateKey)
@@ -52,7 +53,7 @@ func (d DTableValidator) Validate() (bool, []error) {
 	return v.valid, v.errs
 }
 
-func (d DTableValidator) collectValidationResult(v func() (bool, error)) DTableValidator {
+func (d Validator) collectValidationResult(v func() (bool, error)) Validator {
 	if ok, err := v(); !ok {
 		d.valid = false
 		d.errs = append(d.errs, err)
@@ -61,7 +62,7 @@ func (d DTableValidator) collectValidationResult(v func() (bool, error)) DTableV
 	return d
 }
 
-func (d DTableValidator) collectValidationResults(v func() (bool, []error)) DTableValidator {
+func (d Validator) collectValidationResults(v func() (bool, []error)) Validator {
 	if ok, err := v(); !ok {
 		d.valid = false
 		d.errs = append(d.errs, err...)
@@ -70,32 +71,32 @@ func (d DTableValidator) collectValidationResults(v func() (bool, []error)) DTab
 	return d
 }
 
-func (d DTableValidator) validateName() (bool, error) {
+func (d Validator) validateName() (bool, error) {
 	if len(d.dTable.Name) == 0 {
 		return false, ErrDTableNameEmpty
 	}
 	return true, nil
 }
 
-func (d DTableValidator) validateKey() (bool, error) {
+func (d Validator) validateKey() (bool, error) {
 	if len(d.dTable.Key) == 0 {
 		return false, ErrDTableKeyEmpty
 	}
 	return true, nil
 }
 
-func (d DTableValidator) validateHitPolicy() (bool, error) {
+func (d Validator) validateHitPolicy() (bool, error) {
 
-	if _, ok := conf.NotationStandards[d.dTable.NotationStandard].HitPolicies[d.dTable.HitPolicy]; !ok {
+	if _, ok := conf.DecisionTableStandards[d.dTable.NotationStandard].HitPolicies[d.dTable.HitPolicy]; !ok {
 		return false, ErrDTableHitPolicy
 	}
 
 	return true, nil
 }
 
-func (d DTableValidator) validateCollectOperator() (bool, error) {
+func (d Validator) validateCollectOperator() (bool, error) {
 	if d.dTable.HitPolicy == model.Collect {
-		if _, ok := conf.NotationStandards[d.dTable.NotationStandard].CollectOperators[d.dTable.CollectOperator]; !ok {
+		if _, ok := conf.DecisionTableStandards[d.dTable.NotationStandard].CollectOperators[d.dTable.CollectOperator]; !ok {
 			return false, ErrDTableCollectOperator
 		}
 	}
@@ -103,7 +104,7 @@ func (d DTableValidator) validateCollectOperator() (bool, error) {
 	return true, nil
 }
 
-func (d DTableValidator) validateInput() (bool, []error) {
+func (d Validator) validateInput() (bool, []error) {
 	if len(d.dTable.InputFields) == 0 {
 		return false, []error{ErrDTableInputEmpty}
 	}
@@ -123,7 +124,7 @@ func (d DTableValidator) validateInput() (bool, []error) {
 	return true, nil
 }
 
-func (d DTableValidator) validateOutput() (bool, []error) {
+func (d Validator) validateOutput() (bool, []error) {
 	if len(d.dTable.OutputFields) == 0 {
 		return false, []error{ErrDTableOutputEmpty}
 	}
@@ -143,7 +144,7 @@ func (d DTableValidator) validateOutput() (bool, []error) {
 	return true, nil
 }
 
-func (d DTableValidator) validateRuleSchema() (bool, []error) {
+func (d Validator) validateRuleSchema() (bool, []error) {
 	lengthInput := len(d.dTable.InputFields)
 	lengthOutput := len(d.dTable.OutputFields)
 
@@ -175,12 +176,12 @@ func (d DTableValidator) validateRuleSchema() (bool, []error) {
 	return true, nil
 }
 
-func (d DTableValidator) validateRules() (bool, []error) {
+func (d Validator) validateRules() (bool, []error) {
 
 	var errResult []error
 
 	for _, r := range d.dTable.Rules {
-		if ok, err := d.checkRule(r); !ok {
+		if ok, err := d.checkRuleEntries(r); !ok {
 			errResult = append(errResult, err...)
 		}
 	}
@@ -192,7 +193,7 @@ func (d DTableValidator) validateRules() (bool, []error) {
 	return true, nil
 }
 
-func (d DTableValidator) checkFields(f model.Field) (bool, error) {
+func (d Validator) checkFields(f model.Field) (bool, error) {
 	if len(f.Name) == 0 {
 		return false, ErrDTableFieldNameEmpty
 	}
@@ -201,33 +202,32 @@ func (d DTableValidator) checkFields(f model.Field) (bool, error) {
 		return false, ErrDTableFieldLabelEmpty
 	}
 
-	if _, ok := conf.NotationStandards[d.dTable.NotationStandard].VariableType[f.Typ]; !ok {
+	if _, ok := conf.DecisionTableStandards[d.dTable.NotationStandard].VariableType[f.Typ]; !ok {
 		return false, ErrDTableFieldTypInvalid
 	}
 
 	return true, nil
 }
 
-func (d DTableValidator) checkRule(r model.Rule) (bool, []error) {
+func (d Validator) checkRuleEntries(r model.Rule) (bool, []error) {
 	var errResult []error
-	parser := expr.CreateParser()
 
 	for _, v := range r.InputEntries {
-		if _, ok := conf.NotationStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage()]; !ok {
+		if _, ok := conf.DecisionTableStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage()]; !ok {
 			errResult = append(errResult, ErrDTableEntryExpressionLangInvalid)
 		}
 
-		if ok, err := parser.ValidateInputEntry(v); !ok {
+		if ok, err := d.validateInputEntry(v); !ok {
 			errResult = append(errResult, err...)
 		}
 	}
 
 	for _, v := range r.OutputEntries {
-		if _, ok := conf.NotationStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage()]; !ok {
+		if _, ok := conf.DecisionTableStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage()]; !ok {
 			errResult = append(errResult, ErrDTableEntryExpressionLangInvalid)
 		}
 
-		if ok, err := parser.ValidateOutputEntry(v); !ok {
+		if ok, err := d.validateOutputEntry(v); !ok {
 			errResult = append(errResult, err...)
 		}
 	}
@@ -239,11 +239,37 @@ func (d DTableValidator) checkRule(r model.Rule) (bool, []error) {
 	return true, nil
 }
 
-func (d DTableValidator) ValidateInterferences() bool {
+func (d Validator) validateInputEntry(v model.Entry) (bool, []error) {
+	prs, err := d.prs.GetParser(v.ExpressionLanguage())
+	if err != nil {
+		return false, []error{err}
+	}
+
+	if ok, errs := prs.ValidateInputEntry(v); !ok {
+		return false, errs
+	}
+
+	return true, nil
+}
+
+func (d Validator) validateOutputEntry(v model.Entry) (bool, []error) {
+	prs, err := d.prs.GetParser(v.ExpressionLanguage())
+	if err != nil {
+		return false, []error{err}
+	}
+
+	if ok, errs := prs.ValidateOutputEntry(v); !ok {
+		return false, errs
+	}
+
+	return true, nil
+}
+
+func (d Validator) ValidateInterferences() bool {
 	output := d.dTable.OutputFields
 
 	for _, val := range d.dTable.InputFields {
-		if d.containsField(val, output) {
+		if d.fieldIsContained(val, output) {
 			return true
 		}
 	}
@@ -251,12 +277,11 @@ func (d DTableValidator) ValidateInterferences() bool {
 	return false
 }
 
-func (d DTableValidator) containsField(field model.Field, fields []model.Field) bool {
-	for _, val := range fields {
+func (d Validator) fieldIsContained(field model.Field, setOfFields []model.Field) bool {
+	for _, val := range setOfFields {
 		if (val.Label == field.Label) && (val.Name == field.Name) {
 			return true
 		}
-
 	}
 	return false
 }

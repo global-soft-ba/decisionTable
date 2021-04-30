@@ -9,7 +9,7 @@ import (
 
 func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 	type args struct {
-		data model.DTableData
+		data model.TableData
 	}
 	tests := []struct {
 		name    string
@@ -19,7 +19,7 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 	}{
 		{name: "Valid Table",
 			args: args{
-				data: model.DTableData{
+				data: model.TableData{
 					Key:              "test1",
 					Name:             "TableOne",
 					HitPolicy:        model.Priority,
@@ -67,7 +67,7 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 		{
 			name: "Valid Multi Row Table",
 			args: args{
-				data: model.DTableData{
+				data: model.TableData{
 					Key:              "test1",
 					Name:             "TableOne",
 					HitPolicy:        model.First,
@@ -136,7 +136,7 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 		{
 			name: "Valid Multi Row and Rule Table with First Policy",
 			args: args{
-				data: model.DTableData{
+				data: model.TableData{
 					Key:              "test1",
 					Name:             "TableOne",
 					HitPolicy:        model.First,
@@ -230,7 +230,7 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 		{
 			name: "Invalid Multi Row Table",
 			args: args{
-				data: model.DTableData{
+				data: model.TableData{
 					Key:              "test1",
 					Name:             "TableOne",
 					HitPolicy:        model.First,
@@ -267,7 +267,7 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 		{
 			name: "Valid Multi Row and Multi Rule Table with Priority Policy",
 			args: args{
-				data: model.DTableData{
+				data: model.TableData{
 					Key:              "test1",
 					Name:             "TableOne",
 					HitPolicy:        model.Priority,
@@ -361,7 +361,7 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 		{
 			name: "Valid Multi Row and Multi Rule Table with First Policy",
 			args: args{
-				data: model.DTableData{
+				data: model.TableData{
 					Key:              "test1",
 					Name:             "TableOne",
 					HitPolicy:        model.First,
@@ -470,75 +470,6 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						[]grlmodel.Expression{
 							{"O1", "L1", "5"},
 							{"O2", "L1", "5"},
-						},
-					},
-				},
-			},
-			wantErr: false,
-		},
-		{
-			name: "Drop Empty Entry",
-			args: args{
-				data: model.DTableData{
-					Key:              "test1",
-					Name:             "TableOne",
-					HitPolicy:        model.First,
-					CollectOperator:  model.List,
-					NotationStandard: model.GRULE,
-					InputFields: []model.Field{
-						{
-							Name:  "I1",
-							Label: "L1",
-							Typ:   model.String,
-						},
-						{
-							Name:  "I2",
-							Label: "L1",
-							Typ:   model.String,
-						},
-					},
-					OutputFields: []model.Field{
-						{
-							Name:  "O1",
-							Label: "L1",
-							Typ:   model.Float,
-						},
-						{
-							Name:  "O2",
-							Label: "L1",
-							Typ:   model.Float,
-						},
-					},
-					Rules: []model.Rule{
-						{
-							Description: "R1",
-							InputEntries: []model.Entry{
-								model.CreateEntry("==3", model.SFEEL),
-								model.CreateEntry("-", model.SFEEL),
-							},
-							OutputEntries: []model.Entry{
-								model.CreateEntry("-", model.SFEEL),
-								model.CreateEntry("4", model.SFEEL),
-							},
-						},
-					},
-				}},
-			want: grlmodel.RuleSet{
-				Key:             "test1",
-				Name:            "TableOne",
-				HitPolicy:       model.First,
-				CollectOperator: model.List,
-				Rules: []grlmodel.Rule{
-					{
-						"0",
-						"R1",
-						0,
-						0,
-						[]grlmodel.Expression{
-							{"I1", "L1", "==3"},
-						},
-						[]grlmodel.Expression{
-							{"O2", "L1", "4"},
 						},
 					},
 				},

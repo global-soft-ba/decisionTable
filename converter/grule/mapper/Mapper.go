@@ -18,7 +18,7 @@ func CreateGruleMapper() Mapper {
 
 type Mapper struct{}
 
-func (c Mapper) MapToRuleSet(data model.DTableData) (grlmodel.RuleSet, error) {
+func (c Mapper) MapToRuleSet(data model.TableData) (grlmodel.RuleSet, error) {
 	result := grlmodel.RuleSet{
 		Key:             data.Key,
 		Name:            data.Name,

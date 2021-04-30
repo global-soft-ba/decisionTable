@@ -10,8 +10,8 @@ var (
 	ErrDTableNotValid = errors.New("decision table must be valid before converting")
 )
 
-func CreateDecisionTable() DTableBuilderInterface {
-	d := DTableBuilder{}
+func CreateDecisionTable() DecisionTableBuilderInterface {
+	d := DecisionTableBuilder{}
 	return d
 }
 
@@ -69,13 +69,13 @@ func (d DecisionTable) Interferences() bool {
 	return d.interferences
 }
 
-func (d DecisionTable) Convert(converter converter.DTableConverterInterface) ([]string, error) {
+func (d DecisionTable) Convert(converter converter.ConverterInterface) ([]string, error) {
 
 	if !d.valid {
 		return []string{}, ErrDTableNotValid
 	}
 
-	dTable := model.DTableData{
+	dTable := model.TableData{
 		Key:              d.key,
 		Name:             d.name,
 		HitPolicy:        d.hitPolicy,

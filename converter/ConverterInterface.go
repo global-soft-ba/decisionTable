@@ -10,6 +10,6 @@ var (
 	ErrDTableNotationStandard = errors.New("notation standard is not supported by decision table converter")
 )
 
-type DTableConverterInterface interface {
-	Convert(data model.DTableData) ([]string, error)
+type ConverterInterface interface {
+	Convert(data model.TableData) ([]string, error)
 }

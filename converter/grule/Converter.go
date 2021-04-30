@@ -20,14 +20,14 @@ const (
 	Interference = "Interference"
 )
 
-func CreateDTableToGrlConverter() Converter {
+func CreateDecisionTableToGrlConverter() Converter {
 	return Converter{}
 }
 
 type Converter struct {
 }
 
-func (c Converter) Convert(data model.DTableData) ([]string, error) {
+func (c Converter) Convert(data model.TableData) ([]string, error) {
 	if data.NotationStandard != model.GRULE {
 		return []string{}, converter.ErrDTableNotationStandard
 	}

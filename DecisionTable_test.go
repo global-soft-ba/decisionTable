@@ -40,25 +40,6 @@ func TestDecisionTable(t *testing.T) {
 	}
 }
 
-func TestDecisionTableEmptyEntry(t *testing.T) {
-	testTable, err := CreateDecisionTable().
-		SetName("Determine Employee").
-		SetDefinitionKey("determineEmployee").
-		SetNotationStandard(model.GRULE).
-		SetHitPolicy(model.Unique).
-		AddInputField("Type of claim", "claim", model.String).
-		AddOutputField("Responsible employee", "Employee", model.String).
-		AddRule("R1").
-		AddInputEntry(`"Car Accident"`, model.SFEEL).
-		AddOutputEntry("-", model.SFEEL).
-		BuildRule().
-		Build()
-
-	if got := testTable.Rules()[0].OutputEntries[0].EmptyExpression(); got != true {
-		t.Errorf("EmptyEntry in decision table is invalid, got = %v, want = %v true, with error %v", got, true, err)
-	}
-}
-
 func TestDecisionTable_Convert(t *testing.T) {
 
 	testTable, _ := CreateDecisionTable().
@@ -88,7 +69,7 @@ func TestDecisionTable_Convert(t *testing.T) {
 		Build()
 
 	type args struct {
-		converter converter.DTableConverterInterface
+		converter converter.ConverterInterface
 	}
 	tests := []struct {
 		name    string
@@ -100,7 +81,7 @@ func TestDecisionTable_Convert(t *testing.T) {
 		{
 			name:   "DecisionTable To GruleRuleSet",
 			fields: testTable,
-			args:   args{grule.CreateDTableToGrlConverter()},
+			args:   args{grule.CreateDecisionTableToGrlConverter()},
 			want: []string{
 				"rule row_0 \"R1\" salience 0 \nwhen \n   claim.TypeOfClaim ==\"Car Accident\"\n   && claim.ExpenditureOfClaim < 1000\nthen \n  Employee.ResponsibleEmployee =Müller;\n  Employee.4EyesPrinciple =false;\n  complete();",
 				"rule row_1 \"R2\" salience 1 \nwhen \n   claim.TypeOfClaim ==\"Car Accident\"\n   && claim.ExpenditureOfClaim [1000..10000]\nthen \n  Employee.ResponsibleEmployee =Meier;\n  Employee.4EyesPrinciple =false;\n  complete();",

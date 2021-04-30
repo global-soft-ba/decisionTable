@@ -2,8 +2,8 @@ package sfeel
 
 import (
 	"decisionTable/model"
-	"decisionTable/validator/expressions/sfeel/errors"
-	gen "decisionTable/validator/expressions/sfeel/generated"
+	"decisionTable/validator/expression/sfeel/errors"
+	gen "decisionTable/validator/expression/sfeel/generated"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 )
 
@@ -16,7 +16,7 @@ func CreateParser() Parser {
 type Parser struct {
 }
 
-//TODO Check if, due to the use of pointer this structure is thread safe. Until that, we use a new single parser instance for each validation
+//TODO Due to the use of pointer in this structure is not sure if it is thread safe. Until that, we use a new single parser instance for each validation
 
 func (p Parser) ValidateInputEntry(entry model.Entry) (bool, []error) {
 

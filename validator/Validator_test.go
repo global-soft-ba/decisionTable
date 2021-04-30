@@ -2,6 +2,7 @@ package validator
 
 import (
 	"decisionTable/model"
+	"decisionTable/validator/expression"
 	"reflect"
 	"testing"
 )
@@ -9,13 +10,13 @@ import (
 func TestDTableValidator_Validate(t *testing.T) {
 	tests := []struct {
 		name  string
-		table model.DTableData
+		table model.TableData
 		want  bool
 		want1 []error
 	}{
 		{
 			name: "Valid Grule Table",
-			table: model.DTableData{
+			table: model.TableData{
 				Key:              "test1",
 				Name:             "TableOne",
 				HitPolicy:        model.First,
@@ -67,7 +68,7 @@ func TestDTableValidator_Validate(t *testing.T) {
 		},
 		{
 			name: "Wrong hit policy for the NotationStandard",
-			table: model.DTableData{
+			table: model.TableData{
 				Key:              "test1",
 				Name:             "TableOne",
 				HitPolicy:        model.Any,
@@ -97,7 +98,7 @@ func TestDTableValidator_Validate(t *testing.T) {
 		},
 		{
 			name: "Wrong CollectOperators DMN",
-			table: model.DTableData{
+			table: model.TableData{
 				Key:              "K1",
 				Name:             "N1",
 				HitPolicy:        model.Collect,
@@ -117,17 +118,17 @@ func TestDTableValidator_Validate(t *testing.T) {
 				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{
-						model.CreateEntry("3", model.FEEL)},
+						model.CreateEntry("3", model.SFEEL)},
 					OutputEntries: []model.Entry{
-						model.CreateEntry("4", model.FEEL)},
+						model.CreateEntry("4", model.SFEEL)},
 				}},
 			},
 			want:  false,
-			want1: []error{ErrDTableCollectOperator},
+			want1: []error{ErrDTableCollectOperator, ErrDTableEntryExpressionLangInvalid, ErrDTableEntryExpressionLangInvalid},
 		},
 		{
 			name: "Empty input and output fields",
-			table: model.DTableData{
+			table: model.TableData{
 				Key:              "K1",
 				Name:             "N1",
 				HitPolicy:        model.First,
@@ -145,7 +146,7 @@ func TestDTableValidator_Validate(t *testing.T) {
 		},
 		{
 			name: "Wrong Field definition",
-			table: model.DTableData{
+			table: model.TableData{
 				Key:              "K1",
 				Name:             "N1",
 				HitPolicy:        model.First,
@@ -175,7 +176,7 @@ func TestDTableValidator_Validate(t *testing.T) {
 		},
 		{
 			name: "Wrong rule data schemas",
-			table: model.DTableData{
+			table: model.TableData{
 				Key:              "K1",
 				Name:             "N1",
 				HitPolicy:        model.First,
@@ -205,7 +206,7 @@ func TestDTableValidator_Validate(t *testing.T) {
 		},
 		{
 			name: "Wrong rule expression language",
-			table: model.DTableData{
+			table: model.TableData{
 				Key:              "K1",
 				Name:             "N1",
 				HitPolicy:        model.First,
@@ -230,13 +231,13 @@ func TestDTableValidator_Validate(t *testing.T) {
 				}},
 			},
 			want:  false,
-			want1: []error{ErrDTableEntryExpressionLangInvalid},
+			want1: []error{ErrDTableEntryExpressionLangInvalid, expression.ErrDTableNoParserFoundForExpressionLanguage},
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			d := DTableValidator{
+			d := Validator{
 				dTable: tt.table,
 			}
 			got, got1 := d.Validate()
@@ -254,12 +255,12 @@ func TestDTableValidator_ValidateInterferences(t *testing.T) {
 
 	tests := []struct {
 		name  string
-		field model.DTableData
+		field model.TableData
 		want  bool
 	}{
 		{
 			name: "Valid Table Without Interferences",
-			field: model.DTableData{
+			field: model.TableData{
 				Key:              "test1",
 				Name:             "TableOne",
 				HitPolicy:        model.First,
@@ -289,7 +290,7 @@ func TestDTableValidator_ValidateInterferences(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			d := DTableValidator{
+			d := Validator{
 				dTable: tt.field,
 			}
 			if got := d.ValidateInterferences(); got != tt.want {

@@ -1,6 +1,6 @@
 package validator
 
-type DTableValidatorInterface interface {
+type ValidatorInterface interface {
 	Validate() (bool, []error)
 	ValidateInterferences() bool
 }
