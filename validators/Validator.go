@@ -42,8 +42,8 @@ func (d Validator) Validate() (bool, []error) {
 	v = v.executeValidation(v.validateKey)
 	v = v.executeValidation(v.validateHitPolicy)
 	v = v.executeValidation(v.validateCollectOperator)
-	v = v.executeValidation(v.validateInput)
-	v = v.executeValidation(v.validateOutput)
+	v = v.executeValidation(v.validateInputFields)
+	v = v.executeValidation(v.validateOutputFields)
 	v = v.executeValidation(v.validateRuleSchema)
 	v = v.executeValidation(v.validateRules)
 
@@ -95,7 +95,7 @@ func (d Validator) validateCollectOperator() (bool, []error) {
 	return true, nil
 }
 
-func (d Validator) validateInput() (bool, []error) {
+func (d Validator) validateInputFields() (bool, []error) {
 	if len(d.dTable.InputFields) == 0 {
 		return false, []error{ErrDTableInputEmpty}
 	}
@@ -103,7 +103,7 @@ func (d Validator) validateInput() (bool, []error) {
 	var errResult []error
 
 	for _, v := range d.dTable.InputFields {
-		if ok, err := d.checkFields(v); !ok {
+		if ok, err := d.validateFields(v); !ok {
 			errResult = append(errResult, err)
 		}
 	}
@@ -115,7 +115,7 @@ func (d Validator) validateInput() (bool, []error) {
 	return true, nil
 }
 
-func (d Validator) validateOutput() (bool, []error) {
+func (d Validator) validateOutputFields() (bool, []error) {
 	if len(d.dTable.OutputFields) == 0 {
 		return false, []error{ErrDTableOutputEmpty}
 	}
@@ -123,7 +123,7 @@ func (d Validator) validateOutput() (bool, []error) {
 	var errResult []error
 
 	for _, v := range d.dTable.OutputFields {
-		if ok, err := d.checkFields(v); !ok {
+		if ok, err := d.validateFields(v); !ok {
 			errResult = append(errResult, err)
 		}
 	}
@@ -172,11 +172,11 @@ func (d Validator) validateRules() (bool, []error) {
 	var errResult []error
 
 	for _, r := range d.dTable.Rules {
-		if ok, err := d.checkInputRuleEntries(r); !ok {
+		if ok, err := d.validateInputRuleEntries(r); !ok {
 			errResult = append(errResult, err...)
 		}
 
-		if ok, err := d.checkOutputRuleEntries(r); !ok {
+		if ok, err := d.validateOutputRuleEntries(r); !ok {
 			errResult = append(errResult, err...)
 		}
 	}
@@ -188,7 +188,7 @@ func (d Validator) validateRules() (bool, []error) {
 	return true, nil
 }
 
-func (d Validator) checkFields(f model.Field) (bool, error) {
+func (d Validator) validateFields(f model.Field) (bool, error) {
 	if len(f.Name) == 0 {
 		return false, ErrDTableFieldNameEmpty
 	}
@@ -204,7 +204,7 @@ func (d Validator) checkFields(f model.Field) (bool, error) {
 	return true, nil
 }
 
-func (d Validator) checkInputRuleEntries(r model.Rule) (bool, []error) {
+func (d Validator) validateInputRuleEntries(r model.Rule) (bool, []error) {
 	var errResult []error
 
 	for i, v := range r.InputEntries {
@@ -226,7 +226,7 @@ func (d Validator) checkInputRuleEntries(r model.Rule) (bool, []error) {
 	return true, nil
 }
 
-func (d Validator) checkOutputRuleEntries(r model.Rule) (bool, []error) {
+func (d Validator) validateOutputRuleEntries(r model.Rule) (bool, []error) {
 	var errResult []error
 
 	for i, v := range r.OutputEntries {
