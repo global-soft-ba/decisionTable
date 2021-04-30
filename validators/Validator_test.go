@@ -1,8 +1,8 @@
-package validator
+package validators
 
 import (
 	"decisionTable/model"
-	"decisionTable/validator/expression"
+	"decisionTable/validators/expressionlanguages"
 	"reflect"
 	"testing"
 )
@@ -25,7 +25,7 @@ func TestDTableValidator_Validate(t *testing.T) {
 				InputFields: []model.Field{{
 					Name:  "I1",
 					Label: "L1",
-					Typ:   model.String,
+					Typ:   model.Integer,
 				},
 				},
 				OutputFields: []model.Field{{
@@ -49,7 +49,7 @@ func TestDTableValidator_Validate(t *testing.T) {
 							model.CreateEntry("<=3", model.SFEEL),
 						},
 						OutputEntries: []model.Entry{
-							model.CreateEntry(`"yes"`, model.SFEEL),
+							model.CreateEntry("1.2", model.SFEEL),
 						},
 					},
 					{
@@ -58,7 +58,7 @@ func TestDTableValidator_Validate(t *testing.T) {
 							model.CreateEntry("not(47)", model.SFEEL),
 						},
 						OutputEntries: []model.Entry{
-							model.CreateEntry(`"no"`, model.SFEEL),
+							model.CreateEntry("1", model.SFEEL),
 						},
 					},
 				},
@@ -87,7 +87,7 @@ func TestDTableValidator_Validate(t *testing.T) {
 				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{
-						model.CreateEntry("3", model.SFEEL)},
+						model.CreateEntry(`"3"`, model.SFEEL)},
 					OutputEntries: []model.Entry{
 						model.CreateEntry("4", model.SFEEL),
 					},
@@ -118,7 +118,7 @@ func TestDTableValidator_Validate(t *testing.T) {
 				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{
-						model.CreateEntry("3", model.SFEEL)},
+						model.CreateEntry(`"3"`, model.SFEEL)},
 					OutputEntries: []model.Entry{
 						model.CreateEntry("4", model.SFEEL)},
 				}},
@@ -175,7 +175,7 @@ func TestDTableValidator_Validate(t *testing.T) {
 			want1: []error{ErrDTableFieldTypInvalid, ErrDTableFieldNameEmpty},
 		},
 		{
-			name: "Wrong rule data schemas",
+			name: "Wrong mount of input entries regarding data schemas",
 			table: model.TableData{
 				Key:              "K1",
 				Name:             "N1",
@@ -196,13 +196,48 @@ func TestDTableValidator_Validate(t *testing.T) {
 				Rules: []model.Rule{{
 					Description: "R1",
 					InputEntries: []model.Entry{
-						model.CreateEntry("<3", model.SFEEL),
+						model.CreateEntry(`"String"`, model.SFEEL),
 						model.CreateEntry(">3", model.SFEEL)},
-					OutputEntries: []model.Entry{},
+					OutputEntries: []model.Entry{
+						model.CreateEntry("-", model.SFEEL),
+					},
 				}},
 			},
 			want:  false,
-			want1: []error{ErrRuleHaveDifferentAmountOfInputFields, ErrRuleHaveDifferentAmountOfOutputFields},
+			want1: []error{ErrRuleHaveDifferentAmountOfInputFields},
+		},
+		{
+			name: "Wrong mount of output entries regarding data schemas",
+			table: model.TableData{
+				Key:              "K1",
+				Name:             "N1",
+				HitPolicy:        model.First,
+				NotationStandard: model.GRULE,
+				InputFields: []model.Field{
+					{
+						Name:  "I1",
+						Label: "L1",
+						Typ:   model.String,
+					},
+				},
+				OutputFields: []model.Field{{
+					Name:  "O2",
+					Label: "L1",
+					Typ:   model.Integer,
+				}},
+				Rules: []model.Rule{{
+					Description: "R1",
+					InputEntries: []model.Entry{
+						model.CreateEntry(`"String"`, model.SFEEL),
+					},
+					OutputEntries: []model.Entry{
+						model.CreateEntry("-", model.SFEEL),
+						model.CreateEntry("-", model.SFEEL),
+					},
+				}},
+			},
+			want:  false,
+			want1: []error{ErrRuleHaveDifferentAmountOfOutputFields},
 		},
 		{
 			name: "Wrong rule expression language",
@@ -231,7 +266,7 @@ func TestDTableValidator_Validate(t *testing.T) {
 				}},
 			},
 			want:  false,
-			want1: []error{ErrDTableEntryExpressionLangInvalid, expression.ErrDTableNoParserFoundForExpressionLanguage},
+			want1: []error{ErrDTableEntryExpressionLangInvalid, expressionlanguages.ErrDTableNoParserFoundForExpressionLanguage},
 		},
 	}
 

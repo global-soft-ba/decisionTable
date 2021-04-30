@@ -1,9 +1,9 @@
-package validator
+package validators
 
 import (
 	conf "decisionTable/config"
 	"decisionTable/model"
-	"decisionTable/validator/expression"
+	"decisionTable/validators/expressionlanguages"
 	"errors"
 )
 
@@ -24,14 +24,14 @@ var (
 	ErrDTableEntryExpressionLangInvalid      = errors.New("entry expression language of the table standard is invalid")
 )
 
-func CreateDecisionTableValidator(dTable model.TableData, prsFac expression.ParserFactory) ValidatorInterface {
+func CreateDecisionTableValidator(dTable model.TableData, prsFac expressionlanguages.ExpressionValidatorFactory) ValidatorInterface {
 	r := Validator{dTable: dTable, prs: prsFac, valid: false, errs: []error{}}
 	return r
 }
 
 type Validator struct {
 	dTable model.TableData
-	prs    expression.ParserFactory
+	prs    expressionlanguages.ExpressionValidatorFactory
 	valid  bool
 	errs   []error
 }
@@ -172,7 +172,11 @@ func (d Validator) validateRules() (bool, []error) {
 	var errResult []error
 
 	for _, r := range d.dTable.Rules {
-		if ok, err := d.checkRuleEntries(r); !ok {
+		if ok, err := d.checkInputRuleEntries(r); !ok {
+			errResult = append(errResult, err...)
+		}
+
+		if ok, err := d.checkOutputRuleEntries(r); !ok {
 			errResult = append(errResult, err...)
 		}
 	}
@@ -200,26 +204,18 @@ func (d Validator) checkFields(f model.Field) (bool, error) {
 	return true, nil
 }
 
-func (d Validator) checkRuleEntries(r model.Rule) (bool, []error) {
+func (d Validator) checkInputRuleEntries(r model.Rule) (bool, []error) {
 	var errResult []error
 
-	for _, v := range r.InputEntries {
+	for i, v := range r.InputEntries {
 		if _, ok := conf.DecisionTableStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage()]; !ok {
 			errResult = append(errResult, ErrDTableEntryExpressionLangInvalid)
 		}
 
-		if ok, err := d.validateInputEntry(v); !ok {
-			errResult = append(errResult, err...)
-		}
-	}
-
-	for _, v := range r.OutputEntries {
-		if _, ok := conf.DecisionTableStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage()]; !ok {
-			errResult = append(errResult, ErrDTableEntryExpressionLangInvalid)
-		}
-
-		if ok, err := d.validateOutputEntry(v); !ok {
-			errResult = append(errResult, err...)
+		if i < len(d.dTable.InputFields) {
+			if ok, err := d.validateInputEntry(d.dTable.InputFields[i], v); !ok {
+				errResult = append(errResult, err...)
+			}
 		}
 	}
 
@@ -230,26 +226,48 @@ func (d Validator) checkRuleEntries(r model.Rule) (bool, []error) {
 	return true, nil
 }
 
-func (d Validator) validateInputEntry(v model.Entry) (bool, []error) {
+func (d Validator) checkOutputRuleEntries(r model.Rule) (bool, []error) {
+	var errResult []error
+
+	for i, v := range r.OutputEntries {
+		if _, ok := conf.DecisionTableStandards[d.dTable.NotationStandard].ExpressionLanguage[v.ExpressionLanguage()]; !ok {
+			errResult = append(errResult, ErrDTableEntryExpressionLangInvalid)
+		}
+
+		if i < len(d.dTable.OutputFields) {
+			if ok, err := d.validateOutputEntry(d.dTable.OutputFields[i], v); !ok {
+				errResult = append(errResult, err...)
+			}
+		}
+	}
+
+	if len(errResult) != 0 {
+		return false, errResult
+	}
+
+	return true, nil
+}
+
+func (d Validator) validateInputEntry(f model.Field, v model.Entry) (bool, []error) {
 	prs, err := d.prs.GetParser(v.ExpressionLanguage())
 	if err != nil {
 		return false, []error{err}
 	}
 
-	if ok, errs := prs.ValidateInputEntry(v); !ok {
+	if ok, errs := prs.ValidateInputEntry(f, v); !ok {
 		return false, errs
 	}
 
 	return true, nil
 }
 
-func (d Validator) validateOutputEntry(v model.Entry) (bool, []error) {
+func (d Validator) validateOutputEntry(f model.Field, v model.Entry) (bool, []error) {
 	prs, err := d.prs.GetParser(v.ExpressionLanguage())
 	if err != nil {
 		return false, []error{err}
 	}
 
-	if ok, errs := prs.ValidateOutputEntry(v); !ok {
+	if ok, errs := prs.ValidateOutputEntry(f, v); !ok {
 		return false, errs
 	}
 

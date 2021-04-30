@@ -92,9 +92,6 @@ func (c Mapper) mapToExpression(entry model.Entry, field model.Field) (grlmodel.
 		Identifier: field.Label,
 		Expression: entry.Expression(),
 	}
-	if entry.EmptyExpression() {
-		return grlmodel.Expression{}, ErrEmptyExpression
-	}
 
 	return expr, nil
 }

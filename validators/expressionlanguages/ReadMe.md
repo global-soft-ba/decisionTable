@@ -15,7 +15,7 @@ or
 $ brew install antlr
 ```
 
-#Create Code Generation for Parser
+#Create Code Generation for Validator
 
 Following command must be executed in directory of the .g4 file.
 ```

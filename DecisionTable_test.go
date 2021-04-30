@@ -27,7 +27,7 @@ func TestDecisionTable(t *testing.T) {
 		AddInputEntry(`"Car Accident"`, model.SFEEL).
 		AddInputEntry("[1000..10000]", model.SFEEL).
 		AddOutputEntry(`"Meier"`, model.SFEEL).
-		AddOutputEntry(`"false"`, model.SFEEL).BuildRule().
+		AddOutputEntry("false", model.SFEEL).BuildRule().
 		AddRule("R3").
 		AddInputEntry(`"Car Accident"`, model.SFEEL).
 		AddInputEntry(">=10000", model.SFEEL).

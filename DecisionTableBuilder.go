@@ -2,8 +2,8 @@ package main
 
 import (
 	"decisionTable/model"
-	"decisionTable/validator"
-	"decisionTable/validator/expression"
+	"decisionTable/validators"
+	"decisionTable/validators/expressionlanguages"
 )
 
 type DecisionTableBuilder struct {
@@ -59,8 +59,8 @@ func (d DecisionTableBuilder) AddRule(description string) DecisionTableRuleBuild
 }
 
 func (d DecisionTableBuilder) Build() (DecisionTable, []error) {
-	parsers := expression.CreateParserFactory()
-	validtr := validator.CreateDecisionTableValidator(d.dTableData, parsers)
+	parsers := expressionlanguages.CreateParserFactory()
+	validtr := validators.CreateDecisionTableValidator(d.dTableData, parsers)
 
 	valid, err := validtr.Validate()
 	if valid != true {
