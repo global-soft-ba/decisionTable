@@ -1,8 +1,8 @@
 package parser
 
 import (
+	gen "decisionTable/validators/expressionlanguages/sfeel/antlr"
 	"decisionTable/validators/expressionlanguages/sfeel/errors"
-	gen "decisionTable/validators/expressionlanguages/sfeel/generated"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 )
 

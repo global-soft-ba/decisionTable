@@ -19,5 +19,7 @@ $ brew install antlr
 
 Following command must be executed in directory of the .g4 file.
 ```
-$   antlr4 -Dlanguage=Go -o generated SFeel.g4
+$     antlr4 -Dlanguage=Go -o antlr SFeel.g4 -visitor
+
+
 ```

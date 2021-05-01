@@ -367,6 +367,16 @@ func (s *EntryContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *EntryContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEntry(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) Entry() (localctx IEntryContext) {
 	localctx = NewEntryContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 0, SFeelParserRULE_entry)
@@ -503,6 +513,16 @@ func (s *ValidIntegerInputContext) EnterRule(listener antlr.ParseTreeListener) {
 func (s *ValidIntegerInputContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitValidIntegerInput(s)
+	}
+}
+
+func (s *ValidIntegerInputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitValidIntegerInput(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -742,6 +762,16 @@ func (s *ValidNumberInputContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *ValidNumberInputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitValidNumberInput(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) ValidNumberInput() (localctx IValidNumberInputContext) {
 	localctx = NewValidNumberInputContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 4, SFeelParserRULE_validNumberInput)
@@ -958,6 +988,16 @@ func (s *ValidStringInputContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *ValidStringInputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitValidStringInput(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) ValidStringInput() (localctx IValidStringInputContext) {
 	localctx = NewValidStringInputContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 6, SFeelParserRULE_validStringInput)
@@ -1126,6 +1166,16 @@ func (s *ValidBoolInputContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *ValidBoolInputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitValidBoolInput(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) ValidBoolInput() (localctx IValidBoolInputContext) {
 	localctx = NewValidBoolInputContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 8, SFeelParserRULE_validBoolInput)
@@ -1282,6 +1332,16 @@ func (s *ValidDateTimeInputContext) EnterRule(listener antlr.ParseTreeListener) 
 func (s *ValidDateTimeInputContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitValidDateTimeInput(s)
+	}
+}
+
+func (s *ValidDateTimeInputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitValidDateTimeInput(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -1481,6 +1541,16 @@ func (s *ValidIntegerOutputContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *ValidIntegerOutputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitValidIntegerOutput(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) ValidIntegerOutput() (localctx IValidIntegerOutputContext) {
 	localctx = NewValidIntegerOutputContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 12, SFeelParserRULE_validIntegerOutput)
@@ -1603,6 +1673,16 @@ func (s *ValidNumberOutputContext) EnterRule(listener antlr.ParseTreeListener) {
 func (s *ValidNumberOutputContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitValidNumberOutput(s)
+	}
+}
+
+func (s *ValidNumberOutputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitValidNumberOutput(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -1731,6 +1811,16 @@ func (s *ValidStringOutputContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *ValidStringOutputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitValidStringOutput(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) ValidStringOutput() (localctx IValidStringOutputContext) {
 	localctx = NewValidStringOutputContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 16, SFeelParserRULE_validStringOutput)
@@ -1856,6 +1946,16 @@ func (s *ValidBoolOutputContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *ValidBoolOutputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitValidBoolOutput(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) ValidBoolOutput() (localctx IValidBoolOutputContext) {
 	localctx = NewValidBoolOutputContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 18, SFeelParserRULE_validBoolOutput)
@@ -1978,6 +2078,16 @@ func (s *ValidDateTimeOutputContext) EnterRule(listener antlr.ParseTreeListener)
 func (s *ValidDateTimeOutputContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitValidDateTimeOutput(s)
+	}
+}
+
+func (s *ValidDateTimeOutputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitValidDateTimeOutput(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -2124,6 +2234,16 @@ func (s *DisjunctionRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *DisjunctionRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitDisjunctionRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 type ComparisionsRuleContext struct {
 	*ExpressionContext
 }
@@ -2164,6 +2284,16 @@ func (s *ComparisionsRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *ComparisionsRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitComparisionsRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 type EmptyInputRuleContext struct {
 	*ExpressionContext
 }
@@ -2191,6 +2321,16 @@ func (s *EmptyInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 func (s *EmptyInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitEmptyInputRule(s)
+	}
+}
+
+func (s *EmptyInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEmptyInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -2234,6 +2374,16 @@ func (s *NegationRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *NegationRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitNegationRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 type EqualcomparisonRuleContext struct {
 	*ExpressionContext
 }
@@ -2274,6 +2424,16 @@ func (s *EqualcomparisonRuleContext) ExitRule(listener antlr.ParseTreeListener) 
 	}
 }
 
+func (s *EqualcomparisonRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEqualcomparisonRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 type RangeRuleContext struct {
 	*ExpressionContext
 }
@@ -2311,6 +2471,16 @@ func (s *RangeRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 func (s *RangeRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitRangeRule(s)
+	}
+}
+
+func (s *RangeRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitRangeRule(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -2456,6 +2626,16 @@ func (s *NumberContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *NumberContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitNumber(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) Number() (localctx INumberContext) {
 	localctx = NewNumberContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 24, SFeelParserRULE_number)
@@ -2555,6 +2735,16 @@ func (s *StringsContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *StringsContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitStrings(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) Strings() (localctx IStringsContext) {
 	localctx = NewStringsContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 26, SFeelParserRULE_strings)
@@ -2646,6 +2836,16 @@ func (s *BoolsContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *BoolsContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitBools(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) Bools() (localctx IBoolsContext) {
 	localctx = NewBoolsContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 28, SFeelParserRULE_bools)
@@ -2734,6 +2934,16 @@ func (s *DatetimeContext) EnterRule(listener antlr.ParseTreeListener) {
 func (s *DatetimeContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitDatetime(s)
+	}
+}
+
+func (s *DatetimeContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitDatetime(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -2864,6 +3074,16 @@ func (s *EqualcomparisonContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *EqualcomparisonContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEqualcomparison(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) Equalcomparison() (localctx IEqualcomparisonContext) {
 	localctx = NewEqualcomparisonContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 32, SFeelParserRULE_equalcomparison)
@@ -2982,6 +3202,16 @@ func (s *EqualcomparisonIntegerContext) ExitRule(listener antlr.ParseTreeListene
 	}
 }
 
+func (s *EqualcomparisonIntegerContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEqualcomparisonInteger(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) EqualcomparisonInteger() (localctx IEqualcomparisonIntegerContext) {
 	localctx = NewEqualcomparisonIntegerContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 34, SFeelParserRULE_equalcomparisonInteger)
@@ -3076,6 +3306,16 @@ func (s *EqualcomparisonNumberContext) EnterRule(listener antlr.ParseTreeListene
 func (s *EqualcomparisonNumberContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitEqualcomparisonNumber(s)
+	}
+}
+
+func (s *EqualcomparisonNumberContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEqualcomparisonNumber(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -3176,6 +3416,16 @@ func (s *EqualcomparisonBoolContext) ExitRule(listener antlr.ParseTreeListener) 
 	}
 }
 
+func (s *EqualcomparisonBoolContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEqualcomparisonBool(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) EqualcomparisonBool() (localctx IEqualcomparisonBoolContext) {
 	localctx = NewEqualcomparisonBoolContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 38, SFeelParserRULE_equalcomparisonBool)
@@ -3273,6 +3523,16 @@ func (s *EqualcomparisonStringsContext) ExitRule(listener antlr.ParseTreeListene
 	}
 }
 
+func (s *EqualcomparisonStringsContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEqualcomparisonStrings(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) EqualcomparisonStrings() (localctx IEqualcomparisonStringsContext) {
 	localctx = NewEqualcomparisonStringsContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 40, SFeelParserRULE_equalcomparisonStrings)
@@ -3367,6 +3627,16 @@ func (s *EqualcomparisonDateTimeContext) EnterRule(listener antlr.ParseTreeListe
 func (s *EqualcomparisonDateTimeContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitEqualcomparisonDateTime(s)
+	}
+}
+
+func (s *EqualcomparisonDateTimeContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEqualcomparisonDateTime(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -3484,6 +3754,16 @@ func (s *ComparisonContext) EnterRule(listener antlr.ParseTreeListener) {
 func (s *ComparisonContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitComparison(s)
+	}
+}
+
+func (s *ComparisonContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitComparison(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -3608,6 +3888,16 @@ func (s *ComparisonOpsContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *ComparisonOpsContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitComparisonOps(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) ComparisonOps() (localctx IComparisonOpsContext) {
 	localctx = NewComparisonOpsContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 46, SFeelParserRULE_comparisonOps)
@@ -3714,6 +4004,16 @@ func (s *ComparisonIntegerContext) EnterRule(listener antlr.ParseTreeListener) {
 func (s *ComparisonIntegerContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitComparisonInteger(s)
+	}
+}
+
+func (s *ComparisonIntegerContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitComparisonInteger(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -3828,6 +4128,16 @@ func (s *ComparisonDateTimeContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *ComparisonDateTimeContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitComparisonDateTime(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) ComparisonDateTime() (localctx IComparisonDateTimeContext) {
 	localctx = NewComparisonDateTimeContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 50, SFeelParserRULE_comparisonDateTime)
@@ -3936,6 +4246,16 @@ func (s *ComparisonNumberContext) EnterRule(listener antlr.ParseTreeListener) {
 func (s *ComparisonNumberContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitComparisonNumber(s)
+	}
+}
+
+func (s *ComparisonNumberContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitComparisonNumber(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -4060,6 +4380,16 @@ func (s *RangesContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *RangesContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitRanges(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) Ranges() (localctx IRangesContext) {
 	localctx = NewRangesContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 54, SFeelParserRULE_ranges)
@@ -4170,6 +4500,16 @@ func (s *RopContext) EnterRule(listener antlr.ParseTreeListener) {
 func (s *RopContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitRop(s)
+	}
+}
+
+func (s *RopContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitRop(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -4296,6 +4636,16 @@ func (s *RangeIntegerContext) EnterRule(listener antlr.ParseTreeListener) {
 func (s *RangeIntegerContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitRangeInteger(s)
+	}
+}
+
+func (s *RangeIntegerContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitRangeInteger(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -4448,6 +4798,16 @@ func (s *RangeNumberContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *RangeNumberContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitRangeNumber(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) RangeNumber() (localctx IRangeNumberContext) {
 	localctx = NewRangeNumberContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 60, SFeelParserRULE_rangeNumber)
@@ -4597,6 +4957,16 @@ func (s *RangeDateTimeContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *RangeDateTimeContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitRangeDateTime(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) RangeDateTime() (localctx IRangeDateTimeContext) {
 	localctx = NewRangeDateTimeContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 62, SFeelParserRULE_rangeDateTime)
@@ -4739,6 +5109,16 @@ func (s *DisjunctionsContext) EnterRule(listener antlr.ParseTreeListener) {
 func (s *DisjunctionsContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitDisjunctions(s)
+	}
+}
+
+func (s *DisjunctionsContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitDisjunctions(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -4901,6 +5281,16 @@ func (s *DisjunctionsIntegerContext) EnterRule(listener antlr.ParseTreeListener)
 func (s *DisjunctionsIntegerContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitDisjunctionsInteger(s)
+	}
+}
+
+func (s *DisjunctionsIntegerContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitDisjunctionsInteger(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -5113,6 +5503,16 @@ func (s *DisjunctionsNumberContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *DisjunctionsNumberContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitDisjunctionsNumber(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) DisjunctionsNumber() (localctx IDisjunctionsNumberContext) {
 	return p.disjunctionsNumber(0)
 }
@@ -5302,6 +5702,16 @@ func (s *DisjunctionsStringContext) ExitRule(listener antlr.ParseTreeListener) {
 	}
 }
 
+func (s *DisjunctionsStringContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitDisjunctionsString(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 func (p *SFeelParser) DisjunctionsString() (localctx IDisjunctionsStringContext) {
 	return p.disjunctionsString(0)
 }
@@ -5487,6 +5897,16 @@ func (s *DisjunctionsDateTimeContext) EnterRule(listener antlr.ParseTreeListener
 func (s *DisjunctionsDateTimeContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitDisjunctionsDateTime(s)
+	}
+}
+
+func (s *DisjunctionsDateTimeContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitDisjunctionsDateTime(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
@@ -5683,6 +6103,16 @@ func (s *NegationContext) EnterRule(listener antlr.ParseTreeListener) {
 func (s *NegationContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
 		listenerT.ExitNegation(s)
+	}
+}
+
+func (s *NegationContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitNegation(s)
+
+	default:
+		return t.VisitChildren(s)
 	}
 }
 
