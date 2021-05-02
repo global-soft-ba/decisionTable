@@ -12,43 +12,139 @@ func (v *BaseSFeelVisitor) VisitEntry(ctx *EntryContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitValidIntegerInput(ctx *ValidIntegerInputContext) interface{} {
+func (v *BaseSFeelVisitor) VisitEqualComparisonIntegerInputRule(ctx *EqualComparisonIntegerInputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitValidNumberInput(ctx *ValidNumberInputContext) interface{} {
+func (v *BaseSFeelVisitor) VisitComparisonIntegerInputRule(ctx *ComparisonIntegerInputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitValidStringInput(ctx *ValidStringInputContext) interface{} {
+func (v *BaseSFeelVisitor) VisitRangeComparisonIntegerInputRule(ctx *RangeComparisonIntegerInputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitValidBoolInput(ctx *ValidBoolInputContext) interface{} {
+func (v *BaseSFeelVisitor) VisitDisjunctionsIntegerInputRule(ctx *DisjunctionsIntegerInputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitValidDateTimeInput(ctx *ValidDateTimeInputContext) interface{} {
+func (v *BaseSFeelVisitor) VisitNegationIntegerInputRule(ctx *NegationIntegerInputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitValidIntegerOutput(ctx *ValidIntegerOutputContext) interface{} {
+func (v *BaseSFeelVisitor) VisitEmptyIntegerInputRule(ctx *EmptyIntegerInputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitValidNumberOutput(ctx *ValidNumberOutputContext) interface{} {
+func (v *BaseSFeelVisitor) VisitEqualComparisonNumberInputRule(ctx *EqualComparisonNumberInputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitValidStringOutput(ctx *ValidStringOutputContext) interface{} {
+func (v *BaseSFeelVisitor) VisitComparisonNumberInputRule(ctx *ComparisonNumberInputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitValidBoolOutput(ctx *ValidBoolOutputContext) interface{} {
+func (v *BaseSFeelVisitor) VisitRangeComparisonNumberInputRule(ctx *RangeComparisonNumberInputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitValidDateTimeOutput(ctx *ValidDateTimeOutputContext) interface{} {
+func (v *BaseSFeelVisitor) VisitDisjunctionsNumberInputRule(ctx *DisjunctionsNumberInputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitNegationNumberInputRule(ctx *NegationNumberInputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitEmptyNumberInputRule(ctx *EmptyNumberInputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitEqualComparisonStringInputRule(ctx *EqualComparisonStringInputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitComparisonStringInputRule(ctx *ComparisonStringInputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitNegationStringInputRule(ctx *NegationStringInputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitEmptyStringInputRule(ctx *EmptyStringInputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitEqualComparisonBoolInputRule(ctx *EqualComparisonBoolInputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitEmptyBoolInputRule(ctx *EmptyBoolInputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitEqualComparisonDateTimeInputRule(ctx *EqualComparisonDateTimeInputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitComparisonDateTimeInputRule(ctx *ComparisonDateTimeInputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitRangeComparisonDateTimeInputRule(ctx *RangeComparisonDateTimeInputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitDisjunctionsDateTimeInputRule(ctx *DisjunctionsDateTimeInputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitNegationDateTimeInputRule(ctx *NegationDateTimeInputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitEmptyDateTimeInputRule(ctx *EmptyDateTimeInputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitIntegerOutputRule(ctx *IntegerOutputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitEmptyIntegerOutputRule(ctx *EmptyIntegerOutputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitNumberOutputRule(ctx *NumberOutputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitEmptyNumberOutputRule(ctx *EmptyNumberOutputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitStringOutputRule(ctx *StringOutputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitEmptyStringOutputRule(ctx *EmptyStringOutputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitBoolOutputRule(ctx *BoolOutputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitEmptyBoolOutputRule(ctx *EmptyBoolOutputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitDateTimeOutputRule(ctx *DateTimeOutputRuleContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitEmptyDateTimeOutputRule(ctx *EmptyDateTimeOutputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

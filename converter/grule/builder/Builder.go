@@ -1,4 +1,4 @@
-package mapper
+package builder
 
 import (
 	"decisionTable/converter/grule/grlmodel"
@@ -12,7 +12,7 @@ var (
 	ErrEmptyExpression       = errors.New("empty expression detected and will be skiped")
 )
 
-func CreateGruleMapper() Mapper {
+func CreateGruleBuilder() Mapper {
 	return Mapper{}
 }
 

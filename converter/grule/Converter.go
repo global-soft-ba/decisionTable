@@ -3,8 +3,8 @@ package grule
 import (
 	"bytes"
 	"decisionTable/converter"
+	"decisionTable/converter/grule/builder"
 	"decisionTable/converter/grule/grlmodel"
-	"decisionTable/converter/grule/mapper"
 	"decisionTable/converter/grule/templates/grl"
 	"decisionTable/model"
 	"text/template"
@@ -32,7 +32,7 @@ func (c Converter) Convert(data model.TableData) (interface{}, error) {
 		return []string{}, converter.ErrDTableNotationStandard
 	}
 
-	grlModel, err := mapper.CreateGruleMapper().MapToRuleSet(data)
+	grlModel, err := builder.CreateGruleBuilder().MapToRuleSet(data)
 	if err != nil {
 		return []string{}, err
 	}

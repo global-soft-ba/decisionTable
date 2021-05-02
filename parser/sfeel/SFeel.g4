@@ -7,68 +7,70 @@ entry: expression EOF;
 
 // Datatype Language Grammar
 validIntegerInput
-    : equalcomparisonInteger EOF
-    | comparisonInteger EOF
-    | rangeInteger EOF
-    | disjunctionsInteger EOF
-    | NEGATION'('(equalcomparisonInteger|comparisonInteger|rangeInteger|disjunctionsInteger)')' EOF
-    | '-' EOF
+    : equalcomparisonInteger EOF    # EqualComparisonIntegerInputRule
+    | comparisonInteger EOF         # ComparisonIntegerInputRule
+    | rangeInteger EOF              # RangeComparisonIntegerInputRule
+    | disjunctionsInteger EOF       # DisjunctionsIntegerInputRule
+    | NEGATION'('(equalcomparisonInteger|comparisonInteger|rangeInteger|disjunctionsInteger)')' EOF  # NegationIntegerInputRule
+    | '-' EOF                       # EmptyIntegerInputRule
     ;
 
 validNumberInput
-    : equalcomparisonNumber EOF
-    | comparisonNumber EOF
-    | rangeNumber EOF
-    | disjunctionsNumber EOF
-    | NEGATION'('(equalcomparisonNumber|comparisonNumber|rangeNumber|disjunctionsNumber)')' EOF
-    | '-' EOF
+    : equalcomparisonNumber EOF     # EqualComparisonNumberInputRule
+    | comparisonNumber EOF          # ComparisonNumberInputRule
+    | rangeNumber EOF               # RangeComparisonNumberInputRule
+    | disjunctionsNumber EOF        # DisjunctionsNumberInputRule
+    | NEGATION'('(equalcomparisonNumber|comparisonNumber|rangeNumber|disjunctionsNumber)')' EOF # NegationNumberInputRule
+    | '-' EOF                       # EmptyNumberInputRule
     ;
 
 validStringInput
-    : equalcomparisonStrings EOF
-    | disjunctionsString EOF
-    | NEGATION'('(equalcomparisonStrings|disjunctionsString)')' EOF
-    | '-' EOF
+    : equalcomparisonStrings EOF    # EqualComparisonStringInputRule
+    | disjunctionsString EOF        # ComparisonStringInputRule
+    | NEGATION'('(equalcomparisonStrings|disjunctionsString)')' EOF # NegationStringInputRule
+    | '-' EOF                       # EmptyStringInputRule
     ;
 
 validBoolInput
-    : equalcomparisonBool EOF
-    | '-' EOF
+    : equalcomparisonBool EOF       # EqualComparisonBoolInputRule
+    | '-' EOF                       # EmptyBoolInputRule
     ;
 
 validDateTimeInput
-    : equalcomparisonDateTime EOF
-    | comparisonDateTime EOF
-    | rangeDateTime EOF
-    | disjunctionsDateTime EOF
-    | NEGATION'('(equalcomparisonDateTime|comparisonDateTime|rangeDateTime|disjunctionsDateTime)')' EOF
-    | '-' EOF
+    : equalcomparisonDateTime EOF   # EqualComparisonDateTimeInputRule
+    | comparisonDateTime EOF        # ComparisonDateTimeInputRule
+    | rangeDateTime EOF             # RangeComparisonDateTimeInputRule
+    | disjunctionsDateTime EOF      # DisjunctionsDateTimeInputRule
+    | NEGATION'('(equalcomparisonDateTime|comparisonDateTime|rangeDateTime|disjunctionsDateTime)')' EOF # NegationDateTimeInputRule
+    | '-' EOF                       # EmptyDateTimeInputRule
     ;
 
 validIntegerOutput
-    : INTEGER EOF
-    | '-' EOF
+    : INTEGER EOF                   # IntegerOutputRule
+    | '-' EOF                       # EmptyIntegerOutputRule
     ;
 
 validNumberOutput
-    : number EOF
-    | '-' EOF
+    : number EOF                    # NumberOutputRule
+    | '-' EOF                       # EmptyNumberOutputRule
     ;
 
 validStringOutput
-    : strings EOF
-    | '-' EOF
+    : strings EOF                   # StringOutputRule
+    | '-' EOF                       # EmptyStringOutputRule
     ;
 
 validBoolOutput
-    : bools EOF
-    | '-' EOF
+    : bools EOF                     # BoolOutputRule
+    | '-' EOF                       # EmptyBoolOutputRule
     ;
 
 validDateTimeOutput
-    : datetime EOF
-    | '-' EOF
+    : datetime EOF                  # DateTimeOutputRule
+    | '-' EOF                       # EmptyDateTimeOutputRule
     ;
+
+
 
 // Entire Language Grammar SFeel
 

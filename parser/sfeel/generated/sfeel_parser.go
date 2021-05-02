@@ -448,52 +448,8 @@ func NewValidIntegerInputContext(parser antlr.Parser, parent antlr.ParserRuleCon
 
 func (s *ValidIntegerInputContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ValidIntegerInputContext) EqualcomparisonInteger() IEqualcomparisonIntegerContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEqualcomparisonIntegerContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IEqualcomparisonIntegerContext)
-}
-
-func (s *ValidIntegerInputContext) EOF() antlr.TerminalNode {
-	return s.GetToken(SFeelParserEOF, 0)
-}
-
-func (s *ValidIntegerInputContext) ComparisonInteger() IComparisonIntegerContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComparisonIntegerContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IComparisonIntegerContext)
-}
-
-func (s *ValidIntegerInputContext) RangeInteger() IRangeIntegerContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IRangeIntegerContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IRangeIntegerContext)
-}
-
-func (s *ValidIntegerInputContext) DisjunctionsInteger() IDisjunctionsIntegerContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDisjunctionsIntegerContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IDisjunctionsIntegerContext)
-}
-
-func (s *ValidIntegerInputContext) NEGATION() antlr.TerminalNode {
-	return s.GetToken(SFeelParserNEGATION, 0)
+func (s *ValidIntegerInputContext) CopyFrom(ctx *ValidIntegerInputContext) {
+	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
 }
 
 func (s *ValidIntegerInputContext) GetRuleContext() antlr.RuleContext {
@@ -504,22 +460,348 @@ func (s *ValidIntegerInputContext) ToStringTree(ruleNames []string, recog antlr.
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *ValidIntegerInputContext) EnterRule(listener antlr.ParseTreeListener) {
+type NegationIntegerInputRuleContext struct {
+	*ValidIntegerInputContext
+}
+
+func NewNegationIntegerInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *NegationIntegerInputRuleContext {
+	var p = new(NegationIntegerInputRuleContext)
+
+	p.ValidIntegerInputContext = NewEmptyValidIntegerInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidIntegerInputContext))
+
+	return p
+}
+
+func (s *NegationIntegerInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *NegationIntegerInputRuleContext) NEGATION() antlr.TerminalNode {
+	return s.GetToken(SFeelParserNEGATION, 0)
+}
+
+func (s *NegationIntegerInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *NegationIntegerInputRuleContext) EqualcomparisonInteger() IEqualcomparisonIntegerContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEqualcomparisonIntegerContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IEqualcomparisonIntegerContext)
+}
+
+func (s *NegationIntegerInputRuleContext) ComparisonInteger() IComparisonIntegerContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComparisonIntegerContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IComparisonIntegerContext)
+}
+
+func (s *NegationIntegerInputRuleContext) RangeInteger() IRangeIntegerContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IRangeIntegerContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IRangeIntegerContext)
+}
+
+func (s *NegationIntegerInputRuleContext) DisjunctionsInteger() IDisjunctionsIntegerContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDisjunctionsIntegerContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IDisjunctionsIntegerContext)
+}
+
+func (s *NegationIntegerInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterValidIntegerInput(s)
+		listenerT.EnterNegationIntegerInputRule(s)
 	}
 }
 
-func (s *ValidIntegerInputContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *NegationIntegerInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitValidIntegerInput(s)
+		listenerT.ExitNegationIntegerInputRule(s)
 	}
 }
 
-func (s *ValidIntegerInputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *NegationIntegerInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitValidIntegerInput(s)
+		return t.VisitNegationIntegerInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type DisjunctionsIntegerInputRuleContext struct {
+	*ValidIntegerInputContext
+}
+
+func NewDisjunctionsIntegerInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *DisjunctionsIntegerInputRuleContext {
+	var p = new(DisjunctionsIntegerInputRuleContext)
+
+	p.ValidIntegerInputContext = NewEmptyValidIntegerInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidIntegerInputContext))
+
+	return p
+}
+
+func (s *DisjunctionsIntegerInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *DisjunctionsIntegerInputRuleContext) DisjunctionsInteger() IDisjunctionsIntegerContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDisjunctionsIntegerContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IDisjunctionsIntegerContext)
+}
+
+func (s *DisjunctionsIntegerInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *DisjunctionsIntegerInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterDisjunctionsIntegerInputRule(s)
+	}
+}
+
+func (s *DisjunctionsIntegerInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitDisjunctionsIntegerInputRule(s)
+	}
+}
+
+func (s *DisjunctionsIntegerInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitDisjunctionsIntegerInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type ComparisonIntegerInputRuleContext struct {
+	*ValidIntegerInputContext
+}
+
+func NewComparisonIntegerInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *ComparisonIntegerInputRuleContext {
+	var p = new(ComparisonIntegerInputRuleContext)
+
+	p.ValidIntegerInputContext = NewEmptyValidIntegerInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidIntegerInputContext))
+
+	return p
+}
+
+func (s *ComparisonIntegerInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *ComparisonIntegerInputRuleContext) ComparisonInteger() IComparisonIntegerContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComparisonIntegerContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IComparisonIntegerContext)
+}
+
+func (s *ComparisonIntegerInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *ComparisonIntegerInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterComparisonIntegerInputRule(s)
+	}
+}
+
+func (s *ComparisonIntegerInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitComparisonIntegerInputRule(s)
+	}
+}
+
+func (s *ComparisonIntegerInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitComparisonIntegerInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type EqualComparisonIntegerInputRuleContext struct {
+	*ValidIntegerInputContext
+}
+
+func NewEqualComparisonIntegerInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EqualComparisonIntegerInputRuleContext {
+	var p = new(EqualComparisonIntegerInputRuleContext)
+
+	p.ValidIntegerInputContext = NewEmptyValidIntegerInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidIntegerInputContext))
+
+	return p
+}
+
+func (s *EqualComparisonIntegerInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EqualComparisonIntegerInputRuleContext) EqualcomparisonInteger() IEqualcomparisonIntegerContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEqualcomparisonIntegerContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IEqualcomparisonIntegerContext)
+}
+
+func (s *EqualComparisonIntegerInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *EqualComparisonIntegerInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterEqualComparisonIntegerInputRule(s)
+	}
+}
+
+func (s *EqualComparisonIntegerInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitEqualComparisonIntegerInputRule(s)
+	}
+}
+
+func (s *EqualComparisonIntegerInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEqualComparisonIntegerInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type RangeComparisonIntegerInputRuleContext struct {
+	*ValidIntegerInputContext
+}
+
+func NewRangeComparisonIntegerInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *RangeComparisonIntegerInputRuleContext {
+	var p = new(RangeComparisonIntegerInputRuleContext)
+
+	p.ValidIntegerInputContext = NewEmptyValidIntegerInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidIntegerInputContext))
+
+	return p
+}
+
+func (s *RangeComparisonIntegerInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *RangeComparisonIntegerInputRuleContext) RangeInteger() IRangeIntegerContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IRangeIntegerContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IRangeIntegerContext)
+}
+
+func (s *RangeComparisonIntegerInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *RangeComparisonIntegerInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterRangeComparisonIntegerInputRule(s)
+	}
+}
+
+func (s *RangeComparisonIntegerInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitRangeComparisonIntegerInputRule(s)
+	}
+}
+
+func (s *RangeComparisonIntegerInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitRangeComparisonIntegerInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type EmptyIntegerInputRuleContext struct {
+	*ValidIntegerInputContext
+}
+
+func NewEmptyIntegerInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EmptyIntegerInputRuleContext {
+	var p = new(EmptyIntegerInputRuleContext)
+
+	p.ValidIntegerInputContext = NewEmptyValidIntegerInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidIntegerInputContext))
+
+	return p
+}
+
+func (s *EmptyIntegerInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EmptyIntegerInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *EmptyIntegerInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterEmptyIntegerInputRule(s)
+	}
+}
+
+func (s *EmptyIntegerInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitEmptyIntegerInputRule(s)
+	}
+}
+
+func (s *EmptyIntegerInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEmptyIntegerInputRule(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -550,6 +832,7 @@ func (p *SFeelParser) ValidIntegerInput() (localctx IValidIntegerInputContext) {
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 1, p.GetParserRuleContext()) {
 	case 1:
+		localctx = NewEqualComparisonIntegerInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(79)
@@ -561,6 +844,7 @@ func (p *SFeelParser) ValidIntegerInput() (localctx IValidIntegerInputContext) {
 		}
 
 	case 2:
+		localctx = NewComparisonIntegerInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(82)
@@ -572,6 +856,7 @@ func (p *SFeelParser) ValidIntegerInput() (localctx IValidIntegerInputContext) {
 		}
 
 	case 3:
+		localctx = NewRangeComparisonIntegerInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 3)
 		{
 			p.SetState(85)
@@ -583,6 +868,7 @@ func (p *SFeelParser) ValidIntegerInput() (localctx IValidIntegerInputContext) {
 		}
 
 	case 4:
+		localctx = NewDisjunctionsIntegerInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 4)
 		{
 			p.SetState(88)
@@ -594,6 +880,7 @@ func (p *SFeelParser) ValidIntegerInput() (localctx IValidIntegerInputContext) {
 		}
 
 	case 5:
+		localctx = NewNegationIntegerInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 5)
 		{
 			p.SetState(91)
@@ -641,6 +928,7 @@ func (p *SFeelParser) ValidIntegerInput() (localctx IValidIntegerInputContext) {
 		}
 
 	case 6:
+		localctx = NewEmptyIntegerInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 6)
 		{
 			p.SetState(102)
@@ -694,52 +982,8 @@ func NewValidNumberInputContext(parser antlr.Parser, parent antlr.ParserRuleCont
 
 func (s *ValidNumberInputContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ValidNumberInputContext) EqualcomparisonNumber() IEqualcomparisonNumberContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEqualcomparisonNumberContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IEqualcomparisonNumberContext)
-}
-
-func (s *ValidNumberInputContext) EOF() antlr.TerminalNode {
-	return s.GetToken(SFeelParserEOF, 0)
-}
-
-func (s *ValidNumberInputContext) ComparisonNumber() IComparisonNumberContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComparisonNumberContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IComparisonNumberContext)
-}
-
-func (s *ValidNumberInputContext) RangeNumber() IRangeNumberContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IRangeNumberContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IRangeNumberContext)
-}
-
-func (s *ValidNumberInputContext) DisjunctionsNumber() IDisjunctionsNumberContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDisjunctionsNumberContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IDisjunctionsNumberContext)
-}
-
-func (s *ValidNumberInputContext) NEGATION() antlr.TerminalNode {
-	return s.GetToken(SFeelParserNEGATION, 0)
+func (s *ValidNumberInputContext) CopyFrom(ctx *ValidNumberInputContext) {
+	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
 }
 
 func (s *ValidNumberInputContext) GetRuleContext() antlr.RuleContext {
@@ -750,22 +994,348 @@ func (s *ValidNumberInputContext) ToStringTree(ruleNames []string, recog antlr.R
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *ValidNumberInputContext) EnterRule(listener antlr.ParseTreeListener) {
+type ComparisonNumberInputRuleContext struct {
+	*ValidNumberInputContext
+}
+
+func NewComparisonNumberInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *ComparisonNumberInputRuleContext {
+	var p = new(ComparisonNumberInputRuleContext)
+
+	p.ValidNumberInputContext = NewEmptyValidNumberInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidNumberInputContext))
+
+	return p
+}
+
+func (s *ComparisonNumberInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *ComparisonNumberInputRuleContext) ComparisonNumber() IComparisonNumberContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComparisonNumberContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IComparisonNumberContext)
+}
+
+func (s *ComparisonNumberInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *ComparisonNumberInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterValidNumberInput(s)
+		listenerT.EnterComparisonNumberInputRule(s)
 	}
 }
 
-func (s *ValidNumberInputContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *ComparisonNumberInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitValidNumberInput(s)
+		listenerT.ExitComparisonNumberInputRule(s)
 	}
 }
 
-func (s *ValidNumberInputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *ComparisonNumberInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitValidNumberInput(s)
+		return t.VisitComparisonNumberInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type EqualComparisonNumberInputRuleContext struct {
+	*ValidNumberInputContext
+}
+
+func NewEqualComparisonNumberInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EqualComparisonNumberInputRuleContext {
+	var p = new(EqualComparisonNumberInputRuleContext)
+
+	p.ValidNumberInputContext = NewEmptyValidNumberInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidNumberInputContext))
+
+	return p
+}
+
+func (s *EqualComparisonNumberInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EqualComparisonNumberInputRuleContext) EqualcomparisonNumber() IEqualcomparisonNumberContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEqualcomparisonNumberContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IEqualcomparisonNumberContext)
+}
+
+func (s *EqualComparisonNumberInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *EqualComparisonNumberInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterEqualComparisonNumberInputRule(s)
+	}
+}
+
+func (s *EqualComparisonNumberInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitEqualComparisonNumberInputRule(s)
+	}
+}
+
+func (s *EqualComparisonNumberInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEqualComparisonNumberInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type DisjunctionsNumberInputRuleContext struct {
+	*ValidNumberInputContext
+}
+
+func NewDisjunctionsNumberInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *DisjunctionsNumberInputRuleContext {
+	var p = new(DisjunctionsNumberInputRuleContext)
+
+	p.ValidNumberInputContext = NewEmptyValidNumberInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidNumberInputContext))
+
+	return p
+}
+
+func (s *DisjunctionsNumberInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *DisjunctionsNumberInputRuleContext) DisjunctionsNumber() IDisjunctionsNumberContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDisjunctionsNumberContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IDisjunctionsNumberContext)
+}
+
+func (s *DisjunctionsNumberInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *DisjunctionsNumberInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterDisjunctionsNumberInputRule(s)
+	}
+}
+
+func (s *DisjunctionsNumberInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitDisjunctionsNumberInputRule(s)
+	}
+}
+
+func (s *DisjunctionsNumberInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitDisjunctionsNumberInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type NegationNumberInputRuleContext struct {
+	*ValidNumberInputContext
+}
+
+func NewNegationNumberInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *NegationNumberInputRuleContext {
+	var p = new(NegationNumberInputRuleContext)
+
+	p.ValidNumberInputContext = NewEmptyValidNumberInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidNumberInputContext))
+
+	return p
+}
+
+func (s *NegationNumberInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *NegationNumberInputRuleContext) NEGATION() antlr.TerminalNode {
+	return s.GetToken(SFeelParserNEGATION, 0)
+}
+
+func (s *NegationNumberInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *NegationNumberInputRuleContext) EqualcomparisonNumber() IEqualcomparisonNumberContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEqualcomparisonNumberContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IEqualcomparisonNumberContext)
+}
+
+func (s *NegationNumberInputRuleContext) ComparisonNumber() IComparisonNumberContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComparisonNumberContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IComparisonNumberContext)
+}
+
+func (s *NegationNumberInputRuleContext) RangeNumber() IRangeNumberContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IRangeNumberContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IRangeNumberContext)
+}
+
+func (s *NegationNumberInputRuleContext) DisjunctionsNumber() IDisjunctionsNumberContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDisjunctionsNumberContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IDisjunctionsNumberContext)
+}
+
+func (s *NegationNumberInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterNegationNumberInputRule(s)
+	}
+}
+
+func (s *NegationNumberInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitNegationNumberInputRule(s)
+	}
+}
+
+func (s *NegationNumberInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitNegationNumberInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type EmptyNumberInputRuleContext struct {
+	*ValidNumberInputContext
+}
+
+func NewEmptyNumberInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EmptyNumberInputRuleContext {
+	var p = new(EmptyNumberInputRuleContext)
+
+	p.ValidNumberInputContext = NewEmptyValidNumberInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidNumberInputContext))
+
+	return p
+}
+
+func (s *EmptyNumberInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EmptyNumberInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *EmptyNumberInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterEmptyNumberInputRule(s)
+	}
+}
+
+func (s *EmptyNumberInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitEmptyNumberInputRule(s)
+	}
+}
+
+func (s *EmptyNumberInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEmptyNumberInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type RangeComparisonNumberInputRuleContext struct {
+	*ValidNumberInputContext
+}
+
+func NewRangeComparisonNumberInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *RangeComparisonNumberInputRuleContext {
+	var p = new(RangeComparisonNumberInputRuleContext)
+
+	p.ValidNumberInputContext = NewEmptyValidNumberInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidNumberInputContext))
+
+	return p
+}
+
+func (s *RangeComparisonNumberInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *RangeComparisonNumberInputRuleContext) RangeNumber() IRangeNumberContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IRangeNumberContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IRangeNumberContext)
+}
+
+func (s *RangeComparisonNumberInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *RangeComparisonNumberInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterRangeComparisonNumberInputRule(s)
+	}
+}
+
+func (s *RangeComparisonNumberInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitRangeComparisonNumberInputRule(s)
+	}
+}
+
+func (s *RangeComparisonNumberInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitRangeComparisonNumberInputRule(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -796,6 +1366,7 @@ func (p *SFeelParser) ValidNumberInput() (localctx IValidNumberInputContext) {
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 3, p.GetParserRuleContext()) {
 	case 1:
+		localctx = NewEqualComparisonNumberInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(106)
@@ -807,6 +1378,7 @@ func (p *SFeelParser) ValidNumberInput() (localctx IValidNumberInputContext) {
 		}
 
 	case 2:
+		localctx = NewComparisonNumberInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(109)
@@ -818,6 +1390,7 @@ func (p *SFeelParser) ValidNumberInput() (localctx IValidNumberInputContext) {
 		}
 
 	case 3:
+		localctx = NewRangeComparisonNumberInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 3)
 		{
 			p.SetState(112)
@@ -829,6 +1402,7 @@ func (p *SFeelParser) ValidNumberInput() (localctx IValidNumberInputContext) {
 		}
 
 	case 4:
+		localctx = NewDisjunctionsNumberInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 4)
 		{
 			p.SetState(115)
@@ -840,6 +1414,7 @@ func (p *SFeelParser) ValidNumberInput() (localctx IValidNumberInputContext) {
 		}
 
 	case 5:
+		localctx = NewNegationNumberInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 5)
 		{
 			p.SetState(118)
@@ -887,6 +1462,7 @@ func (p *SFeelParser) ValidNumberInput() (localctx IValidNumberInputContext) {
 		}
 
 	case 6:
+		localctx = NewEmptyNumberInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 6)
 		{
 			p.SetState(129)
@@ -940,32 +1516,8 @@ func NewValidStringInputContext(parser antlr.Parser, parent antlr.ParserRuleCont
 
 func (s *ValidStringInputContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ValidStringInputContext) EqualcomparisonStrings() IEqualcomparisonStringsContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEqualcomparisonStringsContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IEqualcomparisonStringsContext)
-}
-
-func (s *ValidStringInputContext) EOF() antlr.TerminalNode {
-	return s.GetToken(SFeelParserEOF, 0)
-}
-
-func (s *ValidStringInputContext) DisjunctionsString() IDisjunctionsStringContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDisjunctionsStringContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IDisjunctionsStringContext)
-}
-
-func (s *ValidStringInputContext) NEGATION() antlr.TerminalNode {
-	return s.GetToken(SFeelParserNEGATION, 0)
+func (s *ValidStringInputContext) CopyFrom(ctx *ValidStringInputContext) {
+	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
 }
 
 func (s *ValidStringInputContext) GetRuleContext() antlr.RuleContext {
@@ -976,22 +1528,220 @@ func (s *ValidStringInputContext) ToStringTree(ruleNames []string, recog antlr.R
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *ValidStringInputContext) EnterRule(listener antlr.ParseTreeListener) {
+type NegationStringInputRuleContext struct {
+	*ValidStringInputContext
+}
+
+func NewNegationStringInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *NegationStringInputRuleContext {
+	var p = new(NegationStringInputRuleContext)
+
+	p.ValidStringInputContext = NewEmptyValidStringInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidStringInputContext))
+
+	return p
+}
+
+func (s *NegationStringInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *NegationStringInputRuleContext) NEGATION() antlr.TerminalNode {
+	return s.GetToken(SFeelParserNEGATION, 0)
+}
+
+func (s *NegationStringInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *NegationStringInputRuleContext) EqualcomparisonStrings() IEqualcomparisonStringsContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEqualcomparisonStringsContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IEqualcomparisonStringsContext)
+}
+
+func (s *NegationStringInputRuleContext) DisjunctionsString() IDisjunctionsStringContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDisjunctionsStringContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IDisjunctionsStringContext)
+}
+
+func (s *NegationStringInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterValidStringInput(s)
+		listenerT.EnterNegationStringInputRule(s)
 	}
 }
 
-func (s *ValidStringInputContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *NegationStringInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitValidStringInput(s)
+		listenerT.ExitNegationStringInputRule(s)
 	}
 }
 
-func (s *ValidStringInputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *NegationStringInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitValidStringInput(s)
+		return t.VisitNegationStringInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type EqualComparisonStringInputRuleContext struct {
+	*ValidStringInputContext
+}
+
+func NewEqualComparisonStringInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EqualComparisonStringInputRuleContext {
+	var p = new(EqualComparisonStringInputRuleContext)
+
+	p.ValidStringInputContext = NewEmptyValidStringInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidStringInputContext))
+
+	return p
+}
+
+func (s *EqualComparisonStringInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EqualComparisonStringInputRuleContext) EqualcomparisonStrings() IEqualcomparisonStringsContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEqualcomparisonStringsContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IEqualcomparisonStringsContext)
+}
+
+func (s *EqualComparisonStringInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *EqualComparisonStringInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterEqualComparisonStringInputRule(s)
+	}
+}
+
+func (s *EqualComparisonStringInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitEqualComparisonStringInputRule(s)
+	}
+}
+
+func (s *EqualComparisonStringInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEqualComparisonStringInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type EmptyStringInputRuleContext struct {
+	*ValidStringInputContext
+}
+
+func NewEmptyStringInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EmptyStringInputRuleContext {
+	var p = new(EmptyStringInputRuleContext)
+
+	p.ValidStringInputContext = NewEmptyValidStringInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidStringInputContext))
+
+	return p
+}
+
+func (s *EmptyStringInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EmptyStringInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *EmptyStringInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterEmptyStringInputRule(s)
+	}
+}
+
+func (s *EmptyStringInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitEmptyStringInputRule(s)
+	}
+}
+
+func (s *EmptyStringInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEmptyStringInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type ComparisonStringInputRuleContext struct {
+	*ValidStringInputContext
+}
+
+func NewComparisonStringInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *ComparisonStringInputRuleContext {
+	var p = new(ComparisonStringInputRuleContext)
+
+	p.ValidStringInputContext = NewEmptyValidStringInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidStringInputContext))
+
+	return p
+}
+
+func (s *ComparisonStringInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *ComparisonStringInputRuleContext) DisjunctionsString() IDisjunctionsStringContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDisjunctionsStringContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IDisjunctionsStringContext)
+}
+
+func (s *ComparisonStringInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *ComparisonStringInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterComparisonStringInputRule(s)
+	}
+}
+
+func (s *ComparisonStringInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitComparisonStringInputRule(s)
+	}
+}
+
+func (s *ComparisonStringInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitComparisonStringInputRule(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -1022,6 +1772,7 @@ func (p *SFeelParser) ValidStringInput() (localctx IValidStringInputContext) {
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 5, p.GetParserRuleContext()) {
 	case 1:
+		localctx = NewEqualComparisonStringInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(133)
@@ -1033,6 +1784,7 @@ func (p *SFeelParser) ValidStringInput() (localctx IValidStringInputContext) {
 		}
 
 	case 2:
+		localctx = NewComparisonStringInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(136)
@@ -1044,6 +1796,7 @@ func (p *SFeelParser) ValidStringInput() (localctx IValidStringInputContext) {
 		}
 
 	case 3:
+		localctx = NewNegationStringInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 3)
 		{
 			p.SetState(139)
@@ -1079,6 +1832,7 @@ func (p *SFeelParser) ValidStringInput() (localctx IValidStringInputContext) {
 		}
 
 	case 4:
+		localctx = NewEmptyStringInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 4)
 		{
 			p.SetState(148)
@@ -1132,18 +1886,8 @@ func NewValidBoolInputContext(parser antlr.Parser, parent antlr.ParserRuleContex
 
 func (s *ValidBoolInputContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ValidBoolInputContext) EqualcomparisonBool() IEqualcomparisonBoolContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEqualcomparisonBoolContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IEqualcomparisonBoolContext)
-}
-
-func (s *ValidBoolInputContext) EOF() antlr.TerminalNode {
-	return s.GetToken(SFeelParserEOF, 0)
+func (s *ValidBoolInputContext) CopyFrom(ctx *ValidBoolInputContext) {
+	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
 }
 
 func (s *ValidBoolInputContext) GetRuleContext() antlr.RuleContext {
@@ -1154,22 +1898,98 @@ func (s *ValidBoolInputContext) ToStringTree(ruleNames []string, recog antlr.Rec
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *ValidBoolInputContext) EnterRule(listener antlr.ParseTreeListener) {
+type EmptyBoolInputRuleContext struct {
+	*ValidBoolInputContext
+}
+
+func NewEmptyBoolInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EmptyBoolInputRuleContext {
+	var p = new(EmptyBoolInputRuleContext)
+
+	p.ValidBoolInputContext = NewEmptyValidBoolInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidBoolInputContext))
+
+	return p
+}
+
+func (s *EmptyBoolInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EmptyBoolInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *EmptyBoolInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterValidBoolInput(s)
+		listenerT.EnterEmptyBoolInputRule(s)
 	}
 }
 
-func (s *ValidBoolInputContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *EmptyBoolInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitValidBoolInput(s)
+		listenerT.ExitEmptyBoolInputRule(s)
 	}
 }
 
-func (s *ValidBoolInputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *EmptyBoolInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitValidBoolInput(s)
+		return t.VisitEmptyBoolInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type EqualComparisonBoolInputRuleContext struct {
+	*ValidBoolInputContext
+}
+
+func NewEqualComparisonBoolInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EqualComparisonBoolInputRuleContext {
+	var p = new(EqualComparisonBoolInputRuleContext)
+
+	p.ValidBoolInputContext = NewEmptyValidBoolInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidBoolInputContext))
+
+	return p
+}
+
+func (s *EqualComparisonBoolInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EqualComparisonBoolInputRuleContext) EqualcomparisonBool() IEqualcomparisonBoolContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEqualcomparisonBoolContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IEqualcomparisonBoolContext)
+}
+
+func (s *EqualComparisonBoolInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *EqualComparisonBoolInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterEqualComparisonBoolInputRule(s)
+	}
+}
+
+func (s *EqualComparisonBoolInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitEqualComparisonBoolInputRule(s)
+	}
+}
+
+func (s *EqualComparisonBoolInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEqualComparisonBoolInputRule(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -1201,6 +2021,7 @@ func (p *SFeelParser) ValidBoolInput() (localctx IValidBoolInputContext) {
 
 	switch p.GetTokenStream().LA(1) {
 	case SFeelParserBOOL:
+		localctx = NewEqualComparisonBoolInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(152)
@@ -1212,6 +2033,7 @@ func (p *SFeelParser) ValidBoolInput() (localctx IValidBoolInputContext) {
 		}
 
 	case SFeelParserT__2:
+		localctx = NewEmptyBoolInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(155)
@@ -1267,52 +2089,8 @@ func NewValidDateTimeInputContext(parser antlr.Parser, parent antlr.ParserRuleCo
 
 func (s *ValidDateTimeInputContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ValidDateTimeInputContext) EqualcomparisonDateTime() IEqualcomparisonDateTimeContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEqualcomparisonDateTimeContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IEqualcomparisonDateTimeContext)
-}
-
-func (s *ValidDateTimeInputContext) EOF() antlr.TerminalNode {
-	return s.GetToken(SFeelParserEOF, 0)
-}
-
-func (s *ValidDateTimeInputContext) ComparisonDateTime() IComparisonDateTimeContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComparisonDateTimeContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IComparisonDateTimeContext)
-}
-
-func (s *ValidDateTimeInputContext) RangeDateTime() IRangeDateTimeContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IRangeDateTimeContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IRangeDateTimeContext)
-}
-
-func (s *ValidDateTimeInputContext) DisjunctionsDateTime() IDisjunctionsDateTimeContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDisjunctionsDateTimeContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IDisjunctionsDateTimeContext)
-}
-
-func (s *ValidDateTimeInputContext) NEGATION() antlr.TerminalNode {
-	return s.GetToken(SFeelParserNEGATION, 0)
+func (s *ValidDateTimeInputContext) CopyFrom(ctx *ValidDateTimeInputContext) {
+	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
 }
 
 func (s *ValidDateTimeInputContext) GetRuleContext() antlr.RuleContext {
@@ -1323,22 +2101,348 @@ func (s *ValidDateTimeInputContext) ToStringTree(ruleNames []string, recog antlr
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *ValidDateTimeInputContext) EnterRule(listener antlr.ParseTreeListener) {
+type RangeComparisonDateTimeInputRuleContext struct {
+	*ValidDateTimeInputContext
+}
+
+func NewRangeComparisonDateTimeInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *RangeComparisonDateTimeInputRuleContext {
+	var p = new(RangeComparisonDateTimeInputRuleContext)
+
+	p.ValidDateTimeInputContext = NewEmptyValidDateTimeInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidDateTimeInputContext))
+
+	return p
+}
+
+func (s *RangeComparisonDateTimeInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *RangeComparisonDateTimeInputRuleContext) RangeDateTime() IRangeDateTimeContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IRangeDateTimeContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IRangeDateTimeContext)
+}
+
+func (s *RangeComparisonDateTimeInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *RangeComparisonDateTimeInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterValidDateTimeInput(s)
+		listenerT.EnterRangeComparisonDateTimeInputRule(s)
 	}
 }
 
-func (s *ValidDateTimeInputContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *RangeComparisonDateTimeInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitValidDateTimeInput(s)
+		listenerT.ExitRangeComparisonDateTimeInputRule(s)
 	}
 }
 
-func (s *ValidDateTimeInputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *RangeComparisonDateTimeInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitValidDateTimeInput(s)
+		return t.VisitRangeComparisonDateTimeInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type EqualComparisonDateTimeInputRuleContext struct {
+	*ValidDateTimeInputContext
+}
+
+func NewEqualComparisonDateTimeInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EqualComparisonDateTimeInputRuleContext {
+	var p = new(EqualComparisonDateTimeInputRuleContext)
+
+	p.ValidDateTimeInputContext = NewEmptyValidDateTimeInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidDateTimeInputContext))
+
+	return p
+}
+
+func (s *EqualComparisonDateTimeInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EqualComparisonDateTimeInputRuleContext) EqualcomparisonDateTime() IEqualcomparisonDateTimeContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEqualcomparisonDateTimeContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IEqualcomparisonDateTimeContext)
+}
+
+func (s *EqualComparisonDateTimeInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *EqualComparisonDateTimeInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterEqualComparisonDateTimeInputRule(s)
+	}
+}
+
+func (s *EqualComparisonDateTimeInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitEqualComparisonDateTimeInputRule(s)
+	}
+}
+
+func (s *EqualComparisonDateTimeInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEqualComparisonDateTimeInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type DisjunctionsDateTimeInputRuleContext struct {
+	*ValidDateTimeInputContext
+}
+
+func NewDisjunctionsDateTimeInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *DisjunctionsDateTimeInputRuleContext {
+	var p = new(DisjunctionsDateTimeInputRuleContext)
+
+	p.ValidDateTimeInputContext = NewEmptyValidDateTimeInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidDateTimeInputContext))
+
+	return p
+}
+
+func (s *DisjunctionsDateTimeInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *DisjunctionsDateTimeInputRuleContext) DisjunctionsDateTime() IDisjunctionsDateTimeContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDisjunctionsDateTimeContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IDisjunctionsDateTimeContext)
+}
+
+func (s *DisjunctionsDateTimeInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *DisjunctionsDateTimeInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterDisjunctionsDateTimeInputRule(s)
+	}
+}
+
+func (s *DisjunctionsDateTimeInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitDisjunctionsDateTimeInputRule(s)
+	}
+}
+
+func (s *DisjunctionsDateTimeInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitDisjunctionsDateTimeInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type EmptyDateTimeInputRuleContext struct {
+	*ValidDateTimeInputContext
+}
+
+func NewEmptyDateTimeInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EmptyDateTimeInputRuleContext {
+	var p = new(EmptyDateTimeInputRuleContext)
+
+	p.ValidDateTimeInputContext = NewEmptyValidDateTimeInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidDateTimeInputContext))
+
+	return p
+}
+
+func (s *EmptyDateTimeInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EmptyDateTimeInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *EmptyDateTimeInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterEmptyDateTimeInputRule(s)
+	}
+}
+
+func (s *EmptyDateTimeInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitEmptyDateTimeInputRule(s)
+	}
+}
+
+func (s *EmptyDateTimeInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEmptyDateTimeInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type ComparisonDateTimeInputRuleContext struct {
+	*ValidDateTimeInputContext
+}
+
+func NewComparisonDateTimeInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *ComparisonDateTimeInputRuleContext {
+	var p = new(ComparisonDateTimeInputRuleContext)
+
+	p.ValidDateTimeInputContext = NewEmptyValidDateTimeInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidDateTimeInputContext))
+
+	return p
+}
+
+func (s *ComparisonDateTimeInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *ComparisonDateTimeInputRuleContext) ComparisonDateTime() IComparisonDateTimeContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComparisonDateTimeContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IComparisonDateTimeContext)
+}
+
+func (s *ComparisonDateTimeInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *ComparisonDateTimeInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterComparisonDateTimeInputRule(s)
+	}
+}
+
+func (s *ComparisonDateTimeInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitComparisonDateTimeInputRule(s)
+	}
+}
+
+func (s *ComparisonDateTimeInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitComparisonDateTimeInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type NegationDateTimeInputRuleContext struct {
+	*ValidDateTimeInputContext
+}
+
+func NewNegationDateTimeInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *NegationDateTimeInputRuleContext {
+	var p = new(NegationDateTimeInputRuleContext)
+
+	p.ValidDateTimeInputContext = NewEmptyValidDateTimeInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidDateTimeInputContext))
+
+	return p
+}
+
+func (s *NegationDateTimeInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *NegationDateTimeInputRuleContext) NEGATION() antlr.TerminalNode {
+	return s.GetToken(SFeelParserNEGATION, 0)
+}
+
+func (s *NegationDateTimeInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *NegationDateTimeInputRuleContext) EqualcomparisonDateTime() IEqualcomparisonDateTimeContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEqualcomparisonDateTimeContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IEqualcomparisonDateTimeContext)
+}
+
+func (s *NegationDateTimeInputRuleContext) ComparisonDateTime() IComparisonDateTimeContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComparisonDateTimeContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IComparisonDateTimeContext)
+}
+
+func (s *NegationDateTimeInputRuleContext) RangeDateTime() IRangeDateTimeContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IRangeDateTimeContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IRangeDateTimeContext)
+}
+
+func (s *NegationDateTimeInputRuleContext) DisjunctionsDateTime() IDisjunctionsDateTimeContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDisjunctionsDateTimeContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IDisjunctionsDateTimeContext)
+}
+
+func (s *NegationDateTimeInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterNegationDateTimeInputRule(s)
+	}
+}
+
+func (s *NegationDateTimeInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitNegationDateTimeInputRule(s)
+	}
+}
+
+func (s *NegationDateTimeInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitNegationDateTimeInputRule(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -1369,6 +2473,7 @@ func (p *SFeelParser) ValidDateTimeInput() (localctx IValidDateTimeInputContext)
 	p.GetErrorHandler().Sync(p)
 	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 8, p.GetParserRuleContext()) {
 	case 1:
+		localctx = NewEqualComparisonDateTimeInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(159)
@@ -1380,6 +2485,7 @@ func (p *SFeelParser) ValidDateTimeInput() (localctx IValidDateTimeInputContext)
 		}
 
 	case 2:
+		localctx = NewComparisonDateTimeInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(162)
@@ -1391,6 +2497,7 @@ func (p *SFeelParser) ValidDateTimeInput() (localctx IValidDateTimeInputContext)
 		}
 
 	case 3:
+		localctx = NewRangeComparisonDateTimeInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 3)
 		{
 			p.SetState(165)
@@ -1402,6 +2509,7 @@ func (p *SFeelParser) ValidDateTimeInput() (localctx IValidDateTimeInputContext)
 		}
 
 	case 4:
+		localctx = NewDisjunctionsDateTimeInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 4)
 		{
 			p.SetState(168)
@@ -1413,6 +2521,7 @@ func (p *SFeelParser) ValidDateTimeInput() (localctx IValidDateTimeInputContext)
 		}
 
 	case 5:
+		localctx = NewNegationDateTimeInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 5)
 		{
 			p.SetState(171)
@@ -1460,6 +2569,7 @@ func (p *SFeelParser) ValidDateTimeInput() (localctx IValidDateTimeInputContext)
 		}
 
 	case 6:
+		localctx = NewEmptyDateTimeInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 6)
 		{
 			p.SetState(182)
@@ -1513,12 +2623,8 @@ func NewValidIntegerOutputContext(parser antlr.Parser, parent antlr.ParserRuleCo
 
 func (s *ValidIntegerOutputContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ValidIntegerOutputContext) INTEGER() antlr.TerminalNode {
-	return s.GetToken(SFeelParserINTEGER, 0)
-}
-
-func (s *ValidIntegerOutputContext) EOF() antlr.TerminalNode {
-	return s.GetToken(SFeelParserEOF, 0)
+func (s *ValidIntegerOutputContext) CopyFrom(ctx *ValidIntegerOutputContext) {
+	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
 }
 
 func (s *ValidIntegerOutputContext) GetRuleContext() antlr.RuleContext {
@@ -1529,22 +2635,92 @@ func (s *ValidIntegerOutputContext) ToStringTree(ruleNames []string, recog antlr
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *ValidIntegerOutputContext) EnterRule(listener antlr.ParseTreeListener) {
+type IntegerOutputRuleContext struct {
+	*ValidIntegerOutputContext
+}
+
+func NewIntegerOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *IntegerOutputRuleContext {
+	var p = new(IntegerOutputRuleContext)
+
+	p.ValidIntegerOutputContext = NewEmptyValidIntegerOutputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidIntegerOutputContext))
+
+	return p
+}
+
+func (s *IntegerOutputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *IntegerOutputRuleContext) INTEGER() antlr.TerminalNode {
+	return s.GetToken(SFeelParserINTEGER, 0)
+}
+
+func (s *IntegerOutputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *IntegerOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterValidIntegerOutput(s)
+		listenerT.EnterIntegerOutputRule(s)
 	}
 }
 
-func (s *ValidIntegerOutputContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *IntegerOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitValidIntegerOutput(s)
+		listenerT.ExitIntegerOutputRule(s)
 	}
 }
 
-func (s *ValidIntegerOutputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *IntegerOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitValidIntegerOutput(s)
+		return t.VisitIntegerOutputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type EmptyIntegerOutputRuleContext struct {
+	*ValidIntegerOutputContext
+}
+
+func NewEmptyIntegerOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EmptyIntegerOutputRuleContext {
+	var p = new(EmptyIntegerOutputRuleContext)
+
+	p.ValidIntegerOutputContext = NewEmptyValidIntegerOutputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidIntegerOutputContext))
+
+	return p
+}
+
+func (s *EmptyIntegerOutputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EmptyIntegerOutputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *EmptyIntegerOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterEmptyIntegerOutputRule(s)
+	}
+}
+
+func (s *EmptyIntegerOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitEmptyIntegerOutputRule(s)
+	}
+}
+
+func (s *EmptyIntegerOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEmptyIntegerOutputRule(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -1576,6 +2752,7 @@ func (p *SFeelParser) ValidIntegerOutput() (localctx IValidIntegerOutputContext)
 
 	switch p.GetTokenStream().LA(1) {
 	case SFeelParserINTEGER:
+		localctx = NewIntegerOutputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(186)
@@ -1587,6 +2764,7 @@ func (p *SFeelParser) ValidIntegerOutput() (localctx IValidIntegerOutputContext)
 		}
 
 	case SFeelParserT__2:
+		localctx = NewEmptyIntegerOutputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(188)
@@ -1642,18 +2820,8 @@ func NewValidNumberOutputContext(parser antlr.Parser, parent antlr.ParserRuleCon
 
 func (s *ValidNumberOutputContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ValidNumberOutputContext) Number() INumberContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*INumberContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(INumberContext)
-}
-
-func (s *ValidNumberOutputContext) EOF() antlr.TerminalNode {
-	return s.GetToken(SFeelParserEOF, 0)
+func (s *ValidNumberOutputContext) CopyFrom(ctx *ValidNumberOutputContext) {
+	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
 }
 
 func (s *ValidNumberOutputContext) GetRuleContext() antlr.RuleContext {
@@ -1664,22 +2832,98 @@ func (s *ValidNumberOutputContext) ToStringTree(ruleNames []string, recog antlr.
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *ValidNumberOutputContext) EnterRule(listener antlr.ParseTreeListener) {
+type EmptyNumberOutputRuleContext struct {
+	*ValidNumberOutputContext
+}
+
+func NewEmptyNumberOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EmptyNumberOutputRuleContext {
+	var p = new(EmptyNumberOutputRuleContext)
+
+	p.ValidNumberOutputContext = NewEmptyValidNumberOutputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidNumberOutputContext))
+
+	return p
+}
+
+func (s *EmptyNumberOutputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EmptyNumberOutputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *EmptyNumberOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterValidNumberOutput(s)
+		listenerT.EnterEmptyNumberOutputRule(s)
 	}
 }
 
-func (s *ValidNumberOutputContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *EmptyNumberOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitValidNumberOutput(s)
+		listenerT.ExitEmptyNumberOutputRule(s)
 	}
 }
 
-func (s *ValidNumberOutputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *EmptyNumberOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitValidNumberOutput(s)
+		return t.VisitEmptyNumberOutputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type NumberOutputRuleContext struct {
+	*ValidNumberOutputContext
+}
+
+func NewNumberOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *NumberOutputRuleContext {
+	var p = new(NumberOutputRuleContext)
+
+	p.ValidNumberOutputContext = NewEmptyValidNumberOutputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidNumberOutputContext))
+
+	return p
+}
+
+func (s *NumberOutputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *NumberOutputRuleContext) Number() INumberContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*INumberContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(INumberContext)
+}
+
+func (s *NumberOutputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *NumberOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterNumberOutputRule(s)
+	}
+}
+
+func (s *NumberOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitNumberOutputRule(s)
+	}
+}
+
+func (s *NumberOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitNumberOutputRule(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -1711,6 +2955,7 @@ func (p *SFeelParser) ValidNumberOutput() (localctx IValidNumberOutputContext) {
 
 	switch p.GetTokenStream().LA(1) {
 	case SFeelParserINTEGER, SFeelParserFLOAT:
+		localctx = NewNumberOutputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(192)
@@ -1722,6 +2967,7 @@ func (p *SFeelParser) ValidNumberOutput() (localctx IValidNumberOutputContext) {
 		}
 
 	case SFeelParserT__2:
+		localctx = NewEmptyNumberOutputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(195)
@@ -1777,18 +3023,8 @@ func NewValidStringOutputContext(parser antlr.Parser, parent antlr.ParserRuleCon
 
 func (s *ValidStringOutputContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ValidStringOutputContext) Strings() IStringsContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IStringsContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IStringsContext)
-}
-
-func (s *ValidStringOutputContext) EOF() antlr.TerminalNode {
-	return s.GetToken(SFeelParserEOF, 0)
+func (s *ValidStringOutputContext) CopyFrom(ctx *ValidStringOutputContext) {
+	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
 }
 
 func (s *ValidStringOutputContext) GetRuleContext() antlr.RuleContext {
@@ -1799,22 +3035,98 @@ func (s *ValidStringOutputContext) ToStringTree(ruleNames []string, recog antlr.
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *ValidStringOutputContext) EnterRule(listener antlr.ParseTreeListener) {
+type StringOutputRuleContext struct {
+	*ValidStringOutputContext
+}
+
+func NewStringOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *StringOutputRuleContext {
+	var p = new(StringOutputRuleContext)
+
+	p.ValidStringOutputContext = NewEmptyValidStringOutputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidStringOutputContext))
+
+	return p
+}
+
+func (s *StringOutputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *StringOutputRuleContext) Strings() IStringsContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IStringsContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IStringsContext)
+}
+
+func (s *StringOutputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *StringOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterValidStringOutput(s)
+		listenerT.EnterStringOutputRule(s)
 	}
 }
 
-func (s *ValidStringOutputContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *StringOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitValidStringOutput(s)
+		listenerT.ExitStringOutputRule(s)
 	}
 }
 
-func (s *ValidStringOutputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *StringOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitValidStringOutput(s)
+		return t.VisitStringOutputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type EmptyStringOutputRuleContext struct {
+	*ValidStringOutputContext
+}
+
+func NewEmptyStringOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EmptyStringOutputRuleContext {
+	var p = new(EmptyStringOutputRuleContext)
+
+	p.ValidStringOutputContext = NewEmptyValidStringOutputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidStringOutputContext))
+
+	return p
+}
+
+func (s *EmptyStringOutputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EmptyStringOutputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *EmptyStringOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterEmptyStringOutputRule(s)
+	}
+}
+
+func (s *EmptyStringOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitEmptyStringOutputRule(s)
+	}
+}
+
+func (s *EmptyStringOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEmptyStringOutputRule(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -1846,6 +3158,7 @@ func (p *SFeelParser) ValidStringOutput() (localctx IValidStringOutputContext) {
 
 	switch p.GetTokenStream().LA(1) {
 	case SFeelParserSTRING:
+		localctx = NewStringOutputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(199)
@@ -1857,6 +3170,7 @@ func (p *SFeelParser) ValidStringOutput() (localctx IValidStringOutputContext) {
 		}
 
 	case SFeelParserT__2:
+		localctx = NewEmptyStringOutputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(202)
@@ -1912,18 +3226,8 @@ func NewValidBoolOutputContext(parser antlr.Parser, parent antlr.ParserRuleConte
 
 func (s *ValidBoolOutputContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ValidBoolOutputContext) Bools() IBoolsContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IBoolsContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IBoolsContext)
-}
-
-func (s *ValidBoolOutputContext) EOF() antlr.TerminalNode {
-	return s.GetToken(SFeelParserEOF, 0)
+func (s *ValidBoolOutputContext) CopyFrom(ctx *ValidBoolOutputContext) {
+	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
 }
 
 func (s *ValidBoolOutputContext) GetRuleContext() antlr.RuleContext {
@@ -1934,22 +3238,98 @@ func (s *ValidBoolOutputContext) ToStringTree(ruleNames []string, recog antlr.Re
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *ValidBoolOutputContext) EnterRule(listener antlr.ParseTreeListener) {
+type BoolOutputRuleContext struct {
+	*ValidBoolOutputContext
+}
+
+func NewBoolOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *BoolOutputRuleContext {
+	var p = new(BoolOutputRuleContext)
+
+	p.ValidBoolOutputContext = NewEmptyValidBoolOutputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidBoolOutputContext))
+
+	return p
+}
+
+func (s *BoolOutputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *BoolOutputRuleContext) Bools() IBoolsContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IBoolsContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IBoolsContext)
+}
+
+func (s *BoolOutputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *BoolOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterValidBoolOutput(s)
+		listenerT.EnterBoolOutputRule(s)
 	}
 }
 
-func (s *ValidBoolOutputContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *BoolOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitValidBoolOutput(s)
+		listenerT.ExitBoolOutputRule(s)
 	}
 }
 
-func (s *ValidBoolOutputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *BoolOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitValidBoolOutput(s)
+		return t.VisitBoolOutputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type EmptyBoolOutputRuleContext struct {
+	*ValidBoolOutputContext
+}
+
+func NewEmptyBoolOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EmptyBoolOutputRuleContext {
+	var p = new(EmptyBoolOutputRuleContext)
+
+	p.ValidBoolOutputContext = NewEmptyValidBoolOutputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidBoolOutputContext))
+
+	return p
+}
+
+func (s *EmptyBoolOutputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EmptyBoolOutputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *EmptyBoolOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterEmptyBoolOutputRule(s)
+	}
+}
+
+func (s *EmptyBoolOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitEmptyBoolOutputRule(s)
+	}
+}
+
+func (s *EmptyBoolOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEmptyBoolOutputRule(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -1981,6 +3361,7 @@ func (p *SFeelParser) ValidBoolOutput() (localctx IValidBoolOutputContext) {
 
 	switch p.GetTokenStream().LA(1) {
 	case SFeelParserBOOL:
+		localctx = NewBoolOutputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(206)
@@ -1992,6 +3373,7 @@ func (p *SFeelParser) ValidBoolOutput() (localctx IValidBoolOutputContext) {
 		}
 
 	case SFeelParserT__2:
+		localctx = NewEmptyBoolOutputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(209)
@@ -2047,18 +3429,8 @@ func NewValidDateTimeOutputContext(parser antlr.Parser, parent antlr.ParserRuleC
 
 func (s *ValidDateTimeOutputContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *ValidDateTimeOutputContext) Datetime() IDatetimeContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDatetimeContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IDatetimeContext)
-}
-
-func (s *ValidDateTimeOutputContext) EOF() antlr.TerminalNode {
-	return s.GetToken(SFeelParserEOF, 0)
+func (s *ValidDateTimeOutputContext) CopyFrom(ctx *ValidDateTimeOutputContext) {
+	s.BaseParserRuleContext.CopyFrom(ctx.BaseParserRuleContext)
 }
 
 func (s *ValidDateTimeOutputContext) GetRuleContext() antlr.RuleContext {
@@ -2069,22 +3441,98 @@ func (s *ValidDateTimeOutputContext) ToStringTree(ruleNames []string, recog antl
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *ValidDateTimeOutputContext) EnterRule(listener antlr.ParseTreeListener) {
+type DateTimeOutputRuleContext struct {
+	*ValidDateTimeOutputContext
+}
+
+func NewDateTimeOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *DateTimeOutputRuleContext {
+	var p = new(DateTimeOutputRuleContext)
+
+	p.ValidDateTimeOutputContext = NewEmptyValidDateTimeOutputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidDateTimeOutputContext))
+
+	return p
+}
+
+func (s *DateTimeOutputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *DateTimeOutputRuleContext) Datetime() IDatetimeContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDatetimeContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IDatetimeContext)
+}
+
+func (s *DateTimeOutputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *DateTimeOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterValidDateTimeOutput(s)
+		listenerT.EnterDateTimeOutputRule(s)
 	}
 }
 
-func (s *ValidDateTimeOutputContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *DateTimeOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitValidDateTimeOutput(s)
+		listenerT.ExitDateTimeOutputRule(s)
 	}
 }
 
-func (s *ValidDateTimeOutputContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *DateTimeOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitValidDateTimeOutput(s)
+		return t.VisitDateTimeOutputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+type EmptyDateTimeOutputRuleContext struct {
+	*ValidDateTimeOutputContext
+}
+
+func NewEmptyDateTimeOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *EmptyDateTimeOutputRuleContext {
+	var p = new(EmptyDateTimeOutputRuleContext)
+
+	p.ValidDateTimeOutputContext = NewEmptyValidDateTimeOutputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidDateTimeOutputContext))
+
+	return p
+}
+
+func (s *EmptyDateTimeOutputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *EmptyDateTimeOutputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *EmptyDateTimeOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterEmptyDateTimeOutputRule(s)
+	}
+}
+
+func (s *EmptyDateTimeOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitEmptyDateTimeOutputRule(s)
+	}
+}
+
+func (s *EmptyDateTimeOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitEmptyDateTimeOutputRule(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -2116,6 +3564,7 @@ func (p *SFeelParser) ValidDateTimeOutput() (localctx IValidDateTimeOutputContex
 
 	switch p.GetTokenStream().LA(1) {
 	case SFeelParserDATEANDTIME:
+		localctx = NewDateTimeOutputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(213)
@@ -2127,6 +3576,7 @@ func (p *SFeelParser) ValidDateTimeOutput() (localctx IValidDateTimeOutputContex
 		}
 
 	case SFeelParserT__2:
+		localctx = NewEmptyDateTimeOutputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(216)

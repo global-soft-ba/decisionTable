@@ -1,4 +1,4 @@
-package mapper
+package builder
 
 import (
 	"decisionTable/converter/grule/grlmodel"
