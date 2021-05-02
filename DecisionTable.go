@@ -69,7 +69,7 @@ func (d DecisionTable) Interferences() bool {
 	return d.interferences
 }
 
-func (d DecisionTable) Convert(converter converter.ConverterInterface) ([]string, error) {
+func (d DecisionTable) Convert(converter converter.ConverterInterface) (interface{}, error) {
 
 	if !d.valid {
 		return []string{}, ErrDTableNotValid

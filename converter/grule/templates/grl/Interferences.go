@@ -1,4 +1,4 @@
-package templates
+package grl
 
 const INTERFERENCE = `{{define "INTERFERENCE"}}{{end}}`
 

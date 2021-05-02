@@ -1,4 +1,4 @@
-package templates
+package grl
 
 /*
 	rule <RuleName> <RuleDescription> [salience <priority>] {

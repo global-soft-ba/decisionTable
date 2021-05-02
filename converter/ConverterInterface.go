@@ -11,5 +11,5 @@ var (
 )
 
 type ConverterInterface interface {
-	Convert(data model.TableData) ([]string, error)
+	Convert(data model.TableData) (interface{}, error)
 }

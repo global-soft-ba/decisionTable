@@ -1,3 +1,3 @@
-package templates
+package grl
 
 const PRIORITY = `{{define "SALIENCE"}}salience {{.Salience}}{{end}}`

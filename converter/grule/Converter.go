@@ -5,7 +5,7 @@ import (
 	"decisionTable/converter"
 	"decisionTable/converter/grule/grlmodel"
 	"decisionTable/converter/grule/mapper"
-	"decisionTable/converter/grule/templates"
+	"decisionTable/converter/grule/templates/grl"
 	"decisionTable/model"
 	"text/template"
 )
@@ -27,7 +27,7 @@ func CreateConverter() Converter {
 type Converter struct {
 }
 
-func (c Converter) Convert(data model.TableData) ([]string, error) {
+func (c Converter) Convert(data model.TableData) (interface{}, error) {
 	if data.NotationStandard != model.GRULE {
 		return []string{}, converter.ErrDTableNotationStandard
 	}
@@ -69,23 +69,23 @@ func (c Converter) buildTemplate(hitPolicy model.HitPolicy, interference bool) (
 
 	var t *template.Template
 
-	t, err := template.New(Rule).Parse(templates.RULE)
+	t, err := template.New(Rule).Parse(grl.RULE)
 	if err != nil {
 		return &template.Template{}, err
 	}
-	_, err = t.New(RuleName).Parse(templates.RULENAME)
+	_, err = t.New(RuleName).Parse(grl.RULENAME)
 	if err != nil {
 		return &template.Template{}, err
 	}
-	_, err = t.New(Expressions).Parse(templates.WHEN)
+	_, err = t.New(Expressions).Parse(grl.WHEN)
 	if err != nil {
 		return &template.Template{}, err
 	}
-	_, err = t.New(Assignments).Parse(templates.THEN)
+	_, err = t.New(Assignments).Parse(grl.THEN)
 	if err != nil {
 		return &template.Template{}, err
 	}
-	_, err = t.New(Entries).Parse(templates.ENTRY)
+	_, err = t.New(Entries).Parse(grl.ENTRY)
 	if err != nil {
 		return &template.Template{}, err
 	}
@@ -104,21 +104,21 @@ func (c Converter) buildTemplate(hitPolicy model.HitPolicy, interference bool) (
 func (c Converter) buildPolicyTemplate(hitPolicy model.HitPolicy) string {
 	switch hitPolicy {
 	case model.Unique:
-		return templates.UNIQUE
+		return grl.UNIQUE
 	case model.First:
-		return templates.FIRST
+		return grl.FIRST
 	case model.Priority:
-		return templates.PRIORITY
+		return grl.PRIORITY
 	default:
-		return templates.DEFAULT
+		return grl.DEFAULT
 	}
 }
 
 func (c Converter) buildInterferenceTemplate(interference bool) string {
 	switch interference {
 	case true:
-		return templates.INTERFERENCE
+		return grl.INTERFERENCE
 	default:
-		return templates.NONINTERFERENCE
+		return grl.NONINTERFERENCE
 	}
 }
