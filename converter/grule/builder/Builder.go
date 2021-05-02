@@ -12,13 +12,13 @@ var (
 	ErrEmptyExpression       = errors.New("empty expression detected and will be skiped")
 )
 
-func CreateGruleBuilder() Mapper {
-	return Mapper{}
+func CreateGruleBuilder() GruleBuilder {
+	return GruleBuilder{}
 }
 
-type Mapper struct{}
+type GruleBuilder struct{}
 
-func (c Mapper) MapToRuleSet(data model.TableData) (grlmodel.RuleSet, error) {
+func (c GruleBuilder) MapDTableToRuleSet(data model.TableData) (grlmodel.RuleSet, error) {
 	result := grlmodel.RuleSet{
 		Key:             data.Key,
 		Name:            data.Name,
@@ -30,7 +30,7 @@ func (c Mapper) MapToRuleSet(data model.TableData) (grlmodel.RuleSet, error) {
 
 	maxRules := len(data.Rules)
 	for i, val := range data.Rules {
-		rule, err := c.mapToRule(i, maxRules, val, data.InputFields, data.OutputFields)
+		rule, err := c.mapEntriesAndFieldsToRule(i, maxRules, val, data.InputFields, data.OutputFields)
 		if err != nil {
 			return grlmodel.RuleSet{}, err
 		}
@@ -39,7 +39,7 @@ func (c Mapper) MapToRuleSet(data model.TableData) (grlmodel.RuleSet, error) {
 	return result, nil
 }
 
-func (c Mapper) mapToRule(columId int, maxRules int, rule model.Rule, inputFields []model.Field, outputFields []model.Field) (grlmodel.Rule, error) {
+func (c GruleBuilder) mapEntriesAndFieldsToRule(columId int, maxRules int, rule model.Rule, inputFields []model.Field, outputFields []model.Field) (grlmodel.Rule, error) {
 	r := grlmodel.Rule{
 		Name:        strconv.Itoa(columId),
 		Description: rule.Description,
@@ -49,12 +49,12 @@ func (c Mapper) mapToRule(columId int, maxRules int, rule model.Rule, inputField
 		Assignments: nil,
 	}
 
-	expr, err := c.mapToExpressions(rule.InputEntries, inputFields)
+	expr, err := c.mapEntryToExpressions(rule.InputEntries, inputFields)
 	if err != nil {
 		return grlmodel.Rule{}, err
 	}
 
-	asst, err := c.mapToExpressions(rule.OutputEntries, outputFields)
+	asst, err := c.mapEntryToExpressions(rule.OutputEntries, outputFields)
 	if err != nil {
 		return grlmodel.Rule{}, err
 	}
@@ -64,7 +64,7 @@ func (c Mapper) mapToRule(columId int, maxRules int, rule model.Rule, inputField
 	return r, nil
 }
 
-func (c Mapper) mapToExpressions(entries []model.Entry, fields []model.Field) ([]grlmodel.Expression, error) {
+func (c GruleBuilder) mapEntryToExpressions(entries []model.Entry, fields []model.Field) ([]grlmodel.Expression, error) {
 	var result []grlmodel.Expression
 
 	fieldCount := len(fields)
@@ -86,10 +86,11 @@ func (c Mapper) mapToExpressions(entries []model.Entry, fields []model.Field) ([
 	return result, nil
 }
 
-func (c Mapper) mapToExpression(entry model.Entry, field model.Field) (grlmodel.Expression, error) {
+func (c GruleBuilder) mapToExpression(entry model.Entry, field model.Field) (grlmodel.Expression, error) {
 	expr := grlmodel.Expression{
 		Name:       field.Name,
 		Identifier: field.Label,
+		Typ:        field.Typ,
 		Expression: entry.Expression(),
 	}
 

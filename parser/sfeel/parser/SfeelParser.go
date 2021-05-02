@@ -6,7 +6,7 @@ import (
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 )
 
-func CreateParser(expr string) Parser {
+func CreateSfeelParser(expr string) SfeelParser {
 	// Create ErrorListener
 	errorListener := &errors2.ErrorListener{}
 
@@ -28,23 +28,23 @@ func CreateParser(expr string) Parser {
 	prs.RemoveErrorListeners()
 	prs.AddErrorListener(errorListener)
 
-	return Parser{lexer, prs, errorListener}
+	return SfeelParser{lexer, prs, errorListener}
 }
 
-type Parser struct {
+type SfeelParser struct {
 	lexer         *gen.SFeelLexer
 	parser        *gen.SFeelParser
 	errorListener *errors2.ErrorListener
 }
 
-func (p Parser) Lexer() *gen.SFeelLexer {
+func (p SfeelParser) Lexer() *gen.SFeelLexer {
 	return p.lexer
 }
 
-func (p Parser) Parse() *gen.SFeelParser {
+func (p SfeelParser) Parse() *gen.SFeelParser {
 	return p.parser
 }
 
-func (p Parser) Errors() []error {
+func (p SfeelParser) Errors() []error {
 	return p.errorListener.Errors
 }

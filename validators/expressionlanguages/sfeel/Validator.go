@@ -15,7 +15,7 @@ type Validator struct {
 //TODO not sure if the antlr parser is thread safe. Until that, we use a new single parser instance for each validation
 
 func (v Validator) ValidateInputEntry(field model.Field, entry model.Entry) (bool, []error) {
-	p := parser.CreateParser(entry.Expression())
+	p := parser.CreateSfeelParser(entry.Expression())
 
 	switch field.Typ {
 	case model.String:
@@ -42,7 +42,7 @@ func (v Validator) ValidateInputEntry(field model.Field, entry model.Entry) (boo
 }
 
 func (v Validator) ValidateOutputEntry(field model.Field, entry model.Entry) (bool, []error) {
-	p := parser.CreateParser(entry.Expression())
+	p := parser.CreateSfeelParser(entry.Expression())
 
 	switch field.Typ {
 	case model.String:
