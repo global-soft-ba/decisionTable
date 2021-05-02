@@ -2,15 +2,14 @@ package sfeel
 
 import (
 	"decisionTable/converter/grule/expressionlanguages/sfeel/converters"
-	"decisionTable/converter/grule/expressionlanguages/sfeel/grl"
-	maps "decisionTable/converter/grule/expressionlanguages/sfeel/mapping"
+	maps "decisionTable/converter/grule/expressionlanguages/sfeel/mappings"
 	"decisionTable/converter/grule/grlmodel"
 	"decisionTable/model"
 	"decisionTable/parser/sfeel/parser"
 )
 
 func CreateGrlExpressionConverter() ExpressionConverter {
-	return ExpressionConverter{grl.GrlMapping}
+	return ExpressionConverter{maps.GrlMapping}
 }
 
 func CreateJsonExpressionConverter() ExpressionConverter {

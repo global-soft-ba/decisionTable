@@ -276,7 +276,7 @@ func TestConverter_converting(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			c := Converter{}
+			c := GrlConverter{}
 			got, err := c.convertRuleSetIntoGRL(tt.args.ruleSet)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("convertRuleSetIntoGRL() error = %v, wantErr %v", err, tt.wantErr)

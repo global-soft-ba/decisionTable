@@ -1,16 +1,15 @@
-package grl
+package mappings
 
 import (
-	maps "decisionTable/converter/grule/expressionlanguages/sfeel/mapping"
 	gen "decisionTable/parser/sfeel/generated"
 )
 
-var GrlMapping = maps.ConverterMapping{
+var GrlMapping = ConverterMapping{
 	TargetToken: map[int]string{
-		maps.EQUAL:    "=",
-		maps.AND:      "&&",
-		maps.OR:       "||",
-		maps.NEGATION: `!( {{ expr }} )`,
+		EQUAL:    "=",
+		AND:      "&&",
+		OR:       "||",
+		NEGATION: `!( {{ expr }} )`,
 	},
 	ComparisonOperators: map[int]string{
 		gen.SFeelLexerLESS:      "<",

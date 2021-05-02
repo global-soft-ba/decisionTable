@@ -1,4 +1,4 @@
-package mapping
+package mappings
 
 const (
 	// GRULE Specific Tokens

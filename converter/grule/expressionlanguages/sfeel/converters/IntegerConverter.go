@@ -1,7 +1,7 @@
 package converters
 
 import (
-	maps "decisionTable/converter/grule/expressionlanguages/sfeel/mapping"
+	maps "decisionTable/converter/grule/expressionlanguages/sfeel/mappings"
 	gen "decisionTable/parser/sfeel/generated"
 	"fmt"
 )

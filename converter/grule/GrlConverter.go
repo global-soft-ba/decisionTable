@@ -20,16 +20,16 @@ const (
 	Interference = "Interference"
 )
 
-func CreateConverter() Converter {
+func CreateGrlConverter() GrlConverter {
 	conv := sfeel.CreateGrlExpressionConverter()
-	return Converter{conv}
+	return GrlConverter{conv}
 }
 
-type Converter struct {
+type GrlConverter struct {
 	expConv sfeel.ExpressionConverter
 }
 
-func (c Converter) Convert(data model.TableData) (interface{}, error) {
+func (c GrlConverter) Convert(data model.TableData) (interface{}, error) {
 
 	grlModel, err := builder.CreateGruleBuilder().MapDTableToRuleSet(data)
 	if err != nil {
@@ -44,10 +44,10 @@ func (c Converter) Convert(data model.TableData) (interface{}, error) {
 	return result, nil
 }
 
-func (c Converter) buildTemplate(hitPolicy model.HitPolicy, interference bool) (*template.Template, error) {
+func (c GrlConverter) buildTemplate(hitPolicy model.HitPolicy, interference bool) (*template.Template, error) {
 
 	var t *template.Template
-	// TODo build only GRL Tempalte / What with Json?
+	// TODo build only GRL Template / What with Json?
 	t, err := template.New(Rule).Parse(grl.RULE)
 	if err != nil {
 		return &template.Template{}, err
@@ -80,7 +80,7 @@ func (c Converter) buildTemplate(hitPolicy model.HitPolicy, interference bool) (
 	return t, err
 }
 
-func (c Converter) buildPolicyTemplate(hitPolicy model.HitPolicy) string {
+func (c GrlConverter) buildPolicyTemplate(hitPolicy model.HitPolicy) string {
 	switch hitPolicy {
 	case model.Unique:
 		return grl.UNIQUE
@@ -93,7 +93,7 @@ func (c Converter) buildPolicyTemplate(hitPolicy model.HitPolicy) string {
 	}
 }
 
-func (c Converter) buildInterferenceTemplate(interference bool) string {
+func (c GrlConverter) buildInterferenceTemplate(interference bool) string {
 	switch interference {
 	case true:
 		return grl.INTERFERENCE
@@ -102,7 +102,7 @@ func (c Converter) buildInterferenceTemplate(interference bool) string {
 	}
 }
 
-func (c Converter) convertRuleSetIntoGRL(ruleSet grlmodel.RuleSet) ([]string, error) {
+func (c GrlConverter) convertRuleSetIntoGRL(ruleSet grlmodel.RuleSet) ([]string, error) {
 	var result []string
 
 	tmpl, err := c.buildTemplate(ruleSet.HitPolicy, ruleSet.Interference)
@@ -125,11 +125,10 @@ func (c Converter) convertRuleSetIntoGRL(ruleSet grlmodel.RuleSet) ([]string, er
 	return result, nil
 }
 
-func (c Converter) convertRuleExpressionsIntoGRL(rule grlmodel.Rule) grlmodel.Rule {
+func (c GrlConverter) convertRuleExpressionsIntoGRL(rule grlmodel.Rule) grlmodel.Rule {
 	result := rule
 	for i, v := range rule.Expressions {
-		//convExpression := c.expConv.Convert(v)
-		convExpression := v
+		convExpression := c.expConv.Convert(v)
 		result.Expressions[i] = convExpression
 
 	}
