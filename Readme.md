@@ -82,10 +82,10 @@ Long|X|
 Double|X|  
 Date|X|X    
 
-## Expression Languages
+## Term Languages
 The expresion language defined the functions and comparisons of a single rule entry. It depends on the chosen table notations standard.
 
-Expression Language | DMN Notation | GRL Notation   
+Term Language | DMN Notation | GRL Notation   
 ------------ | ---------------|--------------  	
 SFEEL| |X
 FEEL|X|       
@@ -100,4 +100,4 @@ More Details can be found here:
 * [Decision Model and Notation DMN (OMG)](https://www.omg.org/spec/DMN/1.2/PDF)
 
 # SFEEL INPUT EXPRESSIONS
-* [Simple Friendly Enough Expression Language (SFEEL)](https://docs.camunda.org/manual/7.4/reference/dmn11/feel/language-elements/)
+* [Simple Friendly Enough Term Language (SFEEL)](https://docs.camunda.org/manual/7.4/reference/dmn11/feel/language-elements/)

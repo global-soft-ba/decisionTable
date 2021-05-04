@@ -30,12 +30,12 @@ func TestConverter_converting(t *testing.T) {
 						"R1",
 						0,
 						0,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.Integer, "==3"},
 							{"I2", "L1", model.Integer, ">3"},
 							{"I3", "L1", model.Integer, ">4"},
 						},
-						[]grlmodel.Expression{{"O1", "L1", model.Integer, "=4"}},
+						[]grlmodel.Term{{"O1", "L1", model.Integer, "=4"}},
 					},
 				},
 			}},
@@ -55,10 +55,10 @@ func TestConverter_converting(t *testing.T) {
 						"R1",
 						0,
 						0,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.Integer, "==3"},
 						},
-						[]grlmodel.Expression{{"O1", "L1", model.Integer, "=4"}},
+						[]grlmodel.Term{{"O1", "L1", model.Integer, "=4"}},
 					},
 				},
 			}},
@@ -78,12 +78,12 @@ func TestConverter_converting(t *testing.T) {
 						"R1",
 						0,
 						0,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.Integer, "==3"},
 							{"I2", "L1", model.Integer, ">3"},
 							{"I3", "L1", model.Integer, ">4"},
 						},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Integer, "=4"},
 							{"O1", "L1", model.Integer, "=4"},
 						},
@@ -106,12 +106,12 @@ func TestConverter_converting(t *testing.T) {
 						"R1",
 						0,
 						2,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.Integer, "==3"},
 							{"I2", "L1", model.Integer, ">3"},
 							{"I3", "L1", model.Integer, ">4"},
 						},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Integer, "=4"},
 							{"O1", "L1", model.Integer, "=4"},
 						},
@@ -121,12 +121,12 @@ func TestConverter_converting(t *testing.T) {
 						"R2",
 						1,
 						1,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.Integer, "==3"},
 							{"I2", "L1", model.Integer, ">3"},
 							{"I3", "L1", model.Integer, ">4"},
 						},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Integer, "=4"},
 							{"O1", "L1", model.Integer, "=4"},
 						},
@@ -136,12 +136,12 @@ func TestConverter_converting(t *testing.T) {
 						"R3",
 						2,
 						0,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.Integer, "==3"},
 							{"I2", "L1", model.Integer, ">3"},
 							{"I3", "L1", model.Integer, ">4"},
 						},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Integer, "=4"},
 							{"O1", "L1", model.Integer, "=4"},
 						},
@@ -166,12 +166,12 @@ func TestConverter_converting(t *testing.T) {
 						"R1",
 						0,
 						2,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.Integer, "==3"},
 							{"I2", "L1", model.Integer, ">3"},
 							{"I3", "L1", model.Integer, ">4"},
 						},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Integer, "=4"},
 							{"O1", "L1", model.Integer, "=4"},
 						},
@@ -181,12 +181,12 @@ func TestConverter_converting(t *testing.T) {
 						"R2",
 						1,
 						1,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.Integer, "==3"},
 							{"I2", "L1", model.Integer, ">3"},
 							{"I3", "L1", model.Integer, ">4"},
 						},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Integer, "=4"},
 							{"O1", "L1", model.Integer, "=4"},
 						},
@@ -196,12 +196,12 @@ func TestConverter_converting(t *testing.T) {
 						"R3",
 						2,
 						0,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.Integer, "==3"},
 							{"I2", "L1", model.Integer, ">3"},
 							{"I3", "L1", model.Integer, ">4"},
 						},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Integer, "=4"},
 							{"O1", "L1", model.Integer, "=4"},
 						},
@@ -226,12 +226,12 @@ func TestConverter_converting(t *testing.T) {
 						"R1",
 						0,
 						2,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.Integer, "==3"},
 							{"I2", "L1", model.Integer, ">3"},
 							{"I3", "L1", model.Integer, ">4"},
 						},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Integer, "=4"},
 							{"O1", "L1", model.Integer, "=4"},
 						},
@@ -241,12 +241,12 @@ func TestConverter_converting(t *testing.T) {
 						"R2",
 						1,
 						1,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.Integer, "==3"},
 							{"I2", "L1", model.Integer, ">3"},
 							{"I3", "L1", model.Integer, ">4"},
 						},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Integer, "=4"},
 							{"O1", "L1", model.Integer, "=4"},
 						},
@@ -256,12 +256,12 @@ func TestConverter_converting(t *testing.T) {
 						"R3",
 						2,
 						0,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.Integer, "==3"},
 							{"I2", "L1", model.Integer, ">3"},
 							{"I3", "L1", model.Integer, ">4"},
 						},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Integer, "=4"},
 							{"O1", "L1", model.Integer, "=4"},
 						},

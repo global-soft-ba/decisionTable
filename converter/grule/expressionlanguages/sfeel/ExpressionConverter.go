@@ -1,8 +1,8 @@
 package sfeel
 
 import (
-	"decisionTable/converter/grule/expressionlanguages/sfeel/converters"
-	maps "decisionTable/converter/grule/expressionlanguages/sfeel/mappings"
+	maps "decisionTable/converter/grule/expressionlanguages/sfeel/mapper"
+	"decisionTable/converter/grule/expressionlanguages/sfeel/visitors"
 	"decisionTable/converter/grule/grlmodel"
 	"decisionTable/model"
 	"decisionTable/parser/sfeel/parser"
@@ -18,19 +18,20 @@ func CreateJsonExpressionConverter() ExpressionConverter {
 
 // ExpressionConverter ExpressionConverter is a converter between the ParseTree and our grl data model
 type ExpressionConverter struct {
-	maps maps.ConverterMapping
+	maps maps.Mapper
 }
 
-func (c ExpressionConverter) Convert(expr grlmodel.Expression) grlmodel.Expression {
+// TODO Seperate Input and Output! Or not shoudl work as well with output
+func (c ExpressionConverter) Convert(expr grlmodel.Term) grlmodel.Term {
 	prs := parser.CreateSfeelParser(expr.Expression)
 
 	switch expr.Typ {
 	case model.Integer:
 		tree := prs.Parse().ValidIntegerInput()
-		conv := converters.CreateIntegerConverter(c.maps)
+		conv := visitors.CreateIntegerVisitor(expr, c.maps)
 		expr.Expression = tree.Accept(conv).(string)
-		return grlmodel.Expression{}
+		return expr
 	default:
-		return grlmodel.Expression{}
+		return grlmodel.Term{}
 	}
 }

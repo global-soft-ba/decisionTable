@@ -2,7 +2,7 @@ package grlmodel
 
 import "decisionTable/model"
 
-type Expression struct {
+type Term struct {
 	Name       string
 	Identifier string
 	Typ        model.VariableTyp

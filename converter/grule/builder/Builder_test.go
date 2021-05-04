@@ -57,8 +57,8 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						"R1",
 						0,
 						0,
-						[]grlmodel.Expression{{"I1", "L1", model.String, "==3"}},
-						[]grlmodel.Expression{{"O1", "L1", model.Float, "4"}},
+						[]grlmodel.Term{{"I1", "L1", model.String, "==3"}},
+						[]grlmodel.Term{{"O1", "L1", model.Float, "4"}},
 					},
 				},
 			},
@@ -121,10 +121,10 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						"R1",
 						0,
 						0,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.String, "==3"},
 							{"I2", "L1", model.String, "==3"}},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Float, "4"},
 							{"O2", "L1", model.Float, "4"},
 						},
@@ -202,10 +202,10 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						"R1",
 						0,
 						1,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.String, "==3"},
 							{"I2", "L1", model.String, "==3"}},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Float, "4"},
 							{"O2", "L1", model.Float, "4"},
 						},
@@ -215,10 +215,10 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						"R2",
 						1,
 						0,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.String, ">3"},
 							{"I2", "L1", model.String, ">3"}},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Float, "5"},
 							{"O2", "L1", model.Float, "5"},
 						},
@@ -333,10 +333,10 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						"R1",
 						0,
 						1,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.String, "==3"},
 							{"I2", "L1", model.String, "==3"}},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Float, "4"},
 							{"O2", "L1", model.Float, "4"},
 						},
@@ -346,10 +346,10 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						"R2",
 						1,
 						0,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.String, ">3"},
 							{"I2", "L1", model.String, ">3"}},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Float, "5"},
 							{"O2", "L1", model.Float, "5"},
 						},
@@ -438,10 +438,10 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						"R1",
 						0,
 						2,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.String, "==3"},
 							{"I2", "L1", model.String, "==3"}},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Float, "4"},
 							{"O2", "L1", model.Float, "4"},
 						},
@@ -451,10 +451,10 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						"R2",
 						1,
 						1,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.String, ">3"},
 							{"I2", "L1", model.String, ">3"}},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Float, "5"},
 							{"O2", "L1", model.Float, "5"},
 						},
@@ -464,10 +464,10 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						"R3",
 						2,
 						0,
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"I1", "L1", model.String, ">3"},
 							{"I2", "L1", model.String, ">3"}},
-						[]grlmodel.Expression{
+						[]grlmodel.Term{
 							{"O1", "L1", model.Float, "5"},
 							{"O2", "L1", model.Float, "5"},
 						},

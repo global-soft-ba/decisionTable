@@ -64,18 +64,18 @@ func (c GruleBuilder) mapEntriesAndFieldsToRule(columId int, maxRules int, rule 
 	return r, nil
 }
 
-func (c GruleBuilder) mapEntryToExpressions(entries []model.Entry, fields []model.Field) ([]grlmodel.Expression, error) {
-	var result []grlmodel.Expression
+func (c GruleBuilder) mapEntryToExpressions(entries []model.Entry, fields []model.Field) ([]grlmodel.Term, error) {
+	var result []grlmodel.Term
 
 	fieldCount := len(fields)
 	for i, val := range entries {
 		if i >= fieldCount {
-			return []grlmodel.Expression{}, ErrMapperIndexOutOfBound
+			return []grlmodel.Term{}, ErrMapperIndexOutOfBound
 		}
 		entry, err := c.mapToExpression(val, fields[i])
 
 		if err != nil && err != ErrEmptyExpression {
-			return []grlmodel.Expression{}, err
+			return []grlmodel.Term{}, err
 		}
 
 		//EmptyEntries will be droped
@@ -86,8 +86,8 @@ func (c GruleBuilder) mapEntryToExpressions(entries []model.Entry, fields []mode
 	return result, nil
 }
 
-func (c GruleBuilder) mapToExpression(entry model.Entry, field model.Field) (grlmodel.Expression, error) {
-	expr := grlmodel.Expression{
+func (c GruleBuilder) mapToExpression(entry model.Entry, field model.Field) (grlmodel.Term, error) {
+	expr := grlmodel.Term{
 		Name:       field.Name,
 		Identifier: field.Label,
 		Typ:        field.Typ,
