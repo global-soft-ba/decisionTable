@@ -70,25 +70,6 @@ validDateTimeOutput
     | '-' EOF                       # EmptyDateTimeOutputRule
     ;
 
-// Simple Grammar for Converting
-/*
-validInput
-    : datatype EOF             # TestEqualcomparisonRule
-    | comparisonOps datatype    # Test2
-    | disjunction #Test3
-    | rangesOps datatype '..' datatype rangesOps #Test4
-    ;
-
-disjunction
-    : datatype
-    | disjunction DISJUNCTION disjunction
-    ;
-
-rangesOps: (RANGEIN | RANGEOUT);
-
-datatype:(INTEGER|FLOAT|STRING|BOOL|DATEANDTIME);
-*/
-
 // Entire Language Grammar SFeel
 
 expression
@@ -150,6 +131,8 @@ negation
 
 
 // Lexer and Token Config
+
+//TODO IN GRL Integers with different Semantic http://hyperjumptech.viewdocs.io/grule-rule-engine/GRL_Literals_en/
 
 // Datatypes
 SIGN: '+'|'-';

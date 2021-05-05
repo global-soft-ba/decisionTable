@@ -58,7 +58,7 @@ var grule = TableConfigStandard{
 	},
 
 	CollectOperators: map[model.CollectOperator]string{},
-
+	//TODO IN GRL Float = REAL
 	VariableType: map[model.VariableTyp]string{
 		model.String:  "",
 		model.Boolean: "",
