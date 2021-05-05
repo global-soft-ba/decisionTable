@@ -3,6 +3,8 @@ package mapper
 import (
 	"bytes"
 	"decisionTable/converter/grule/grlmodel"
+	"regexp"
+	"strconv"
 	"text/template"
 )
 
@@ -20,6 +22,7 @@ const (
 	RANGES          = 7
 	DISJUNCTIONS    = 8
 	DISJUNCTIONTERM = 9
+	DATEANDTIME     = 10
 )
 
 type TemplateData struct {
@@ -102,4 +105,27 @@ func (m Mapper) MapDisjunctionsTerm(term interface{}) string {
 func (m Mapper) MapNegation(term interface{}) string {
 	tmpl := m.Templates[NEGATION]
 	return m.executeTemplate(tmpl, term.(string))
+}
+
+func (m Mapper) MapDateAndTimeFormat(expr string) string {
+	//regex := regexp.MustCompile(`DateAndTime\("|-|T|:|"\)`)
+	regex := regexp.MustCompile(`\D+`)
+	split := regex.Split(expr, -1)
+
+	var format []int
+	for _, val := range split {
+		s, _ := strconv.Atoi(val)
+		format = append(format, s)
+	}
+
+	tmpl := m.Templates[DATEANDTIME]
+	data := map[string]int{
+		"Year":    format[1],
+		"Month":   format[2],
+		"Day":     format[3],
+		"Hour":    format[4],
+		"Minutes": format[5],
+		"Seconds": format[6],
+	}
+	return m.executeTemplate(tmpl, data)
 }

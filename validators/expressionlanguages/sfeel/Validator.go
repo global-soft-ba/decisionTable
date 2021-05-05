@@ -30,7 +30,7 @@ func (v Validator) ValidateInputEntry(field model.Field, entry model.Entry) (boo
 		p.Parse().ValidNumberInput()
 	case model.Long:
 		p.Parse().ValidNumberInput()
-	case model.Date:
+	case model.DateTime:
 		p.Parse().ValidDateTimeInput()
 	}
 
@@ -57,7 +57,7 @@ func (v Validator) ValidateOutputEntry(field model.Field, entry model.Entry) (bo
 		p.Parse().ValidNumberOutput()
 	case model.Long:
 		p.Parse().ValidNumberOutput()
-	case model.Date:
+	case model.DateTime:
 		p.Parse().ValidDateTimeOutput()
 	}
 

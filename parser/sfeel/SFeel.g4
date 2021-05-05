@@ -129,15 +129,16 @@ negation
     : NEGATION'('(equalcomparison|comparison|ranges|disjunctions)')'
     ;
 
-
 // Lexer and Token Config
 
 //TODO IN GRL Integers with different Semantic http://hyperjumptech.viewdocs.io/grule-rule-engine/GRL_Literals_en/
 
 // Datatypes
+
 SIGN: '+'|'-';
-INTEGER:  '0' | SIGN? '1'..'9''0'..'9'*;
-FLOAT:    '0'.'0' | SIGN?  '0'..'9'+ '.' '0'..'9'*'1'..'9';
+INTEGER:  '0' | SIGN? '1'..'9'DIGIT*;
+FLOAT:    '0'.'0' | SIGN?  DIGIT+ '.' DIGIT*'1'..'9';
+
 
 STRING: '"' NONCONTROL_CHAR* '"';
     fragment NONCONTROL_CHAR: LETTER | DIGIT | SYMBOL | SPACE;
@@ -168,10 +169,11 @@ NEGATION: 'not';
 
 
 DATEANDTIME: 'DateAndTime("'FORMAT'")' ;
-    FORMAT: YYYY'-'MM'-'DD'T'HH':'MMM':'SS;
+FORMAT: YYYY'-'MM'-'DD'T'HH':'MMM':'SS;
     fragment YYYY: '0'..'9''0'..'9''0'..'9''1'..'9' | '0'..'9''0'..'9''1'..'9''0'..'9' | '0'..'9''1'..'9''0'..'9''0'..'9' | '1'..'9''0'..'9''0'..'9''0'..'9';
     fragment MM:  '0''1'..'9' | '1''0'..'2';
     fragment DD:  '0''1'..'9' | '1'..'2''0'..'9' | '3''0'..'1';
     fragment HH:  '0''0'..'9' | '1''0'..'9' | '2''0'..'3';
     fragment MMM: '0''0'..'9' | '1'..'5''0'..'9';
     fragment SS:  '0''0'..'9' | '1'..'5''0'..'9';
+

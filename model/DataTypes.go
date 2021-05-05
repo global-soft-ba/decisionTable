@@ -44,11 +44,11 @@ const (
 type VariableTyp string
 
 const (
-	String  VariableTyp = "string"
-	Boolean VariableTyp = "boolean"
-	Integer VariableTyp = "integer"
-	Float   VariableTyp = "float"
-	Long    VariableTyp = "long"
-	Double  VariableTyp = "double"
-	Date    VariableTyp = "date"
+	String   VariableTyp = "string"
+	Boolean  VariableTyp = "boolean"
+	Integer  VariableTyp = "integer"
+	Float    VariableTyp = "float"
+	Long     VariableTyp = "long"
+	Double   VariableTyp = "double"
+	DateTime VariableTyp = "date"
 )

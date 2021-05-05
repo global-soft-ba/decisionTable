@@ -31,5 +31,6 @@ var GrlMapping = Mapper{
 		DISJUNCTIONS:    `{{.first}} || {{.second}}`,
 		DISJUNCTIONTERM: `({{.}})`,
 		NEGATION:        `!({{.}})`,
+		DATEANDTIME:     `MakeTime({{.Year}},{{.Month}},{{.Day}},{{.Hour}},{{.Minutes}},{{.Seconds}})`,
 	},
 }

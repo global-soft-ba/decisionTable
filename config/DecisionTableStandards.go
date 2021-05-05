@@ -38,12 +38,12 @@ var dmn = TableConfigStandard{
 	},
 
 	VariableType: map[model.VariableTyp]string{
-		model.String:  "",
-		model.Boolean: "",
-		model.Integer: "",
-		model.Long:    "",
-		model.Double:  "",
-		model.Date:    "",
+		model.String:   "",
+		model.Boolean:  "",
+		model.Integer:  "",
+		model.Long:     "",
+		model.Double:   "",
+		model.DateTime: "",
 	}}
 
 var grule = TableConfigStandard{
@@ -60,9 +60,9 @@ var grule = TableConfigStandard{
 	CollectOperators: map[model.CollectOperator]string{},
 	//TODO IN GRL Float = REAL
 	VariableType: map[model.VariableTyp]string{
-		model.String:  "",
-		model.Boolean: "",
-		model.Integer: "",
-		model.Float:   "",
-		model.Date:    "",
+		model.String:   "",
+		model.Boolean:  "",
+		model.Integer:  "",
+		model.Float:    "",
+		model.DateTime: "",
 	}}
