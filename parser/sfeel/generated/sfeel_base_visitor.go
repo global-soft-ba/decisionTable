@@ -64,7 +64,7 @@ func (v *BaseSFeelVisitor) VisitEqualComparisonStringInputRule(ctx *EqualCompari
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitComparisonStringInputRule(ctx *ComparisonStringInputRuleContext) interface{} {
+func (v *BaseSFeelVisitor) VisitDisjunctionsStringInputRule(ctx *DisjunctionsStringInputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

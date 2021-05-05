@@ -36,6 +36,11 @@ func (c ExpressionConverter) Convert(expr grlmodel.Term) grlmodel.Term {
 		conv := visitors.CreateNumberVisitor(expr, c.maps)
 		expr.Expression = tree.Accept(conv).(string)
 		return expr
+	case model.String:
+		tree := prs.Parse().ValidStringInput()
+		conv := visitors.CreateStringVisitor(expr, c.maps)
+		expr.Expression = tree.Accept(conv).(string)
+		return expr
 	default:
 		return grlmodel.Term{}
 	}

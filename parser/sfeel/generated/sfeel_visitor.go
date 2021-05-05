@@ -50,8 +50,8 @@ type SFeelVisitor interface {
 	// Visit a parse tree produced by SFeelParser#EqualComparisonStringInputRule.
 	VisitEqualComparisonStringInputRule(ctx *EqualComparisonStringInputRuleContext) interface{}
 
-	// Visit a parse tree produced by SFeelParser#ComparisonStringInputRule.
-	VisitComparisonStringInputRule(ctx *ComparisonStringInputRuleContext) interface{}
+	// Visit a parse tree produced by SFeelParser#DisjunctionsStringInputRule.
+	VisitDisjunctionsStringInputRule(ctx *DisjunctionsStringInputRuleContext) interface{}
 
 	// Visit a parse tree produced by SFeelParser#NegationStringInputRule.
 	VisitNegationStringInputRule(ctx *NegationStringInputRuleContext) interface{}

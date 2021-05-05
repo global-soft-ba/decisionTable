@@ -1650,6 +1650,60 @@ func (s *EqualComparisonStringInputRuleContext) Accept(visitor antlr.ParseTreeVi
 	}
 }
 
+type DisjunctionsStringInputRuleContext struct {
+	*ValidStringInputContext
+}
+
+func NewDisjunctionsStringInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *DisjunctionsStringInputRuleContext {
+	var p = new(DisjunctionsStringInputRuleContext)
+
+	p.ValidStringInputContext = NewEmptyValidStringInputContext()
+	p.parser = parser
+	p.CopyFrom(ctx.(*ValidStringInputContext))
+
+	return p
+}
+
+func (s *DisjunctionsStringInputRuleContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *DisjunctionsStringInputRuleContext) DisjunctionsString() IDisjunctionsStringContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDisjunctionsStringContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IDisjunctionsStringContext)
+}
+
+func (s *DisjunctionsStringInputRuleContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *DisjunctionsStringInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterDisjunctionsStringInputRule(s)
+	}
+}
+
+func (s *DisjunctionsStringInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitDisjunctionsStringInputRule(s)
+	}
+}
+
+func (s *DisjunctionsStringInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitDisjunctionsStringInputRule(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 type EmptyStringInputRuleContext struct {
 	*ValidStringInputContext
 }
@@ -1694,60 +1748,6 @@ func (s *EmptyStringInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) int
 	}
 }
 
-type ComparisonStringInputRuleContext struct {
-	*ValidStringInputContext
-}
-
-func NewComparisonStringInputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *ComparisonStringInputRuleContext {
-	var p = new(ComparisonStringInputRuleContext)
-
-	p.ValidStringInputContext = NewEmptyValidStringInputContext()
-	p.parser = parser
-	p.CopyFrom(ctx.(*ValidStringInputContext))
-
-	return p
-}
-
-func (s *ComparisonStringInputRuleContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *ComparisonStringInputRuleContext) DisjunctionsString() IDisjunctionsStringContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDisjunctionsStringContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IDisjunctionsStringContext)
-}
-
-func (s *ComparisonStringInputRuleContext) EOF() antlr.TerminalNode {
-	return s.GetToken(SFeelParserEOF, 0)
-}
-
-func (s *ComparisonStringInputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterComparisonStringInputRule(s)
-	}
-}
-
-func (s *ComparisonStringInputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitComparisonStringInputRule(s)
-	}
-}
-
-func (s *ComparisonStringInputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
-	switch t := visitor.(type) {
-	case SFeelVisitor:
-		return t.VisitComparisonStringInputRule(s)
-
-	default:
-		return t.VisitChildren(s)
-	}
-}
-
 func (p *SFeelParser) ValidStringInput() (localctx IValidStringInputContext) {
 	localctx = NewValidStringInputContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 6, SFeelParserRULE_validStringInput)
@@ -1784,7 +1784,7 @@ func (p *SFeelParser) ValidStringInput() (localctx IValidStringInputContext) {
 		}
 
 	case 2:
-		localctx = NewComparisonStringInputRuleContext(p, localctx)
+		localctx = NewDisjunctionsStringInputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(136)

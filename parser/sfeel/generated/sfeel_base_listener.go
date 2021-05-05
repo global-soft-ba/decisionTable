@@ -119,11 +119,13 @@ func (s *BaseSFeelListener) EnterEqualComparisonStringInputRule(ctx *EqualCompar
 func (s *BaseSFeelListener) ExitEqualComparisonStringInputRule(ctx *EqualComparisonStringInputRuleContext) {
 }
 
-// EnterComparisonStringInputRule is called when production ComparisonStringInputRule is entered.
-func (s *BaseSFeelListener) EnterComparisonStringInputRule(ctx *ComparisonStringInputRuleContext) {}
+// EnterDisjunctionsStringInputRule is called when production DisjunctionsStringInputRule is entered.
+func (s *BaseSFeelListener) EnterDisjunctionsStringInputRule(ctx *DisjunctionsStringInputRuleContext) {
+}
 
-// ExitComparisonStringInputRule is called when production ComparisonStringInputRule is exited.
-func (s *BaseSFeelListener) ExitComparisonStringInputRule(ctx *ComparisonStringInputRuleContext) {}
+// ExitDisjunctionsStringInputRule is called when production DisjunctionsStringInputRule is exited.
+func (s *BaseSFeelListener) ExitDisjunctionsStringInputRule(ctx *DisjunctionsStringInputRuleContext) {
+}
 
 // EnterNegationStringInputRule is called when production NegationStringInputRule is entered.
 func (s *BaseSFeelListener) EnterNegationStringInputRule(ctx *NegationStringInputRuleContext) {}

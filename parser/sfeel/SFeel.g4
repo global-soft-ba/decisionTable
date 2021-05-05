@@ -26,7 +26,7 @@ validNumberInput
 
 validStringInput
     : equalcomparisonStrings EOF    # EqualComparisonStringInputRule
-    | disjunctionsString EOF        # ComparisonStringInputRule
+    | disjunctionsString EOF        # DisjunctionsStringInputRule
     | NEGATION'('(equalcomparisonStrings|disjunctionsString)')' EOF # NegationStringInputRule
     | '-' EOF                       # EmptyStringInputRule
     ;

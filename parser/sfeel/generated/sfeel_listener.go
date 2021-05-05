@@ -50,8 +50,8 @@ type SFeelListener interface {
 	// EnterEqualComparisonStringInputRule is called when entering the EqualComparisonStringInputRule production.
 	EnterEqualComparisonStringInputRule(c *EqualComparisonStringInputRuleContext)
 
-	// EnterComparisonStringInputRule is called when entering the ComparisonStringInputRule production.
-	EnterComparisonStringInputRule(c *ComparisonStringInputRuleContext)
+	// EnterDisjunctionsStringInputRule is called when entering the DisjunctionsStringInputRule production.
+	EnterDisjunctionsStringInputRule(c *DisjunctionsStringInputRuleContext)
 
 	// EnterNegationStringInputRule is called when entering the NegationStringInputRule production.
 	EnterNegationStringInputRule(c *NegationStringInputRuleContext)
@@ -251,8 +251,8 @@ type SFeelListener interface {
 	// ExitEqualComparisonStringInputRule is called when exiting the EqualComparisonStringInputRule production.
 	ExitEqualComparisonStringInputRule(c *EqualComparisonStringInputRuleContext)
 
-	// ExitComparisonStringInputRule is called when exiting the ComparisonStringInputRule production.
-	ExitComparisonStringInputRule(c *ComparisonStringInputRuleContext)
+	// ExitDisjunctionsStringInputRule is called when exiting the DisjunctionsStringInputRule production.
+	ExitDisjunctionsStringInputRule(c *DisjunctionsStringInputRuleContext)
 
 	// ExitNegationStringInputRule is called when exiting the NegationStringInputRule production.
 	ExitNegationStringInputRule(c *NegationStringInputRuleContext)
