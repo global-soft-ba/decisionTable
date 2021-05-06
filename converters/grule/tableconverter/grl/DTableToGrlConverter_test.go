@@ -273,6 +273,98 @@ func TestConverter_converting(t *testing.T) {
 				"rule row_2 \"R3\" \nwhen \n   L1.I1 == 3\n   && L1.I2 > 3\n   && L1.I3 > 4\nthen \n  L1.O1 = 4;\n  L1.O1 = 4;\n  complete();"},
 			wantErr: false,
 		},
+		{name: "Valid Convert Single Float Expressions",
+			args: args{grlmodel.RuleSet{
+				Key:             "test1",
+				Name:            "TableOne",
+				HitPolicy:       model.First,
+				CollectOperator: model.List,
+				Interference:    false,
+				Rules: []grlmodel.Rule{
+					{
+						"0",
+						"R1",
+						0,
+						0,
+						[]grlmodel.Term{
+							{"I1", "L1", model.Float, "3.3", model.SFEEL},
+						},
+						[]grlmodel.Term{{"O1", "L1", model.String, `"4"`, model.SFEEL}},
+					},
+				},
+			}},
+			want:    []string{"rule row_0 \"R1\" salience 0\nwhen \n   L1.I1 == 3.3\nthen \n  L1.O1 = \"4\";\n  complete();"},
+			wantErr: false,
+		},
+		{name: "Valid Convert Single Boolean Expressions",
+			args: args{grlmodel.RuleSet{
+				Key:             "test1",
+				Name:            "TableOne",
+				HitPolicy:       model.First,
+				CollectOperator: model.List,
+				Interference:    false,
+				Rules: []grlmodel.Rule{
+					{
+						"0",
+						"R1",
+						0,
+						0,
+						[]grlmodel.Term{
+							{"I1", "L1", model.Boolean, "true", model.SFEEL},
+						},
+						[]grlmodel.Term{{"O1", "L1", model.Boolean, "false", model.SFEEL}},
+					},
+				},
+			}},
+			want:    []string{"rule row_0 \"R1\" salience 0\nwhen \n   L1.I1 == true\nthen \n  L1.O1 = false;\n  complete();"},
+			wantErr: false,
+		},
+		{name: "Valid Convert Single String Expressions",
+			args: args{grlmodel.RuleSet{
+				Key:             "test1",
+				Name:            "TableOne",
+				HitPolicy:       model.First,
+				CollectOperator: model.List,
+				Interference:    false,
+				Rules: []grlmodel.Rule{
+					{
+						"0",
+						"R1",
+						0,
+						0,
+						[]grlmodel.Term{
+							{"I1", "L1", model.String, `"true"`, model.SFEEL},
+						},
+						[]grlmodel.Term{{"O1", "L1", model.String, `"false"`, model.SFEEL}},
+					},
+				},
+			}},
+			want:    []string{"rule row_0 \"R1\" salience 0\nwhen \n   L1.I1 == \"true\"\nthen \n  L1.O1 = \"false\";\n  complete();"},
+			wantErr: false,
+		},
+		{name: "Valid Convert DatTime String Expressions",
+			args: args{grlmodel.RuleSet{
+				Key:             "test1",
+				Name:            "TableOne",
+				HitPolicy:       model.First,
+				CollectOperator: model.List,
+				Interference:    false,
+				Rules: []grlmodel.Rule{
+					{
+						"0",
+						"R1",
+						0,
+						0,
+						[]grlmodel.Term{
+							{"I1", "L1", model.DateTime, `DateAndTime("2021-01-01T12:00:00")`, model.SFEEL},
+						},
+						[]grlmodel.Term{{"O1", "L1", model.DateTime, `DateAndTime("2021-01-01T13:00:00")`, model.SFEEL}},
+					},
+				},
+			}},
+			want:    []string{"rule row_0 \"R1\" salience 0\nwhen \n   L1.I1 == MakeTime(2021,1,1,12,0,0)\nthen \n  L1.O1 = MakeTime(2021,1,1,13,0,0);\n  complete();"},
+			wantErr: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
