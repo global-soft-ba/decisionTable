@@ -135,7 +135,8 @@ func (c DTableToGrlConverter) convertRuleExpressionsIntoGRL(rule grlmodel.Rule) 
 	if err != nil {
 		return result, err
 	}
-	result, err = c.convertOutputExpressionsIntoGRL(rule)
+
+	result, err = c.convertOutputExpressionsIntoGRL(result)
 	if err != nil {
 		return result, err
 	}
@@ -145,24 +146,41 @@ func (c DTableToGrlConverter) convertRuleExpressionsIntoGRL(rule grlmodel.Rule) 
 
 func (c DTableToGrlConverter) convertInputExpressionsIntoGRL(rule grlmodel.Rule) (grlmodel.Rule, error) {
 	result := rule
-	for i, v := range rule.Expressions {
+	var expr []grlmodel.Term
+
+	for _, v := range rule.Expressions {
 		expConv, err := c.expConvFac.GetExpressionConverter(v.ExpressionLanguage, c.format)
 		if err != nil {
 			return grlmodel.Rule{}, err
 		}
-		result.Expressions[i] = expConv.ConvertExpression(v)
+
+		term := expConv.ConvertExpression(v)
+		//Remove empty expressions
+		if term.Expression != "" {
+			expr = append(expr, term)
+		}
 	}
+
+	result.Expressions = expr
 	return result, nil
 }
 
 func (c DTableToGrlConverter) convertOutputExpressionsIntoGRL(rule grlmodel.Rule) (grlmodel.Rule, error) {
 	result := rule
-	for i, v := range rule.Assignments {
+	var assgn []grlmodel.Term
+
+	for _, v := range rule.Assignments {
 		expConv, err := c.expConvFac.GetExpressionConverter(v.ExpressionLanguage, c.format)
 		if err != nil {
 			return grlmodel.Rule{}, err
 		}
-		result.Assignments[i] = expConv.ConvertAssignments(v)
+		term := expConv.ConvertAssignments(v)
+		//Remove empty expressions
+		if term.Expression != "" {
+			assgn = append(assgn, term)
+		}
 	}
+
+	result.Assignments = assgn
 	return result, nil
 }

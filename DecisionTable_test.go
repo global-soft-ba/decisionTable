@@ -83,9 +83,9 @@ func TestDecisionTable_Convert(t *testing.T) {
 			fields: testTable,
 			args:   args{grl.CreateDTableToGrlConverter()},
 			want: []string{
-				"rule row_0 \"R1\" salience 0 \nwhen \n   claim.TypeOfClaim ==\"Car Accident\"\n   && claim.ExpenditureOfClaim < 1000\nthen \n  Employee.ResponsibleEmployee =Müller;\n  Employee.4EyesPrinciple =false;\n  complete();",
-				"rule row_1 \"R2\" salience 1 \nwhen \n   claim.TypeOfClaim ==\"Car Accident\"\n   && claim.ExpenditureOfClaim [1000..10000]\nthen \n  Employee.ResponsibleEmployee =Meier;\n  Employee.4EyesPrinciple =false;\n  complete();",
-				"rule row_2 \"R3\" salience 2 \nwhen \n   claim.ExpenditureOfClaim >= 10000\nthen \n  Employee.4EyesPrinciple =true;\n  complete();",
+				"rule row_0 \"R1\" salience 0 \nwhen \n   claim.TypeOfClaim == \"Car Accident\"\n   && claim.ExpenditureOfClaim < 1000\nthen \n  Employee.ResponsibleEmployee = \"Müller\";\n  Employee.4EyesPrinciple = false;\n  complete();",
+				"rule row_1 \"R2\" salience 1 \nwhen \n   claim.TypeOfClaim == \"Car Accident\"\n   && ((claim.ExpenditureOfClaim >= 1000) && (claim.ExpenditureOfClaim <= 10000))\nthen \n  Employee.ResponsibleEmployee = \"Meier\";\n  Employee.4EyesPrinciple = false;\n  complete();",
+				"rule row_2 \"R3\" salience 2 \nwhen \n   claim.ExpenditureOfClaim >= 10000\nthen \n  Employee.4EyesPrinciple = true;\n  complete();",
 			},
 			wantErr: false,
 		},

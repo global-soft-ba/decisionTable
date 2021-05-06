@@ -33,4 +33,4 @@ const THEN = `{{define "THEN"}}
  {{- end}}
 {{- end}}`
 
-const ENTRY = `{{define "ENTRY"}}{{.Identifier}}.{{.Name}} {{.Expression}}{{end}}`
+const ENTRY = `{{define "ENTRY"}}{{.Expression}}{{end}}`
