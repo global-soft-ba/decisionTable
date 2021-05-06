@@ -3,8 +3,9 @@ package model
 type DTableStandard string
 
 const (
-	GRULE DTableStandard = "GRULE"
-	DMN   DTableStandard = "DMN (OMG)"
+	GRULE  DTableStandard = "GRULE"
+	DMN    DTableStandard = "DMN (OMG)"
+	DROOLS DTableStandard = "DROOLS (REDHAT)"
 )
 
 type HitPolicy string

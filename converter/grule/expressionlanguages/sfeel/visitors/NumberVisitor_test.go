@@ -15,7 +15,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 		maps mapper.Mapper
 	}
 
-	mapping := mapper.GrlMapping
+	mapping := mapper.SettingsGRL
 
 	tests := []struct {
 		name string

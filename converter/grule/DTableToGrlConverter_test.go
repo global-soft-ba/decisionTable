@@ -31,11 +31,11 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "==3"},
-							{"I2", "L1", model.Integer, ">3"},
-							{"I3", "L1", model.Integer, ">4"},
+							{"I1", "L1", model.Integer, "==3", model.SFEEL},
+							{"I2", "L1", model.Integer, ">3", model.SFEEL},
+							{"I3", "L1", model.Integer, ">4", model.SFEEL},
 						},
-						[]grlmodel.Term{{"O1", "L1", model.Integer, "=4"}},
+						[]grlmodel.Term{{"O1", "L1", model.Integer, "=4", model.SFEEL}},
 					},
 				},
 			}},
@@ -56,9 +56,9 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "==3"},
+							{"I1", "L1", model.Integer, "==3", model.SFEEL},
 						},
-						[]grlmodel.Term{{"O1", "L1", model.Integer, "=4"}},
+						[]grlmodel.Term{{"O1", "L1", model.Integer, "=4", model.SFEEL}},
 					},
 				},
 			}},
@@ -79,13 +79,13 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "==3"},
-							{"I2", "L1", model.Integer, ">3"},
-							{"I3", "L1", model.Integer, ">4"},
+							{"I1", "L1", model.Integer, "==3", model.SFEEL},
+							{"I2", "L1", model.Integer, ">3", model.SFEEL},
+							{"I3", "L1", model.Integer, ">4", model.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "=4"},
-							{"O1", "L1", model.Integer, "=4"},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
 						},
 					},
 				},
@@ -107,13 +107,13 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						2,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "==3"},
-							{"I2", "L1", model.Integer, ">3"},
-							{"I3", "L1", model.Integer, ">4"},
+							{"I1", "L1", model.Integer, "==3", model.SFEEL},
+							{"I2", "L1", model.Integer, ">3", model.SFEEL},
+							{"I3", "L1", model.Integer, ">4", model.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "=4"},
-							{"O1", "L1", model.Integer, "=4"},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
 						},
 					},
 					{
@@ -122,13 +122,13 @@ func TestConverter_converting(t *testing.T) {
 						1,
 						1,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "==3"},
-							{"I2", "L1", model.Integer, ">3"},
-							{"I3", "L1", model.Integer, ">4"},
+							{"I1", "L1", model.Integer, "==3", model.SFEEL},
+							{"I2", "L1", model.Integer, ">3", model.SFEEL},
+							{"I3", "L1", model.Integer, ">4", model.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "=4"},
-							{"O1", "L1", model.Integer, "=4"},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
 						},
 					},
 					{
@@ -137,13 +137,13 @@ func TestConverter_converting(t *testing.T) {
 						2,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "==3"},
-							{"I2", "L1", model.Integer, ">3"},
-							{"I3", "L1", model.Integer, ">4"},
+							{"I1", "L1", model.Integer, "==3", model.SFEEL},
+							{"I2", "L1", model.Integer, ">3", model.SFEEL},
+							{"I3", "L1", model.Integer, ">4", model.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "=4"},
-							{"O1", "L1", model.Integer, "=4"},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
 						},
 					},
 				},
@@ -167,13 +167,13 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						2,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "==3"},
-							{"I2", "L1", model.Integer, ">3"},
-							{"I3", "L1", model.Integer, ">4"},
+							{"I1", "L1", model.Integer, "==3", model.SFEEL},
+							{"I2", "L1", model.Integer, ">3", model.SFEEL},
+							{"I3", "L1", model.Integer, ">4", model.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "=4"},
-							{"O1", "L1", model.Integer, "=4"},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
 						},
 					},
 					{
@@ -182,13 +182,13 @@ func TestConverter_converting(t *testing.T) {
 						1,
 						1,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "==3"},
-							{"I2", "L1", model.Integer, ">3"},
-							{"I3", "L1", model.Integer, ">4"},
+							{"I1", "L1", model.Integer, "==3", model.SFEEL},
+							{"I2", "L1", model.Integer, ">3", model.SFEEL},
+							{"I3", "L1", model.Integer, ">4", model.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "=4"},
-							{"O1", "L1", model.Integer, "=4"},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
 						},
 					},
 					{
@@ -197,13 +197,13 @@ func TestConverter_converting(t *testing.T) {
 						2,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "==3"},
-							{"I2", "L1", model.Integer, ">3"},
-							{"I3", "L1", model.Integer, ">4"},
+							{"I1", "L1", model.Integer, "==3", model.SFEEL},
+							{"I2", "L1", model.Integer, ">3", model.SFEEL},
+							{"I3", "L1", model.Integer, ">4", model.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "=4"},
-							{"O1", "L1", model.Integer, "=4"},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
 						},
 					},
 				},
@@ -227,13 +227,13 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						2,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "==3"},
-							{"I2", "L1", model.Integer, ">3"},
-							{"I3", "L1", model.Integer, ">4"},
+							{"I1", "L1", model.Integer, "==3", model.SFEEL},
+							{"I2", "L1", model.Integer, ">3", model.SFEEL},
+							{"I3", "L1", model.Integer, ">4", model.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "=4"},
-							{"O1", "L1", model.Integer, "=4"},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
 						},
 					},
 					{
@@ -242,13 +242,13 @@ func TestConverter_converting(t *testing.T) {
 						1,
 						1,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "==3"},
-							{"I2", "L1", model.Integer, ">3"},
-							{"I3", "L1", model.Integer, ">4"},
+							{"I1", "L1", model.Integer, "==3", model.SFEEL},
+							{"I2", "L1", model.Integer, ">3", model.SFEEL},
+							{"I3", "L1", model.Integer, ">4", model.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "=4"},
-							{"O1", "L1", model.Integer, "=4"},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
 						},
 					},
 					{
@@ -257,13 +257,13 @@ func TestConverter_converting(t *testing.T) {
 						2,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "==3"},
-							{"I2", "L1", model.Integer, ">3"},
-							{"I3", "L1", model.Integer, ">4"},
+							{"I1", "L1", model.Integer, "==3", model.SFEEL},
+							{"I2", "L1", model.Integer, ">3", model.SFEEL},
+							{"I3", "L1", model.Integer, ">4", model.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "=4"},
-							{"O1", "L1", model.Integer, "=4"},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
+							{"O1", "L1", model.Integer, "=4", model.SFEEL},
 						},
 					},
 				},
@@ -276,7 +276,7 @@ func TestConverter_converting(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			c := GrlConverter{}
+			c := DTableToGrlConverter{}
 			got, err := c.convertRuleSetIntoGRL(tt.args.ruleSet)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("convertRuleSetIntoGRL() error = %v, wantErr %v", err, tt.wantErr)

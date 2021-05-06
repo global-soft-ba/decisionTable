@@ -4,7 +4,7 @@ import (
 	gen "decisionTable/parser/sfeel/generated"
 )
 
-var GrlMapping = Mapper{
+var SettingsGRL = Mapper{
 	TargetToken: map[int]string{
 		AND:   "&&",
 		OR:    "||",

@@ -8,21 +8,20 @@ import (
 	"decisionTable/parser/sfeel/parser"
 )
 
-func CreateGrlExpressionConverter() ExpressionConverter {
-	return ExpressionConverter{maps.GrlMapping}
+func CreateSfeelToGrlConverter() SFeelConverter {
+	return SFeelConverter{maps.SettingsGRL}
 }
 
-func CreateJsonExpressionConverter() ExpressionConverter {
-	panic("not implemented")
+func CreateSfeelToJsonConverter() SFeelConverter {
+	return SFeelConverter{maps.SettingsJSON}
 }
 
-// ExpressionConverter ExpressionConverter is a converter between the ParseTree and our grl data model
-type ExpressionConverter struct {
+// SFeelConverter SFeelConverter is a converter between the ParseTree and our grl data model
+type SFeelConverter struct {
 	maps maps.Mapper
 }
 
-// TODO Seperate Input and Output! (Maybe the input works as well as with output)
-func (c ExpressionConverter) Convert(expr grlmodel.Term) grlmodel.Term {
+func (c SFeelConverter) ConvertExpression(expr grlmodel.Term) grlmodel.Term {
 	prs := parser.CreateSfeelParser(expr.Expression)
 
 	switch expr.Typ {
@@ -41,7 +40,16 @@ func (c ExpressionConverter) Convert(expr grlmodel.Term) grlmodel.Term {
 		conv := visitors.CreateStringVisitor(expr, c.maps)
 		expr.Expression = tree.Accept(conv).(string)
 		return expr
+	case model.DateTime:
+		tree := prs.Parse().ValidDateTimeInput()
+		conv := visitors.CreateDateTimeVisitor(expr, c.maps)
+		expr.Expression = tree.Accept(conv).(string)
+		return expr
 	default:
 		return grlmodel.Term{}
 	}
+}
+
+func (c SFeelConverter) ConvertAssignments(expr grlmodel.Term) grlmodel.Term {
+	return expr
 }

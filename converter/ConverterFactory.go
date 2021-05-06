@@ -1,43 +1,34 @@
 package converter
 
 import (
+	"decisionTable/converter/converterinterface"
 	"decisionTable/converter/grule"
 	"decisionTable/model"
-	err "errors"
+	"errors"
 )
 
 var (
-	ErrDTableNoConverterFoundForTableStandard = err.New("no parser found for decision table standard")
-	ErrDTableNoConverterFoundForOutputFormat  = err.New("no converter found for decision table output formats")
+	ErrDTableNoConverterFoundForTableStandard = errors.New("no parser found for decision table standard")
 )
 
-type OutputFormat string
-
-const (
-	GRL  OutputFormat = "GRL"
-	JSON OutputFormat = "JSON"
-)
-
-func CreateConverterFactory(format OutputFormat) ConverterFactory {
-	return ConverterFactory{format}
+func CreateTableConverterFactory() DTableConverterFactory {
+	return DTableConverterFactory{}
 }
 
-type ConverterFactory struct {
-	format OutputFormat
-}
+type DTableConverterFactory struct{}
 
-func (c ConverterFactory) GetConverter(standard model.DTableStandard) (ConverterInterface, error) {
+func (c DTableConverterFactory) GetTableConverter(standard model.DTableStandard, format model.OutputFormat) (converterinterface.ConverterInterface, error) {
 	switch standard {
 	case model.GRULE:
-		switch c.format {
-		case GRL:
-			return grule.CreateGrlConverter(), nil
-		case JSON:
-			return grule.CreateJsonConverter(), nil
-		default:
-			return nil, ErrDTableNoConverterFoundForOutputFormat
+		conv, err := grule.CreateDTableToGruleConverterFactory().GetFormatConverter(format)
+		if err != nil {
+			return nil, err
 		}
-
+		return conv, nil
+	case model.DROOLS:
+		panic("implement me")
+	case model.DMN:
+		panic("implement me")
 	default:
 		return nil, ErrDTableNoConverterFoundForTableStandard
 	}

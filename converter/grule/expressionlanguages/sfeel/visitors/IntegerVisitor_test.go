@@ -20,7 +20,7 @@ func TestIntegerConverter_GeneralTest(t *testing.T) {
 	}
 	prs := parser.CreateSfeelParser(expr.Expression)
 	tree := prs.Parse().ValidIntegerInput()
-	vis := CreateIntegerVisitor(expr, mapper.GrlMapping)
+	vis := CreateIntegerVisitor(expr, mapper.SettingsGRL)
 	x := tree.Accept(vis).(string)
 
 	fmt.Println("OUT", x)
@@ -33,7 +33,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 		maps mapper.Mapper
 	}
 
-	mapping := mapper.GrlMapping
+	mapping := mapper.SettingsGRL
 
 	tests := []struct {
 		name string

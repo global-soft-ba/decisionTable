@@ -15,7 +15,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 		maps mapper.Mapper
 	}
 
-	mapping := mapper.GrlMapping
+	mapping := mapper.SettingsGRL
 
 	tests := []struct {
 		name string

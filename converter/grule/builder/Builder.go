@@ -88,10 +88,11 @@ func (c GruleBuilder) mapEntryToExpressions(entries []model.Entry, fields []mode
 
 func (c GruleBuilder) mapToExpression(entry model.Entry, field model.Field) (grlmodel.Term, error) {
 	expr := grlmodel.Term{
-		Name:       field.Name,
-		Identifier: field.Label,
-		Typ:        field.Typ,
-		Expression: entry.Expression(),
+		Name:               field.Name,
+		Identifier:         field.Label,
+		Typ:                field.Typ,
+		Expression:         entry.Expression(),
+		ExpressionLanguage: entry.ExpressionLanguage(),
 	}
 
 	return expr, nil

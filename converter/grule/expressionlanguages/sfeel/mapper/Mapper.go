@@ -3,9 +3,14 @@ package mapper
 import (
 	"bytes"
 	"decisionTable/converter/grule/grlmodel"
+	"errors"
 	"regexp"
 	"strconv"
 	"text/template"
+)
+
+var (
+	ErrExpressionLanguageDateTimeFormat = errors.New("could not format datetime value correct")
 )
 
 const (
@@ -108,7 +113,6 @@ func (m Mapper) MapNegation(term interface{}) string {
 }
 
 func (m Mapper) MapDateAndTimeFormat(expr string) string {
-	//regex := regexp.MustCompile(`DateAndTime\("|-|T|:|"\)`)
 	regex := regexp.MustCompile(`\D+`)
 	split := regex.Split(expr, -1)
 
@@ -116,6 +120,10 @@ func (m Mapper) MapDateAndTimeFormat(expr string) string {
 	for _, val := range split {
 		s, _ := strconv.Atoi(val)
 		format = append(format, s)
+	}
+
+	if len(format) == 0 || len(format) < 6 {
+		return ErrExpressionLanguageDateTimeFormat.Error()
 	}
 
 	tmpl := m.Templates[DATEANDTIME]
