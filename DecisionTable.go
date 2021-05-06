@@ -1,7 +1,7 @@
 package main
 
 import (
-	"decisionTable/converter/interfaces"
+	"decisionTable/converters/interfaces"
 	"decisionTable/model"
 	"errors"
 )
