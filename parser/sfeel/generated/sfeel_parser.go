@@ -2635,12 +2635,12 @@ func (s *ValidIntegerOutputContext) ToStringTree(ruleNames []string, recog antlr
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-type IntegerOutputRuleContext struct {
+type IntegerAssignmentOutputRuleContext struct {
 	*ValidIntegerOutputContext
 }
 
-func NewIntegerOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *IntegerOutputRuleContext {
-	var p = new(IntegerOutputRuleContext)
+func NewIntegerAssignmentOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *IntegerAssignmentOutputRuleContext {
+	var p = new(IntegerAssignmentOutputRuleContext)
 
 	p.ValidIntegerOutputContext = NewEmptyValidIntegerOutputContext()
 	p.parser = parser
@@ -2649,34 +2649,34 @@ func NewIntegerOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContex
 	return p
 }
 
-func (s *IntegerOutputRuleContext) GetRuleContext() antlr.RuleContext {
+func (s *IntegerAssignmentOutputRuleContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *IntegerOutputRuleContext) INTEGER() antlr.TerminalNode {
+func (s *IntegerAssignmentOutputRuleContext) INTEGER() antlr.TerminalNode {
 	return s.GetToken(SFeelParserINTEGER, 0)
 }
 
-func (s *IntegerOutputRuleContext) EOF() antlr.TerminalNode {
+func (s *IntegerAssignmentOutputRuleContext) EOF() antlr.TerminalNode {
 	return s.GetToken(SFeelParserEOF, 0)
 }
 
-func (s *IntegerOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *IntegerAssignmentOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterIntegerOutputRule(s)
+		listenerT.EnterIntegerAssignmentOutputRule(s)
 	}
 }
 
-func (s *IntegerOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *IntegerAssignmentOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitIntegerOutputRule(s)
+		listenerT.ExitIntegerAssignmentOutputRule(s)
 	}
 }
 
-func (s *IntegerOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *IntegerAssignmentOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitIntegerOutputRule(s)
+		return t.VisitIntegerAssignmentOutputRule(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -2752,7 +2752,7 @@ func (p *SFeelParser) ValidIntegerOutput() (localctx IValidIntegerOutputContext)
 
 	switch p.GetTokenStream().LA(1) {
 	case SFeelParserINTEGER:
-		localctx = NewIntegerOutputRuleContext(p, localctx)
+		localctx = NewIntegerAssignmentOutputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(186)
@@ -2876,12 +2876,12 @@ func (s *EmptyNumberOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) in
 	}
 }
 
-type NumberOutputRuleContext struct {
+type NumberAssignmentOutputRuleContext struct {
 	*ValidNumberOutputContext
 }
 
-func NewNumberOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *NumberOutputRuleContext {
-	var p = new(NumberOutputRuleContext)
+func NewNumberAssignmentOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *NumberAssignmentOutputRuleContext {
+	var p = new(NumberAssignmentOutputRuleContext)
 
 	p.ValidNumberOutputContext = NewEmptyValidNumberOutputContext()
 	p.parser = parser
@@ -2890,11 +2890,11 @@ func NewNumberOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext
 	return p
 }
 
-func (s *NumberOutputRuleContext) GetRuleContext() antlr.RuleContext {
+func (s *NumberAssignmentOutputRuleContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *NumberOutputRuleContext) Number() INumberContext {
+func (s *NumberAssignmentOutputRuleContext) Number() INumberContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*INumberContext)(nil)).Elem(), 0)
 
 	if t == nil {
@@ -2904,26 +2904,26 @@ func (s *NumberOutputRuleContext) Number() INumberContext {
 	return t.(INumberContext)
 }
 
-func (s *NumberOutputRuleContext) EOF() antlr.TerminalNode {
+func (s *NumberAssignmentOutputRuleContext) EOF() antlr.TerminalNode {
 	return s.GetToken(SFeelParserEOF, 0)
 }
 
-func (s *NumberOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *NumberAssignmentOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterNumberOutputRule(s)
+		listenerT.EnterNumberAssignmentOutputRule(s)
 	}
 }
 
-func (s *NumberOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *NumberAssignmentOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitNumberOutputRule(s)
+		listenerT.ExitNumberAssignmentOutputRule(s)
 	}
 }
 
-func (s *NumberOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *NumberAssignmentOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitNumberOutputRule(s)
+		return t.VisitNumberAssignmentOutputRule(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -2955,7 +2955,7 @@ func (p *SFeelParser) ValidNumberOutput() (localctx IValidNumberOutputContext) {
 
 	switch p.GetTokenStream().LA(1) {
 	case SFeelParserINTEGER, SFeelParserFLOAT:
-		localctx = NewNumberOutputRuleContext(p, localctx)
+		localctx = NewNumberAssignmentOutputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(192)
@@ -3035,12 +3035,12 @@ func (s *ValidStringOutputContext) ToStringTree(ruleNames []string, recog antlr.
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-type StringOutputRuleContext struct {
+type StringAssignmentOutputRuleContext struct {
 	*ValidStringOutputContext
 }
 
-func NewStringOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *StringOutputRuleContext {
-	var p = new(StringOutputRuleContext)
+func NewStringAssignmentOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *StringAssignmentOutputRuleContext {
+	var p = new(StringAssignmentOutputRuleContext)
 
 	p.ValidStringOutputContext = NewEmptyValidStringOutputContext()
 	p.parser = parser
@@ -3049,11 +3049,11 @@ func NewStringOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext
 	return p
 }
 
-func (s *StringOutputRuleContext) GetRuleContext() antlr.RuleContext {
+func (s *StringAssignmentOutputRuleContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *StringOutputRuleContext) Strings() IStringsContext {
+func (s *StringAssignmentOutputRuleContext) Strings() IStringsContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*IStringsContext)(nil)).Elem(), 0)
 
 	if t == nil {
@@ -3063,26 +3063,26 @@ func (s *StringOutputRuleContext) Strings() IStringsContext {
 	return t.(IStringsContext)
 }
 
-func (s *StringOutputRuleContext) EOF() antlr.TerminalNode {
+func (s *StringAssignmentOutputRuleContext) EOF() antlr.TerminalNode {
 	return s.GetToken(SFeelParserEOF, 0)
 }
 
-func (s *StringOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *StringAssignmentOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterStringOutputRule(s)
+		listenerT.EnterStringAssignmentOutputRule(s)
 	}
 }
 
-func (s *StringOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *StringAssignmentOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitStringOutputRule(s)
+		listenerT.ExitStringAssignmentOutputRule(s)
 	}
 }
 
-func (s *StringOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *StringAssignmentOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitStringOutputRule(s)
+		return t.VisitStringAssignmentOutputRule(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -3158,7 +3158,7 @@ func (p *SFeelParser) ValidStringOutput() (localctx IValidStringOutputContext) {
 
 	switch p.GetTokenStream().LA(1) {
 	case SFeelParserSTRING:
-		localctx = NewStringOutputRuleContext(p, localctx)
+		localctx = NewStringAssignmentOutputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(199)
@@ -3238,12 +3238,12 @@ func (s *ValidBoolOutputContext) ToStringTree(ruleNames []string, recog antlr.Re
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-type BoolOutputRuleContext struct {
+type BoolAssignmentOutputRuleContext struct {
 	*ValidBoolOutputContext
 }
 
-func NewBoolOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *BoolOutputRuleContext {
-	var p = new(BoolOutputRuleContext)
+func NewBoolAssignmentOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *BoolAssignmentOutputRuleContext {
+	var p = new(BoolAssignmentOutputRuleContext)
 
 	p.ValidBoolOutputContext = NewEmptyValidBoolOutputContext()
 	p.parser = parser
@@ -3252,11 +3252,11 @@ func NewBoolOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) 
 	return p
 }
 
-func (s *BoolOutputRuleContext) GetRuleContext() antlr.RuleContext {
+func (s *BoolAssignmentOutputRuleContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *BoolOutputRuleContext) Bools() IBoolsContext {
+func (s *BoolAssignmentOutputRuleContext) Bools() IBoolsContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*IBoolsContext)(nil)).Elem(), 0)
 
 	if t == nil {
@@ -3266,26 +3266,26 @@ func (s *BoolOutputRuleContext) Bools() IBoolsContext {
 	return t.(IBoolsContext)
 }
 
-func (s *BoolOutputRuleContext) EOF() antlr.TerminalNode {
+func (s *BoolAssignmentOutputRuleContext) EOF() antlr.TerminalNode {
 	return s.GetToken(SFeelParserEOF, 0)
 }
 
-func (s *BoolOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *BoolAssignmentOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterBoolOutputRule(s)
+		listenerT.EnterBoolAssignmentOutputRule(s)
 	}
 }
 
-func (s *BoolOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *BoolAssignmentOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitBoolOutputRule(s)
+		listenerT.ExitBoolAssignmentOutputRule(s)
 	}
 }
 
-func (s *BoolOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *BoolAssignmentOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitBoolOutputRule(s)
+		return t.VisitBoolAssignmentOutputRule(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -3361,7 +3361,7 @@ func (p *SFeelParser) ValidBoolOutput() (localctx IValidBoolOutputContext) {
 
 	switch p.GetTokenStream().LA(1) {
 	case SFeelParserBOOL:
-		localctx = NewBoolOutputRuleContext(p, localctx)
+		localctx = NewBoolAssignmentOutputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(206)
@@ -3441,12 +3441,12 @@ func (s *ValidDateTimeOutputContext) ToStringTree(ruleNames []string, recog antl
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-type DateTimeOutputRuleContext struct {
+type DateTimeAssignmentOutputRuleContext struct {
 	*ValidDateTimeOutputContext
 }
 
-func NewDateTimeOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *DateTimeOutputRuleContext {
-	var p = new(DateTimeOutputRuleContext)
+func NewDateTimeAssignmentOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *DateTimeAssignmentOutputRuleContext {
+	var p = new(DateTimeAssignmentOutputRuleContext)
 
 	p.ValidDateTimeOutputContext = NewEmptyValidDateTimeOutputContext()
 	p.parser = parser
@@ -3455,11 +3455,11 @@ func NewDateTimeOutputRuleContext(parser antlr.Parser, ctx antlr.ParserRuleConte
 	return p
 }
 
-func (s *DateTimeOutputRuleContext) GetRuleContext() antlr.RuleContext {
+func (s *DateTimeAssignmentOutputRuleContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *DateTimeOutputRuleContext) Datetime() IDatetimeContext {
+func (s *DateTimeAssignmentOutputRuleContext) Datetime() IDatetimeContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*IDatetimeContext)(nil)).Elem(), 0)
 
 	if t == nil {
@@ -3469,26 +3469,26 @@ func (s *DateTimeOutputRuleContext) Datetime() IDatetimeContext {
 	return t.(IDatetimeContext)
 }
 
-func (s *DateTimeOutputRuleContext) EOF() antlr.TerminalNode {
+func (s *DateTimeAssignmentOutputRuleContext) EOF() antlr.TerminalNode {
 	return s.GetToken(SFeelParserEOF, 0)
 }
 
-func (s *DateTimeOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *DateTimeAssignmentOutputRuleContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterDateTimeOutputRule(s)
+		listenerT.EnterDateTimeAssignmentOutputRule(s)
 	}
 }
 
-func (s *DateTimeOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *DateTimeAssignmentOutputRuleContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitDateTimeOutputRule(s)
+		listenerT.ExitDateTimeAssignmentOutputRule(s)
 	}
 }
 
-func (s *DateTimeOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *DateTimeAssignmentOutputRuleContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitDateTimeOutputRule(s)
+		return t.VisitDateTimeAssignmentOutputRule(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -3564,7 +3564,7 @@ func (p *SFeelParser) ValidDateTimeOutput() (localctx IValidDateTimeOutputContex
 
 	switch p.GetTokenStream().LA(1) {
 	case SFeelParserDATEANDTIME:
-		localctx = NewDateTimeOutputRuleContext(p, localctx)
+		localctx = NewDateTimeAssignmentOutputRuleContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
 			p.SetState(213)

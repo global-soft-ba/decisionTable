@@ -108,7 +108,7 @@ func (v *BaseSFeelVisitor) VisitEmptyDateTimeInputRule(ctx *EmptyDateTimeInputRu
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitIntegerOutputRule(ctx *IntegerOutputRuleContext) interface{} {
+func (v *BaseSFeelVisitor) VisitIntegerAssignmentOutputRule(ctx *IntegerAssignmentOutputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -116,7 +116,7 @@ func (v *BaseSFeelVisitor) VisitEmptyIntegerOutputRule(ctx *EmptyIntegerOutputRu
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitNumberOutputRule(ctx *NumberOutputRuleContext) interface{} {
+func (v *BaseSFeelVisitor) VisitNumberAssignmentOutputRule(ctx *NumberAssignmentOutputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -124,7 +124,7 @@ func (v *BaseSFeelVisitor) VisitEmptyNumberOutputRule(ctx *EmptyNumberOutputRule
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitStringOutputRule(ctx *StringOutputRuleContext) interface{} {
+func (v *BaseSFeelVisitor) VisitStringAssignmentOutputRule(ctx *StringAssignmentOutputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -132,7 +132,7 @@ func (v *BaseSFeelVisitor) VisitEmptyStringOutputRule(ctx *EmptyStringOutputRule
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitBoolOutputRule(ctx *BoolOutputRuleContext) interface{} {
+func (v *BaseSFeelVisitor) VisitBoolAssignmentOutputRule(ctx *BoolAssignmentOutputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -140,7 +140,7 @@ func (v *BaseSFeelVisitor) VisitEmptyBoolOutputRule(ctx *EmptyBoolOutputRuleCont
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitDateTimeOutputRule(ctx *DateTimeOutputRuleContext) interface{} {
+func (v *BaseSFeelVisitor) VisitDateTimeAssignmentOutputRule(ctx *DateTimeAssignmentOutputRuleContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

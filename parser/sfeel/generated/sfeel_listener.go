@@ -83,32 +83,32 @@ type SFeelListener interface {
 	// EnterEmptyDateTimeInputRule is called when entering the EmptyDateTimeInputRule production.
 	EnterEmptyDateTimeInputRule(c *EmptyDateTimeInputRuleContext)
 
-	// EnterIntegerOutputRule is called when entering the IntegerOutputRule production.
-	EnterIntegerOutputRule(c *IntegerOutputRuleContext)
+	// EnterIntegerAssignmentOutputRule is called when entering the IntegerAssignmentOutputRule production.
+	EnterIntegerAssignmentOutputRule(c *IntegerAssignmentOutputRuleContext)
 
 	// EnterEmptyIntegerOutputRule is called when entering the EmptyIntegerOutputRule production.
 	EnterEmptyIntegerOutputRule(c *EmptyIntegerOutputRuleContext)
 
-	// EnterNumberOutputRule is called when entering the NumberOutputRule production.
-	EnterNumberOutputRule(c *NumberOutputRuleContext)
+	// EnterNumberAssignmentOutputRule is called when entering the NumberAssignmentOutputRule production.
+	EnterNumberAssignmentOutputRule(c *NumberAssignmentOutputRuleContext)
 
 	// EnterEmptyNumberOutputRule is called when entering the EmptyNumberOutputRule production.
 	EnterEmptyNumberOutputRule(c *EmptyNumberOutputRuleContext)
 
-	// EnterStringOutputRule is called when entering the StringOutputRule production.
-	EnterStringOutputRule(c *StringOutputRuleContext)
+	// EnterStringAssignmentOutputRule is called when entering the StringAssignmentOutputRule production.
+	EnterStringAssignmentOutputRule(c *StringAssignmentOutputRuleContext)
 
 	// EnterEmptyStringOutputRule is called when entering the EmptyStringOutputRule production.
 	EnterEmptyStringOutputRule(c *EmptyStringOutputRuleContext)
 
-	// EnterBoolOutputRule is called when entering the BoolOutputRule production.
-	EnterBoolOutputRule(c *BoolOutputRuleContext)
+	// EnterBoolAssignmentOutputRule is called when entering the BoolAssignmentOutputRule production.
+	EnterBoolAssignmentOutputRule(c *BoolAssignmentOutputRuleContext)
 
 	// EnterEmptyBoolOutputRule is called when entering the EmptyBoolOutputRule production.
 	EnterEmptyBoolOutputRule(c *EmptyBoolOutputRuleContext)
 
-	// EnterDateTimeOutputRule is called when entering the DateTimeOutputRule production.
-	EnterDateTimeOutputRule(c *DateTimeOutputRuleContext)
+	// EnterDateTimeAssignmentOutputRule is called when entering the DateTimeAssignmentOutputRule production.
+	EnterDateTimeAssignmentOutputRule(c *DateTimeAssignmentOutputRuleContext)
 
 	// EnterEmptyDateTimeOutputRule is called when entering the EmptyDateTimeOutputRule production.
 	EnterEmptyDateTimeOutputRule(c *EmptyDateTimeOutputRuleContext)
@@ -284,32 +284,32 @@ type SFeelListener interface {
 	// ExitEmptyDateTimeInputRule is called when exiting the EmptyDateTimeInputRule production.
 	ExitEmptyDateTimeInputRule(c *EmptyDateTimeInputRuleContext)
 
-	// ExitIntegerOutputRule is called when exiting the IntegerOutputRule production.
-	ExitIntegerOutputRule(c *IntegerOutputRuleContext)
+	// ExitIntegerAssignmentOutputRule is called when exiting the IntegerAssignmentOutputRule production.
+	ExitIntegerAssignmentOutputRule(c *IntegerAssignmentOutputRuleContext)
 
 	// ExitEmptyIntegerOutputRule is called when exiting the EmptyIntegerOutputRule production.
 	ExitEmptyIntegerOutputRule(c *EmptyIntegerOutputRuleContext)
 
-	// ExitNumberOutputRule is called when exiting the NumberOutputRule production.
-	ExitNumberOutputRule(c *NumberOutputRuleContext)
+	// ExitNumberAssignmentOutputRule is called when exiting the NumberAssignmentOutputRule production.
+	ExitNumberAssignmentOutputRule(c *NumberAssignmentOutputRuleContext)
 
 	// ExitEmptyNumberOutputRule is called when exiting the EmptyNumberOutputRule production.
 	ExitEmptyNumberOutputRule(c *EmptyNumberOutputRuleContext)
 
-	// ExitStringOutputRule is called when exiting the StringOutputRule production.
-	ExitStringOutputRule(c *StringOutputRuleContext)
+	// ExitStringAssignmentOutputRule is called when exiting the StringAssignmentOutputRule production.
+	ExitStringAssignmentOutputRule(c *StringAssignmentOutputRuleContext)
 
 	// ExitEmptyStringOutputRule is called when exiting the EmptyStringOutputRule production.
 	ExitEmptyStringOutputRule(c *EmptyStringOutputRuleContext)
 
-	// ExitBoolOutputRule is called when exiting the BoolOutputRule production.
-	ExitBoolOutputRule(c *BoolOutputRuleContext)
+	// ExitBoolAssignmentOutputRule is called when exiting the BoolAssignmentOutputRule production.
+	ExitBoolAssignmentOutputRule(c *BoolAssignmentOutputRuleContext)
 
 	// ExitEmptyBoolOutputRule is called when exiting the EmptyBoolOutputRule production.
 	ExitEmptyBoolOutputRule(c *EmptyBoolOutputRuleContext)
 
-	// ExitDateTimeOutputRule is called when exiting the DateTimeOutputRule production.
-	ExitDateTimeOutputRule(c *DateTimeOutputRuleContext)
+	// ExitDateTimeAssignmentOutputRule is called when exiting the DateTimeAssignmentOutputRule production.
+	ExitDateTimeAssignmentOutputRule(c *DateTimeAssignmentOutputRuleContext)
 
 	// ExitEmptyDateTimeOutputRule is called when exiting the EmptyDateTimeOutputRule production.
 	ExitEmptyDateTimeOutputRule(c *EmptyDateTimeOutputRuleContext)

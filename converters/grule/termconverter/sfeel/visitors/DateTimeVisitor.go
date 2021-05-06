@@ -109,3 +109,14 @@ func (v *DateTimeVisitor) VisitNegationDateTimeInputRule(ctx *gen.NegationDateTi
 
 	return v.maps.MapNegation(term)
 }
+
+// Assignment Rules
+func (v *DateTimeVisitor) VisitDateTimeAssignmentOutputRule(ctx *gen.DateTimeAssignmentOutputRuleContext) interface{} {
+	val := ctx.Datetime().GetText()
+	format := v.maps.MapDateAndTimeFormat(val)
+	return v.maps.MapAssignment(v.expr, format)
+}
+
+func (v *DateTimeVisitor) VisitEmptyDateTimeOutputRule(ctx *gen.EmptyDateTimeOutputRuleContext) interface{} {
+	return v.maps.MapEmpty(v.expr)
+}

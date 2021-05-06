@@ -64,3 +64,13 @@ func (v *StringVisitor) VisitNegationStringInputRule(ctx *gen.NegationStringInpu
 func (v *StringVisitor) VisitStrings(ctx *gen.StringsContext) interface{} {
 	return ctx.STRING()
 }
+
+// Assignment Rules
+func (v *StringVisitor) VisitStringAssignmentOutputRule(ctx *gen.StringAssignmentOutputRuleContext) interface{} {
+	val := ctx.Strings().GetText()
+	return v.maps.MapAssignment(v.expr, val)
+}
+
+func (v *StringVisitor) VisitEmptyStringOutputRule(ctx *gen.EmptyStringOutputRuleContext) interface{} {
+	return v.maps.MapEmpty(v.expr)
+}

@@ -58,3 +58,53 @@ func TestBoolVisitor_BoolInputRules(t *testing.T) {
 		})
 	}
 }
+
+func TestBoolVisitor_BoolOutputRules(t *testing.T) {
+	type fields struct {
+		term grlmodel.Term
+		maps mapper.TermMapper
+	}
+
+	mapping := mapper.SettingsGRL
+
+	tests := []struct {
+		name string
+		args fields
+		want string
+	}{
+		{"boolean assignment",
+			fields{
+				grlmodel.Term{
+					Name:       "score",
+					Identifier: "credit",
+					Typ:        model.Boolean,
+					Expression: "true",
+				},
+				mapping,
+			},
+			"credit.score = true"},
+		{"boolean empty assignment",
+			fields{
+				grlmodel.Term{
+					Name:       "score",
+					Identifier: "credit",
+					Typ:        model.Boolean,
+					Expression: "-",
+				},
+				mapping,
+			},
+			""},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			prs := parser.CreateSfeelParser(tt.args.term.Expression)
+			tree := prs.Parse().ValidBoolOutput()
+			vis := CreateBoolVisitor(tt.args.term, tt.args.maps)
+
+			if got := tree.Accept(vis).(string); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Error in StringOutputRule() => %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

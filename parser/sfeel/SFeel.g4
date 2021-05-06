@@ -46,27 +46,27 @@ validDateTimeInput
     ;
 
 validIntegerOutput
-    : INTEGER EOF                   # IntegerOutputRule
+    : INTEGER EOF                   # IntegerAssignmentOutputRule
     | '-' EOF                       # EmptyIntegerOutputRule
     ;
 
 validNumberOutput
-    : number EOF                    # NumberOutputRule
+    : number EOF                    # NumberAssignmentOutputRule
     | '-' EOF                       # EmptyNumberOutputRule
     ;
 
 validStringOutput
-    : strings EOF                   # StringOutputRule
+    : strings EOF                   # StringAssignmentOutputRule
     | '-' EOF                       # EmptyStringOutputRule
     ;
 
 validBoolOutput
-    : bools EOF                     # BoolOutputRule
+    : bools EOF                     # BoolAssignmentOutputRule
     | '-' EOF                       # EmptyBoolOutputRule
     ;
 
 validDateTimeOutput
-    : datetime EOF                  # DateTimeOutputRule
+    : datetime EOF                  # DateTimeAssignmentOutputRule
     | '-' EOF                       # EmptyDateTimeOutputRule
     ;
 

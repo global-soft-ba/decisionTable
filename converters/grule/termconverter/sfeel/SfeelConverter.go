@@ -2,23 +2,23 @@ package sfeel
 
 import (
 	"decisionTable/converters/grule/grlmodel"
-	mapper2 "decisionTable/converters/grule/termconverter/sfeel/mapper"
+	"decisionTable/converters/grule/termconverter/sfeel/mapper"
 	"decisionTable/converters/grule/termconverter/sfeel/visitors"
 	"decisionTable/model"
 	"decisionTable/parser/sfeel/parser"
 )
 
 func CreateSfeelTermToGrlConverter() SFeelTermConverter {
-	return SFeelTermConverter{mapper2.SettingsGRL}
+	return SFeelTermConverter{mapper.SettingsGRL}
 }
 
 func CreateSfeelTermToJsonConverter() SFeelTermConverter {
-	return SFeelTermConverter{mapper2.SettingsJSON}
+	return SFeelTermConverter{mapper.SettingsJSON}
 }
 
 // SFeelTermConverter is a converter between the ParseTree and our grl data model
 type SFeelTermConverter struct {
-	maps mapper2.TermMapper
+	maps mapper.TermMapper
 }
 
 func (c SFeelTermConverter) ConvertExpression(expr grlmodel.Term) grlmodel.Term {

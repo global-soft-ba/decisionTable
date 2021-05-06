@@ -197,11 +197,13 @@ func (s *BaseSFeelListener) EnterEmptyDateTimeInputRule(ctx *EmptyDateTimeInputR
 // ExitEmptyDateTimeInputRule is called when production EmptyDateTimeInputRule is exited.
 func (s *BaseSFeelListener) ExitEmptyDateTimeInputRule(ctx *EmptyDateTimeInputRuleContext) {}
 
-// EnterIntegerOutputRule is called when production IntegerOutputRule is entered.
-func (s *BaseSFeelListener) EnterIntegerOutputRule(ctx *IntegerOutputRuleContext) {}
+// EnterIntegerAssignmentOutputRule is called when production IntegerAssignmentOutputRule is entered.
+func (s *BaseSFeelListener) EnterIntegerAssignmentOutputRule(ctx *IntegerAssignmentOutputRuleContext) {
+}
 
-// ExitIntegerOutputRule is called when production IntegerOutputRule is exited.
-func (s *BaseSFeelListener) ExitIntegerOutputRule(ctx *IntegerOutputRuleContext) {}
+// ExitIntegerAssignmentOutputRule is called when production IntegerAssignmentOutputRule is exited.
+func (s *BaseSFeelListener) ExitIntegerAssignmentOutputRule(ctx *IntegerAssignmentOutputRuleContext) {
+}
 
 // EnterEmptyIntegerOutputRule is called when production EmptyIntegerOutputRule is entered.
 func (s *BaseSFeelListener) EnterEmptyIntegerOutputRule(ctx *EmptyIntegerOutputRuleContext) {}
@@ -209,11 +211,11 @@ func (s *BaseSFeelListener) EnterEmptyIntegerOutputRule(ctx *EmptyIntegerOutputR
 // ExitEmptyIntegerOutputRule is called when production EmptyIntegerOutputRule is exited.
 func (s *BaseSFeelListener) ExitEmptyIntegerOutputRule(ctx *EmptyIntegerOutputRuleContext) {}
 
-// EnterNumberOutputRule is called when production NumberOutputRule is entered.
-func (s *BaseSFeelListener) EnterNumberOutputRule(ctx *NumberOutputRuleContext) {}
+// EnterNumberAssignmentOutputRule is called when production NumberAssignmentOutputRule is entered.
+func (s *BaseSFeelListener) EnterNumberAssignmentOutputRule(ctx *NumberAssignmentOutputRuleContext) {}
 
-// ExitNumberOutputRule is called when production NumberOutputRule is exited.
-func (s *BaseSFeelListener) ExitNumberOutputRule(ctx *NumberOutputRuleContext) {}
+// ExitNumberAssignmentOutputRule is called when production NumberAssignmentOutputRule is exited.
+func (s *BaseSFeelListener) ExitNumberAssignmentOutputRule(ctx *NumberAssignmentOutputRuleContext) {}
 
 // EnterEmptyNumberOutputRule is called when production EmptyNumberOutputRule is entered.
 func (s *BaseSFeelListener) EnterEmptyNumberOutputRule(ctx *EmptyNumberOutputRuleContext) {}
@@ -221,11 +223,11 @@ func (s *BaseSFeelListener) EnterEmptyNumberOutputRule(ctx *EmptyNumberOutputRul
 // ExitEmptyNumberOutputRule is called when production EmptyNumberOutputRule is exited.
 func (s *BaseSFeelListener) ExitEmptyNumberOutputRule(ctx *EmptyNumberOutputRuleContext) {}
 
-// EnterStringOutputRule is called when production StringOutputRule is entered.
-func (s *BaseSFeelListener) EnterStringOutputRule(ctx *StringOutputRuleContext) {}
+// EnterStringAssignmentOutputRule is called when production StringAssignmentOutputRule is entered.
+func (s *BaseSFeelListener) EnterStringAssignmentOutputRule(ctx *StringAssignmentOutputRuleContext) {}
 
-// ExitStringOutputRule is called when production StringOutputRule is exited.
-func (s *BaseSFeelListener) ExitStringOutputRule(ctx *StringOutputRuleContext) {}
+// ExitStringAssignmentOutputRule is called when production StringAssignmentOutputRule is exited.
+func (s *BaseSFeelListener) ExitStringAssignmentOutputRule(ctx *StringAssignmentOutputRuleContext) {}
 
 // EnterEmptyStringOutputRule is called when production EmptyStringOutputRule is entered.
 func (s *BaseSFeelListener) EnterEmptyStringOutputRule(ctx *EmptyStringOutputRuleContext) {}
@@ -233,11 +235,11 @@ func (s *BaseSFeelListener) EnterEmptyStringOutputRule(ctx *EmptyStringOutputRul
 // ExitEmptyStringOutputRule is called when production EmptyStringOutputRule is exited.
 func (s *BaseSFeelListener) ExitEmptyStringOutputRule(ctx *EmptyStringOutputRuleContext) {}
 
-// EnterBoolOutputRule is called when production BoolOutputRule is entered.
-func (s *BaseSFeelListener) EnterBoolOutputRule(ctx *BoolOutputRuleContext) {}
+// EnterBoolAssignmentOutputRule is called when production BoolAssignmentOutputRule is entered.
+func (s *BaseSFeelListener) EnterBoolAssignmentOutputRule(ctx *BoolAssignmentOutputRuleContext) {}
 
-// ExitBoolOutputRule is called when production BoolOutputRule is exited.
-func (s *BaseSFeelListener) ExitBoolOutputRule(ctx *BoolOutputRuleContext) {}
+// ExitBoolAssignmentOutputRule is called when production BoolAssignmentOutputRule is exited.
+func (s *BaseSFeelListener) ExitBoolAssignmentOutputRule(ctx *BoolAssignmentOutputRuleContext) {}
 
 // EnterEmptyBoolOutputRule is called when production EmptyBoolOutputRule is entered.
 func (s *BaseSFeelListener) EnterEmptyBoolOutputRule(ctx *EmptyBoolOutputRuleContext) {}
@@ -245,11 +247,13 @@ func (s *BaseSFeelListener) EnterEmptyBoolOutputRule(ctx *EmptyBoolOutputRuleCon
 // ExitEmptyBoolOutputRule is called when production EmptyBoolOutputRule is exited.
 func (s *BaseSFeelListener) ExitEmptyBoolOutputRule(ctx *EmptyBoolOutputRuleContext) {}
 
-// EnterDateTimeOutputRule is called when production DateTimeOutputRule is entered.
-func (s *BaseSFeelListener) EnterDateTimeOutputRule(ctx *DateTimeOutputRuleContext) {}
+// EnterDateTimeAssignmentOutputRule is called when production DateTimeAssignmentOutputRule is entered.
+func (s *BaseSFeelListener) EnterDateTimeAssignmentOutputRule(ctx *DateTimeAssignmentOutputRuleContext) {
+}
 
-// ExitDateTimeOutputRule is called when production DateTimeOutputRule is exited.
-func (s *BaseSFeelListener) ExitDateTimeOutputRule(ctx *DateTimeOutputRuleContext) {}
+// ExitDateTimeAssignmentOutputRule is called when production DateTimeAssignmentOutputRule is exited.
+func (s *BaseSFeelListener) ExitDateTimeAssignmentOutputRule(ctx *DateTimeAssignmentOutputRuleContext) {
+}
 
 // EnterEmptyDateTimeOutputRule is called when production EmptyDateTimeOutputRule is entered.
 func (s *BaseSFeelListener) EnterEmptyDateTimeOutputRule(ctx *EmptyDateTimeOutputRuleContext) {}

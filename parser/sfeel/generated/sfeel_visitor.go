@@ -83,32 +83,32 @@ type SFeelVisitor interface {
 	// Visit a parse tree produced by SFeelParser#EmptyDateTimeInputRule.
 	VisitEmptyDateTimeInputRule(ctx *EmptyDateTimeInputRuleContext) interface{}
 
-	// Visit a parse tree produced by SFeelParser#IntegerOutputRule.
-	VisitIntegerOutputRule(ctx *IntegerOutputRuleContext) interface{}
+	// Visit a parse tree produced by SFeelParser#IntegerAssignmentOutputRule.
+	VisitIntegerAssignmentOutputRule(ctx *IntegerAssignmentOutputRuleContext) interface{}
 
 	// Visit a parse tree produced by SFeelParser#EmptyIntegerOutputRule.
 	VisitEmptyIntegerOutputRule(ctx *EmptyIntegerOutputRuleContext) interface{}
 
-	// Visit a parse tree produced by SFeelParser#NumberOutputRule.
-	VisitNumberOutputRule(ctx *NumberOutputRuleContext) interface{}
+	// Visit a parse tree produced by SFeelParser#NumberAssignmentOutputRule.
+	VisitNumberAssignmentOutputRule(ctx *NumberAssignmentOutputRuleContext) interface{}
 
 	// Visit a parse tree produced by SFeelParser#EmptyNumberOutputRule.
 	VisitEmptyNumberOutputRule(ctx *EmptyNumberOutputRuleContext) interface{}
 
-	// Visit a parse tree produced by SFeelParser#StringOutputRule.
-	VisitStringOutputRule(ctx *StringOutputRuleContext) interface{}
+	// Visit a parse tree produced by SFeelParser#StringAssignmentOutputRule.
+	VisitStringAssignmentOutputRule(ctx *StringAssignmentOutputRuleContext) interface{}
 
 	// Visit a parse tree produced by SFeelParser#EmptyStringOutputRule.
 	VisitEmptyStringOutputRule(ctx *EmptyStringOutputRuleContext) interface{}
 
-	// Visit a parse tree produced by SFeelParser#BoolOutputRule.
-	VisitBoolOutputRule(ctx *BoolOutputRuleContext) interface{}
+	// Visit a parse tree produced by SFeelParser#BoolAssignmentOutputRule.
+	VisitBoolAssignmentOutputRule(ctx *BoolAssignmentOutputRuleContext) interface{}
 
 	// Visit a parse tree produced by SFeelParser#EmptyBoolOutputRule.
 	VisitEmptyBoolOutputRule(ctx *EmptyBoolOutputRuleContext) interface{}
 
-	// Visit a parse tree produced by SFeelParser#DateTimeOutputRule.
-	VisitDateTimeOutputRule(ctx *DateTimeOutputRuleContext) interface{}
+	// Visit a parse tree produced by SFeelParser#DateTimeAssignmentOutputRule.
+	VisitDateTimeAssignmentOutputRule(ctx *DateTimeAssignmentOutputRuleContext) interface{}
 
 	// Visit a parse tree produced by SFeelParser#EmptyDateTimeOutputRule.
 	VisitEmptyDateTimeOutputRule(ctx *EmptyDateTimeOutputRuleContext) interface{}

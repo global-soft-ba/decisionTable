@@ -5,27 +5,9 @@ import (
 	"decisionTable/converters/grule/termconverter/sfeel/mapper"
 	"decisionTable/model"
 	"decisionTable/parser/sfeel/parser"
-	"fmt"
 	"reflect"
 	"testing"
 )
-
-func TestIntegerConverter_GeneralTest(t *testing.T) {
-
-	expr := grlmodel.Term{
-		Name:       "Name",
-		Identifier: "Person",
-		Typ:        model.Integer,
-		Expression: "[1..4]",
-	}
-	prs := parser.CreateSfeelParser(expr.Expression)
-	tree := prs.Parse().ValidIntegerInput()
-	vis := CreateIntegerVisitor(expr, mapper.SettingsGRL)
-	x := tree.Accept(vis).(string)
-
-	fmt.Println("OUT", x)
-
-}
 
 func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 	type fields struct {
@@ -183,6 +165,56 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 
 			if got := tree.Accept(vis).(string); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Error in IntegerInputRule() => %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestIntegerVisitor_IntegerOutputRules(t *testing.T) {
+	type fields struct {
+		term grlmodel.Term
+		maps mapper.TermMapper
+	}
+
+	mapping := mapper.SettingsGRL
+
+	tests := []struct {
+		name string
+		args fields
+		want string
+	}{
+		{"integer assignment",
+			fields{
+				grlmodel.Term{
+					Name:       "score",
+					Identifier: "credit",
+					Typ:        model.Integer,
+					Expression: "1",
+				},
+				mapping,
+			},
+			"credit.score = 1"},
+		{"integer empty assignment",
+			fields{
+				grlmodel.Term{
+					Name:       "score",
+					Identifier: "credit",
+					Typ:        model.Integer,
+					Expression: "-",
+				},
+				mapping,
+			},
+			""},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			prs := parser.CreateSfeelParser(tt.args.term.Expression)
+			tree := prs.Parse().ValidIntegerOutput()
+			vis := CreateIntegerVisitor(tt.args.term, tt.args.maps)
+
+			if got := tree.Accept(vis).(string); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Error in IntegerOutputRule() => %v, want %v", got, tt.want)
 			}
 		})
 	}

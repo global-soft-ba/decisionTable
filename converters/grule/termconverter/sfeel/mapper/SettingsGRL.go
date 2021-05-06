@@ -6,9 +6,10 @@ import (
 
 var SettingsGRL = TermMapper{
 	TargetToken: map[int]string{
-		AND:   "&&",
-		OR:    "||",
-		EQUAL: "==",
+		AND:    "&&",
+		OR:     "||",
+		EQUAL:  "==",
+		ASSIGN: "=",
 	},
 	ComparisonOperators: map[int]string{
 		gen.SFeelLexerLESS:      "<",
@@ -32,5 +33,6 @@ var SettingsGRL = TermMapper{
 		DISJUNCTIONTERM: `({{.}})`,
 		NEGATION:        `!({{.}})`,
 		DATEANDTIME:     `MakeTime({{.Year}},{{.Month}},{{.Day}},{{.Hour}},{{.Minutes}},{{.Seconds}})`,
+		ASSIGNMENT:      `{{.Expr.Identifier}}.{{.Expr.Name}} {{ .Op }} {{ .Val }}`,
 	},
 }

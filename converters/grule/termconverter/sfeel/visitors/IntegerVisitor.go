@@ -106,3 +106,13 @@ func (v *IntegerVisitor) VisitNegationIntegerInputRule(ctx *gen.NegationIntegerI
 
 	return v.maps.MapNegation(term)
 }
+
+// Assignment Rules
+func (v *IntegerVisitor) VisitIntegerAssignmentOutputRule(ctx *gen.IntegerAssignmentOutputRuleContext) interface{} {
+	val := ctx.INTEGER().GetText()
+	return v.maps.MapAssignment(v.expr, val)
+}
+
+func (v *IntegerVisitor) VisitEmptyIntegerOutputRule(ctx *gen.EmptyIntegerOutputRuleContext) interface{} {
+	return v.maps.MapEmpty(v.expr)
+}

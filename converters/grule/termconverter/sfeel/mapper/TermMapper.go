@@ -15,10 +15,11 @@ var (
 
 const (
 
-	//Logical operator token
-	EQUAL = 1
-	AND   = 2
-	OR    = 3
+	// Operator token
+	EQUAL  = 1
+	AND    = 2
+	OR     = 3
+	ASSIGN = 4
 
 	//Operation Templates
 	NEGATION        = 4
@@ -28,6 +29,7 @@ const (
 	DISJUNCTIONS    = 8
 	DISJUNCTIONTERM = 9
 	DATEANDTIME     = 10
+	ASSIGNMENT      = 11
 )
 
 type TemplateData struct {
@@ -135,5 +137,13 @@ func (m TermMapper) MapDateAndTimeFormat(expr string) string {
 		"Minutes": format[5],
 		"Seconds": format[6],
 	}
+	return m.executeTemplate(tmpl, data)
+}
+
+func (m TermMapper) MapAssignment(expr grlmodel.Term, val string) string {
+	tmpl := m.Templates[ASSIGNMENT]
+	op := m.TargetToken[ASSIGN]
+
+	data := TemplateData{expr, op, val}
 	return m.executeTemplate(tmpl, data)
 }

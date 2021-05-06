@@ -105,3 +105,13 @@ func (v *NumberVisitor) VisitNegationNumberInputRule(ctx *gen.NegationNumberInpu
 
 	return v.maps.MapNegation(term)
 }
+
+// Assignment Rules
+func (v *NumberVisitor) VisitNumberAssignmentOutputRule(ctx *gen.NumberAssignmentOutputRuleContext) interface{} {
+	val := ctx.Number().GetText()
+	return v.maps.MapAssignment(v.expr, val)
+}
+
+func (v *NumberVisitor) VisitEmptyNumberOutputRule(ctx *gen.EmptyNumberOutputRuleContext) interface{} {
+	return v.maps.MapEmpty(v.expr)
+}

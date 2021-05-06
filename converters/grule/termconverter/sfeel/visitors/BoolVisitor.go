@@ -24,3 +24,13 @@ func (v *BoolVisitor) VisitEqualComparisonBoolInputRule(ctx *gen.EqualComparison
 func (v *BoolVisitor) VisitEmptyBoolInputRule(ctx *gen.EmptyBoolInputRuleContext) interface{} {
 	return v.maps.MapEmpty(v.expr)
 }
+
+// Assignment Rules
+func (v *BoolVisitor) VisitBoolAssignmentOutputRule(ctx *gen.BoolAssignmentOutputRuleContext) interface{} {
+	val := ctx.Bools().GetText()
+	return v.maps.MapAssignment(v.expr, val)
+}
+
+func (v *BoolVisitor) VisitEmptyBoolOutputRule(ctx *gen.EmptyBoolOutputRuleContext) interface{} {
+	return v.maps.MapEmpty(v.expr)
+}
