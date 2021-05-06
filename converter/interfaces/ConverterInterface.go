@@ -1,4 +1,4 @@
-package converterinterface
+package interfaces
 
 import (
 	"decisionTable/model"

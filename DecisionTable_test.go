@@ -1,8 +1,8 @@
 package main
 
 import (
-	"decisionTable/converter/converterinterface"
 	"decisionTable/converter/grule"
+	"decisionTable/converter/interfaces"
 	"decisionTable/model"
 	"reflect"
 	"testing"
@@ -69,7 +69,7 @@ func TestDecisionTable_Convert(t *testing.T) {
 		Build()
 
 	type args struct {
-		converter converterinterface.ConverterInterface
+		converter interfaces.ConverterInterface
 	}
 	tests := []struct {
 		name    string

@@ -1,8 +1,8 @@
 package converter
 
 import (
-	"decisionTable/converter/converterinterface"
 	"decisionTable/converter/grule"
+	"decisionTable/converter/interfaces"
 	"decisionTable/model"
 	"errors"
 )
@@ -17,7 +17,7 @@ func CreateTableConverterFactory() DTableConverterFactory {
 
 type DTableConverterFactory struct{}
 
-func (c DTableConverterFactory) GetTableConverter(standard model.DTableStandard, format model.OutputFormat) (converterinterface.ConverterInterface, error) {
+func (c DTableConverterFactory) GetTableConverter(standard model.DTableStandard, format model.OutputFormat) (interfaces.ConverterInterface, error) {
 	switch standard {
 	case model.GRULE:
 		conv, err := grule.CreateDTableToGruleConverterFactory().GetFormatConverter(format)

@@ -1,7 +1,7 @@
 package grule
 
 import (
-	intf "decisionTable/converter/converterinterface"
+	intf "decisionTable/converter/interfaces"
 	"decisionTable/model"
 	err "errors"
 )

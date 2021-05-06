@@ -1,7 +1,7 @@
 package main
 
 import (
-	"decisionTable/converter/converterinterface"
+	"decisionTable/converter/interfaces"
 	"decisionTable/model"
 	"errors"
 )
@@ -69,7 +69,7 @@ func (d DecisionTable) Interferences() bool {
 	return d.interferences
 }
 
-func (d DecisionTable) Convert(converter converterinterface.ConverterInterface) (interface{}, error) {
+func (d DecisionTable) Convert(converter interfaces.ConverterInterface) (interface{}, error) {
 
 	if !d.valid {
 		return []string{}, ErrDTableNotValid
