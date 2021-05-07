@@ -45,8 +45,8 @@ table, _ := CreateDecisionTable().
 		Build()
 ```
 
-We assume that the frontend will represent a decision table as a kind of table. In case, that a user changes something in the frontend table, we drop the old decision table representation and rebuild from the new 
-(frontend) table (which was manipulated by the user). By doing so, we don't need any "insert function" for rules/inputs/outputs etc and so it keeps the DecisionTable-Type simple. 
+We assume that the frontend will represent a decision table as a kind of table. In case, that a user changes something in the frontend table, we assume that the old decision table representation will be dropped and then rebuild from the new 
+(frontend) table (which was manipulated by the user). By doing so, we don't need any "insert function" for rules/inputs/outputs etc and so it keeps the DecisionTable-Builder simple. 
 
 ## Hit Policies and Collect Operators
 A decision table consists of several rules, typically represented as rows. When reading such a row we look at certain input values and deduct a certain result represented by output values. 
