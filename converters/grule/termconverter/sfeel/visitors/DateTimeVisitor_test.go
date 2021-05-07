@@ -26,7 +26,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "time",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.DateTime,
 					Expression: `DateAndTime("2021-02-01T13:01:00")`,
 				},
@@ -37,7 +37,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "time",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.DateTime,
 					Expression: `<DateAndTime("2021-01-01T12:00:00")`,
 				},
@@ -48,7 +48,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "time",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.DateTime,
 					Expression: `<=DateAndTime("2021-01-01T12:00:00")`,
 				},
@@ -59,7 +59,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "time",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.DateTime,
 					Expression: `>DateAndTime("2021-01-01T12:00:00")`,
 				},
@@ -70,7 +70,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "time",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.DateTime,
 					Expression: `>=DateAndTime("2021-01-01T12:00:00")`,
 				},
@@ -81,7 +81,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "time",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.DateTime,
 					Expression: "-",
 				},
@@ -92,7 +92,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "time",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.DateTime,
 					Expression: `[DateAndTime("2021-01-01T12:00:00")..DateAndTime("2021-02-01T12:00:00")]`,
 				},
@@ -103,7 +103,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "time",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.DateTime,
 					Expression: `[DateAndTime("2021-01-01T12:00:00")..DateAndTime("2021-02-01T12:00:00")[`,
 				},
@@ -114,7 +114,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "time",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.DateTime,
 					Expression: `]DateAndTime("2021-01-01T12:00:00")..DateAndTime("2021-02-01T12:00:00")[`,
 				},
@@ -125,7 +125,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "time",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.DateTime,
 					Expression: `]DateAndTime("2021-01-01T12:00:00")..DateAndTime("2021-02-01T12:00:00")]`,
 				},
@@ -136,7 +136,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "time",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.DateTime,
 					Expression: `DateAndTime("2021-01-01T12:00:00"),DateAndTime("2021-02-01T12:00:00"),DateAndTime("2021-03-01T12:00:00")`,
 				},
@@ -147,7 +147,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "time",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.DateTime,
 					Expression: `not(DateAndTime("2021-01-01T12:00:00"))`,
 				},
@@ -186,7 +186,7 @@ func TestDateTimeVisitor_DateTimeOutputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "time",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.DateTime,
 					Expression: `DateAndTime("2021-01-01T12:00:00")`,
 				},
@@ -197,7 +197,7 @@ func TestDateTimeVisitor_DateTimeOutputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "time",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.DateTime,
 					Expression: "-",
 				},

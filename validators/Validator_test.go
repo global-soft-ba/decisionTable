@@ -23,15 +23,15 @@ func TestDTableValidator_Validate(t *testing.T) {
 				CollectOperator:  model.List,
 				NotationStandard: model.GRULE,
 				InputFields: []model.Field{{
-					Name:  "I1",
-					Label: "L1",
-					Typ:   model.Integer,
+					Name: "I1",
+					Key:  "L1",
+					Typ:  model.Integer,
 				},
 				},
 				OutputFields: []model.Field{{
-					Name:  "O1",
-					Label: "L1",
-					Typ:   model.Float,
+					Name: "O1",
+					Key:  "L1",
+					Typ:  model.Float,
 				}},
 				Rules: []model.Rule{
 					{
@@ -74,15 +74,15 @@ func TestDTableValidator_Validate(t *testing.T) {
 				HitPolicy:        model.Any,
 				NotationStandard: model.GRULE,
 				InputFields: []model.Field{{
-					Name:  "I1",
-					Label: "L1",
-					Typ:   model.String,
+					Name: "I1",
+					Key:  "L1",
+					Typ:  model.String,
 				},
 				},
 				OutputFields: []model.Field{{
-					Name:  "O1",
-					Label: "L1",
-					Typ:   model.Integer,
+					Name: "O1",
+					Key:  "L1",
+					Typ:  model.Integer,
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
@@ -105,15 +105,15 @@ func TestDTableValidator_Validate(t *testing.T) {
 				CollectOperator:  "XYZ",
 				NotationStandard: model.DMN,
 				InputFields: []model.Field{{
-					Name:  "I1",
-					Label: "L1",
-					Typ:   model.String,
+					Name: "I1",
+					Key:  "L1",
+					Typ:  model.String,
 				},
 				},
 				OutputFields: []model.Field{{
-					Name:  "O1",
-					Label: "L1",
-					Typ:   model.Integer,
+					Name: "O1",
+					Key:  "L1",
+					Typ:  model.Integer,
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
@@ -152,15 +152,15 @@ func TestDTableValidator_Validate(t *testing.T) {
 				HitPolicy:        model.First,
 				NotationStandard: model.GRULE,
 				InputFields: []model.Field{{
-					Name:  "I1",
-					Label: "L1",
-					Typ:   model.Double,
+					Name: "I1",
+					Key:  "L1",
+					Typ:  model.Double,
 				},
 				},
 				OutputFields: []model.Field{{
-					Name:  "",
-					Label: "L1",
-					Typ:   model.Integer,
+					Name: "",
+					Key:  "L1",
+					Typ:  model.Integer,
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
@@ -183,15 +183,15 @@ func TestDTableValidator_Validate(t *testing.T) {
 				NotationStandard: model.GRULE,
 				InputFields: []model.Field{
 					{
-						Name:  "I1",
-						Label: "L1",
-						Typ:   model.String,
+						Name: "I1",
+						Key:  "L1",
+						Typ:  model.String,
 					},
 				},
 				OutputFields: []model.Field{{
-					Name:  "O2",
-					Label: "L1",
-					Typ:   model.Integer,
+					Name: "O2",
+					Key:  "L1",
+					Typ:  model.Integer,
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
@@ -215,15 +215,15 @@ func TestDTableValidator_Validate(t *testing.T) {
 				NotationStandard: model.GRULE,
 				InputFields: []model.Field{
 					{
-						Name:  "I1",
-						Label: "L1",
-						Typ:   model.String,
+						Name: "I1",
+						Key:  "L1",
+						Typ:  model.String,
 					},
 				},
 				OutputFields: []model.Field{{
-					Name:  "O2",
-					Label: "L1",
-					Typ:   model.Integer,
+					Name: "O2",
+					Key:  "L1",
+					Typ:  model.Integer,
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
@@ -247,15 +247,15 @@ func TestDTableValidator_Validate(t *testing.T) {
 				HitPolicy:        model.First,
 				NotationStandard: model.GRULE,
 				InputFields: []model.Field{{
-					Name:  "I1",
-					Label: "L1",
-					Typ:   model.String,
+					Name: "I1",
+					Key:  "L1",
+					Typ:  model.String,
 				},
 				},
 				OutputFields: []model.Field{{
-					Name:  "O2",
-					Label: "L1",
-					Typ:   model.Integer,
+					Name: "O2",
+					Key:  "L1",
+					Typ:  model.Integer,
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
@@ -302,15 +302,15 @@ func TestDTableValidator_ValidateInterferences(t *testing.T) {
 				CollectOperator:  model.List,
 				NotationStandard: model.GRULE,
 				InputFields: []model.Field{{
-					Name:  "I1",
-					Label: "L1",
-					Typ:   model.String,
+					Name: "I1",
+					Key:  "L1",
+					Typ:  model.String,
 				},
 				},
 				OutputFields: []model.Field{{
-					Name:  "O1",
-					Label: "L1",
-					Typ:   model.Float,
+					Name: "O1",
+					Key:  "L1",
+					Typ:  model.Float,
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",

@@ -10,10 +10,11 @@ package templates
 
 */
 
-const RULE = `rule {{ template "RULENAME" . }} {{template "SALIENCE" . }}
-when {{ template "WHEN" .}}
-then {{ template "THEN" .}}
-{{ template "INTERFERENCE" }}`
+const RULE = `rule {{ template "RULENAME" . }} {{template "SALIENCE" . }} {
+ when {{ template "WHEN" .}} 
+ then {{ template "THEN" .}} 
+ {{ template "INTERFERENCE" }}
+}`
 
 const RULENAME = `{{define "RULENAME"}}row_{{ .Name }} "{{ .Description }}"{{end}}`
 

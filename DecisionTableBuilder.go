@@ -36,13 +36,13 @@ func (d DecisionTableBuilder) SetNotationStandard(lang model.DTableStandard) Dec
 }
 
 func (d DecisionTableBuilder) AddInputField(name string, label string, typ model.VariableTyp) DecisionTableBuilderInterface {
-	field := model.Field{Name: name, Label: label, Typ: typ}
+	field := model.Field{Name: name, Key: label, Typ: typ}
 	d.dTableData.InputFields = append(d.dTableData.InputFields, field)
 	return d
 }
 
 func (d DecisionTableBuilder) AddOutputField(name string, label string, typ model.VariableTyp) DecisionTableBuilderInterface {
-	field := model.Field{Name: name, Label: label, Typ: typ}
+	field := model.Field{Name: name, Key: label, Typ: typ}
 	d.dTableData.OutputFields = append(d.dTableData.OutputFields, field)
 	return d
 }

@@ -26,7 +26,7 @@ func TestBoolVisitor_BoolInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Boolean,
 					Expression: "false",
 				},
@@ -37,7 +37,7 @@ func TestBoolVisitor_BoolInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Integer,
 					Expression: "-",
 				},
@@ -76,7 +76,7 @@ func TestBoolVisitor_BoolOutputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Boolean,
 					Expression: "true",
 				},
@@ -87,7 +87,7 @@ func TestBoolVisitor_BoolOutputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Boolean,
 					Expression: "-",
 				},

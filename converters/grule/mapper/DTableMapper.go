@@ -89,7 +89,7 @@ func (c DTableMapper) mapEntryToExpressions(entries []model.Entry, fields []mode
 func (c DTableMapper) mapToExpression(entry model.Entry, field model.Field) (grlmodel.Term, error) {
 	expr := grlmodel.Term{
 		Name:               field.Name,
-		Identifier:         field.Label,
+		Key:                field.Key,
 		Typ:                field.Typ,
 		Expression:         entry.Expression(),
 		ExpressionLanguage: entry.ExpressionLanguage(),

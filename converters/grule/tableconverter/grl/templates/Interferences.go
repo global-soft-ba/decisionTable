@@ -2,4 +2,4 @@ package templates
 
 const INTERFERENCE = `{{define "INTERFERENCE"}}{{end}}`
 
-const NONINTERFERENCE = `{{define "INTERFERENCE"}}  complete();{{end}}`
+const NONINTERFERENCE = `{{define "INTERFERENCE"}} Complete();{{end}}`

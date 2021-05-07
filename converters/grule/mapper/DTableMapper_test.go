@@ -26,15 +26,15 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 					CollectOperator:  model.List,
 					NotationStandard: model.GRULE,
 					InputFields: []model.Field{{
-						Name:  "I1",
-						Label: "L1",
-						Typ:   model.String,
+						Name: "I1",
+						Key:  "L1",
+						Typ:  model.String,
 					},
 					},
 					OutputFields: []model.Field{{
-						Name:  "O1",
-						Label: "L1",
-						Typ:   model.Float,
+						Name: "O1",
+						Key:  "L1",
+						Typ:  model.Float,
 					}},
 					Rules: []model.Rule{{
 						Description: "R1",
@@ -75,26 +75,26 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 					NotationStandard: model.GRULE,
 					InputFields: []model.Field{
 						{
-							Name:  "I1",
-							Label: "L1",
-							Typ:   model.String,
+							Name: "I1",
+							Key:  "L1",
+							Typ:  model.String,
 						},
 						{
-							Name:  "I2",
-							Label: "L1",
-							Typ:   model.String,
+							Name: "I2",
+							Key:  "L1",
+							Typ:  model.String,
 						},
 					},
 					OutputFields: []model.Field{
 						{
-							Name:  "O1",
-							Label: "L1",
-							Typ:   model.Float,
+							Name: "O1",
+							Key:  "L1",
+							Typ:  model.Float,
 						},
 						{
-							Name:  "O2",
-							Label: "L1",
-							Typ:   model.Float,
+							Name: "O2",
+							Key:  "L1",
+							Typ:  model.Float,
 						},
 					},
 					Rules: []model.Rule{
@@ -144,26 +144,26 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 					NotationStandard: model.GRULE,
 					InputFields: []model.Field{
 						{
-							Name:  "I1",
-							Label: "L1",
-							Typ:   model.String,
+							Name: "I1",
+							Key:  "L1",
+							Typ:  model.String,
 						},
 						{
-							Name:  "I2",
-							Label: "L1",
-							Typ:   model.String,
+							Name: "I2",
+							Key:  "L1",
+							Typ:  model.String,
 						},
 					},
 					OutputFields: []model.Field{
 						{
-							Name:  "O1",
-							Label: "L1",
-							Typ:   model.Float,
+							Name: "O1",
+							Key:  "L1",
+							Typ:  model.Float,
 						},
 						{
-							Name:  "O2",
-							Label: "L1",
-							Typ:   model.Float,
+							Name: "O2",
+							Key:  "L1",
+							Typ:  model.Float,
 						},
 					},
 					Rules: []model.Rule{
@@ -237,18 +237,18 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 					CollectOperator:  model.List,
 					NotationStandard: model.GRULE,
 					InputFields: []model.Field{{
-						Name:  "I1",
-						Label: "L1",
-						Typ:   model.String,
+						Name: "I1",
+						Key:  "L1",
+						Typ:  model.String,
 					}},
 					OutputFields: []model.Field{{
-						Name:  "O1",
-						Label: "L1",
-						Typ:   model.Float,
+						Name: "O1",
+						Key:  "L1",
+						Typ:  model.Float,
 					}, {
-						Name:  "O2",
-						Label: "L1",
-						Typ:   model.Float,
+						Name: "O2",
+						Key:  "L1",
+						Typ:  model.Float,
 					}},
 					Rules: []model.Rule{{
 						Description: "R1",
@@ -275,26 +275,26 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 					NotationStandard: model.GRULE,
 					InputFields: []model.Field{
 						{
-							Name:  "I1",
-							Label: "L1",
-							Typ:   model.String,
+							Name: "I1",
+							Key:  "L1",
+							Typ:  model.String,
 						},
 						{
-							Name:  "I2",
-							Label: "L1",
-							Typ:   model.String,
+							Name: "I2",
+							Key:  "L1",
+							Typ:  model.String,
 						},
 					},
 					OutputFields: []model.Field{
 						{
-							Name:  "O1",
-							Label: "L1",
-							Typ:   model.Float,
+							Name: "O1",
+							Key:  "L1",
+							Typ:  model.Float,
 						},
 						{
-							Name:  "O2",
-							Label: "L1",
-							Typ:   model.Float,
+							Name: "O2",
+							Key:  "L1",
+							Typ:  model.Float,
 						},
 					},
 					Rules: []model.Rule{
@@ -369,26 +369,26 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 					NotationStandard: model.GRULE,
 					InputFields: []model.Field{
 						{
-							Name:  "I1",
-							Label: "L1",
-							Typ:   model.String,
+							Name: "I1",
+							Key:  "L1",
+							Typ:  model.String,
 						},
 						{
-							Name:  "I2",
-							Label: "L1",
-							Typ:   model.String,
+							Name: "I2",
+							Key:  "L1",
+							Typ:  model.String,
 						},
 					},
 					OutputFields: []model.Field{
 						{
-							Name:  "O1",
-							Label: "L1",
-							Typ:   model.Float,
+							Name: "O1",
+							Key:  "L1",
+							Typ:  model.Float,
 						},
 						{
-							Name:  "O2",
-							Label: "L1",
-							Typ:   model.Float,
+							Name: "O2",
+							Key:  "L1",
+							Typ:  model.Float,
 						},
 					},
 					Rules: []model.Rule{

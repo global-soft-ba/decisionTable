@@ -26,7 +26,7 @@ func TestStringVisitor_StringInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.String,
 					Expression: `"1"`,
 				},
@@ -38,7 +38,7 @@ func TestStringVisitor_StringInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Integer,
 					Expression: `"1","2","ABC"`,
 				},
@@ -50,7 +50,7 @@ func TestStringVisitor_StringInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Integer,
 					Expression: `not("1")`,
 				},
@@ -61,7 +61,7 @@ func TestStringVisitor_StringInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Integer,
 					Expression: "-",
 				},
@@ -100,7 +100,7 @@ func TestStringVisitor_StringOutputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.String,
 					Expression: `"1"`,
 				},
@@ -111,7 +111,7 @@ func TestStringVisitor_StringOutputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.String,
 					Expression: "-",
 				},

@@ -26,7 +26,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Float,
 					Expression: "<1.2",
 				},
@@ -37,7 +37,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Float,
 					Expression: "<=1.1",
 				},
@@ -48,7 +48,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Float,
 					Expression: ">1.2",
 				},
@@ -59,7 +59,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Float,
 					Expression: ">=1",
 				},
@@ -70,7 +70,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Float,
 					Expression: "-",
 				},
@@ -81,7 +81,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Float,
 					Expression: "1.1",
 				},
@@ -92,7 +92,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Float,
 					Expression: "[1.1..90]",
 				},
@@ -103,7 +103,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Float,
 					Expression: "[1.1..90.1[",
 				},
@@ -114,7 +114,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Float,
 					Expression: "]1.1..90[",
 				},
@@ -125,7 +125,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Integer,
 					Expression: "]1..90]",
 				},
@@ -136,7 +136,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Integer,
 					Expression: "<1,>=2,[3..8],4,7",
 				},
@@ -148,7 +148,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Integer,
 					Expression: "not(1.1)",
 				},
@@ -187,7 +187,7 @@ func TestNumberVisitor_NumberOutputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Float,
 					Expression: "1",
 				},
@@ -198,7 +198,7 @@ func TestNumberVisitor_NumberOutputRules(t *testing.T) {
 			fields{
 				grlmodel.Term{
 					Name:       "score",
-					Identifier: "credit",
+					Key:        "credit",
 					Typ:        model.Float,
 					Expression: "-",
 				},

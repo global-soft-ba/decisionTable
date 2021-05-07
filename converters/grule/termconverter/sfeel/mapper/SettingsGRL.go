@@ -26,13 +26,13 @@ var SettingsGRL = TermMapper{
 		gen.SFeelParserRANGEOUT: `<=`, // ..1]
 	},
 	Templates: map[int]string{
-		EQUALCOMPARISON: `{{.Expr.Identifier}}.{{.Expr.Name}} {{ .Op }} {{ .Val }}`,
-		COMPARISON:      `{{.Expr.Identifier}}.{{.Expr.Name}} {{ .Op }} {{ .Val }}`,
-		RANGES:          `(({{.start.Expr.Identifier}}.{{.start.Expr.Name}} {{.start.Op}} {{.start.Val}}) && ({{.end.Expr.Identifier}}.{{.end.Expr.Name}} {{.end.Op}} {{.end.Val}}))`,
+		EQUALCOMPARISON: `{{.Expr.Key}}.{{.Expr.Name}} {{ .Op }} {{ .Val }}`,
+		COMPARISON:      `{{.Expr.Key}}.{{.Expr.Name}} {{ .Op }} {{ .Val }}`,
+		RANGES:          `(({{.start.Expr.Key}}.{{.start.Expr.Name}} {{.start.Op}} {{.start.Val}}) && ({{.end.Expr.Key}}.{{.end.Expr.Name}} {{.end.Op}} {{.end.Val}}))`,
 		DISJUNCTIONS:    `{{.first}} || {{.second}}`,
 		DISJUNCTIONTERM: `({{.}})`,
 		NEGATION:        `!({{.}})`,
 		DATEANDTIME:     `MakeTime({{.Year}},{{.Month}},{{.Day}},{{.Hour}},{{.Minutes}},{{.Seconds}})`,
-		ASSIGNMENT:      `{{.Expr.Identifier}}.{{.Expr.Name}} {{ .Op }} {{ .Val }}`,
+		ASSIGNMENT:      `{{.Expr.Key}}.{{.Expr.Name}} {{ .Op }} {{ .Val }}`,
 	},
 }

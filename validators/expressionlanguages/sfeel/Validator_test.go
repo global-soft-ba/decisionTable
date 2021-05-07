@@ -34,7 +34,7 @@ func TestValidator_ValidateInputEntry(t *testing.T) {
 		{
 			name: "Valid String Expression",
 			args: args{
-				model.Field{Name: "", Label: "", Typ: model.String},
+				model.Field{Name: "", Key: "", Typ: model.String},
 				model.CreateEntry(`"Hello"`, model.FEEL),
 			},
 			want: true,
@@ -42,7 +42,7 @@ func TestValidator_ValidateInputEntry(t *testing.T) {
 		{
 			name: "Invalid String Expression",
 			args: args{
-				model.Field{Name: "", Label: "", Typ: model.String},
+				model.Field{Name: "", Key: "", Typ: model.String},
 				model.CreateEntry(`<"Hello"`, model.FEEL),
 			},
 			want: false,
@@ -73,7 +73,7 @@ func TestValidator_ValidateOutputEntry(t *testing.T) {
 		{
 			name: "Valid String Expression",
 			args: args{
-				model.Field{Name: "", Label: "", Typ: model.String},
+				model.Field{Name: "", Key: "", Typ: model.String},
 				model.CreateEntry(`"Hello"`, model.FEEL),
 			},
 			want: true,
@@ -81,7 +81,7 @@ func TestValidator_ValidateOutputEntry(t *testing.T) {
 		{
 			name: "Invalid String Expression",
 			args: args{
-				model.Field{Name: "", Label: "", Typ: model.String},
+				model.Field{Name: "", Key: "", Typ: model.String},
 				model.CreateEntry(`"Hello","Hello"`, model.FEEL),
 			},
 			want: false,
@@ -89,7 +89,7 @@ func TestValidator_ValidateOutputEntry(t *testing.T) {
 		{
 			name: "Invalid Integer Expression",
 			args: args{
-				model.Field{Name: "", Label: "", Typ: model.Integer},
+				model.Field{Name: "", Key: "", Typ: model.Integer},
 				model.CreateEntry("1,2", model.FEEL),
 			},
 			want: false,

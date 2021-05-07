@@ -193,7 +193,7 @@ func (d Validator) validateFields(f model.Field) (bool, error) {
 		return false, ErrDTableFieldNameEmpty
 	}
 
-	if len(f.Label) == 0 {
+	if len(f.Key) == 0 {
 		return false, ErrDTableFieldLabelEmpty
 	}
 
@@ -288,7 +288,7 @@ func (d Validator) ValidateContainsInterferences() bool {
 
 func (d Validator) fieldIsContained(field model.Field, setOfFields []model.Field) bool {
 	for _, val := range setOfFields {
-		if (val.Label == field.Label) && (val.Name == field.Name) {
+		if (val.Key == field.Key) && (val.Name == field.Name) {
 			return true
 		}
 	}
