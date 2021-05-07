@@ -36,11 +36,13 @@ func (rb *KnowledgeLib) AddRule(rule string, knowledgeBase string) error {
 type Claim struct {
 	TypeOfClaim        string
 	ExpenditureOfClaim int
+	TimeOfClaim        time.Time
 }
 
 type Employee struct {
 	ResponsibleEmployee string
 	FourEyesPrinciple   bool
+	LastTime            time.Time
 }
 
 func main() {
@@ -52,25 +54,33 @@ func main() {
 		SetHitPolicy(model.Unique).
 		AddInputField("TypeOfClaim", "Claim", model.String).
 		AddInputField("ExpenditureOfClaim", "Claim", model.Integer).
+		AddInputField("TimeOfClaim", "Claim", model.DateTime).
 		AddOutputField("ResponsibleEmployee", "Employee", model.String).
 		AddOutputField("FourEyesPrinciple", "Employee", model.Boolean).
+		AddOutputField("LastTime", "Employee", model.DateTime).
 		AddRule("R1").
 		AddInputEntry(`"Car Accident"`, model.SFEEL).
 		AddInputEntry("<1000", model.SFEEL).
+		AddInputEntry(`>=DateAndTime("2021-01-02T12:00:00")`, model.SFEEL).
 		AddOutputEntry(`"Müller"`, model.SFEEL).
 		AddOutputEntry("false", model.SFEEL).
+		AddOutputEntry(`DateAndTime("2023-01-03T23:59:59")`, model.SFEEL).
 		BuildRule().
 		AddRule("R2").
 		AddInputEntry(`"Car Accident"`, model.SFEEL).
 		AddInputEntry("[1000..10000]", model.SFEEL).
+		AddInputEntry("-", model.SFEEL).
 		AddOutputEntry(`"Schulz"`, model.SFEEL).
 		AddOutputEntry("false", model.SFEEL).
+		AddOutputEntry("-", model.SFEEL).
 		BuildRule().
 		AddRule("R3").
 		AddInputEntry("-", model.SFEEL).
 		AddInputEntry(">=10000", model.SFEEL).
+		AddInputEntry("-", model.SFEEL).
 		AddOutputEntry("-", model.SFEEL).
 		AddOutputEntry("true", model.SFEEL).
+		AddOutputEntry("-", model.SFEEL).
 		BuildRule().
 		Build()
 
@@ -82,6 +92,7 @@ func main() {
 	}
 
 	//Load Library and Insert rules
+	fmt.Println("--------------GRL-RUlES------------------------")
 	kl := CreateKnowledgeLibrary()
 	result := rules.([]string)
 	for _, rule := range result {
@@ -93,9 +104,11 @@ func main() {
 	}
 
 	// Create Example Data
+	timeVal, err := time.Parse("2006-01-02T15:04:05", "2021-01-04T12:00:00")
 	claim := Claim{
 		TypeOfClaim:        "Car Accident",
 		ExpenditureOfClaim: 100,
+		TimeOfClaim:        timeVal,
 	}
 	employee := Employee{}
 
