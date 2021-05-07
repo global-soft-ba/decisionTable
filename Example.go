@@ -84,7 +84,7 @@ func main() {
 		BuildRule().
 		Build()
 
-	// COnvert Table Into Grule Rules
+	// Convert Table Into Grule Rules
 	converter, _ := conv.CreateTableConverterFactory().GetTableConverter(model.GRULE, model.GRL)
 	rules, err := table.Convert(converter)
 	if err != nil {

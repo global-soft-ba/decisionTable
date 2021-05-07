@@ -1,38 +1,47 @@
-# Decision Table Representation
-A representation of a decision table with: 
-* simple data structure
-* no execution - only representation
-* support of DMN and GRULE notation standards
+# Decision Table 
 
-## Table Example
+This library enables the creation and conversion of decision tables in Golang programming language. Inspired by the JBOSS Drools or Camunda DMN Suite. 
+Decions table are commonly used or rather visualized as a table in a UI to represent complex decisions in a more human-readable way. The library can be used as a data representation in Golang for such frontend/UI components. 
+
+Each table represents a complex system of rules. Such systems describe a decision for which input, which output is to be generated. 
+The library allows:
+* The creation of such rules
+* Data-type dependent validation of rule expression
+* Converting into a rule-engine format (to finally execute rules)
+
+
+# Table Example
 ![Image of Decision Table](img.png)
 
-## Code Example
+# Decision Table Builder (Code Example)
 ```
-CreateDecisionTable().
+table, _ := CreateDecisionTable().
 		SetName("Determine Employee").
 		SetDefinitionKey("determineEmployee").
 		SetNotationStandard(model.GRULE).
 		SetHitPolicy(model.Unique).
-		AddInputField("TypeOfClaim", "claim", model.String).
-		AddInputField("ExpenditureOfClaim", "claim", model.Integer).
+		AddInputField("TypeOfClaim", "Claim", model.String).
+		AddInputField("ExpenditureOfClaim", "Claim", model.Integer).
 		AddOutputField("ResponsibleEmployee", "Employee", model.String).
-		AddOutputField("4EyesPrinciple", "Employee", model.Boolean).
+		AddOutputField("FourEyesPrinciple", "Employee", model.Boolean).
 		AddRule("R1").
           AddInputEntry(`"Car Accident"`, model.SFEEL).
           AddInputEntry("<1000", model.SFEEL).
           AddOutputEntry(`"Müller"`, model.SFEEL).
-          AddOutputEntry("false", model.SFEEL).BuildRule().
+          AddOutputEntry("false", model.SFEEL).
+		BuildRule().
 		AddRule("R2").
           AddInputEntry(`"Car Accident"`, model.SFEEL).
           AddInputEntry("[1000..10000]", model.SFEEL).
-          AddOutputEntry(`"Meier"`, model.SFEEL).
-          AddOutputEntry("false", model.SFEEL).BuildRule().
-		AddRule("R3").
+          AddOutputEntry(`"Schulz"`, model.SFEEL).
+          AddOutputEntry("false", model.SFEEL).
+		BuildRule().
+          AddRule("R3").
           AddInputEntry("-", model.SFEEL).
           AddInputEntry(">=10000", model.SFEEL).
           AddOutputEntry("-", model.SFEEL).
-          AddOutputEntry("true", model.SFEEL).BuildRule().
+          AddOutputEntry("true", model.SFEEL).
+		BuildRule().
 		Build()
 ```
 
@@ -69,7 +78,7 @@ Multiple result tables may return the output of multiple rules. The hit policies
 ### Examples
 Examples can be found here: [Camunda Page](https://camunda.com/best-practices/choosing-the-dmn-hit-policy/#_knowing_the_dmn_hit_policy_strong_basics_strong)
 
-## Variable Types
+## Supported Variable Types
 The allowed types of input or output variables differs on the selected notation standard of a decision table:
 
 Variable Types | DMN Notation | GRL Notation
@@ -80,24 +89,23 @@ Integer|X|X
 Float||X   
 Long|X|    
 Double|X|  
-Date|X|X    
+DateTime|X|X    
 
-## Term Languages
-The expresion language defined the functions and comparisons of a single rule entry. It depends on the chosen table notations standard.
-
-Term Language | DMN Notation | GRL Notation   
------------- | ---------------|--------------  	
-SFEEL| |X
-FEEL|X|       
-Javascript|X|
-Python|X|     
-Groovy|X|     
-JRuby|X|      
-Juel|X|       
-       
 More Details can be found here:
 * [GRULE](http://hyperjumptech.viewdocs.io/grule-rule-engine/GRL_en/)
 * [Decision Model and Notation DMN (OMG)](https://www.omg.org/spec/DMN/1.2/PDF)
 
-# SFEEL INPUT EXPRESSIONS
-* [Simple Friendly Enough Term Language (SFEEL)](https://docs.camunda.org/manual/7.4/reference/dmn11/feel/language-elements/)
+## Supported Expression Languages
+The expresion language defined the functions and comparisons of a single rule entry. It depends on the chosen table notations standard.
+So far we support the SFEEL Standard partially. 
+### SFEEL INPUT EXPRESSIONS
+* [Simple Friendly Enough Expression Language (SFEEL)](https://docs.camunda.org/manual/7.4/reference/dmn11/feel/language-elements/)
+
+# Converter for Standards/Engines
+The following converter are supported, so far:
+## ["Gopher Holds The Rules (GRULE)"](http://hyperjumptech.viewdocs.io/grule-rule-engine/GRL_en/)
+```
+// Convert Table Into Grule Rules
+converter, _ := conv.CreateTableConverterFactory().GetTableConverter(model.GRULE, model.GRL)
+rules, err := table.Convert(converter)
+```
