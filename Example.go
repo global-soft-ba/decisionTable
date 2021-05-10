@@ -112,6 +112,11 @@ func main() {
 	}
 	employee := Employee{}
 
+	// CreateEngine Instance
+	ruleEngine := engine.NewGruleEngine()
+	kb := kl.Library.NewKnowledgeBaseInstance("#exampleBase", "0.0.1")
+
+	now := time.Now()
 	// Load example
 	dataCtx := ast.NewDataContext()
 	err = dataCtx.Add("Claim", &claim)
@@ -120,13 +125,7 @@ func main() {
 		fmt.Println("Error:", err)
 	}
 
-	// CreateEngine Instance
-	ruleEngine := engine.NewGruleEngine()
-	kb := kl.Library.NewKnowledgeBaseInstance("#exampleBase", "0.0.1")
-
 	//Execution
-	//ruleEntries, _ := ruleEngine.FetchMatchingRules(dataCtx,kb)
-	now := time.Now()
 	err = ruleEngine.Execute(dataCtx, kb)
 	fmt.Println("--------------OutCome------------------------")
 	fmt.Println("time elapse:", time.Since(now))
