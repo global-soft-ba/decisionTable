@@ -100,6 +100,7 @@ The expresion language defined the functions and comparisons of a single rule en
 So far we support the SFEEL Standard partially. 
 ### SFEEL INPUT EXPRESSIONS
 * [Simple Friendly Enough Expression Language (SFEEL)](https://docs.camunda.org/manual/7.4/reference/dmn11/feel/language-elements/)
+* [Official Standard Document s-FEEL/FEEL (OMG)](https://www.omg.org/spec/DMN/1.3/PDF)
 
 # Converter for Standards/Engines
 The following converter are supported, so far:
