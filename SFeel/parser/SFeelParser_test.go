@@ -41,6 +41,21 @@ func TestASTRepresentation(t *testing.T) {
 			args: args{`true`},
 			want: `=true`,
 		},
+		{
+			name: "less unary statements",
+			args: args{`<1,<3`},
+			want: `<1,<3`,
+		},
+		{
+			name: "not unary statements",
+			args: args{`not(<1,<3)`},
+			want: `not(<1,<3)`,
+		},
+		{
+			name: "empty unary statment",
+			args: args{`-`},
+			want: "",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

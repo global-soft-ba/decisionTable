@@ -10,7 +10,6 @@ import (
 
 func CreateSFeelListener() SFeelListener {
 	listener := SFeelListener{stack: newStack()}
-
 	return listener
 }
 
@@ -21,17 +20,34 @@ type SFeelListener struct {
 }
 
 func (s *SFeelListener) GetAST() ast.Node {
+	if s.stack.length == 0 {
+		return nil
+	}
 	return s.stack.Pop().(ast.Node)
 }
 
-func (s *SFeelListener) ExitNegationSimpleUnaryTests(ctx *gen.NegationSimpleUnaryTestsContext) {
-	val := s.stack.Pop().(ast.UnaryStatements)
-	val.Negation = ast.Rule{
-		Type:    0,
-		Literal: "",
+func (s *SFeelListener) ExitEmptySimpleUnaryTests(ctx *gen.EmptySimpleUnaryTestsContext) {
+	lit := ctx.GetStart().GetText()
+	tkn := ast.Token{
+		Type:    gen.SFeelParserRULE_simple_unary_tests,
+		Literal: lit,
 	}
+	empty := ast.EmptyStatement{ParserToken: tkn}
+	s.stack.Push(empty)
+}
 
-	s.stack.Push(val)
+func (s *SFeelListener) ExitNegationSimpleUnaryTests(ctx *gen.NegationSimpleUnaryTestsContext) {
+	const NEGATIONTOKEN = "not("
+	neg := ctx.GetStart().GetText()
+
+	if neg == NEGATIONTOKEN {
+		val := s.stack.Pop().(ast.DisjunctedUnaryStatements)
+		val.Negation = ast.Rule{
+			Type:    gen.SFeelParserRULE_simple_unary_tests,
+			Literal: neg,
+		}
+		s.stack.Push(val)
+	}
 }
 
 func (s *SFeelListener) ExitSimple_positive_unary_tests(ctx *gen.Simple_positive_unary_testsContext) {
@@ -40,7 +56,7 @@ func (s *SFeelListener) ExitSimple_positive_unary_tests(ctx *gen.Simple_positive
 		Literal: ctx.GetText(),
 	}
 
-	suT := ast.UnaryStatements{ParserRules: prs, Negation: ast.Rule{Type: -1}}
+	suT := ast.DisjunctedUnaryStatements{ParserRules: prs, Negation: ast.Rule{Type: -1}}
 	length := s.stack.Len()
 	for i := 0; i < length; i++ {
 		val := s.stack.Pop().(ast.Node)

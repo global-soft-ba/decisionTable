@@ -2,17 +2,29 @@ package ast
 
 import "bytes"
 
-type UnaryStatements struct {
+type EmptyStatement struct {
+	ParserToken Token
+}
+
+func (l EmptyStatement) ParserLiteral() string {
+	return l.ParserToken.Literal
+}
+
+func (l EmptyStatement) String() string {
+	return ""
+}
+
+type DisjunctedUnaryStatements struct {
 	ParserRules Rule
 	Negation    Rule
 	UnaryTests  []Node
 }
 
-func (l UnaryStatements) ParserLiteral() string {
+func (l DisjunctedUnaryStatements) ParserLiteral() string {
 	return l.ParserRules.Literal
 }
 
-func (l UnaryStatements) String() string {
+func (l DisjunctedUnaryStatements) String() string {
 	var out bytes.Buffer
 
 	for i, val := range l.UnaryTests {
@@ -25,7 +37,6 @@ func (l UnaryStatements) String() string {
 	var out2 bytes.Buffer
 	if l.Negation.Type != -1 {
 		out2.WriteString(l.Negation.Literal)
-		out2.WriteString("(")
 		out2.WriteString(out.String())
 		out2.WriteString(")")
 	} else {
