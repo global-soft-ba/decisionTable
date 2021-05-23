@@ -32,7 +32,7 @@ func (s *SFeelListener) ExitEmptySimpleUnaryTests(ctx *gen.EmptySimpleUnaryTests
 		Type:    gen.SFeelParserRULE_simple_unary_tests,
 		Literal: lit,
 	}
-	empty := ast.EmptyStatement{ParserToken: tkn}
+	empty := ast.EmptyUnaryTest{ParserToken: tkn}
 	s.stack.Push(empty)
 }
 
@@ -41,7 +41,7 @@ func (s *SFeelListener) ExitNegationSimpleUnaryTests(ctx *gen.NegationSimpleUnar
 	neg := ctx.GetStart().GetText()
 
 	if neg == NEGATIONTOKEN {
-		val := s.stack.Pop().(ast.DisjunctedUnaryStatements)
+		val := s.stack.Pop().(ast.UnaryTests)
 		val.Negation = ast.Rule{
 			Type:    gen.SFeelParserRULE_simple_unary_tests,
 			Literal: neg,
@@ -56,7 +56,7 @@ func (s *SFeelListener) ExitSimple_positive_unary_tests(ctx *gen.Simple_positive
 		Literal: ctx.GetText(),
 	}
 
-	suT := ast.DisjunctedUnaryStatements{ParserRules: prs, Negation: ast.Rule{Type: -1}}
+	suT := ast.UnaryTests{ParserRules: prs, Negation: ast.Rule{Type: -1}}
 	length := s.stack.Len()
 	for i := 0; i < length; i++ {
 		val := s.stack.Pop().(ast.Node)
@@ -70,7 +70,7 @@ func (s *SFeelListener) ExitEqualUnaryComparison(ctx *gen.EqualUnaryComparisonCo
 	rule := ast.Rule{Type: gen.SFeelParserRULE_unary_comparison, Literal: ctx.GetText()}
 	val := s.stack.Pop()
 
-	n := ast.UnaryStatement{
+	n := ast.UnaryTest{
 		ParserRule: rule,
 		Operator:   ast.Token{Type: -1},
 		Value:      val.(ast.Node),
@@ -83,7 +83,7 @@ func (s *SFeelListener) ExitUnaryComparison(ctx *gen.UnaryComparisonContext) {
 	op := ast.Token{Type: ctx.GetStart().GetTokenType(), Literal: ctx.GetStart().GetText()}
 	val := s.stack.Pop()
 
-	n := ast.UnaryStatement{
+	n := ast.UnaryTest{
 		ParserRule: prs,
 		Operator:   op,
 		Value:      val.(ast.Node),
@@ -145,15 +145,26 @@ func (s *SFeelListener) ExitNumeric_literal(ctx *gen.Numeric_literalContext) {
 			negInt := n.(ast.Integer)
 			negInt.SignRule = ast.Rule{Type: gen.SFeelParserRULE_numeric_literal, Literal: ctx.GetStart().GetText()}
 			s.stack.Push(negInt)
-		case ast.Real:
+		case ast.Float:
 			n := s.stack.Pop()
-			negReal := n.(ast.Real)
+			negReal := n.(ast.Float)
 			negReal.SignRule = ast.Rule{Type: gen.SFeelParserRULE_numeric_literal, Literal: ctx.GetStart().GetText()}
 			s.stack.Push(negReal)
 		default:
 			s.Errors = append(s.Errors, errors.NewError("unknown numeric data type: %s ", reflect.TypeOf(nType)))
 		}
 	}
+}
+
+func (s *SFeelListener) ExitQualified_name(ctx *gen.Qualified_nameContext) {
+	rule := ast.Rule{Type: gen.SFeelParserRULE_qualified_name, Literal: ctx.GetText()}
+	var names []string
+	for _, val := range ctx.AllName() {
+		names = append(names, val.GetText())
+	}
+
+	q := ast.QualifiedName{ParserRule: rule, Value: names}
+	s.stack.Push(q)
 }
 
 func (s *SFeelListener) ExitInteger_literal(ctx *gen.Integer_literalContext) {
@@ -175,7 +186,7 @@ func (s *SFeelListener) ExitReal_literal(ctx *gen.Real_literalContext) {
 	if err != nil {
 		s.Errors = append(s.Errors, err)
 	} else {
-		n := ast.Real{ParserRule: rule, SignRule: ast.Rule{Type: -1}, Value: val}
+		n := ast.Float{ParserRule: rule, SignRule: ast.Rule{Type: -1}, Value: val}
 		s.stack.Push(n)
 	}
 }
@@ -200,5 +211,6 @@ func (s *SFeelListener) ExitBoolean_literal(ctx *gen.Boolean_literalContext) {
 }
 
 func (s *SFeelListener) ExitDate_time_literal(ctx *gen.Date_time_literalContext) {
+	//ToDo Date-Time Datatype
 	panic("implement me")
 }

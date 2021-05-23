@@ -8,11 +8,21 @@ import (
 
 type QualifiedName struct {
 	ParserRule Rule
-	Value      string
+	Value      []string
 }
 
 func (l QualifiedName) ParserLiteral() string { return l.ParserRule.Literal }
-func (l QualifiedName) String() string        { return l.Value }
+func (l QualifiedName) String() string {
+	var out bytes.Buffer
+	for i, val := range l.Value {
+		if i > 0 {
+			out.WriteString(".")
+		}
+		out.WriteString(val)
+	}
+
+	return out.String()
+}
 
 type Integer struct {
 	ParserRule Rule
@@ -33,17 +43,17 @@ func (l Integer) String() string {
 	return out.String()
 }
 
-type Real struct {
+type Float struct {
 	ParserRule Rule
 	SignRule   Rule
 	Value      float64
 }
 
-func (l Real) ParserLiteral() string {
+func (l Float) ParserLiteral() string {
 	return l.SignRule.Literal + l.ParserRule.Literal
 }
 
-func (l Real) String() string {
+func (l Float) String() string {
 	var out bytes.Buffer
 	if l.SignRule.Type != -1 {
 		out.WriteString(l.SignRule.Literal)

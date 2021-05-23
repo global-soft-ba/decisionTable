@@ -23,7 +23,7 @@ func TestASTRepresentation_InputEntries(t *testing.T) {
 			want: "[1..5]",
 		},
 		{
-			name: "interval real",
+			name: "interval float",
 			args: args{"[1.1..55.1]"},
 			want: "[1.1E+00..5.51E+01]",
 		},
@@ -53,9 +53,19 @@ func TestASTRepresentation_InputEntries(t *testing.T) {
 			want: `not(<1,<3)`,
 		},
 		{
-			name: "empty unary statment",
+			name: "empty unary statement",
 			args: args{`-`},
 			want: "",
+		},
+		{
+			name: "unary statement with qualified_nam",
+			args: args{`<a`},
+			want: "<a",
+		},
+		{
+			name: "unary statement with multiple qualified_names",
+			args: args{`<a.a1.a2`},
+			want: "<a.a1.a2",
 		},
 	}
 	for _, tt := range tests {
