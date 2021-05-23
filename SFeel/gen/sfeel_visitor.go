@@ -8,17 +8,11 @@ import "github.com/antlr/antlr4/runtime/Go/antlr"
 type SFeelVisitor interface {
 	antlr.ParseTreeVisitor
 
-	// Visit a parse tree produced by SFeelParser#start.
-	VisitStart(ctx *StartContext) interface{}
+	// Visit a parse tree produced by SFeelParser#inputEntry.
+	VisitInputEntry(ctx *InputEntryContext) interface{}
 
-	// Visit a parse tree produced by SFeelParser#simple_expressions.
-	VisitSimple_expressions(ctx *Simple_expressionsContext) interface{}
-
-	// Visit a parse tree produced by SFeelParser#expression.
-	VisitExpression(ctx *ExpressionContext) interface{}
-
-	// Visit a parse tree produced by SFeelParser#simple_expression.
-	VisitSimple_expression(ctx *Simple_expressionContext) interface{}
+	// Visit a parse tree produced by SFeelParser#outputEntry.
+	VisitOutputEntry(ctx *OutputEntryContext) interface{}
 
 	// Visit a parse tree produced by SFeelParser#SimpleUnaryTests.
 	VisitSimpleUnaryTests(ctx *SimpleUnaryTestsContext) interface{}
@@ -41,6 +35,30 @@ type SFeelVisitor interface {
 	// Visit a parse tree produced by SFeelParser#EqualUnaryComparison.
 	VisitEqualUnaryComparison(ctx *EqualUnaryComparisonContext) interface{}
 
+	// Visit a parse tree produced by SFeelParser#interval.
+	VisitInterval(ctx *IntervalContext) interface{}
+
+	// Visit a parse tree produced by SFeelParser#open_interval_start.
+	VisitOpen_interval_start(ctx *Open_interval_startContext) interface{}
+
+	// Visit a parse tree produced by SFeelParser#closed_interval_start.
+	VisitClosed_interval_start(ctx *Closed_interval_startContext) interface{}
+
+	// Visit a parse tree produced by SFeelParser#open_interval_end.
+	VisitOpen_interval_end(ctx *Open_interval_endContext) interface{}
+
+	// Visit a parse tree produced by SFeelParser#closed_interval_end.
+	VisitClosed_interval_end(ctx *Closed_interval_endContext) interface{}
+
+	// Visit a parse tree produced by SFeelParser#simple_expressions.
+	VisitSimple_expressions(ctx *Simple_expressionsContext) interface{}
+
+	// Visit a parse tree produced by SFeelParser#expression.
+	VisitExpression(ctx *ExpressionContext) interface{}
+
+	// Visit a parse tree produced by SFeelParser#simple_expression.
+	VisitSimple_expression(ctx *Simple_expressionContext) interface{}
+
 	// Visit a parse tree produced by SFeelParser#comparison.
 	VisitComparison(ctx *ComparisonContext) interface{}
 
@@ -61,21 +79,6 @@ type SFeelVisitor interface {
 
 	// Visit a parse tree produced by SFeelParser#Power.
 	VisitPower(ctx *PowerContext) interface{}
-
-	// Visit a parse tree produced by SFeelParser#interval.
-	VisitInterval(ctx *IntervalContext) interface{}
-
-	// Visit a parse tree produced by SFeelParser#open_interval_start.
-	VisitOpen_interval_start(ctx *Open_interval_startContext) interface{}
-
-	// Visit a parse tree produced by SFeelParser#closed_interval_start.
-	VisitClosed_interval_start(ctx *Closed_interval_startContext) interface{}
-
-	// Visit a parse tree produced by SFeelParser#open_interval_end.
-	VisitOpen_interval_end(ctx *Open_interval_endContext) interface{}
-
-	// Visit a parse tree produced by SFeelParser#closed_interval_end.
-	VisitClosed_interval_end(ctx *Closed_interval_endContext) interface{}
 
 	// Visit a parse tree produced by SFeelParser#endpoint.
 	VisitEndpoint(ctx *EndpointContext) interface{}

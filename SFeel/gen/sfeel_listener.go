@@ -8,17 +8,11 @@ import "github.com/antlr/antlr4/runtime/Go/antlr"
 type SFeelListener interface {
 	antlr.ParseTreeListener
 
-	// EnterStart is called when entering the start production.
-	EnterStart(c *StartContext)
+	// EnterInputEntry is called when entering the inputEntry production.
+	EnterInputEntry(c *InputEntryContext)
 
-	// EnterSimple_expressions is called when entering the simple_expressions production.
-	EnterSimple_expressions(c *Simple_expressionsContext)
-
-	// EnterExpression is called when entering the expression production.
-	EnterExpression(c *ExpressionContext)
-
-	// EnterSimple_expression is called when entering the simple_expression production.
-	EnterSimple_expression(c *Simple_expressionContext)
+	// EnterOutputEntry is called when entering the outputEntry production.
+	EnterOutputEntry(c *OutputEntryContext)
 
 	// EnterSimpleUnaryTests is called when entering the SimpleUnaryTests production.
 	EnterSimpleUnaryTests(c *SimpleUnaryTestsContext)
@@ -41,6 +35,30 @@ type SFeelListener interface {
 	// EnterEqualUnaryComparison is called when entering the EqualUnaryComparison production.
 	EnterEqualUnaryComparison(c *EqualUnaryComparisonContext)
 
+	// EnterInterval is called when entering the interval production.
+	EnterInterval(c *IntervalContext)
+
+	// EnterOpen_interval_start is called when entering the open_interval_start production.
+	EnterOpen_interval_start(c *Open_interval_startContext)
+
+	// EnterClosed_interval_start is called when entering the closed_interval_start production.
+	EnterClosed_interval_start(c *Closed_interval_startContext)
+
+	// EnterOpen_interval_end is called when entering the open_interval_end production.
+	EnterOpen_interval_end(c *Open_interval_endContext)
+
+	// EnterClosed_interval_end is called when entering the closed_interval_end production.
+	EnterClosed_interval_end(c *Closed_interval_endContext)
+
+	// EnterSimple_expressions is called when entering the simple_expressions production.
+	EnterSimple_expressions(c *Simple_expressionsContext)
+
+	// EnterExpression is called when entering the expression production.
+	EnterExpression(c *ExpressionContext)
+
+	// EnterSimple_expression is called when entering the simple_expression production.
+	EnterSimple_expression(c *Simple_expressionContext)
+
 	// EnterComparison is called when entering the comparison production.
 	EnterComparison(c *ComparisonContext)
 
@@ -61,21 +79,6 @@ type SFeelListener interface {
 
 	// EnterPower is called when entering the Power production.
 	EnterPower(c *PowerContext)
-
-	// EnterInterval is called when entering the interval production.
-	EnterInterval(c *IntervalContext)
-
-	// EnterOpen_interval_start is called when entering the open_interval_start production.
-	EnterOpen_interval_start(c *Open_interval_startContext)
-
-	// EnterClosed_interval_start is called when entering the closed_interval_start production.
-	EnterClosed_interval_start(c *Closed_interval_startContext)
-
-	// EnterOpen_interval_end is called when entering the open_interval_end production.
-	EnterOpen_interval_end(c *Open_interval_endContext)
-
-	// EnterClosed_interval_end is called when entering the closed_interval_end production.
-	EnterClosed_interval_end(c *Closed_interval_endContext)
 
 	// EnterEndpoint is called when entering the endpoint production.
 	EnterEndpoint(c *EndpointContext)
@@ -107,17 +110,11 @@ type SFeelListener interface {
 	// EnterString_literal is called when entering the string_literal production.
 	EnterString_literal(c *String_literalContext)
 
-	// ExitStart is called when exiting the start production.
-	ExitStart(c *StartContext)
+	// ExitInputEntry is called when exiting the inputEntry production.
+	ExitInputEntry(c *InputEntryContext)
 
-	// ExitSimple_expressions is called when exiting the simple_expressions production.
-	ExitSimple_expressions(c *Simple_expressionsContext)
-
-	// ExitExpression is called when exiting the expression production.
-	ExitExpression(c *ExpressionContext)
-
-	// ExitSimple_expression is called when exiting the simple_expression production.
-	ExitSimple_expression(c *Simple_expressionContext)
+	// ExitOutputEntry is called when exiting the outputEntry production.
+	ExitOutputEntry(c *OutputEntryContext)
 
 	// ExitSimpleUnaryTests is called when exiting the SimpleUnaryTests production.
 	ExitSimpleUnaryTests(c *SimpleUnaryTestsContext)
@@ -140,6 +137,30 @@ type SFeelListener interface {
 	// ExitEqualUnaryComparison is called when exiting the EqualUnaryComparison production.
 	ExitEqualUnaryComparison(c *EqualUnaryComparisonContext)
 
+	// ExitInterval is called when exiting the interval production.
+	ExitInterval(c *IntervalContext)
+
+	// ExitOpen_interval_start is called when exiting the open_interval_start production.
+	ExitOpen_interval_start(c *Open_interval_startContext)
+
+	// ExitClosed_interval_start is called when exiting the closed_interval_start production.
+	ExitClosed_interval_start(c *Closed_interval_startContext)
+
+	// ExitOpen_interval_end is called when exiting the open_interval_end production.
+	ExitOpen_interval_end(c *Open_interval_endContext)
+
+	// ExitClosed_interval_end is called when exiting the closed_interval_end production.
+	ExitClosed_interval_end(c *Closed_interval_endContext)
+
+	// ExitSimple_expressions is called when exiting the simple_expressions production.
+	ExitSimple_expressions(c *Simple_expressionsContext)
+
+	// ExitExpression is called when exiting the expression production.
+	ExitExpression(c *ExpressionContext)
+
+	// ExitSimple_expression is called when exiting the simple_expression production.
+	ExitSimple_expression(c *Simple_expressionContext)
+
 	// ExitComparison is called when exiting the comparison production.
 	ExitComparison(c *ComparisonContext)
 
@@ -160,21 +181,6 @@ type SFeelListener interface {
 
 	// ExitPower is called when exiting the Power production.
 	ExitPower(c *PowerContext)
-
-	// ExitInterval is called when exiting the interval production.
-	ExitInterval(c *IntervalContext)
-
-	// ExitOpen_interval_start is called when exiting the open_interval_start production.
-	ExitOpen_interval_start(c *Open_interval_startContext)
-
-	// ExitClosed_interval_start is called when exiting the closed_interval_start production.
-	ExitClosed_interval_start(c *Closed_interval_startContext)
-
-	// ExitOpen_interval_end is called when exiting the open_interval_end production.
-	ExitOpen_interval_end(c *Open_interval_endContext)
-
-	// ExitClosed_interval_end is called when exiting the closed_interval_end production.
-	ExitClosed_interval_end(c *Closed_interval_endContext)
 
 	// ExitEndpoint is called when exiting the endpoint production.
 	ExitEndpoint(c *EndpointContext)

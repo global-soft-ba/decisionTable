@@ -21,92 +21,91 @@ var parserATN = []uint16{
 	4, 8, 9, 8, 4, 9, 9, 9, 4, 10, 9, 10, 4, 11, 9, 11, 4, 12, 9, 12, 4, 13,
 	9, 13, 4, 14, 9, 14, 4, 15, 9, 15, 4, 16, 9, 16, 4, 17, 9, 17, 4, 18, 9,
 	18, 4, 19, 9, 19, 4, 20, 9, 20, 4, 21, 9, 21, 4, 22, 9, 22, 4, 23, 9, 23,
-	4, 24, 9, 24, 4, 25, 9, 25, 4, 26, 9, 26, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2,
-	3, 2, 5, 2, 59, 10, 2, 3, 3, 3, 3, 3, 3, 7, 3, 64, 10, 3, 12, 3, 14, 3,
-	67, 11, 3, 3, 4, 3, 4, 3, 5, 3, 5, 3, 5, 5, 5, 74, 10, 5, 3, 6, 3, 6, 3,
-	6, 3, 6, 3, 6, 3, 6, 5, 6, 82, 10, 6, 3, 7, 3, 7, 3, 7, 7, 7, 87, 10, 7,
-	12, 7, 14, 7, 90, 11, 7, 3, 8, 3, 8, 5, 8, 94, 10, 8, 3, 9, 3, 9, 3, 9,
-	5, 9, 99, 10, 9, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10, 3, 10,
-	3, 10, 5, 10, 110, 10, 10, 3, 10, 3, 10, 3, 10, 7, 10, 115, 10, 10, 12,
-	10, 14, 10, 118, 11, 10, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11,
-	3, 11, 5, 11, 128, 10, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3, 11, 3,
-	11, 3, 11, 3, 11, 7, 11, 139, 10, 11, 12, 11, 14, 11, 142, 11, 11, 3, 12,
-	3, 12, 5, 12, 146, 10, 12, 3, 12, 3, 12, 3, 12, 3, 12, 3, 12, 5, 12, 153,
-	10, 12, 3, 13, 3, 13, 3, 14, 3, 14, 3, 15, 3, 15, 3, 16, 3, 16, 3, 17,
-	3, 17, 3, 18, 3, 18, 5, 18, 167, 10, 18, 3, 19, 3, 19, 3, 19, 7, 19, 172,
-	10, 19, 12, 19, 14, 19, 175, 11, 19, 3, 20, 3, 20, 3, 20, 3, 20, 5, 20,
-	181, 10, 20, 3, 21, 3, 21, 3, 21, 3, 21, 3, 21, 3, 22, 5, 22, 189, 10,
-	22, 3, 22, 3, 22, 5, 22, 193, 10, 22, 3, 23, 3, 23, 3, 24, 3, 24, 3, 25,
-	3, 25, 3, 26, 6, 26, 202, 10, 26, 13, 26, 14, 26, 203, 3, 26, 2, 4, 18,
-	20, 27, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34,
-	36, 38, 40, 42, 44, 46, 48, 50, 2, 10, 3, 2, 23, 26, 3, 2, 23, 28, 3, 2,
-	19, 20, 3, 2, 21, 22, 4, 2, 6, 6, 8, 8, 4, 2, 5, 5, 9, 9, 3, 2, 11, 14,
-	3, 2, 15, 16, 2, 206, 2, 58, 3, 2, 2, 2, 4, 60, 3, 2, 2, 2, 6, 68, 3, 2,
-	2, 2, 8, 73, 3, 2, 2, 2, 10, 81, 3, 2, 2, 2, 12, 83, 3, 2, 2, 2, 14, 93,
-	3, 2, 2, 2, 16, 98, 3, 2, 2, 2, 18, 109, 3, 2, 2, 2, 20, 127, 3, 2, 2,
-	2, 22, 145, 3, 2, 2, 2, 24, 154, 3, 2, 2, 2, 26, 156, 3, 2, 2, 2, 28, 158,
-	3, 2, 2, 2, 30, 160, 3, 2, 2, 2, 32, 162, 3, 2, 2, 2, 34, 166, 3, 2, 2,
-	2, 36, 168, 3, 2, 2, 2, 38, 180, 3, 2, 2, 2, 40, 182, 3, 2, 2, 2, 42, 188,
-	3, 2, 2, 2, 44, 194, 3, 2, 2, 2, 46, 196, 3, 2, 2, 2, 48, 198, 3, 2, 2,
-	2, 50, 201, 3, 2, 2, 2, 52, 53, 5, 10, 6, 2, 53, 54, 7, 2, 2, 3, 54, 59,
-	3, 2, 2, 2, 55, 56, 5, 4, 3, 2, 56, 57, 7, 2, 2, 3, 57, 59, 3, 2, 2, 2,
-	58, 52, 3, 2, 2, 2, 58, 55, 3, 2, 2, 2, 59, 3, 3, 2, 2, 2, 60, 65, 5, 8,
-	5, 2, 61, 62, 7, 3, 2, 2, 62, 64, 5, 8, 5, 2, 63, 61, 3, 2, 2, 2, 64, 67,
-	3, 2, 2, 2, 65, 63, 3, 2, 2, 2, 65, 66, 3, 2, 2, 2, 66, 5, 3, 2, 2, 2,
-	67, 65, 3, 2, 2, 2, 68, 69, 5, 8, 5, 2, 69, 7, 3, 2, 2, 2, 70, 74, 5, 20,
-	11, 2, 71, 74, 5, 34, 18, 2, 72, 74, 5, 18, 10, 2, 73, 70, 3, 2, 2, 2,
-	73, 71, 3, 2, 2, 2, 73, 72, 3, 2, 2, 2, 74, 9, 3, 2, 2, 2, 75, 82, 5, 12,
-	7, 2, 76, 77, 7, 4, 2, 2, 77, 78, 5, 12, 7, 2, 78, 79, 7, 5, 2, 2, 79,
-	82, 3, 2, 2, 2, 80, 82, 7, 22, 2, 2, 81, 75, 3, 2, 2, 2, 81, 76, 3, 2,
-	2, 2, 81, 80, 3, 2, 2, 2, 82, 11, 3, 2, 2, 2, 83, 88, 5, 14, 8, 2, 84,
-	85, 7, 3, 2, 2, 85, 87, 5, 14, 8, 2, 86, 84, 3, 2, 2, 2, 87, 90, 3, 2,
-	2, 2, 88, 86, 3, 2, 2, 2, 88, 89, 3, 2, 2, 2, 89, 13, 3, 2, 2, 2, 90, 88,
-	3, 2, 2, 2, 91, 94, 5, 16, 9, 2, 92, 94, 5, 22, 12, 2, 93, 91, 3, 2, 2,
-	2, 93, 92, 3, 2, 2, 2, 94, 15, 3, 2, 2, 2, 95, 96, 9, 2, 2, 2, 96, 99,
-	5, 32, 17, 2, 97, 99, 5, 32, 17, 2, 98, 95, 3, 2, 2, 2, 98, 97, 3, 2, 2,
-	2, 99, 17, 3, 2, 2, 2, 100, 101, 8, 10, 1, 2, 101, 102, 5, 34, 18, 2, 102,
-	103, 9, 3, 2, 2, 103, 104, 5, 6, 4, 2, 104, 110, 3, 2, 2, 2, 105, 106,
-	5, 20, 11, 2, 106, 107, 9, 3, 2, 2, 107, 108, 5, 6, 4, 2, 108, 110, 3,
-	2, 2, 2, 109, 100, 3, 2, 2, 2, 109, 105, 3, 2, 2, 2, 110, 116, 3, 2, 2,
-	2, 111, 112, 12, 3, 2, 2, 112, 113, 9, 3, 2, 2, 113, 115, 5, 6, 4, 2, 114,
-	111, 3, 2, 2, 2, 115, 118, 3, 2, 2, 2, 116, 114, 3, 2, 2, 2, 116, 117,
-	3, 2, 2, 2, 117, 19, 3, 2, 2, 2, 118, 116, 3, 2, 2, 2, 119, 120, 8, 11,
-	1, 2, 120, 128, 5, 34, 18, 2, 121, 122, 7, 6, 2, 2, 122, 123, 5, 20, 11,
-	2, 123, 124, 7, 5, 2, 2, 124, 128, 3, 2, 2, 2, 125, 126, 7, 22, 2, 2, 126,
-	128, 5, 20, 11, 6, 127, 119, 3, 2, 2, 2, 127, 121, 3, 2, 2, 2, 127, 125,
-	3, 2, 2, 2, 128, 140, 3, 2, 2, 2, 129, 130, 12, 5, 2, 2, 130, 131, 7, 18,
-	2, 2, 131, 139, 5, 20, 11, 6, 132, 133, 12, 4, 2, 2, 133, 134, 9, 4, 2,
-	2, 134, 139, 5, 20, 11, 5, 135, 136, 12, 3, 2, 2, 136, 137, 9, 5, 2, 2,
-	137, 139, 5, 20, 11, 4, 138, 129, 3, 2, 2, 2, 138, 132, 3, 2, 2, 2, 138,
-	135, 3, 2, 2, 2, 139, 142, 3, 2, 2, 2, 140, 138, 3, 2, 2, 2, 140, 141,
-	3, 2, 2, 2, 141, 21, 3, 2, 2, 2, 142, 140, 3, 2, 2, 2, 143, 146, 5, 24,
-	13, 2, 144, 146, 5, 26, 14, 2, 145, 143, 3, 2, 2, 2, 145, 144, 3, 2, 2,
-	2, 146, 147, 3, 2, 2, 2, 147, 148, 5, 32, 17, 2, 148, 149, 7, 7, 2, 2,
-	149, 152, 5, 32, 17, 2, 150, 153, 5, 28, 15, 2, 151, 153, 5, 30, 16, 2,
-	152, 150, 3, 2, 2, 2, 152, 151, 3, 2, 2, 2, 153, 23, 3, 2, 2, 2, 154, 155,
-	9, 6, 2, 2, 155, 25, 3, 2, 2, 2, 156, 157, 7, 9, 2, 2, 157, 27, 3, 2, 2,
-	2, 158, 159, 9, 7, 2, 2, 159, 29, 3, 2, 2, 2, 160, 161, 7, 8, 2, 2, 161,
-	31, 3, 2, 2, 2, 162, 163, 5, 34, 18, 2, 163, 33, 3, 2, 2, 2, 164, 167,
-	5, 36, 19, 2, 165, 167, 5, 38, 20, 2, 166, 164, 3, 2, 2, 2, 166, 165, 3,
-	2, 2, 2, 167, 35, 3, 2, 2, 2, 168, 173, 7, 17, 2, 2, 169, 170, 7, 10, 2,
-	2, 170, 172, 7, 17, 2, 2, 171, 169, 3, 2, 2, 2, 172, 175, 3, 2, 2, 2, 173,
-	171, 3, 2, 2, 2, 173, 174, 3, 2, 2, 2, 174, 37, 3, 2, 2, 2, 175, 173, 3,
-	2, 2, 2, 176, 181, 5, 42, 22, 2, 177, 181, 5, 50, 26, 2, 178, 181, 5, 48,
-	25, 2, 179, 181, 5, 40, 21, 2, 180, 176, 3, 2, 2, 2, 180, 177, 3, 2, 2,
-	2, 180, 178, 3, 2, 2, 2, 180, 179, 3, 2, 2, 2, 181, 39, 3, 2, 2, 2, 182,
-	183, 9, 8, 2, 2, 183, 184, 7, 6, 2, 2, 184, 185, 5, 50, 26, 2, 185, 186,
-	7, 5, 2, 2, 186, 41, 3, 2, 2, 2, 187, 189, 7, 22, 2, 2, 188, 187, 3, 2,
-	2, 2, 188, 189, 3, 2, 2, 2, 189, 192, 3, 2, 2, 2, 190, 193, 5, 44, 23,
-	2, 191, 193, 5, 46, 24, 2, 192, 190, 3, 2, 2, 2, 192, 191, 3, 2, 2, 2,
-	193, 43, 3, 2, 2, 2, 194, 195, 7, 29, 2, 2, 195, 45, 3, 2, 2, 2, 196, 197,
-	7, 30, 2, 2, 197, 47, 3, 2, 2, 2, 198, 199, 9, 9, 2, 2, 199, 49, 3, 2,
-	2, 2, 200, 202, 7, 31, 2, 2, 201, 200, 3, 2, 2, 2, 202, 203, 3, 2, 2, 2,
-	203, 201, 3, 2, 2, 2, 203, 204, 3, 2, 2, 2, 204, 51, 3, 2, 2, 2, 22, 58,
-	65, 73, 81, 88, 93, 98, 109, 116, 127, 138, 140, 145, 152, 166, 173, 180,
-	188, 192, 203,
+	4, 24, 9, 24, 4, 25, 9, 25, 4, 26, 9, 26, 4, 27, 9, 27, 3, 2, 3, 2, 3,
+	2, 3, 3, 3, 3, 3, 3, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 3, 4, 5, 4, 67, 10,
+	4, 3, 5, 3, 5, 3, 5, 7, 5, 72, 10, 5, 12, 5, 14, 5, 75, 11, 5, 3, 6, 3,
+	6, 5, 6, 79, 10, 6, 3, 7, 3, 7, 3, 7, 5, 7, 84, 10, 7, 3, 8, 3, 8, 5, 8,
+	88, 10, 8, 3, 8, 3, 8, 3, 8, 3, 8, 3, 8, 5, 8, 95, 10, 8, 3, 9, 3, 9, 3,
+	10, 3, 10, 3, 11, 3, 11, 3, 12, 3, 12, 3, 13, 3, 13, 3, 13, 7, 13, 108,
+	10, 13, 12, 13, 14, 13, 111, 11, 13, 3, 14, 3, 14, 3, 15, 3, 15, 3, 15,
+	5, 15, 118, 10, 15, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16, 3,
+	16, 3, 16, 5, 16, 129, 10, 16, 3, 16, 3, 16, 3, 16, 7, 16, 134, 10, 16,
+	12, 16, 14, 16, 137, 11, 16, 3, 17, 3, 17, 3, 17, 3, 17, 3, 17, 3, 17,
+	3, 17, 3, 17, 5, 17, 147, 10, 17, 3, 17, 3, 17, 3, 17, 3, 17, 3, 17, 3,
+	17, 3, 17, 3, 17, 3, 17, 7, 17, 158, 10, 17, 12, 17, 14, 17, 161, 11, 17,
+	3, 18, 3, 18, 3, 19, 3, 19, 5, 19, 167, 10, 19, 3, 20, 3, 20, 3, 20, 7,
+	20, 172, 10, 20, 12, 20, 14, 20, 175, 11, 20, 3, 21, 3, 21, 3, 21, 3, 21,
+	5, 21, 181, 10, 21, 3, 22, 3, 22, 3, 22, 3, 22, 3, 22, 3, 23, 5, 23, 189,
+	10, 23, 3, 23, 3, 23, 5, 23, 193, 10, 23, 3, 24, 3, 24, 3, 25, 3, 25, 3,
+	26, 3, 26, 3, 27, 6, 27, 202, 10, 27, 13, 27, 14, 27, 203, 3, 27, 2, 4,
+	30, 32, 28, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32,
+	34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 2, 10, 3, 2, 23, 26, 3, 2, 7, 8,
+	4, 2, 4, 4, 9, 9, 3, 2, 23, 28, 3, 2, 19, 20, 3, 2, 21, 22, 3, 2, 11, 14,
+	3, 2, 15, 16, 2, 204, 2, 54, 3, 2, 2, 2, 4, 57, 3, 2, 2, 2, 6, 66, 3, 2,
+	2, 2, 8, 68, 3, 2, 2, 2, 10, 78, 3, 2, 2, 2, 12, 83, 3, 2, 2, 2, 14, 87,
+	3, 2, 2, 2, 16, 96, 3, 2, 2, 2, 18, 98, 3, 2, 2, 2, 20, 100, 3, 2, 2, 2,
+	22, 102, 3, 2, 2, 2, 24, 104, 3, 2, 2, 2, 26, 112, 3, 2, 2, 2, 28, 117,
+	3, 2, 2, 2, 30, 128, 3, 2, 2, 2, 32, 146, 3, 2, 2, 2, 34, 162, 3, 2, 2,
+	2, 36, 166, 3, 2, 2, 2, 38, 168, 3, 2, 2, 2, 40, 180, 3, 2, 2, 2, 42, 182,
+	3, 2, 2, 2, 44, 188, 3, 2, 2, 2, 46, 194, 3, 2, 2, 2, 48, 196, 3, 2, 2,
+	2, 50, 198, 3, 2, 2, 2, 52, 201, 3, 2, 2, 2, 54, 55, 5, 6, 4, 2, 55, 56,
+	7, 2, 2, 3, 56, 3, 3, 2, 2, 2, 57, 58, 5, 24, 13, 2, 58, 59, 7, 2, 2, 3,
+	59, 5, 3, 2, 2, 2, 60, 67, 5, 8, 5, 2, 61, 62, 7, 3, 2, 2, 62, 63, 5, 8,
+	5, 2, 63, 64, 7, 4, 2, 2, 64, 67, 3, 2, 2, 2, 65, 67, 7, 22, 2, 2, 66,
+	60, 3, 2, 2, 2, 66, 61, 3, 2, 2, 2, 66, 65, 3, 2, 2, 2, 67, 7, 3, 2, 2,
+	2, 68, 73, 5, 10, 6, 2, 69, 70, 7, 5, 2, 2, 70, 72, 5, 10, 6, 2, 71, 69,
+	3, 2, 2, 2, 72, 75, 3, 2, 2, 2, 73, 71, 3, 2, 2, 2, 73, 74, 3, 2, 2, 2,
+	74, 9, 3, 2, 2, 2, 75, 73, 3, 2, 2, 2, 76, 79, 5, 12, 7, 2, 77, 79, 5,
+	14, 8, 2, 78, 76, 3, 2, 2, 2, 78, 77, 3, 2, 2, 2, 79, 11, 3, 2, 2, 2, 80,
+	81, 9, 2, 2, 2, 81, 84, 5, 34, 18, 2, 82, 84, 5, 34, 18, 2, 83, 80, 3,
+	2, 2, 2, 83, 82, 3, 2, 2, 2, 84, 13, 3, 2, 2, 2, 85, 88, 5, 16, 9, 2, 86,
+	88, 5, 18, 10, 2, 87, 85, 3, 2, 2, 2, 87, 86, 3, 2, 2, 2, 88, 89, 3, 2,
+	2, 2, 89, 90, 5, 34, 18, 2, 90, 91, 7, 6, 2, 2, 91, 94, 5, 34, 18, 2, 92,
+	95, 5, 20, 11, 2, 93, 95, 5, 22, 12, 2, 94, 92, 3, 2, 2, 2, 94, 93, 3,
+	2, 2, 2, 95, 15, 3, 2, 2, 2, 96, 97, 9, 3, 2, 2, 97, 17, 3, 2, 2, 2, 98,
+	99, 7, 9, 2, 2, 99, 19, 3, 2, 2, 2, 100, 101, 9, 4, 2, 2, 101, 21, 3, 2,
+	2, 2, 102, 103, 7, 8, 2, 2, 103, 23, 3, 2, 2, 2, 104, 109, 5, 28, 15, 2,
+	105, 106, 7, 5, 2, 2, 106, 108, 5, 28, 15, 2, 107, 105, 3, 2, 2, 2, 108,
+	111, 3, 2, 2, 2, 109, 107, 3, 2, 2, 2, 109, 110, 3, 2, 2, 2, 110, 25, 3,
+	2, 2, 2, 111, 109, 3, 2, 2, 2, 112, 113, 5, 28, 15, 2, 113, 27, 3, 2, 2,
+	2, 114, 118, 5, 32, 17, 2, 115, 118, 5, 36, 19, 2, 116, 118, 5, 30, 16,
+	2, 117, 114, 3, 2, 2, 2, 117, 115, 3, 2, 2, 2, 117, 116, 3, 2, 2, 2, 118,
+	29, 3, 2, 2, 2, 119, 120, 8, 16, 1, 2, 120, 121, 5, 36, 19, 2, 121, 122,
+	9, 5, 2, 2, 122, 123, 5, 26, 14, 2, 123, 129, 3, 2, 2, 2, 124, 125, 5,
+	32, 17, 2, 125, 126, 9, 5, 2, 2, 126, 127, 5, 26, 14, 2, 127, 129, 3, 2,
+	2, 2, 128, 119, 3, 2, 2, 2, 128, 124, 3, 2, 2, 2, 129, 135, 3, 2, 2, 2,
+	130, 131, 12, 3, 2, 2, 131, 132, 9, 5, 2, 2, 132, 134, 5, 26, 14, 2, 133,
+	130, 3, 2, 2, 2, 134, 137, 3, 2, 2, 2, 135, 133, 3, 2, 2, 2, 135, 136,
+	3, 2, 2, 2, 136, 31, 3, 2, 2, 2, 137, 135, 3, 2, 2, 2, 138, 139, 8, 17,
+	1, 2, 139, 147, 5, 36, 19, 2, 140, 141, 7, 7, 2, 2, 141, 142, 5, 32, 17,
+	2, 142, 143, 7, 4, 2, 2, 143, 147, 3, 2, 2, 2, 144, 145, 7, 22, 2, 2, 145,
+	147, 5, 32, 17, 6, 146, 138, 3, 2, 2, 2, 146, 140, 3, 2, 2, 2, 146, 144,
+	3, 2, 2, 2, 147, 159, 3, 2, 2, 2, 148, 149, 12, 5, 2, 2, 149, 150, 7, 18,
+	2, 2, 150, 158, 5, 32, 17, 6, 151, 152, 12, 4, 2, 2, 152, 153, 9, 6, 2,
+	2, 153, 158, 5, 32, 17, 5, 154, 155, 12, 3, 2, 2, 155, 156, 9, 7, 2, 2,
+	156, 158, 5, 32, 17, 4, 157, 148, 3, 2, 2, 2, 157, 151, 3, 2, 2, 2, 157,
+	154, 3, 2, 2, 2, 158, 161, 3, 2, 2, 2, 159, 157, 3, 2, 2, 2, 159, 160,
+	3, 2, 2, 2, 160, 33, 3, 2, 2, 2, 161, 159, 3, 2, 2, 2, 162, 163, 5, 36,
+	19, 2, 163, 35, 3, 2, 2, 2, 164, 167, 5, 38, 20, 2, 165, 167, 5, 40, 21,
+	2, 166, 164, 3, 2, 2, 2, 166, 165, 3, 2, 2, 2, 167, 37, 3, 2, 2, 2, 168,
+	173, 7, 17, 2, 2, 169, 170, 7, 10, 2, 2, 170, 172, 7, 17, 2, 2, 171, 169,
+	3, 2, 2, 2, 172, 175, 3, 2, 2, 2, 173, 171, 3, 2, 2, 2, 173, 174, 3, 2,
+	2, 2, 174, 39, 3, 2, 2, 2, 175, 173, 3, 2, 2, 2, 176, 181, 5, 44, 23, 2,
+	177, 181, 5, 52, 27, 2, 178, 181, 5, 50, 26, 2, 179, 181, 5, 42, 22, 2,
+	180, 176, 3, 2, 2, 2, 180, 177, 3, 2, 2, 2, 180, 178, 3, 2, 2, 2, 180,
+	179, 3, 2, 2, 2, 181, 41, 3, 2, 2, 2, 182, 183, 9, 8, 2, 2, 183, 184, 7,
+	7, 2, 2, 184, 185, 5, 52, 27, 2, 185, 186, 7, 4, 2, 2, 186, 43, 3, 2, 2,
+	2, 187, 189, 7, 22, 2, 2, 188, 187, 3, 2, 2, 2, 188, 189, 3, 2, 2, 2, 189,
+	192, 3, 2, 2, 2, 190, 193, 5, 46, 24, 2, 191, 193, 5, 48, 25, 2, 192, 190,
+	3, 2, 2, 2, 192, 191, 3, 2, 2, 2, 193, 45, 3, 2, 2, 2, 194, 195, 7, 29,
+	2, 2, 195, 47, 3, 2, 2, 2, 196, 197, 7, 30, 2, 2, 197, 49, 3, 2, 2, 2,
+	198, 199, 9, 9, 2, 2, 199, 51, 3, 2, 2, 2, 200, 202, 7, 31, 2, 2, 201,
+	200, 3, 2, 2, 2, 202, 203, 3, 2, 2, 2, 203, 201, 3, 2, 2, 2, 203, 204,
+	3, 2, 2, 2, 204, 53, 3, 2, 2, 2, 21, 66, 73, 78, 83, 87, 94, 109, 117,
+	128, 135, 146, 157, 159, 166, 173, 180, 188, 192, 203,
 }
 var literalNames = []string{
-	"", "','", "'not('", "')'", "'('", "'..'", "']'", "'['", "'.'", "'date'",
+	"", "'not('", "')'", "','", "'..'", "'('", "']'", "'['", "'.'", "'date'",
 	"'time'", "'date and time'", "'duration'", "'true'", "'false'", "", "'**'",
 	"'*'", "'/'", "'+'", "'-'", "'<'", "'<='", "'>'", "'>='", "'='", "'!='",
 }
@@ -117,11 +116,11 @@ var symbolicNames = []string{
 }
 
 var ruleNames = []string{
-	"start", "simple_expressions", "expression", "simple_expression", "simple_unary_tests",
-	"simple_positive_unary_tests", "simple_positive_unary_test", "unary_comparison",
-	"comparison", "arithmetic_expression", "interval", "open_interval_start",
-	"closed_interval_start", "open_interval_end", "closed_interval_end", "endpoint",
-	"simple_value", "qualified_name", "simple_literal", "date_time_literal",
+	"inputEntry", "outputEntry", "simple_unary_tests", "simple_positive_unary_tests",
+	"simple_positive_unary_test", "unary_comparison", "interval", "open_interval_start",
+	"closed_interval_start", "open_interval_end", "closed_interval_end", "simple_expressions",
+	"expression", "simple_expression", "comparison", "arithmetic_expression",
+	"endpoint", "simple_value", "qualified_name", "simple_literal", "date_time_literal",
 	"numeric_literal", "integer_literal", "real_literal", "boolean_literal",
 	"string_literal",
 }
@@ -192,72 +191,73 @@ const (
 
 // SFeelParser rules.
 const (
-	SFeelParserRULE_start                       = 0
-	SFeelParserRULE_simple_expressions          = 1
-	SFeelParserRULE_expression                  = 2
-	SFeelParserRULE_simple_expression           = 3
-	SFeelParserRULE_simple_unary_tests          = 4
-	SFeelParserRULE_simple_positive_unary_tests = 5
-	SFeelParserRULE_simple_positive_unary_test  = 6
-	SFeelParserRULE_unary_comparison            = 7
-	SFeelParserRULE_comparison                  = 8
-	SFeelParserRULE_arithmetic_expression       = 9
-	SFeelParserRULE_interval                    = 10
-	SFeelParserRULE_open_interval_start         = 11
-	SFeelParserRULE_closed_interval_start       = 12
-	SFeelParserRULE_open_interval_end           = 13
-	SFeelParserRULE_closed_interval_end         = 14
-	SFeelParserRULE_endpoint                    = 15
-	SFeelParserRULE_simple_value                = 16
-	SFeelParserRULE_qualified_name              = 17
-	SFeelParserRULE_simple_literal              = 18
-	SFeelParserRULE_date_time_literal           = 19
-	SFeelParserRULE_numeric_literal             = 20
-	SFeelParserRULE_integer_literal             = 21
-	SFeelParserRULE_real_literal                = 22
-	SFeelParserRULE_boolean_literal             = 23
-	SFeelParserRULE_string_literal              = 24
+	SFeelParserRULE_inputEntry                  = 0
+	SFeelParserRULE_outputEntry                 = 1
+	SFeelParserRULE_simple_unary_tests          = 2
+	SFeelParserRULE_simple_positive_unary_tests = 3
+	SFeelParserRULE_simple_positive_unary_test  = 4
+	SFeelParserRULE_unary_comparison            = 5
+	SFeelParserRULE_interval                    = 6
+	SFeelParserRULE_open_interval_start         = 7
+	SFeelParserRULE_closed_interval_start       = 8
+	SFeelParserRULE_open_interval_end           = 9
+	SFeelParserRULE_closed_interval_end         = 10
+	SFeelParserRULE_simple_expressions          = 11
+	SFeelParserRULE_expression                  = 12
+	SFeelParserRULE_simple_expression           = 13
+	SFeelParserRULE_comparison                  = 14
+	SFeelParserRULE_arithmetic_expression       = 15
+	SFeelParserRULE_endpoint                    = 16
+	SFeelParserRULE_simple_value                = 17
+	SFeelParserRULE_qualified_name              = 18
+	SFeelParserRULE_simple_literal              = 19
+	SFeelParserRULE_date_time_literal           = 20
+	SFeelParserRULE_numeric_literal             = 21
+	SFeelParserRULE_integer_literal             = 22
+	SFeelParserRULE_real_literal                = 23
+	SFeelParserRULE_boolean_literal             = 24
+	SFeelParserRULE_string_literal              = 25
 )
 
-// IStartContext is an interface to support dynamic dispatch.
-type IStartContext interface {
+// IInputEntryContext is an interface to support dynamic dispatch.
+type IInputEntryContext interface {
 	antlr.ParserRuleContext
 
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
 
-	// IsStartContext differentiates from other interfaces.
-	IsStartContext()
+	// IsInputEntryContext differentiates from other interfaces.
+	IsInputEntryContext()
 }
 
-type StartContext struct {
+type InputEntryContext struct {
 	*antlr.BaseParserRuleContext
 	parser antlr.Parser
 }
 
-func NewEmptyStartContext() *StartContext {
-	var p = new(StartContext)
+func NewEmptyInputEntryContext() *InputEntryContext {
+	var p = new(InputEntryContext)
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = SFeelParserRULE_start
+	p.RuleIndex = SFeelParserRULE_inputEntry
 	return p
 }
 
-func (*StartContext) IsStartContext() {}
+func (*InputEntryContext) IsInputEntryContext() {}
 
-func NewStartContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *StartContext {
-	var p = new(StartContext)
+func NewInputEntryContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *InputEntryContext {
+	var p = new(InputEntryContext)
 
 	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
 
 	p.parser = parser
-	p.RuleIndex = SFeelParserRULE_start
+	p.RuleIndex = SFeelParserRULE_inputEntry
 
 	return p
 }
 
-func (s *StartContext) GetParser() antlr.Parser { return s.parser }
+func (s *InputEntryContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *StartContext) Simple_unary_tests() ISimple_unary_testsContext {
+func (s *InputEntryContext) Simple_unary_tests() ISimple_unary_testsContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISimple_unary_testsContext)(nil)).Elem(), 0)
 
 	if t == nil {
@@ -267,11 +267,112 @@ func (s *StartContext) Simple_unary_tests() ISimple_unary_testsContext {
 	return t.(ISimple_unary_testsContext)
 }
 
-func (s *StartContext) EOF() antlr.TerminalNode {
+func (s *InputEntryContext) EOF() antlr.TerminalNode {
 	return s.GetToken(SFeelParserEOF, 0)
 }
 
-func (s *StartContext) Simple_expressions() ISimple_expressionsContext {
+func (s *InputEntryContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *InputEntryContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *InputEntryContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterInputEntry(s)
+	}
+}
+
+func (s *InputEntryContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitInputEntry(s)
+	}
+}
+
+func (s *InputEntryContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitInputEntry(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+func (p *SFeelParser) InputEntry() (localctx IInputEntryContext) {
+	localctx = NewInputEntryContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 0, SFeelParserRULE_inputEntry)
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(52)
+		p.Simple_unary_tests()
+	}
+	{
+		p.SetState(53)
+		p.Match(SFeelParserEOF)
+	}
+
+	return localctx
+}
+
+// IOutputEntryContext is an interface to support dynamic dispatch.
+type IOutputEntryContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsOutputEntryContext differentiates from other interfaces.
+	IsOutputEntryContext()
+}
+
+type OutputEntryContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyOutputEntryContext() *OutputEntryContext {
+	var p = new(OutputEntryContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = SFeelParserRULE_outputEntry
+	return p
+}
+
+func (*OutputEntryContext) IsOutputEntryContext() {}
+
+func NewOutputEntryContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *OutputEntryContext {
+	var p = new(OutputEntryContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SFeelParserRULE_outputEntry
+
+	return p
+}
+
+func (s *OutputEntryContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *OutputEntryContext) Simple_expressions() ISimple_expressionsContext {
 	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISimple_expressionsContext)(nil)).Elem(), 0)
 
 	if t == nil {
@@ -281,181 +382,43 @@ func (s *StartContext) Simple_expressions() ISimple_expressionsContext {
 	return t.(ISimple_expressionsContext)
 }
 
-func (s *StartContext) GetRuleContext() antlr.RuleContext {
+func (s *OutputEntryContext) EOF() antlr.TerminalNode {
+	return s.GetToken(SFeelParserEOF, 0)
+}
+
+func (s *OutputEntryContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *StartContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+func (s *OutputEntryContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
-func (s *StartContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *OutputEntryContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterStart(s)
+		listenerT.EnterOutputEntry(s)
 	}
 }
 
-func (s *StartContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *OutputEntryContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitStart(s)
+		listenerT.ExitOutputEntry(s)
 	}
 }
 
-func (s *StartContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *OutputEntryContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case SFeelVisitor:
-		return t.VisitStart(s)
+		return t.VisitOutputEntry(s)
 
 	default:
 		return t.VisitChildren(s)
 	}
 }
 
-func (p *SFeelParser) Start() (localctx IStartContext) {
-	localctx = NewStartContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 0, SFeelParserRULE_start)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.SetState(56)
-	p.GetErrorHandler().Sync(p)
-	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 0, p.GetParserRuleContext()) {
-	case 1:
-		p.EnterOuterAlt(localctx, 1)
-		{
-			p.SetState(50)
-			p.Simple_unary_tests()
-		}
-		{
-			p.SetState(51)
-			p.Match(SFeelParserEOF)
-		}
-
-	case 2:
-		p.EnterOuterAlt(localctx, 2)
-		{
-			p.SetState(53)
-			p.Simple_expressions()
-		}
-		{
-			p.SetState(54)
-			p.Match(SFeelParserEOF)
-		}
-
-	}
-
-	return localctx
-}
-
-// ISimple_expressionsContext is an interface to support dynamic dispatch.
-type ISimple_expressionsContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// IsSimple_expressionsContext differentiates from other interfaces.
-	IsSimple_expressionsContext()
-}
-
-type Simple_expressionsContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-}
-
-func NewEmptySimple_expressionsContext() *Simple_expressionsContext {
-	var p = new(Simple_expressionsContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = SFeelParserRULE_simple_expressions
-	return p
-}
-
-func (*Simple_expressionsContext) IsSimple_expressionsContext() {}
-
-func NewSimple_expressionsContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Simple_expressionsContext {
-	var p = new(Simple_expressionsContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = SFeelParserRULE_simple_expressions
-
-	return p
-}
-
-func (s *Simple_expressionsContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *Simple_expressionsContext) AllSimple_expression() []ISimple_expressionContext {
-	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*ISimple_expressionContext)(nil)).Elem())
-	var tst = make([]ISimple_expressionContext, len(ts))
-
-	for i, t := range ts {
-		if t != nil {
-			tst[i] = t.(ISimple_expressionContext)
-		}
-	}
-
-	return tst
-}
-
-func (s *Simple_expressionsContext) Simple_expression(i int) ISimple_expressionContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISimple_expressionContext)(nil)).Elem(), i)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(ISimple_expressionContext)
-}
-
-func (s *Simple_expressionsContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *Simple_expressionsContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *Simple_expressionsContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterSimple_expressions(s)
-	}
-}
-
-func (s *Simple_expressionsContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitSimple_expressions(s)
-	}
-}
-
-func (s *Simple_expressionsContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
-	switch t := visitor.(type) {
-	case SFeelVisitor:
-		return t.VisitSimple_expressions(s)
-
-	default:
-		return t.VisitChildren(s)
-	}
-}
-
-func (p *SFeelParser) Simple_expressions() (localctx ISimple_expressionsContext) {
-	localctx = NewSimple_expressionsContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 2, SFeelParserRULE_simple_expressions)
-	var _la int
+func (p *SFeelParser) OutputEntry() (localctx IOutputEntryContext) {
+	localctx = NewOutputEntryContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 2, SFeelParserRULE_outputEntry)
 
 	defer func() {
 		p.ExitRule()
@@ -475,280 +438,12 @@ func (p *SFeelParser) Simple_expressions() (localctx ISimple_expressionsContext)
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(58)
-		p.Simple_expression()
+		p.SetState(55)
+		p.Simple_expressions()
 	}
-	p.SetState(63)
-	p.GetErrorHandler().Sync(p)
-	_la = p.GetTokenStream().LA(1)
-
-	for _la == SFeelParserT__0 {
-		{
-			p.SetState(59)
-			p.Match(SFeelParserT__0)
-		}
-		{
-			p.SetState(60)
-			p.Simple_expression()
-		}
-
-		p.SetState(65)
-		p.GetErrorHandler().Sync(p)
-		_la = p.GetTokenStream().LA(1)
-	}
-
-	return localctx
-}
-
-// IExpressionContext is an interface to support dynamic dispatch.
-type IExpressionContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// IsExpressionContext differentiates from other interfaces.
-	IsExpressionContext()
-}
-
-type ExpressionContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-}
-
-func NewEmptyExpressionContext() *ExpressionContext {
-	var p = new(ExpressionContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = SFeelParserRULE_expression
-	return p
-}
-
-func (*ExpressionContext) IsExpressionContext() {}
-
-func NewExpressionContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ExpressionContext {
-	var p = new(ExpressionContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = SFeelParserRULE_expression
-
-	return p
-}
-
-func (s *ExpressionContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *ExpressionContext) Simple_expression() ISimple_expressionContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISimple_expressionContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(ISimple_expressionContext)
-}
-
-func (s *ExpressionContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *ExpressionContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *ExpressionContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterExpression(s)
-	}
-}
-
-func (s *ExpressionContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitExpression(s)
-	}
-}
-
-func (s *ExpressionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
-	switch t := visitor.(type) {
-	case SFeelVisitor:
-		return t.VisitExpression(s)
-
-	default:
-		return t.VisitChildren(s)
-	}
-}
-
-func (p *SFeelParser) Expression() (localctx IExpressionContext) {
-	localctx = NewExpressionContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 4, SFeelParserRULE_expression)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(66)
-		p.Simple_expression()
-	}
-
-	return localctx
-}
-
-// ISimple_expressionContext is an interface to support dynamic dispatch.
-type ISimple_expressionContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// IsSimple_expressionContext differentiates from other interfaces.
-	IsSimple_expressionContext()
-}
-
-type Simple_expressionContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-}
-
-func NewEmptySimple_expressionContext() *Simple_expressionContext {
-	var p = new(Simple_expressionContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = SFeelParserRULE_simple_expression
-	return p
-}
-
-func (*Simple_expressionContext) IsSimple_expressionContext() {}
-
-func NewSimple_expressionContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Simple_expressionContext {
-	var p = new(Simple_expressionContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = SFeelParserRULE_simple_expression
-
-	return p
-}
-
-func (s *Simple_expressionContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *Simple_expressionContext) Arithmetic_expression() IArithmetic_expressionContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IArithmetic_expressionContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IArithmetic_expressionContext)
-}
-
-func (s *Simple_expressionContext) Simple_value() ISimple_valueContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISimple_valueContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(ISimple_valueContext)
-}
-
-func (s *Simple_expressionContext) Comparison() IComparisonContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComparisonContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IComparisonContext)
-}
-
-func (s *Simple_expressionContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *Simple_expressionContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *Simple_expressionContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterSimple_expression(s)
-	}
-}
-
-func (s *Simple_expressionContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitSimple_expression(s)
-	}
-}
-
-func (s *Simple_expressionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
-	switch t := visitor.(type) {
-	case SFeelVisitor:
-		return t.VisitSimple_expression(s)
-
-	default:
-		return t.VisitChildren(s)
-	}
-}
-
-func (p *SFeelParser) Simple_expression() (localctx ISimple_expressionContext) {
-	localctx = NewSimple_expressionContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 6, SFeelParserRULE_simple_expression)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.SetState(71)
-	p.GetErrorHandler().Sync(p)
-	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 2, p.GetParserRuleContext()) {
-	case 1:
-		p.EnterOuterAlt(localctx, 1)
-		{
-			p.SetState(68)
-			p.arithmetic_expression(0)
-		}
-
-	case 2:
-		p.EnterOuterAlt(localctx, 2)
-		{
-			p.SetState(69)
-			p.Simple_value()
-		}
-
-	case 3:
-		p.EnterOuterAlt(localctx, 3)
-		{
-			p.SetState(70)
-			p.comparison(0)
-		}
-
+		p.SetState(56)
+		p.Match(SFeelParserEOF)
 	}
 
 	return localctx
@@ -950,7 +645,7 @@ func (s *NegationSimpleUnaryTestsContext) Accept(visitor antlr.ParseTreeVisitor)
 
 func (p *SFeelParser) Simple_unary_tests() (localctx ISimple_unary_testsContext) {
 	localctx = NewSimple_unary_testsContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 8, SFeelParserRULE_simple_unary_tests)
+	p.EnterRule(localctx, 4, SFeelParserRULE_simple_unary_tests)
 
 	defer func() {
 		p.ExitRule()
@@ -968,14 +663,14 @@ func (p *SFeelParser) Simple_unary_tests() (localctx ISimple_unary_testsContext)
 		}
 	}()
 
-	p.SetState(79)
+	p.SetState(64)
 	p.GetErrorHandler().Sync(p)
-	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 3, p.GetParserRuleContext()) {
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 0, p.GetParserRuleContext()) {
 	case 1:
 		localctx = NewSimpleUnaryTestsContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(73)
+			p.SetState(58)
 			p.Simple_positive_unary_tests()
 		}
 
@@ -983,23 +678,23 @@ func (p *SFeelParser) Simple_unary_tests() (localctx ISimple_unary_testsContext)
 		localctx = NewNegationSimpleUnaryTestsContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(74)
-			p.Match(SFeelParserT__1)
+			p.SetState(59)
+			p.Match(SFeelParserT__0)
 		}
 		{
-			p.SetState(75)
+			p.SetState(60)
 			p.Simple_positive_unary_tests()
 		}
 		{
-			p.SetState(76)
-			p.Match(SFeelParserT__2)
+			p.SetState(61)
+			p.Match(SFeelParserT__1)
 		}
 
 	case 3:
 		localctx = NewEmptySimpleUnaryTestsContext(p, localctx)
 		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(78)
+			p.SetState(63)
 			p.Match(SFeelParserSUB)
 		}
 
@@ -1101,7 +796,7 @@ func (s *Simple_positive_unary_testsContext) Accept(visitor antlr.ParseTreeVisit
 
 func (p *SFeelParser) Simple_positive_unary_tests() (localctx ISimple_positive_unary_testsContext) {
 	localctx = NewSimple_positive_unary_testsContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 10, SFeelParserRULE_simple_positive_unary_tests)
+	p.EnterRule(localctx, 6, SFeelParserRULE_simple_positive_unary_tests)
 	var _la int
 
 	defer func() {
@@ -1122,24 +817,24 @@ func (p *SFeelParser) Simple_positive_unary_tests() (localctx ISimple_positive_u
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(81)
+		p.SetState(66)
 		p.Simple_positive_unary_test()
 	}
-	p.SetState(86)
+	p.SetState(71)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	for _la == SFeelParserT__0 {
+	for _la == SFeelParserT__2 {
 		{
-			p.SetState(82)
-			p.Match(SFeelParserT__0)
+			p.SetState(67)
+			p.Match(SFeelParserT__2)
 		}
 		{
-			p.SetState(83)
+			p.SetState(68)
 			p.Simple_positive_unary_test()
 		}
 
-		p.SetState(88)
+		p.SetState(73)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
@@ -1237,7 +932,7 @@ func (s *Simple_positive_unary_testContext) Accept(visitor antlr.ParseTreeVisito
 
 func (p *SFeelParser) Simple_positive_unary_test() (localctx ISimple_positive_unary_testContext) {
 	localctx = NewSimple_positive_unary_testContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 12, SFeelParserRULE_simple_positive_unary_test)
+	p.EnterRule(localctx, 8, SFeelParserRULE_simple_positive_unary_test)
 
 	defer func() {
 		p.ExitRule()
@@ -1255,21 +950,21 @@ func (p *SFeelParser) Simple_positive_unary_test() (localctx ISimple_positive_un
 		}
 	}()
 
-	p.SetState(91)
+	p.SetState(76)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case SFeelParserT__8, SFeelParserT__9, SFeelParserT__10, SFeelParserT__11, SFeelParserT__12, SFeelParserT__13, SFeelParserName, SFeelParserSUB, SFeelParserLESS, SFeelParserLESSEQ, SFeelParserGREATER, SFeelParserGREATEREQ, SFeelParserINTEGER, SFeelParserREAL, SFeelParserSTRING:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(89)
+			p.SetState(74)
 			p.Unary_comparison()
 		}
 
-	case SFeelParserT__3, SFeelParserT__5, SFeelParserT__6:
+	case SFeelParserT__4, SFeelParserT__5, SFeelParserT__6:
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(90)
+			p.SetState(75)
 			p.Interval()
 		}
 
@@ -1448,7 +1143,7 @@ func (s *UnaryComparisonContext) Accept(visitor antlr.ParseTreeVisitor) interfac
 
 func (p *SFeelParser) Unary_comparison() (localctx IUnary_comparisonContext) {
 	localctx = NewUnary_comparisonContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 14, SFeelParserRULE_unary_comparison)
+	p.EnterRule(localctx, 10, SFeelParserRULE_unary_comparison)
 	var _la int
 
 	defer func() {
@@ -1467,7 +1162,7 @@ func (p *SFeelParser) Unary_comparison() (localctx IUnary_comparisonContext) {
 		}
 	}()
 
-	p.SetState(96)
+	p.SetState(81)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
@@ -1475,7 +1170,7 @@ func (p *SFeelParser) Unary_comparison() (localctx IUnary_comparisonContext) {
 		localctx = NewUnaryComparisonContext(p, localctx)
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(93)
+			p.SetState(78)
 			_la = p.GetTokenStream().LA(1)
 
 			if !(((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<SFeelParserLESS)|(1<<SFeelParserLESSEQ)|(1<<SFeelParserGREATER)|(1<<SFeelParserGREATEREQ))) != 0) {
@@ -1486,7 +1181,7 @@ func (p *SFeelParser) Unary_comparison() (localctx IUnary_comparisonContext) {
 			}
 		}
 		{
-			p.SetState(94)
+			p.SetState(79)
 			p.Endpoint()
 		}
 
@@ -1494,12 +1189,1011 @@ func (p *SFeelParser) Unary_comparison() (localctx IUnary_comparisonContext) {
 		localctx = NewEqualUnaryComparisonContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
-			p.SetState(95)
+			p.SetState(80)
 			p.Endpoint()
 		}
 
 	default:
 		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+	}
+
+	return localctx
+}
+
+// IIntervalContext is an interface to support dynamic dispatch.
+type IIntervalContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsIntervalContext differentiates from other interfaces.
+	IsIntervalContext()
+}
+
+type IntervalContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyIntervalContext() *IntervalContext {
+	var p = new(IntervalContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = SFeelParserRULE_interval
+	return p
+}
+
+func (*IntervalContext) IsIntervalContext() {}
+
+func NewIntervalContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *IntervalContext {
+	var p = new(IntervalContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SFeelParserRULE_interval
+
+	return p
+}
+
+func (s *IntervalContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *IntervalContext) AllEndpoint() []IEndpointContext {
+	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*IEndpointContext)(nil)).Elem())
+	var tst = make([]IEndpointContext, len(ts))
+
+	for i, t := range ts {
+		if t != nil {
+			tst[i] = t.(IEndpointContext)
+		}
+	}
+
+	return tst
+}
+
+func (s *IntervalContext) Endpoint(i int) IEndpointContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEndpointContext)(nil)).Elem(), i)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IEndpointContext)
+}
+
+func (s *IntervalContext) Open_interval_start() IOpen_interval_startContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IOpen_interval_startContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IOpen_interval_startContext)
+}
+
+func (s *IntervalContext) Closed_interval_start() IClosed_interval_startContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IClosed_interval_startContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IClosed_interval_startContext)
+}
+
+func (s *IntervalContext) Open_interval_end() IOpen_interval_endContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IOpen_interval_endContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IOpen_interval_endContext)
+}
+
+func (s *IntervalContext) Closed_interval_end() IClosed_interval_endContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IClosed_interval_endContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IClosed_interval_endContext)
+}
+
+func (s *IntervalContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *IntervalContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *IntervalContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterInterval(s)
+	}
+}
+
+func (s *IntervalContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitInterval(s)
+	}
+}
+
+func (s *IntervalContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitInterval(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+func (p *SFeelParser) Interval() (localctx IIntervalContext) {
+	localctx = NewIntervalContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 12, SFeelParserRULE_interval)
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	p.SetState(85)
+	p.GetErrorHandler().Sync(p)
+
+	switch p.GetTokenStream().LA(1) {
+	case SFeelParserT__4, SFeelParserT__5:
+		{
+			p.SetState(83)
+			p.Open_interval_start()
+		}
+
+	case SFeelParserT__6:
+		{
+			p.SetState(84)
+			p.Closed_interval_start()
+		}
+
+	default:
+		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+	}
+	{
+		p.SetState(87)
+		p.Endpoint()
+	}
+	{
+		p.SetState(88)
+		p.Match(SFeelParserT__3)
+	}
+	{
+		p.SetState(89)
+		p.Endpoint()
+	}
+	p.SetState(92)
+	p.GetErrorHandler().Sync(p)
+
+	switch p.GetTokenStream().LA(1) {
+	case SFeelParserT__1, SFeelParserT__6:
+		{
+			p.SetState(90)
+			p.Open_interval_end()
+		}
+
+	case SFeelParserT__5:
+		{
+			p.SetState(91)
+			p.Closed_interval_end()
+		}
+
+	default:
+		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+	}
+
+	return localctx
+}
+
+// IOpen_interval_startContext is an interface to support dynamic dispatch.
+type IOpen_interval_startContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsOpen_interval_startContext differentiates from other interfaces.
+	IsOpen_interval_startContext()
+}
+
+type Open_interval_startContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyOpen_interval_startContext() *Open_interval_startContext {
+	var p = new(Open_interval_startContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = SFeelParserRULE_open_interval_start
+	return p
+}
+
+func (*Open_interval_startContext) IsOpen_interval_startContext() {}
+
+func NewOpen_interval_startContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Open_interval_startContext {
+	var p = new(Open_interval_startContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SFeelParserRULE_open_interval_start
+
+	return p
+}
+
+func (s *Open_interval_startContext) GetParser() antlr.Parser { return s.parser }
+func (s *Open_interval_startContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *Open_interval_startContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *Open_interval_startContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterOpen_interval_start(s)
+	}
+}
+
+func (s *Open_interval_startContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitOpen_interval_start(s)
+	}
+}
+
+func (s *Open_interval_startContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitOpen_interval_start(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+func (p *SFeelParser) Open_interval_start() (localctx IOpen_interval_startContext) {
+	localctx = NewOpen_interval_startContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 14, SFeelParserRULE_open_interval_start)
+	var _la int
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(94)
+		_la = p.GetTokenStream().LA(1)
+
+		if !(_la == SFeelParserT__4 || _la == SFeelParserT__5) {
+			p.GetErrorHandler().RecoverInline(p)
+		} else {
+			p.GetErrorHandler().ReportMatch(p)
+			p.Consume()
+		}
+	}
+
+	return localctx
+}
+
+// IClosed_interval_startContext is an interface to support dynamic dispatch.
+type IClosed_interval_startContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsClosed_interval_startContext differentiates from other interfaces.
+	IsClosed_interval_startContext()
+}
+
+type Closed_interval_startContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyClosed_interval_startContext() *Closed_interval_startContext {
+	var p = new(Closed_interval_startContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = SFeelParserRULE_closed_interval_start
+	return p
+}
+
+func (*Closed_interval_startContext) IsClosed_interval_startContext() {}
+
+func NewClosed_interval_startContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Closed_interval_startContext {
+	var p = new(Closed_interval_startContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SFeelParserRULE_closed_interval_start
+
+	return p
+}
+
+func (s *Closed_interval_startContext) GetParser() antlr.Parser { return s.parser }
+func (s *Closed_interval_startContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *Closed_interval_startContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *Closed_interval_startContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterClosed_interval_start(s)
+	}
+}
+
+func (s *Closed_interval_startContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitClosed_interval_start(s)
+	}
+}
+
+func (s *Closed_interval_startContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitClosed_interval_start(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+func (p *SFeelParser) Closed_interval_start() (localctx IClosed_interval_startContext) {
+	localctx = NewClosed_interval_startContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 16, SFeelParserRULE_closed_interval_start)
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(96)
+		p.Match(SFeelParserT__6)
+	}
+
+	return localctx
+}
+
+// IOpen_interval_endContext is an interface to support dynamic dispatch.
+type IOpen_interval_endContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsOpen_interval_endContext differentiates from other interfaces.
+	IsOpen_interval_endContext()
+}
+
+type Open_interval_endContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyOpen_interval_endContext() *Open_interval_endContext {
+	var p = new(Open_interval_endContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = SFeelParserRULE_open_interval_end
+	return p
+}
+
+func (*Open_interval_endContext) IsOpen_interval_endContext() {}
+
+func NewOpen_interval_endContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Open_interval_endContext {
+	var p = new(Open_interval_endContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SFeelParserRULE_open_interval_end
+
+	return p
+}
+
+func (s *Open_interval_endContext) GetParser() antlr.Parser { return s.parser }
+func (s *Open_interval_endContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *Open_interval_endContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *Open_interval_endContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterOpen_interval_end(s)
+	}
+}
+
+func (s *Open_interval_endContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitOpen_interval_end(s)
+	}
+}
+
+func (s *Open_interval_endContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitOpen_interval_end(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+func (p *SFeelParser) Open_interval_end() (localctx IOpen_interval_endContext) {
+	localctx = NewOpen_interval_endContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 18, SFeelParserRULE_open_interval_end)
+	var _la int
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(98)
+		_la = p.GetTokenStream().LA(1)
+
+		if !(_la == SFeelParserT__1 || _la == SFeelParserT__6) {
+			p.GetErrorHandler().RecoverInline(p)
+		} else {
+			p.GetErrorHandler().ReportMatch(p)
+			p.Consume()
+		}
+	}
+
+	return localctx
+}
+
+// IClosed_interval_endContext is an interface to support dynamic dispatch.
+type IClosed_interval_endContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsClosed_interval_endContext differentiates from other interfaces.
+	IsClosed_interval_endContext()
+}
+
+type Closed_interval_endContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyClosed_interval_endContext() *Closed_interval_endContext {
+	var p = new(Closed_interval_endContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = SFeelParserRULE_closed_interval_end
+	return p
+}
+
+func (*Closed_interval_endContext) IsClosed_interval_endContext() {}
+
+func NewClosed_interval_endContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Closed_interval_endContext {
+	var p = new(Closed_interval_endContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SFeelParserRULE_closed_interval_end
+
+	return p
+}
+
+func (s *Closed_interval_endContext) GetParser() antlr.Parser { return s.parser }
+func (s *Closed_interval_endContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *Closed_interval_endContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *Closed_interval_endContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterClosed_interval_end(s)
+	}
+}
+
+func (s *Closed_interval_endContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitClosed_interval_end(s)
+	}
+}
+
+func (s *Closed_interval_endContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitClosed_interval_end(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+func (p *SFeelParser) Closed_interval_end() (localctx IClosed_interval_endContext) {
+	localctx = NewClosed_interval_endContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 20, SFeelParserRULE_closed_interval_end)
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(100)
+		p.Match(SFeelParserT__5)
+	}
+
+	return localctx
+}
+
+// ISimple_expressionsContext is an interface to support dynamic dispatch.
+type ISimple_expressionsContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsSimple_expressionsContext differentiates from other interfaces.
+	IsSimple_expressionsContext()
+}
+
+type Simple_expressionsContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptySimple_expressionsContext() *Simple_expressionsContext {
+	var p = new(Simple_expressionsContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = SFeelParserRULE_simple_expressions
+	return p
+}
+
+func (*Simple_expressionsContext) IsSimple_expressionsContext() {}
+
+func NewSimple_expressionsContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Simple_expressionsContext {
+	var p = new(Simple_expressionsContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SFeelParserRULE_simple_expressions
+
+	return p
+}
+
+func (s *Simple_expressionsContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *Simple_expressionsContext) AllSimple_expression() []ISimple_expressionContext {
+	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*ISimple_expressionContext)(nil)).Elem())
+	var tst = make([]ISimple_expressionContext, len(ts))
+
+	for i, t := range ts {
+		if t != nil {
+			tst[i] = t.(ISimple_expressionContext)
+		}
+	}
+
+	return tst
+}
+
+func (s *Simple_expressionsContext) Simple_expression(i int) ISimple_expressionContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISimple_expressionContext)(nil)).Elem(), i)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(ISimple_expressionContext)
+}
+
+func (s *Simple_expressionsContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *Simple_expressionsContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *Simple_expressionsContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterSimple_expressions(s)
+	}
+}
+
+func (s *Simple_expressionsContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitSimple_expressions(s)
+	}
+}
+
+func (s *Simple_expressionsContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitSimple_expressions(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+func (p *SFeelParser) Simple_expressions() (localctx ISimple_expressionsContext) {
+	localctx = NewSimple_expressionsContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 22, SFeelParserRULE_simple_expressions)
+	var _la int
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(102)
+		p.Simple_expression()
+	}
+	p.SetState(107)
+	p.GetErrorHandler().Sync(p)
+	_la = p.GetTokenStream().LA(1)
+
+	for _la == SFeelParserT__2 {
+		{
+			p.SetState(103)
+			p.Match(SFeelParserT__2)
+		}
+		{
+			p.SetState(104)
+			p.Simple_expression()
+		}
+
+		p.SetState(109)
+		p.GetErrorHandler().Sync(p)
+		_la = p.GetTokenStream().LA(1)
+	}
+
+	return localctx
+}
+
+// IExpressionContext is an interface to support dynamic dispatch.
+type IExpressionContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsExpressionContext differentiates from other interfaces.
+	IsExpressionContext()
+}
+
+type ExpressionContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyExpressionContext() *ExpressionContext {
+	var p = new(ExpressionContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = SFeelParserRULE_expression
+	return p
+}
+
+func (*ExpressionContext) IsExpressionContext() {}
+
+func NewExpressionContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ExpressionContext {
+	var p = new(ExpressionContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SFeelParserRULE_expression
+
+	return p
+}
+
+func (s *ExpressionContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *ExpressionContext) Simple_expression() ISimple_expressionContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISimple_expressionContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(ISimple_expressionContext)
+}
+
+func (s *ExpressionContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *ExpressionContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *ExpressionContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterExpression(s)
+	}
+}
+
+func (s *ExpressionContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitExpression(s)
+	}
+}
+
+func (s *ExpressionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitExpression(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+func (p *SFeelParser) Expression() (localctx IExpressionContext) {
+	localctx = NewExpressionContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 24, SFeelParserRULE_expression)
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(110)
+		p.Simple_expression()
+	}
+
+	return localctx
+}
+
+// ISimple_expressionContext is an interface to support dynamic dispatch.
+type ISimple_expressionContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// IsSimple_expressionContext differentiates from other interfaces.
+	IsSimple_expressionContext()
+}
+
+type Simple_expressionContext struct {
+	*antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptySimple_expressionContext() *Simple_expressionContext {
+	var p = new(Simple_expressionContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = SFeelParserRULE_simple_expression
+	return p
+}
+
+func (*Simple_expressionContext) IsSimple_expressionContext() {}
+
+func NewSimple_expressionContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Simple_expressionContext {
+	var p = new(Simple_expressionContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SFeelParserRULE_simple_expression
+
+	return p
+}
+
+func (s *Simple_expressionContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *Simple_expressionContext) Arithmetic_expression() IArithmetic_expressionContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IArithmetic_expressionContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IArithmetic_expressionContext)
+}
+
+func (s *Simple_expressionContext) Simple_value() ISimple_valueContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*ISimple_valueContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(ISimple_valueContext)
+}
+
+func (s *Simple_expressionContext) Comparison() IComparisonContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IComparisonContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IComparisonContext)
+}
+
+func (s *Simple_expressionContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *Simple_expressionContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *Simple_expressionContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.EnterSimple_expression(s)
+	}
+}
+
+func (s *Simple_expressionContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SFeelListener); ok {
+		listenerT.ExitSimple_expression(s)
+	}
+}
+
+func (s *Simple_expressionContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SFeelVisitor:
+		return t.VisitSimple_expression(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
+func (p *SFeelParser) Simple_expression() (localctx ISimple_expressionContext) {
+	localctx = NewSimple_expressionContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 26, SFeelParserRULE_simple_expression)
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.SetState(115)
+	p.GetErrorHandler().Sync(p)
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 7, p.GetParserRuleContext()) {
+	case 1:
+		p.EnterOuterAlt(localctx, 1)
+		{
+			p.SetState(112)
+			p.arithmetic_expression(0)
+		}
+
+	case 2:
+		p.EnterOuterAlt(localctx, 2)
+		{
+			p.SetState(113)
+			p.Simple_value()
+		}
+
+	case 3:
+		p.EnterOuterAlt(localctx, 3)
+		{
+			p.SetState(114)
+			p.comparison(0)
+		}
+
 	}
 
 	return localctx
@@ -1647,8 +2341,8 @@ func (p *SFeelParser) comparison(_p int) (localctx IComparisonContext) {
 	localctx = NewComparisonContext(p, p.GetParserRuleContext(), _parentState)
 	var _prevctx IComparisonContext = localctx
 	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
-	_startState := 16
-	p.EnterRecursionRule(localctx, 16, SFeelParserRULE_comparison, _p)
+	_startState := 28
+	p.EnterRecursionRule(localctx, 28, SFeelParserRULE_comparison, _p)
 	var _la int
 
 	defer func() {
@@ -1670,16 +2364,16 @@ func (p *SFeelParser) comparison(_p int) (localctx IComparisonContext) {
 	var _alt int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(107)
+	p.SetState(126)
 	p.GetErrorHandler().Sync(p)
-	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 7, p.GetParserRuleContext()) {
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 8, p.GetParserRuleContext()) {
 	case 1:
 		{
-			p.SetState(99)
+			p.SetState(118)
 			p.Simple_value()
 		}
 		{
-			p.SetState(100)
+			p.SetState(119)
 			_la = p.GetTokenStream().LA(1)
 
 			if !(((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<SFeelParserLESS)|(1<<SFeelParserLESSEQ)|(1<<SFeelParserGREATER)|(1<<SFeelParserGREATEREQ)|(1<<SFeelParserEQUAL)|(1<<SFeelParserNOTEQUAL))) != 0) {
@@ -1690,17 +2384,17 @@ func (p *SFeelParser) comparison(_p int) (localctx IComparisonContext) {
 			}
 		}
 		{
-			p.SetState(101)
+			p.SetState(120)
 			p.Expression()
 		}
 
 	case 2:
 		{
-			p.SetState(103)
+			p.SetState(122)
 			p.arithmetic_expression(0)
 		}
 		{
-			p.SetState(104)
+			p.SetState(123)
 			_la = p.GetTokenStream().LA(1)
 
 			if !(((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<SFeelParserLESS)|(1<<SFeelParserLESSEQ)|(1<<SFeelParserGREATER)|(1<<SFeelParserGREATEREQ)|(1<<SFeelParserEQUAL)|(1<<SFeelParserNOTEQUAL))) != 0) {
@@ -1711,15 +2405,15 @@ func (p *SFeelParser) comparison(_p int) (localctx IComparisonContext) {
 			}
 		}
 		{
-			p.SetState(105)
+			p.SetState(124)
 			p.Expression()
 		}
 
 	}
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(114)
+	p.SetState(133)
 	p.GetErrorHandler().Sync(p)
-	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 8, p.GetParserRuleContext())
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 9, p.GetParserRuleContext())
 
 	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 		if _alt == 1 {
@@ -1729,13 +2423,13 @@ func (p *SFeelParser) comparison(_p int) (localctx IComparisonContext) {
 			_prevctx = localctx
 			localctx = NewComparisonContext(p, _parentctx, _parentState)
 			p.PushNewRecursionContext(localctx, _startState, SFeelParserRULE_comparison)
-			p.SetState(109)
+			p.SetState(128)
 
 			if !(p.Precpred(p.GetParserRuleContext(), 1)) {
 				panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 1)", ""))
 			}
 			{
-				p.SetState(110)
+				p.SetState(129)
 				_la = p.GetTokenStream().LA(1)
 
 				if !(((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<SFeelParserLESS)|(1<<SFeelParserLESSEQ)|(1<<SFeelParserGREATER)|(1<<SFeelParserGREATEREQ)|(1<<SFeelParserEQUAL)|(1<<SFeelParserNOTEQUAL))) != 0) {
@@ -1746,14 +2440,14 @@ func (p *SFeelParser) comparison(_p int) (localctx IComparisonContext) {
 				}
 			}
 			{
-				p.SetState(111)
+				p.SetState(130)
 				p.Expression()
 			}
 
 		}
-		p.SetState(116)
+		p.SetState(135)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 8, p.GetParserRuleContext())
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 9, p.GetParserRuleContext())
 	}
 
 	return localctx
@@ -2197,8 +2891,8 @@ func (p *SFeelParser) arithmetic_expression(_p int) (localctx IArithmetic_expres
 	localctx = NewArithmetic_expressionContext(p, p.GetParserRuleContext(), _parentState)
 	var _prevctx IArithmetic_expressionContext = localctx
 	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
-	_startState := 18
-	p.EnterRecursionRule(localctx, 18, SFeelParserRULE_arithmetic_expression, _p)
+	_startState := 30
+	p.EnterRecursionRule(localctx, 30, SFeelParserRULE_arithmetic_expression, _p)
 	var _la int
 
 	defer func() {
@@ -2220,16 +2914,16 @@ func (p *SFeelParser) arithmetic_expression(_p int) (localctx IArithmetic_expres
 	var _alt int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(125)
+	p.SetState(144)
 	p.GetErrorHandler().Sync(p)
-	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 9, p.GetParserRuleContext()) {
+	switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 10, p.GetParserRuleContext()) {
 	case 1:
 		localctx = NewValueContext(p, localctx)
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 
 		{
-			p.SetState(118)
+			p.SetState(137)
 			p.Simple_value()
 		}
 
@@ -2238,16 +2932,16 @@ func (p *SFeelParser) arithmetic_expression(_p int) (localctx IArithmetic_expres
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(119)
-			p.Match(SFeelParserT__3)
+			p.SetState(138)
+			p.Match(SFeelParserT__4)
 		}
 		{
-			p.SetState(120)
+			p.SetState(139)
 			p.arithmetic_expression(0)
 		}
 		{
-			p.SetState(121)
-			p.Match(SFeelParserT__2)
+			p.SetState(140)
+			p.Match(SFeelParserT__1)
 		}
 
 	case 3:
@@ -2255,19 +2949,19 @@ func (p *SFeelParser) arithmetic_expression(_p int) (localctx IArithmetic_expres
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(123)
+			p.SetState(142)
 			p.Match(SFeelParserSUB)
 		}
 		{
-			p.SetState(124)
+			p.SetState(143)
 			p.arithmetic_expression(4)
 		}
 
 	}
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(138)
+	p.SetState(157)
 	p.GetErrorHandler().Sync(p)
-	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 11, p.GetParserRuleContext())
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 12, p.GetParserRuleContext())
 
 	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 		if _alt == 1 {
@@ -2275,39 +2969,39 @@ func (p *SFeelParser) arithmetic_expression(_p int) (localctx IArithmetic_expres
 				p.TriggerExitRuleEvent()
 			}
 			_prevctx = localctx
-			p.SetState(136)
+			p.SetState(155)
 			p.GetErrorHandler().Sync(p)
-			switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 10, p.GetParserRuleContext()) {
+			switch p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 11, p.GetParserRuleContext()) {
 			case 1:
 				localctx = NewPowerContext(p, NewArithmetic_expressionContext(p, _parentctx, _parentState))
 				p.PushNewRecursionContext(localctx, _startState, SFeelParserRULE_arithmetic_expression)
-				p.SetState(127)
+				p.SetState(146)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 3)) {
 					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 3)", ""))
 				}
 				{
-					p.SetState(128)
+					p.SetState(147)
 
 					var _m = p.Match(SFeelParserPOW)
 
 					localctx.(*PowerContext).operator = _m
 				}
 				{
-					p.SetState(129)
+					p.SetState(148)
 					p.arithmetic_expression(4)
 				}
 
 			case 2:
 				localctx = NewMultiplicationOrDivisionContext(p, NewArithmetic_expressionContext(p, _parentctx, _parentState))
 				p.PushNewRecursionContext(localctx, _startState, SFeelParserRULE_arithmetic_expression)
-				p.SetState(130)
+				p.SetState(149)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 2)) {
 					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 2)", ""))
 				}
 				{
-					p.SetState(131)
+					p.SetState(150)
 
 					var _lt = p.GetTokenStream().LT(1)
 
@@ -2325,20 +3019,20 @@ func (p *SFeelParser) arithmetic_expression(_p int) (localctx IArithmetic_expres
 					}
 				}
 				{
-					p.SetState(132)
+					p.SetState(151)
 					p.arithmetic_expression(3)
 				}
 
 			case 3:
 				localctx = NewAdditionOrSubtractionContext(p, NewArithmetic_expressionContext(p, _parentctx, _parentState))
 				p.PushNewRecursionContext(localctx, _startState, SFeelParserRULE_arithmetic_expression)
-				p.SetState(133)
+				p.SetState(152)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 1)) {
 					panic(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 1)", ""))
 				}
 				{
-					p.SetState(134)
+					p.SetState(153)
 
 					var _lt = p.GetTokenStream().LT(1)
 
@@ -2356,622 +3050,16 @@ func (p *SFeelParser) arithmetic_expression(_p int) (localctx IArithmetic_expres
 					}
 				}
 				{
-					p.SetState(135)
+					p.SetState(154)
 					p.arithmetic_expression(2)
 				}
 
 			}
 
 		}
-		p.SetState(140)
+		p.SetState(159)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 11, p.GetParserRuleContext())
-	}
-
-	return localctx
-}
-
-// IIntervalContext is an interface to support dynamic dispatch.
-type IIntervalContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// IsIntervalContext differentiates from other interfaces.
-	IsIntervalContext()
-}
-
-type IntervalContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-}
-
-func NewEmptyIntervalContext() *IntervalContext {
-	var p = new(IntervalContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = SFeelParserRULE_interval
-	return p
-}
-
-func (*IntervalContext) IsIntervalContext() {}
-
-func NewIntervalContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *IntervalContext {
-	var p = new(IntervalContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = SFeelParserRULE_interval
-
-	return p
-}
-
-func (s *IntervalContext) GetParser() antlr.Parser { return s.parser }
-
-func (s *IntervalContext) AllEndpoint() []IEndpointContext {
-	var ts = s.GetTypedRuleContexts(reflect.TypeOf((*IEndpointContext)(nil)).Elem())
-	var tst = make([]IEndpointContext, len(ts))
-
-	for i, t := range ts {
-		if t != nil {
-			tst[i] = t.(IEndpointContext)
-		}
-	}
-
-	return tst
-}
-
-func (s *IntervalContext) Endpoint(i int) IEndpointContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IEndpointContext)(nil)).Elem(), i)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IEndpointContext)
-}
-
-func (s *IntervalContext) Open_interval_start() IOpen_interval_startContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IOpen_interval_startContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IOpen_interval_startContext)
-}
-
-func (s *IntervalContext) Closed_interval_start() IClosed_interval_startContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IClosed_interval_startContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IClosed_interval_startContext)
-}
-
-func (s *IntervalContext) Open_interval_end() IOpen_interval_endContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IOpen_interval_endContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IOpen_interval_endContext)
-}
-
-func (s *IntervalContext) Closed_interval_end() IClosed_interval_endContext {
-	var t = s.GetTypedRuleContext(reflect.TypeOf((*IClosed_interval_endContext)(nil)).Elem(), 0)
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IClosed_interval_endContext)
-}
-
-func (s *IntervalContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *IntervalContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *IntervalContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterInterval(s)
-	}
-}
-
-func (s *IntervalContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitInterval(s)
-	}
-}
-
-func (s *IntervalContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
-	switch t := visitor.(type) {
-	case SFeelVisitor:
-		return t.VisitInterval(s)
-
-	default:
-		return t.VisitChildren(s)
-	}
-}
-
-func (p *SFeelParser) Interval() (localctx IIntervalContext) {
-	localctx = NewIntervalContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 20, SFeelParserRULE_interval)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.EnterOuterAlt(localctx, 1)
-	p.SetState(143)
-	p.GetErrorHandler().Sync(p)
-
-	switch p.GetTokenStream().LA(1) {
-	case SFeelParserT__3, SFeelParserT__5:
-		{
-			p.SetState(141)
-			p.Open_interval_start()
-		}
-
-	case SFeelParserT__6:
-		{
-			p.SetState(142)
-			p.Closed_interval_start()
-		}
-
-	default:
-		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
-	}
-	{
-		p.SetState(145)
-		p.Endpoint()
-	}
-	{
-		p.SetState(146)
-		p.Match(SFeelParserT__4)
-	}
-	{
-		p.SetState(147)
-		p.Endpoint()
-	}
-	p.SetState(150)
-	p.GetErrorHandler().Sync(p)
-
-	switch p.GetTokenStream().LA(1) {
-	case SFeelParserT__2, SFeelParserT__6:
-		{
-			p.SetState(148)
-			p.Open_interval_end()
-		}
-
-	case SFeelParserT__5:
-		{
-			p.SetState(149)
-			p.Closed_interval_end()
-		}
-
-	default:
-		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
-	}
-
-	return localctx
-}
-
-// IOpen_interval_startContext is an interface to support dynamic dispatch.
-type IOpen_interval_startContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// IsOpen_interval_startContext differentiates from other interfaces.
-	IsOpen_interval_startContext()
-}
-
-type Open_interval_startContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-}
-
-func NewEmptyOpen_interval_startContext() *Open_interval_startContext {
-	var p = new(Open_interval_startContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = SFeelParserRULE_open_interval_start
-	return p
-}
-
-func (*Open_interval_startContext) IsOpen_interval_startContext() {}
-
-func NewOpen_interval_startContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Open_interval_startContext {
-	var p = new(Open_interval_startContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = SFeelParserRULE_open_interval_start
-
-	return p
-}
-
-func (s *Open_interval_startContext) GetParser() antlr.Parser { return s.parser }
-func (s *Open_interval_startContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *Open_interval_startContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *Open_interval_startContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterOpen_interval_start(s)
-	}
-}
-
-func (s *Open_interval_startContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitOpen_interval_start(s)
-	}
-}
-
-func (s *Open_interval_startContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
-	switch t := visitor.(type) {
-	case SFeelVisitor:
-		return t.VisitOpen_interval_start(s)
-
-	default:
-		return t.VisitChildren(s)
-	}
-}
-
-func (p *SFeelParser) Open_interval_start() (localctx IOpen_interval_startContext) {
-	localctx = NewOpen_interval_startContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 22, SFeelParserRULE_open_interval_start)
-	var _la int
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.EnterOuterAlt(localctx, 1)
-	{
-		p.SetState(152)
-		_la = p.GetTokenStream().LA(1)
-
-		if !(_la == SFeelParserT__3 || _la == SFeelParserT__5) {
-			p.GetErrorHandler().RecoverInline(p)
-		} else {
-			p.GetErrorHandler().ReportMatch(p)
-			p.Consume()
-		}
-	}
-
-	return localctx
-}
-
-// IClosed_interval_startContext is an interface to support dynamic dispatch.
-type IClosed_interval_startContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// IsClosed_interval_startContext differentiates from other interfaces.
-	IsClosed_interval_startContext()
-}
-
-type Closed_interval_startContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-}
-
-func NewEmptyClosed_interval_startContext() *Closed_interval_startContext {
-	var p = new(Closed_interval_startContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = SFeelParserRULE_closed_interval_start
-	return p
-}
-
-func (*Closed_interval_startContext) IsClosed_interval_startContext() {}
-
-func NewClosed_interval_startContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Closed_interval_startContext {
-	var p = new(Closed_interval_startContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = SFeelParserRULE_closed_interval_start
-
-	return p
-}
-
-func (s *Closed_interval_startContext) GetParser() antlr.Parser { return s.parser }
-func (s *Closed_interval_startContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *Closed_interval_startContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *Closed_interval_startContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterClosed_interval_start(s)
-	}
-}
-
-func (s *Closed_interval_startContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitClosed_interval_start(s)
-	}
-}
-
-func (s *Closed_interval_startContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
-	switch t := visitor.(type) {
-	case SFeelVisitor:
-		return t.VisitClosed_interval_start(s)
-
-	default:
-		return t.VisitChildren(s)
-	}
-}
-
-func (p *SFeelParser) Closed_interval_start() (localctx IClosed_interval_startContext) {
-	localctx = NewClosed_interval_startContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 24, SFeelParserRULE_closed_interval_start)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.EnterOuterAlt(localctx, 1)
-	{
-		p.SetState(154)
-		p.Match(SFeelParserT__6)
-	}
-
-	return localctx
-}
-
-// IOpen_interval_endContext is an interface to support dynamic dispatch.
-type IOpen_interval_endContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// IsOpen_interval_endContext differentiates from other interfaces.
-	IsOpen_interval_endContext()
-}
-
-type Open_interval_endContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-}
-
-func NewEmptyOpen_interval_endContext() *Open_interval_endContext {
-	var p = new(Open_interval_endContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = SFeelParserRULE_open_interval_end
-	return p
-}
-
-func (*Open_interval_endContext) IsOpen_interval_endContext() {}
-
-func NewOpen_interval_endContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Open_interval_endContext {
-	var p = new(Open_interval_endContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = SFeelParserRULE_open_interval_end
-
-	return p
-}
-
-func (s *Open_interval_endContext) GetParser() antlr.Parser { return s.parser }
-func (s *Open_interval_endContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *Open_interval_endContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *Open_interval_endContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterOpen_interval_end(s)
-	}
-}
-
-func (s *Open_interval_endContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitOpen_interval_end(s)
-	}
-}
-
-func (s *Open_interval_endContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
-	switch t := visitor.(type) {
-	case SFeelVisitor:
-		return t.VisitOpen_interval_end(s)
-
-	default:
-		return t.VisitChildren(s)
-	}
-}
-
-func (p *SFeelParser) Open_interval_end() (localctx IOpen_interval_endContext) {
-	localctx = NewOpen_interval_endContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 26, SFeelParserRULE_open_interval_end)
-	var _la int
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.EnterOuterAlt(localctx, 1)
-	{
-		p.SetState(156)
-		_la = p.GetTokenStream().LA(1)
-
-		if !(_la == SFeelParserT__2 || _la == SFeelParserT__6) {
-			p.GetErrorHandler().RecoverInline(p)
-		} else {
-			p.GetErrorHandler().ReportMatch(p)
-			p.Consume()
-		}
-	}
-
-	return localctx
-}
-
-// IClosed_interval_endContext is an interface to support dynamic dispatch.
-type IClosed_interval_endContext interface {
-	antlr.ParserRuleContext
-
-	// GetParser returns the parser.
-	GetParser() antlr.Parser
-
-	// IsClosed_interval_endContext differentiates from other interfaces.
-	IsClosed_interval_endContext()
-}
-
-type Closed_interval_endContext struct {
-	*antlr.BaseParserRuleContext
-	parser antlr.Parser
-}
-
-func NewEmptyClosed_interval_endContext() *Closed_interval_endContext {
-	var p = new(Closed_interval_endContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
-	p.RuleIndex = SFeelParserRULE_closed_interval_end
-	return p
-}
-
-func (*Closed_interval_endContext) IsClosed_interval_endContext() {}
-
-func NewClosed_interval_endContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Closed_interval_endContext {
-	var p = new(Closed_interval_endContext)
-
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
-
-	p.parser = parser
-	p.RuleIndex = SFeelParserRULE_closed_interval_end
-
-	return p
-}
-
-func (s *Closed_interval_endContext) GetParser() antlr.Parser { return s.parser }
-func (s *Closed_interval_endContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *Closed_interval_endContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *Closed_interval_endContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.EnterClosed_interval_end(s)
-	}
-}
-
-func (s *Closed_interval_endContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(SFeelListener); ok {
-		listenerT.ExitClosed_interval_end(s)
-	}
-}
-
-func (s *Closed_interval_endContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
-	switch t := visitor.(type) {
-	case SFeelVisitor:
-		return t.VisitClosed_interval_end(s)
-
-	default:
-		return t.VisitChildren(s)
-	}
-}
-
-func (p *SFeelParser) Closed_interval_end() (localctx IClosed_interval_endContext) {
-	localctx = NewClosed_interval_endContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 28, SFeelParserRULE_closed_interval_end)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
-	p.EnterOuterAlt(localctx, 1)
-	{
-		p.SetState(158)
-		p.Match(SFeelParserT__5)
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 12, p.GetParserRuleContext())
 	}
 
 	return localctx
@@ -3057,7 +3145,7 @@ func (s *EndpointContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 
 func (p *SFeelParser) Endpoint() (localctx IEndpointContext) {
 	localctx = NewEndpointContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 30, SFeelParserRULE_endpoint)
+	p.EnterRule(localctx, 32, SFeelParserRULE_endpoint)
 
 	defer func() {
 		p.ExitRule()
@@ -3174,7 +3262,7 @@ func (s *Simple_valueContext) Accept(visitor antlr.ParseTreeVisitor) interface{}
 
 func (p *SFeelParser) Simple_value() (localctx ISimple_valueContext) {
 	localctx = NewSimple_valueContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 32, SFeelParserRULE_simple_value)
+	p.EnterRule(localctx, 34, SFeelParserRULE_simple_value)
 
 	defer func() {
 		p.ExitRule()
@@ -3295,7 +3383,7 @@ func (s *Qualified_nameContext) Accept(visitor antlr.ParseTreeVisitor) interface
 
 func (p *SFeelParser) Qualified_name() (localctx IQualified_nameContext) {
 	localctx = NewQualified_nameContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 34, SFeelParserRULE_qualified_name)
+	p.EnterRule(localctx, 36, SFeelParserRULE_qualified_name)
 
 	defer func() {
 		p.ExitRule()
@@ -3322,7 +3410,7 @@ func (p *SFeelParser) Qualified_name() (localctx IQualified_nameContext) {
 	}
 	p.SetState(171)
 	p.GetErrorHandler().Sync(p)
-	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 15, p.GetParserRuleContext())
+	_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 14, p.GetParserRuleContext())
 
 	for _alt != 2 && _alt != antlr.ATNInvalidAltNumber {
 		if _alt == 1 {
@@ -3338,7 +3426,7 @@ func (p *SFeelParser) Qualified_name() (localctx IQualified_nameContext) {
 		}
 		p.SetState(173)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 15, p.GetParserRuleContext())
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 14, p.GetParserRuleContext())
 	}
 
 	return localctx
@@ -3454,7 +3542,7 @@ func (s *Simple_literalContext) Accept(visitor antlr.ParseTreeVisitor) interface
 
 func (p *SFeelParser) Simple_literal() (localctx ISimple_literalContext) {
 	localctx = NewSimple_literalContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 36, SFeelParserRULE_simple_literal)
+	p.EnterRule(localctx, 38, SFeelParserRULE_simple_literal)
 
 	defer func() {
 		p.ExitRule()
@@ -3591,7 +3679,7 @@ func (s *Date_time_literalContext) Accept(visitor antlr.ParseTreeVisitor) interf
 
 func (p *SFeelParser) Date_time_literal() (localctx IDate_time_literalContext) {
 	localctx = NewDate_time_literalContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 38, SFeelParserRULE_date_time_literal)
+	p.EnterRule(localctx, 40, SFeelParserRULE_date_time_literal)
 	var _la int
 
 	defer func() {
@@ -3624,7 +3712,7 @@ func (p *SFeelParser) Date_time_literal() (localctx IDate_time_literalContext) {
 	}
 	{
 		p.SetState(181)
-		p.Match(SFeelParserT__3)
+		p.Match(SFeelParserT__4)
 	}
 	{
 		p.SetState(182)
@@ -3632,7 +3720,7 @@ func (p *SFeelParser) Date_time_literal() (localctx IDate_time_literalContext) {
 	}
 	{
 		p.SetState(183)
-		p.Match(SFeelParserT__2)
+		p.Match(SFeelParserT__1)
 	}
 
 	return localctx
@@ -3732,7 +3820,7 @@ func (s *Numeric_literalContext) Accept(visitor antlr.ParseTreeVisitor) interfac
 
 func (p *SFeelParser) Numeric_literal() (localctx INumeric_literalContext) {
 	localctx = NewNumeric_literalContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 40, SFeelParserRULE_numeric_literal)
+	p.EnterRule(localctx, 42, SFeelParserRULE_numeric_literal)
 	var _la int
 
 	defer func() {
@@ -3860,7 +3948,7 @@ func (s *Integer_literalContext) Accept(visitor antlr.ParseTreeVisitor) interfac
 
 func (p *SFeelParser) Integer_literal() (localctx IInteger_literalContext) {
 	localctx = NewInteger_literalContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 42, SFeelParserRULE_integer_literal)
+	p.EnterRule(localctx, 44, SFeelParserRULE_integer_literal)
 
 	defer func() {
 		p.ExitRule()
@@ -3961,7 +4049,7 @@ func (s *Real_literalContext) Accept(visitor antlr.ParseTreeVisitor) interface{}
 
 func (p *SFeelParser) Real_literal() (localctx IReal_literalContext) {
 	localctx = NewReal_literalContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 44, SFeelParserRULE_real_literal)
+	p.EnterRule(localctx, 46, SFeelParserRULE_real_literal)
 
 	defer func() {
 		p.ExitRule()
@@ -4057,7 +4145,7 @@ func (s *Boolean_literalContext) Accept(visitor antlr.ParseTreeVisitor) interfac
 
 func (p *SFeelParser) Boolean_literal() (localctx IBoolean_literalContext) {
 	localctx = NewBoolean_literalContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 46, SFeelParserRULE_boolean_literal)
+	p.EnterRule(localctx, 48, SFeelParserRULE_boolean_literal)
 	var _la int
 
 	defer func() {
@@ -4170,7 +4258,7 @@ func (s *String_literalContext) Accept(visitor antlr.ParseTreeVisitor) interface
 
 func (p *SFeelParser) String_literal() (localctx IString_literalContext) {
 	localctx = NewString_literalContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 48, SFeelParserRULE_string_literal)
+	p.EnterRule(localctx, 50, SFeelParserRULE_string_literal)
 
 	defer func() {
 		p.ExitRule()
@@ -4208,7 +4296,7 @@ func (p *SFeelParser) String_literal() (localctx IString_literalContext) {
 
 		p.SetState(201)
 		p.GetErrorHandler().Sync(p)
-		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 19, p.GetParserRuleContext())
+		_alt = p.GetInterpreter().AdaptivePredict(p.GetTokenStream(), 18, p.GetParserRuleContext())
 	}
 
 	return localctx
@@ -4216,14 +4304,14 @@ func (p *SFeelParser) String_literal() (localctx IString_literalContext) {
 
 func (p *SFeelParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex int) bool {
 	switch ruleIndex {
-	case 8:
+	case 14:
 		var t *ComparisonContext = nil
 		if localctx != nil {
 			t = localctx.(*ComparisonContext)
 		}
 		return p.Comparison_Sempred(t, predIndex)
 
-	case 9:
+	case 15:
 		var t *Arithmetic_expressionContext = nil
 		if localctx != nil {
 			t = localctx.(*Arithmetic_expressionContext)

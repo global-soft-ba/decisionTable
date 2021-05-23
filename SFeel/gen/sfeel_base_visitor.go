@@ -8,19 +8,11 @@ type BaseSFeelVisitor struct {
 	*antlr.BaseParseTreeVisitor
 }
 
-func (v *BaseSFeelVisitor) VisitStart(ctx *StartContext) interface{} {
+func (v *BaseSFeelVisitor) VisitInputEntry(ctx *InputEntryContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitSimple_expressions(ctx *Simple_expressionsContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseSFeelVisitor) VisitExpression(ctx *ExpressionContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseSFeelVisitor) VisitSimple_expression(ctx *Simple_expressionContext) interface{} {
+func (v *BaseSFeelVisitor) VisitOutputEntry(ctx *OutputEntryContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -52,6 +44,38 @@ func (v *BaseSFeelVisitor) VisitEqualUnaryComparison(ctx *EqualUnaryComparisonCo
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSFeelVisitor) VisitInterval(ctx *IntervalContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitOpen_interval_start(ctx *Open_interval_startContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitClosed_interval_start(ctx *Closed_interval_startContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitOpen_interval_end(ctx *Open_interval_endContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitClosed_interval_end(ctx *Closed_interval_endContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitSimple_expressions(ctx *Simple_expressionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitExpression(ctx *ExpressionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitSimple_expression(ctx *Simple_expressionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSFeelVisitor) VisitComparison(ctx *ComparisonContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -77,26 +101,6 @@ func (v *BaseSFeelVisitor) VisitParentheses(ctx *ParenthesesContext) interface{}
 }
 
 func (v *BaseSFeelVisitor) VisitPower(ctx *PowerContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseSFeelVisitor) VisitInterval(ctx *IntervalContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseSFeelVisitor) VisitOpen_interval_start(ctx *Open_interval_startContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseSFeelVisitor) VisitClosed_interval_start(ctx *Closed_interval_startContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseSFeelVisitor) VisitOpen_interval_end(ctx *Open_interval_endContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseSFeelVisitor) VisitClosed_interval_end(ctx *Closed_interval_endContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

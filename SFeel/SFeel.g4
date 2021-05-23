@@ -2,19 +2,13 @@ grammar SFeel;
 //OMG Version 1.3
 
 
-//EVTL. Start Input and Start Output !!!
-start
-    : simple_unary_tests EOF
-    | simple_expressions EOF
-    ;
+// Each input entry SHALL be an instance of simple unary tests (grammar rule 12 - OMG Standard)
+inputEntry: simple_unary_tests EOF;
+
+// Each output entry SHALL be a simple expression (grammar rule 3 - - OMG Standard).
+outputEntry: simple_expressions EOF;
 
 
-
-
-
-simple_expressions: simple_expression  (',' simple_expression)* ; //Disjunctions
-expression: simple_expression ;
-simple_expression: arithmetic_expression | simple_value | comparison ;
 
 // Unaray Tests
 simple_unary_tests   //Disjunctions
@@ -30,7 +24,17 @@ unary_comparison
     | endpoint                                       #EqualUnaryComparison
     ;
 
+// Unary Interval Statements
+interval: ( open_interval_start | closed_interval_start ) endpoint '..' endpoint ( open_interval_end | closed_interval_end ) ;
+open_interval_start: '(' | ']' ;
+closed_interval_start: '[' ;
+open_interval_end: ')' | '[' ;
+closed_interval_end: ']' ;
 
+// Simple Expressions
+simple_expressions: simple_expression  (',' simple_expression)* ; //Disjunctions
+expression: simple_expression ;
+simple_expression: arithmetic_expression | simple_value | comparison ;
 
 // Comparison Operations
 comparison
@@ -50,13 +54,6 @@ arithmetic_expression
    ;
 
 
-
-// Interval
-interval: ( open_interval_start | closed_interval_start ) endpoint '..' endpoint ( open_interval_end | closed_interval_end ) ;
-open_interval_start: '(' | ']' ;
-closed_interval_start: '[' ;
-open_interval_end: ')' | '[' ;
-closed_interval_end: ']' ;
 
 
 // Simple Primitives

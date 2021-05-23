@@ -68,12 +68,11 @@ func (s *SFeelListener) ExitSimple_positive_unary_tests(ctx *gen.Simple_positive
 
 func (s *SFeelListener) ExitEqualUnaryComparison(ctx *gen.EqualUnaryComparisonContext) {
 	rule := ast.Rule{Type: gen.SFeelParserRULE_unary_comparison, Literal: ctx.GetText()}
-	op := ast.Token{Type: gen.SFeelParserEQUAL, Literal: "="}
 	val := s.stack.Pop()
 
 	n := ast.UnaryStatement{
 		ParserRule: rule,
-		Operator:   op,
+		Operator:   ast.Token{Type: -1},
 		Value:      val.(ast.Node),
 	}
 	s.stack.Push(n)

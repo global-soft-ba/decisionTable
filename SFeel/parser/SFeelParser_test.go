@@ -2,12 +2,13 @@ package parser
 
 import (
 	antlr2 "decisionTable/SFeel/antlr"
+	gen "decisionTable/SFeel/gen"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"reflect"
 	"testing"
 )
 
-func TestASTRepresentation(t *testing.T) {
+func TestASTRepresentation_InputEntries(t *testing.T) {
 	type args struct {
 		expr string
 	}
@@ -17,7 +18,7 @@ func TestASTRepresentation(t *testing.T) {
 		want string
 	}{
 		{
-			name: "interval",
+			name: "interval integer",
 			args: args{"[1..5]"},
 			want: "[1..5]",
 		},
@@ -29,17 +30,17 @@ func TestASTRepresentation(t *testing.T) {
 		{
 			name: "equal unary integer",
 			args: args{"1"},
-			want: "=1",
+			want: "1",
 		},
 		{
 			name: "equal unary string",
 			args: args{`"1"`},
-			want: `="1"`,
+			want: `"1"`,
 		},
 		{
 			name: "equal unary boolean",
 			args: args{`true`},
-			want: `=true`,
+			want: `true`,
 		},
 		{
 			name: "less unary statements",
@@ -60,7 +61,10 @@ func TestASTRepresentation(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			prs := CreateSFeelParser(tt.args.expr)
-			tree := prs.Parser().Start()
+			tree := prs.Parser().InputEntry()
+			//Up-Front Syntax Check
+			base := gen.BaseSFeelListener{}
+			antlr.ParseTreeWalkerDefault.Walk(&base, tree)
 
 			if len(prs.Errors()) == 0 {
 				// Finally parse the expression

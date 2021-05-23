@@ -21,29 +21,17 @@ func (s *BaseSFeelListener) EnterEveryRule(ctx antlr.ParserRuleContext) {}
 // ExitEveryRule is called when any rule is exited.
 func (s *BaseSFeelListener) ExitEveryRule(ctx antlr.ParserRuleContext) {}
 
-// EnterStart is called when production start is entered.
-func (s *BaseSFeelListener) EnterStart(ctx *StartContext) {}
+// EnterInputEntry is called when production inputEntry is entered.
+func (s *BaseSFeelListener) EnterInputEntry(ctx *InputEntryContext) {}
 
-// ExitStart is called when production start is exited.
-func (s *BaseSFeelListener) ExitStart(ctx *StartContext) {}
+// ExitInputEntry is called when production inputEntry is exited.
+func (s *BaseSFeelListener) ExitInputEntry(ctx *InputEntryContext) {}
 
-// EnterSimple_expressions is called when production simple_expressions is entered.
-func (s *BaseSFeelListener) EnterSimple_expressions(ctx *Simple_expressionsContext) {}
+// EnterOutputEntry is called when production outputEntry is entered.
+func (s *BaseSFeelListener) EnterOutputEntry(ctx *OutputEntryContext) {}
 
-// ExitSimple_expressions is called when production simple_expressions is exited.
-func (s *BaseSFeelListener) ExitSimple_expressions(ctx *Simple_expressionsContext) {}
-
-// EnterExpression is called when production expression is entered.
-func (s *BaseSFeelListener) EnterExpression(ctx *ExpressionContext) {}
-
-// ExitExpression is called when production expression is exited.
-func (s *BaseSFeelListener) ExitExpression(ctx *ExpressionContext) {}
-
-// EnterSimple_expression is called when production simple_expression is entered.
-func (s *BaseSFeelListener) EnterSimple_expression(ctx *Simple_expressionContext) {}
-
-// ExitSimple_expression is called when production simple_expression is exited.
-func (s *BaseSFeelListener) ExitSimple_expression(ctx *Simple_expressionContext) {}
+// ExitOutputEntry is called when production outputEntry is exited.
+func (s *BaseSFeelListener) ExitOutputEntry(ctx *OutputEntryContext) {}
 
 // EnterSimpleUnaryTests is called when production SimpleUnaryTests is entered.
 func (s *BaseSFeelListener) EnterSimpleUnaryTests(ctx *SimpleUnaryTestsContext) {}
@@ -89,6 +77,54 @@ func (s *BaseSFeelListener) EnterEqualUnaryComparison(ctx *EqualUnaryComparisonC
 // ExitEqualUnaryComparison is called when production EqualUnaryComparison is exited.
 func (s *BaseSFeelListener) ExitEqualUnaryComparison(ctx *EqualUnaryComparisonContext) {}
 
+// EnterInterval is called when production interval is entered.
+func (s *BaseSFeelListener) EnterInterval(ctx *IntervalContext) {}
+
+// ExitInterval is called when production interval is exited.
+func (s *BaseSFeelListener) ExitInterval(ctx *IntervalContext) {}
+
+// EnterOpen_interval_start is called when production open_interval_start is entered.
+func (s *BaseSFeelListener) EnterOpen_interval_start(ctx *Open_interval_startContext) {}
+
+// ExitOpen_interval_start is called when production open_interval_start is exited.
+func (s *BaseSFeelListener) ExitOpen_interval_start(ctx *Open_interval_startContext) {}
+
+// EnterClosed_interval_start is called when production closed_interval_start is entered.
+func (s *BaseSFeelListener) EnterClosed_interval_start(ctx *Closed_interval_startContext) {}
+
+// ExitClosed_interval_start is called when production closed_interval_start is exited.
+func (s *BaseSFeelListener) ExitClosed_interval_start(ctx *Closed_interval_startContext) {}
+
+// EnterOpen_interval_end is called when production open_interval_end is entered.
+func (s *BaseSFeelListener) EnterOpen_interval_end(ctx *Open_interval_endContext) {}
+
+// ExitOpen_interval_end is called when production open_interval_end is exited.
+func (s *BaseSFeelListener) ExitOpen_interval_end(ctx *Open_interval_endContext) {}
+
+// EnterClosed_interval_end is called when production closed_interval_end is entered.
+func (s *BaseSFeelListener) EnterClosed_interval_end(ctx *Closed_interval_endContext) {}
+
+// ExitClosed_interval_end is called when production closed_interval_end is exited.
+func (s *BaseSFeelListener) ExitClosed_interval_end(ctx *Closed_interval_endContext) {}
+
+// EnterSimple_expressions is called when production simple_expressions is entered.
+func (s *BaseSFeelListener) EnterSimple_expressions(ctx *Simple_expressionsContext) {}
+
+// ExitSimple_expressions is called when production simple_expressions is exited.
+func (s *BaseSFeelListener) ExitSimple_expressions(ctx *Simple_expressionsContext) {}
+
+// EnterExpression is called when production expression is entered.
+func (s *BaseSFeelListener) EnterExpression(ctx *ExpressionContext) {}
+
+// ExitExpression is called when production expression is exited.
+func (s *BaseSFeelListener) ExitExpression(ctx *ExpressionContext) {}
+
+// EnterSimple_expression is called when production simple_expression is entered.
+func (s *BaseSFeelListener) EnterSimple_expression(ctx *Simple_expressionContext) {}
+
+// ExitSimple_expression is called when production simple_expression is exited.
+func (s *BaseSFeelListener) ExitSimple_expression(ctx *Simple_expressionContext) {}
+
 // EnterComparison is called when production comparison is entered.
 func (s *BaseSFeelListener) EnterComparison(ctx *ComparisonContext) {}
 
@@ -130,36 +166,6 @@ func (s *BaseSFeelListener) EnterPower(ctx *PowerContext) {}
 
 // ExitPower is called when production Power is exited.
 func (s *BaseSFeelListener) ExitPower(ctx *PowerContext) {}
-
-// EnterInterval is called when production interval is entered.
-func (s *BaseSFeelListener) EnterInterval(ctx *IntervalContext) {}
-
-// ExitInterval is called when production interval is exited.
-func (s *BaseSFeelListener) ExitInterval(ctx *IntervalContext) {}
-
-// EnterOpen_interval_start is called when production open_interval_start is entered.
-func (s *BaseSFeelListener) EnterOpen_interval_start(ctx *Open_interval_startContext) {}
-
-// ExitOpen_interval_start is called when production open_interval_start is exited.
-func (s *BaseSFeelListener) ExitOpen_interval_start(ctx *Open_interval_startContext) {}
-
-// EnterClosed_interval_start is called when production closed_interval_start is entered.
-func (s *BaseSFeelListener) EnterClosed_interval_start(ctx *Closed_interval_startContext) {}
-
-// ExitClosed_interval_start is called when production closed_interval_start is exited.
-func (s *BaseSFeelListener) ExitClosed_interval_start(ctx *Closed_interval_startContext) {}
-
-// EnterOpen_interval_end is called when production open_interval_end is entered.
-func (s *BaseSFeelListener) EnterOpen_interval_end(ctx *Open_interval_endContext) {}
-
-// ExitOpen_interval_end is called when production open_interval_end is exited.
-func (s *BaseSFeelListener) ExitOpen_interval_end(ctx *Open_interval_endContext) {}
-
-// EnterClosed_interval_end is called when production closed_interval_end is entered.
-func (s *BaseSFeelListener) EnterClosed_interval_end(ctx *Closed_interval_endContext) {}
-
-// ExitClosed_interval_end is called when production closed_interval_end is exited.
-func (s *BaseSFeelListener) ExitClosed_interval_end(ctx *Closed_interval_endContext) {}
 
 // EnterEndpoint is called when production endpoint is entered.
 func (s *BaseSFeelListener) EnterEndpoint(ctx *EndpointContext) {}
