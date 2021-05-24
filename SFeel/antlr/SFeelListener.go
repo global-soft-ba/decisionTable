@@ -26,6 +26,7 @@ func (s *SFeelListener) GetAST() ast.AbstractSyntaxTree {
 	return ast.AbstractSyntaxTree{Root: s.stack.Pop().(ast.Node)}
 }
 
+//Unary Tests
 func (s *SFeelListener) ExitEmptySimpleUnaryTests(ctx *gen.EmptySimpleUnaryTestsContext) {
 	lit := ctx.GetStart().GetText()
 	tkn := ast.Token{

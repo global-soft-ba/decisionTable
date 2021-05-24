@@ -1,14 +1,14 @@
 package antlr
 
 import (
-	errors2 "decisionTable/SFeel/antlr/errors"
+	antlrErrors "decisionTable/SFeel/antlr/errors"
 	gen "decisionTable/SFeel/gen"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 )
 
 func CreateSFeelParser(expr string) SFeelParser {
 	// Create ErrorListener
-	errorListener := &errors2.ErrorListener{}
+	errorListener := &antlrErrors.ErrorListener{}
 
 	// Create Lexer
 	is := antlr.NewInputStream(expr)
@@ -34,7 +34,7 @@ func CreateSFeelParser(expr string) SFeelParser {
 type SFeelParser struct {
 	lexer         *gen.SFeelLexer
 	parser        *gen.SFeelParser
-	errorListener *errors2.ErrorListener
+	errorListener *antlrErrors.ErrorListener
 }
 
 func (O SFeelParser) Lexer() *gen.SFeelLexer {
