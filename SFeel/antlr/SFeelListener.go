@@ -1,8 +1,8 @@
 package antlr
 
 import (
+	errors2 "decisionTable/SFeel/antlr/errors"
 	ast "decisionTable/SFeel/ast"
-	"decisionTable/SFeel/errors"
 	gen "decisionTable/SFeel/gen"
 	"reflect"
 	"strconv"
@@ -151,7 +151,7 @@ func (s *SFeelListener) ExitNumeric_literal(ctx *gen.Numeric_literalContext) {
 			negReal.SignRule = ast.Rule{Type: gen.SFeelParserRULE_numeric_literal, Literal: ctx.GetStart().GetText()}
 			s.stack.Push(negReal)
 		default:
-			s.Errors = append(s.Errors, errors.NewError("unknown numeric data type: %s ", reflect.TypeOf(nType)))
+			s.Errors = append(s.Errors, errors2.NewError("unknown numeric data type: %s ", reflect.TypeOf(nType)))
 		}
 	}
 }

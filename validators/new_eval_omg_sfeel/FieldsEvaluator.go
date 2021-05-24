@@ -2,10 +2,13 @@ package new_eval_omg_sfeel
 
 import (
 	"decisionTable/SFeel/ast"
-	"decisionTable/SFeel/errors"
 	"decisionTable/model"
+	"errors"
+	"fmt"
 	"reflect"
 )
+
+//ToDo make error global accessible via const?
 
 type FieldsEvaluator struct {
 	fields []model.Field
@@ -50,7 +53,7 @@ func (e FieldsEvaluator) evalDataType(data ast.Node) (bool, error) {
 		return e.evalQualifiedName(data.(ast.QualifiedName))
 	}
 
-	return false, errors.NewError("field data type %s does not expected Sfeel data typ %s ", e.field.Typ, reflect.TypeOf(data))
+	return false, errors.New(fmt.Sprintf("field data type %s does not expected Sfeel data typ %s ", e.field.Typ, reflect.TypeOf(data)))
 }
 
 func (e FieldsEvaluator) evalQualifiedName(name ast.QualifiedName) (bool, error) {
@@ -59,7 +62,7 @@ func (e FieldsEvaluator) evalQualifiedName(name ast.QualifiedName) (bool, error)
 		return false, err
 	}
 	if res.Typ != e.field.Typ {
-		return false, errors.NewError("referenced field type %s doesn't correspond to field typ %s ", e.field.Typ, reflect.TypeOf(res.Typ))
+		return false, errors.New(fmt.Sprintf("referenced field type %s doesn't correspond to field typ %s ", e.field.Typ, reflect.TypeOf(res.Typ)))
 
 	}
 	return true, nil
@@ -73,5 +76,5 @@ func (e FieldsEvaluator) evalQualifiedNameExistenceInFields(name ast.QualifiedNa
 			return val, nil
 		}
 	}
-	return model.Field{}, errors.NewError("couldn't find qualified name %s in field list", name.String())
+	return model.Field{}, errors.New(fmt.Sprintf("couldn't find qualified name %s in field list", name.String()))
 }

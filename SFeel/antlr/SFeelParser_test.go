@@ -1,7 +1,6 @@
-package parser
+package antlr
 
 import (
-	antlr2 "decisionTable/SFeel/antlr"
 	gen "decisionTable/SFeel/gen"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"reflect"
@@ -78,7 +77,7 @@ func TestASTRepresentation_InputEntries(t *testing.T) {
 
 			if len(prs.Errors()) == 0 {
 				// Finally parse the expression
-				conv := antlr2.CreateSFeelListener()
+				conv := CreateSFeelListener()
 				antlr.ParseTreeWalkerDefault.Walk(&conv, tree)
 				if got := conv.GetAST().String(); !reflect.DeepEqual(got, tt.want) {
 					t.Errorf("CreateSFeelParser() = %v, want %v", got, tt.want)
