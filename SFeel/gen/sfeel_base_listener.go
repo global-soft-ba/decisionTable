@@ -21,23 +21,11 @@ func (s *BaseSFeelListener) EnterEveryRule(ctx antlr.ParserRuleContext) {}
 // ExitEveryRule is called when any rule is exited.
 func (s *BaseSFeelListener) ExitEveryRule(ctx antlr.ParserRuleContext) {}
 
-// EnterInputEntry is called when production inputEntry is entered.
-func (s *BaseSFeelListener) EnterInputEntry(ctx *InputEntryContext) {}
+// EnterStart is called when production start is entered.
+func (s *BaseSFeelListener) EnterStart(ctx *StartContext) {}
 
-// ExitInputEntry is called when production inputEntry is exited.
-func (s *BaseSFeelListener) ExitInputEntry(ctx *InputEntryContext) {}
-
-// EnterOutputEntry is called when production outputEntry is entered.
-func (s *BaseSFeelListener) EnterOutputEntry(ctx *OutputEntryContext) {}
-
-// ExitOutputEntry is called when production outputEntry is exited.
-func (s *BaseSFeelListener) ExitOutputEntry(ctx *OutputEntryContext) {}
-
-// EnterSyntaxCheck is called when production syntaxCheck is entered.
-func (s *BaseSFeelListener) EnterSyntaxCheck(ctx *SyntaxCheckContext) {}
-
-// ExitSyntaxCheck is called when production syntaxCheck is exited.
-func (s *BaseSFeelListener) ExitSyntaxCheck(ctx *SyntaxCheckContext) {}
+// ExitStart is called when production start is exited.
+func (s *BaseSFeelListener) ExitStart(ctx *StartContext) {}
 
 // EnterSimpleUnaryTests is called when production SimpleUnaryTests is entered.
 func (s *BaseSFeelListener) EnterSimpleUnaryTests(ctx *SimpleUnaryTestsContext) {}

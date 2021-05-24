@@ -2,16 +2,9 @@ grammar SFeel;
 //OMG Version 1.3
 
 
-// Each input entry SHALL be an instance of simple unary tests (grammar rule 12 - OMG Standard)
-inputEntry: simple_unary_tests EOF;
-
-// Each output entry SHALL be a simple expression (grammar rule 3 - - OMG Standard).
-outputEntry: simple_expressions EOF;
-
-// single entry point for syntax checking
-syntaxCheck
-    : simple_unary_tests EOF
-    | simple_expressions EOF;
+start
+    : simple_unary_tests EOF // Each input entry SHALL be an instance of simple unary tests (grammar rule 12 - OMG Standard)
+    | simple_expressions EOF; // Each output entry SHALL be a simple expression (grammar rule 3 - OMG Standard).
 
 
 // Unaray Tests

@@ -1,13 +1,5 @@
 package ast
 
-type AbstractSyntaxTree struct {
-	Root Node
-}
-
-func (a AbstractSyntaxTree) String() string {
-	return a.Root.String()
-}
-
 // The base Node interface
 type Node interface {
 	ParserLiteral() string

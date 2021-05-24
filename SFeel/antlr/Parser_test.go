@@ -1,13 +1,11 @@
 package antlr
 
 import (
-	gen "decisionTable/SFeel/gen"
-	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"reflect"
 	"testing"
 )
 
-func TestASTRepresentation_InputEntries(t *testing.T) {
+func TestParser_Parse(t *testing.T) {
 	type args struct {
 		expr string
 	}
@@ -69,21 +67,12 @@ func TestASTRepresentation_InputEntries(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			prs := CreateSFeelParser(tt.args.expr)
-			tree := prs.Parser().SyntaxCheck()
-			//Up-Front Syntax Check
-			base := gen.BaseSFeelListener{}
-			antlr.ParseTreeWalkerDefault.Walk(&base, tree)
-
-			if len(prs.Errors()) == 0 {
-				// Finally parse the expression
-				conv := CreateSFeelListener()
-				antlr.ParseTreeWalkerDefault.Walk(&conv, tree)
-				if got := conv.GetAST().String(); !reflect.DeepEqual(got, tt.want) {
-					t.Errorf("CreateSFeelParser() = %v, want %v", got, tt.want)
-				}
-			} else {
-				t.Errorf("CreateSFeelParser(): Syntax error in expression = %v", prs.Errors())
+			ast, err := CreateParser(tt.args.expr).Parse()
+			if err != nil {
+				t.Errorf("Parsing Error = %v", err)
+			}
+			if got := ast.String(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("CreateParser() = %v, want %v", got, tt.want)
 			}
 		})
 	}

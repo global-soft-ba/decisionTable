@@ -8,14 +8,8 @@ import "github.com/antlr/antlr4/runtime/Go/antlr"
 type SFeelVisitor interface {
 	antlr.ParseTreeVisitor
 
-	// Visit a parse tree produced by SFeelParser#inputEntry.
-	VisitInputEntry(ctx *InputEntryContext) interface{}
-
-	// Visit a parse tree produced by SFeelParser#outputEntry.
-	VisitOutputEntry(ctx *OutputEntryContext) interface{}
-
-	// Visit a parse tree produced by SFeelParser#syntaxCheck.
-	VisitSyntaxCheck(ctx *SyntaxCheckContext) interface{}
+	// Visit a parse tree produced by SFeelParser#start.
+	VisitStart(ctx *StartContext) interface{}
 
 	// Visit a parse tree produced by SFeelParser#SimpleUnaryTests.
 	VisitSimpleUnaryTests(ctx *SimpleUnaryTestsContext) interface{}

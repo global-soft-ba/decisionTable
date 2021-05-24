@@ -8,15 +8,7 @@ type BaseSFeelVisitor struct {
 	*antlr.BaseParseTreeVisitor
 }
 
-func (v *BaseSFeelVisitor) VisitInputEntry(ctx *InputEntryContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseSFeelVisitor) VisitOutputEntry(ctx *OutputEntryContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseSFeelVisitor) VisitSyntaxCheck(ctx *SyntaxCheckContext) interface{} {
+func (v *BaseSFeelVisitor) VisitStart(ctx *StartContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

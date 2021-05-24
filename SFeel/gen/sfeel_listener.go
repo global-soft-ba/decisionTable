@@ -8,14 +8,8 @@ import "github.com/antlr/antlr4/runtime/Go/antlr"
 type SFeelListener interface {
 	antlr.ParseTreeListener
 
-	// EnterInputEntry is called when entering the inputEntry production.
-	EnterInputEntry(c *InputEntryContext)
-
-	// EnterOutputEntry is called when entering the outputEntry production.
-	EnterOutputEntry(c *OutputEntryContext)
-
-	// EnterSyntaxCheck is called when entering the syntaxCheck production.
-	EnterSyntaxCheck(c *SyntaxCheckContext)
+	// EnterStart is called when entering the start production.
+	EnterStart(c *StartContext)
 
 	// EnterSimpleUnaryTests is called when entering the SimpleUnaryTests production.
 	EnterSimpleUnaryTests(c *SimpleUnaryTestsContext)
@@ -113,14 +107,8 @@ type SFeelListener interface {
 	// EnterString_literal is called when entering the string_literal production.
 	EnterString_literal(c *String_literalContext)
 
-	// ExitInputEntry is called when exiting the inputEntry production.
-	ExitInputEntry(c *InputEntryContext)
-
-	// ExitOutputEntry is called when exiting the outputEntry production.
-	ExitOutputEntry(c *OutputEntryContext)
-
-	// ExitSyntaxCheck is called when exiting the syntaxCheck production.
-	ExitSyntaxCheck(c *SyntaxCheckContext)
+	// ExitStart is called when exiting the start production.
+	ExitStart(c *StartContext)
 
 	// ExitSimpleUnaryTests is called when exiting the SimpleUnaryTests production.
 	ExitSimpleUnaryTests(c *SimpleUnaryTestsContext)
