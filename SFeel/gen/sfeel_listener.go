@@ -14,6 +14,9 @@ type SFeelListener interface {
 	// EnterOutputEntry is called when entering the outputEntry production.
 	EnterOutputEntry(c *OutputEntryContext)
 
+	// EnterSyntaxCheck is called when entering the syntaxCheck production.
+	EnterSyntaxCheck(c *SyntaxCheckContext)
+
 	// EnterSimpleUnaryTests is called when entering the SimpleUnaryTests production.
 	EnterSimpleUnaryTests(c *SimpleUnaryTestsContext)
 
@@ -115,6 +118,9 @@ type SFeelListener interface {
 
 	// ExitOutputEntry is called when exiting the outputEntry production.
 	ExitOutputEntry(c *OutputEntryContext)
+
+	// ExitSyntaxCheck is called when exiting the syntaxCheck production.
+	ExitSyntaxCheck(c *SyntaxCheckContext)
 
 	// ExitSimpleUnaryTests is called when exiting the SimpleUnaryTests production.
 	ExitSimpleUnaryTests(c *SimpleUnaryTestsContext)

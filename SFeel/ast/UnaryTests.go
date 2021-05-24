@@ -2,29 +2,29 @@ package ast
 
 import "bytes"
 
-type EmptyStatement struct {
+type EmptyUnaryTest struct {
 	ParserToken Token
 }
 
-func (l EmptyStatement) ParserLiteral() string {
+func (l EmptyUnaryTest) ParserLiteral() string {
 	return l.ParserToken.Literal
 }
 
-func (l EmptyStatement) String() string {
+func (l EmptyUnaryTest) String() string {
 	return ""
 }
 
-type DisjunctedUnaryStatements struct {
+type UnaryTests struct {
 	ParserRules Rule
 	Negation    Rule
 	UnaryTests  []Node
 }
 
-func (l DisjunctedUnaryStatements) ParserLiteral() string {
+func (l UnaryTests) ParserLiteral() string {
 	return l.ParserRules.Literal
 }
 
-func (l DisjunctedUnaryStatements) String() string {
+func (l UnaryTests) String() string {
 	var out bytes.Buffer
 
 	for i, val := range l.UnaryTests {
@@ -46,14 +46,14 @@ func (l DisjunctedUnaryStatements) String() string {
 	return out2.String()
 }
 
-type UnaryStatement struct {
+type UnaryTest struct {
 	ParserRule Rule
 	Operator   Token
 	Value      Node
 }
 
-func (l UnaryStatement) ParserLiteral() string { return l.ParserRule.Literal }
-func (l UnaryStatement) String() string {
+func (l UnaryTest) ParserLiteral() string { return l.ParserRule.Literal }
+func (l UnaryTest) String() string {
 	var out bytes.Buffer
 	out.WriteString(l.Operator.Literal)
 	out.WriteString(l.Value.String())

@@ -14,6 +14,9 @@ type SFeelVisitor interface {
 	// Visit a parse tree produced by SFeelParser#outputEntry.
 	VisitOutputEntry(ctx *OutputEntryContext) interface{}
 
+	// Visit a parse tree produced by SFeelParser#syntaxCheck.
+	VisitSyntaxCheck(ctx *SyntaxCheckContext) interface{}
+
 	// Visit a parse tree produced by SFeelParser#SimpleUnaryTests.
 	VisitSimpleUnaryTests(ctx *SimpleUnaryTestsContext) interface{}
 

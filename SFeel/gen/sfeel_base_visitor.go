@@ -16,6 +16,10 @@ func (v *BaseSFeelVisitor) VisitOutputEntry(ctx *OutputEntryContext) interface{}
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSFeelVisitor) VisitSyntaxCheck(ctx *SyntaxCheckContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSFeelVisitor) VisitSimpleUnaryTests(ctx *SimpleUnaryTestsContext) interface{} {
 	return v.VisitChildren(ctx)
 }

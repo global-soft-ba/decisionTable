@@ -71,7 +71,7 @@ func TestASTRepresentation_InputEntries(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			prs := CreateSFeelParser(tt.args.expr)
-			tree := prs.Parser().InputEntry()
+			tree := prs.Parser().SyntaxCheck()
 			//Up-Front Syntax Check
 			base := gen.BaseSFeelListener{}
 			antlr.ParseTreeWalkerDefault.Walk(&base, tree)

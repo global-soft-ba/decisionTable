@@ -19,11 +19,11 @@ type SFeelListener struct {
 	stack  *stack
 }
 
-func (s *SFeelListener) GetAST() ast.Node {
+func (s *SFeelListener) GetAST() ast.AbstractSyntaxTree {
 	if s.stack.length == 0 {
-		return nil
+		return ast.AbstractSyntaxTree{}
 	}
-	return s.stack.Pop().(ast.Node)
+	return ast.AbstractSyntaxTree{Root: s.stack.Pop().(ast.Node)}
 }
 
 func (s *SFeelListener) ExitEmptySimpleUnaryTests(ctx *gen.EmptySimpleUnaryTestsContext) {
