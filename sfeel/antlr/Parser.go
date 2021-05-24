@@ -1,9 +1,9 @@
 package antlr
 
 import (
-	antlrErrors "decisionTable/SFeel/antlr/errors"
-	"decisionTable/SFeel/ast"
-	gen "decisionTable/SFeel/gen"
+	antlrErrors "decisionTable/sfeel/antlr/errors"
+	"decisionTable/sfeel/ast"
+	gen "decisionTable/sfeel/gen"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 )
 

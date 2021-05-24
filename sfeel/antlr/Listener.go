@@ -1,9 +1,9 @@
 package antlr
 
 import (
-	errors2 "decisionTable/SFeel/antlr/errors"
-	ast "decisionTable/SFeel/ast"
-	gen "decisionTable/SFeel/gen"
+	errors2 "decisionTable/sfeel/antlr/errors"
+	ast "decisionTable/sfeel/ast"
+	gen "decisionTable/sfeel/gen"
 	"reflect"
 	"strconv"
 )

@@ -1,8 +1,8 @@
 package new_eval_omg_sfeel
 
 import (
-	"decisionTable/SFeel/ast"
 	"decisionTable/model"
+	"decisionTable/sfeel/ast"
 	"testing"
 )
 
