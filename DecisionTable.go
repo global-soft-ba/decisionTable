@@ -1,9 +1,9 @@
-package decisionTable
+package main
 
 import (
+	"decisionTable/convert/interfaces"
+	"decisionTable/model"
 	"errors"
-	"github.com/global-soft-ba/decisionTable/converters/interfaces"
-	"github.com/global-soft-ba/decisionTable/model"
 )
 
 var (
@@ -16,37 +16,28 @@ func CreateDecisionTable() DecisionTableBuilderInterface {
 }
 
 type DecisionTable struct {
-	key              string
-	name             string
-	hitPolicy        model.HitPolicy
-	collectOperator  model.CollectOperator
-	notationStandard model.DTableStandard
-	interferences    bool
-	valid            bool
-
-	inputFields  []model.Field
-	outputFields []model.Field
-	rules        []model.Rule
+	data  model.TableData
+	valid bool
 }
 
 func (d DecisionTable) Key() string {
-	return d.key
+	return d.data.Key
 }
 
 func (d DecisionTable) Name() string {
-	return d.name
+	return d.data.Name
 }
 
 func (d DecisionTable) HitPolicy() model.HitPolicy {
-	return d.hitPolicy
+	return d.data.HitPolicy
 }
 
 func (d DecisionTable) CollectOperator() model.CollectOperator {
-	return d.collectOperator
+	return d.data.CollectOperator
 }
 
 func (d DecisionTable) NotationStandard() model.DTableStandard {
-	return d.notationStandard
+	return d.data.NotationStandard
 }
 
 func (d DecisionTable) Valid() bool {
@@ -54,19 +45,19 @@ func (d DecisionTable) Valid() bool {
 }
 
 func (d DecisionTable) InputFields() []model.Field {
-	return d.inputFields
+	return d.data.InputFields
 }
 
 func (d DecisionTable) OutputFields() []model.Field {
-	return d.outputFields
+	return d.data.OutputFields
 }
 
 func (d DecisionTable) Rules() []model.Rule {
-	return d.rules
+	return d.data.Rules
 }
 
 func (d DecisionTable) Interferences() bool {
-	return d.interferences
+	return d.data.Interferences
 }
 
 func (d DecisionTable) Convert(converter interfaces.ConverterInterface) (interface{}, error) {
@@ -74,17 +65,5 @@ func (d DecisionTable) Convert(converter interfaces.ConverterInterface) (interfa
 	if !d.valid {
 		return []string{}, ErrDTableNotValid
 	}
-
-	dTable := model.TableData{
-		Key:              d.key,
-		Name:             d.name,
-		HitPolicy:        d.hitPolicy,
-		CollectOperator:  d.collectOperator,
-		NotationStandard: d.notationStandard,
-		InputFields:      d.inputFields,
-		OutputFields:     d.outputFields,
-		Interferences:    d.interferences,
-		Rules:            d.rules,
-	}
-	return converter.Convert(dTable)
+	return converter.Convert(d.data)
 }

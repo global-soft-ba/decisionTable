@@ -1,49 +1,49 @@
-package decisionTable
+package main
 
 import (
-	"github.com/global-soft-ba/decisionTable/model"
-	"github.com/global-soft-ba/decisionTable/validators"
-	"github.com/global-soft-ba/decisionTable/validators/expressionlanguages"
+	"decisionTable/model"
+	"decisionTable/valid"
+	"decisionTable/valid/expressionlanguages"
 )
 
 type DecisionTableBuilder struct {
-	dTableData model.TableData
+	data model.TableData
 }
 
 func (d DecisionTableBuilder) SetDefinitionKey(key string) DecisionTableBuilderInterface {
-	d.dTableData.Key = key
+	d.data.Key = key
 	return d
 }
 
 func (d DecisionTableBuilder) SetName(name string) DecisionTableBuilderInterface {
-	d.dTableData.Name = name
+	d.data.Name = name
 	return d
 }
 
 func (d DecisionTableBuilder) SetHitPolicy(policy model.HitPolicy) DecisionTableBuilderInterface {
-	d.dTableData.HitPolicy = policy
+	d.data.HitPolicy = policy
 	return d
 }
 
 func (d DecisionTableBuilder) SetCollectOperator(collector model.CollectOperator) DecisionTableBuilderInterface {
-	d.dTableData.CollectOperator = collector
+	d.data.CollectOperator = collector
 	return d
 }
 
 func (d DecisionTableBuilder) SetNotationStandard(lang model.DTableStandard) DecisionTableBuilderInterface {
-	d.dTableData.NotationStandard = lang
+	d.data.NotationStandard = lang
 	return d
 }
 
 func (d DecisionTableBuilder) AddInputField(name string, label string, typ model.VariableTyp) DecisionTableBuilderInterface {
 	field := model.Field{Name: name, Key: label, Typ: typ}
-	d.dTableData.InputFields = append(d.dTableData.InputFields, field)
+	d.data.InputFields = append(d.data.InputFields, field)
 	return d
 }
 
 func (d DecisionTableBuilder) AddOutputField(name string, label string, typ model.VariableTyp) DecisionTableBuilderInterface {
 	field := model.Field{Name: name, Key: label, Typ: typ}
-	d.dTableData.OutputFields = append(d.dTableData.OutputFields, field)
+	d.data.OutputFields = append(d.data.OutputFields, field)
 	return d
 }
 
@@ -60,33 +60,16 @@ func (d DecisionTableBuilder) AddRule(description string) DecisionTableRuleBuild
 
 func (d DecisionTableBuilder) Build() (DecisionTable, []error) {
 	parsers := expressionlanguages.CreateParserFactory()
-	validtr := validators.CreateDecisionTableValidator(d.dTableData, parsers)
+	validtr := valid.CreateDecisionTableValidator(d.data, parsers)
 
 	valid, err := validtr.Validate()
 	if valid != true {
 		return DecisionTable{}, err
 	}
 
-	table := d.createDecisionTable()
-	table.interferences = validtr.ValidateContainsInterferences()
+	table := DecisionTable{data: d.data, valid: valid}
+	table.data.Interferences = validtr.ValidateContainsInterferences()
 	return table, nil
-}
-
-func (d DecisionTableBuilder) createDecisionTable() DecisionTable {
-	dTable := DecisionTable{
-		key:              d.dTableData.Key,
-		name:             d.dTableData.Name,
-		hitPolicy:        d.dTableData.HitPolicy,
-		collectOperator:  d.dTableData.CollectOperator,
-		notationStandard: d.dTableData.NotationStandard,
-		valid:            true,
-		interferences:    false,
-		inputFields:      d.dTableData.InputFields,
-		outputFields:     d.dTableData.OutputFields,
-		rules:            d.dTableData.Rules,
-	}
-
-	return dTable
 }
 
 type DTableRuleBuilder struct {
@@ -111,6 +94,6 @@ func (r DTableRuleBuilder) AddOutputEntry(expr string, exprLang model.Expression
 
 func (r DTableRuleBuilder) BuildRule() DecisionTableBuilderInterface {
 	rule := model.Rule{Description: r.description, InputEntries: r.input, OutputEntries: r.output}
-	r.builder.dTableData.Rules = append(r.builder.dTableData.Rules, rule)
+	r.builder.data.Rules = append(r.builder.data.Rules, rule)
 	return r.builder
 }
