@@ -6,40 +6,40 @@ import (
 	"decisionTable/sfeel/eval"
 )
 
-func CreateInputEntry(exp string) (Entry, []error) {
+func CreateInputExpression(exp string) (Expression, []error) {
 	tree, err := antlr.CreateParser(exp).Parse()
 	if err != nil {
-		return Entry{}, err
+		return Expression{}, err
 	}
 
 	evl, err := eval.CreateInputEntryEvaluator().Eval(tree)
 	if !evl {
-		return Entry{}, err
+		return Expression{}, err
 	}
 
-	return Entry{ast: tree, expression: exp}, nil
+	return Expression{ast: tree, expression: exp}, nil
 }
 
-func CreateOutputEntry(exp string) (Entry, []error) {
+func CreateOutputExpression(exp string) (Expression, []error) {
 	tree, err := antlr.CreateParser(exp).Parse()
 	if err != nil {
-		return Entry{}, err
+		return Expression{}, err
 	}
 
 	evl, err := eval.CreateOutputEntryEvaluator().Eval(tree)
 	if !evl {
-		return Entry{}, err
+		return Expression{}, err
 	}
 
-	return Entry{ast: tree, expression: exp}, nil
+	return Expression{ast: tree, expression: exp}, nil
 }
 
-type Entry struct {
+type Expression struct {
 	ast        ast.Node
 	expression string
 }
 
-func (e Entry) String() string {
+func (e Expression) String() string {
 	if e.ast == nil {
 		return ""
 	}
