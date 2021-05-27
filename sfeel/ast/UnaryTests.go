@@ -1,18 +1,9 @@
 package ast
 
-import "bytes"
-
-type EmptyUnaryTest struct {
-	ParserToken Token
-}
-
-func (l EmptyUnaryTest) ParserLiteral() string {
-	return l.ParserToken.Literal
-}
-
-func (l EmptyUnaryTest) String() string {
-	return ""
-}
+import (
+	"bytes"
+	"reflect"
+)
 
 type UnaryTests struct {
 	ParserRules Rule
@@ -23,7 +14,6 @@ type UnaryTests struct {
 func (l UnaryTests) ParserLiteral() string {
 	return l.ParserRules.Literal
 }
-
 func (l UnaryTests) String() string {
 	var out bytes.Buffer
 
@@ -45,6 +35,17 @@ func (l UnaryTests) String() string {
 
 	return out2.String()
 }
+func (l UnaryTests) GetOperandType() reflect.Type {
+	var result []Node
+	for _, val := range l.UnaryTests {
+		ut := val.(UnaryTest)
+		result = append(result, ut.Value)
+	}
+	return checkDataTypePrecedences(result...)
+}
+func (l UnaryTests) GetChildren() []Node {
+	return l.UnaryTests
+}
 
 type UnaryTest struct {
 	ParserRule Rule
@@ -58,6 +59,12 @@ func (l UnaryTest) String() string {
 	out.WriteString(l.Operator.Literal)
 	out.WriteString(l.Value.String())
 	return out.String()
+}
+func (l UnaryTest) GetOperandType() reflect.Type {
+	return reflect.TypeOf(l.Value)
+}
+func (l UnaryTest) GetChildren() []Node {
+	return []Node{l.Value}
 }
 
 type Interval struct {
@@ -78,4 +85,10 @@ func (l Interval) String() string {
 	out.WriteString(l.EndValue.String())
 	out.WriteString(l.EndIntervalRule.Literal)
 	return out.String()
+}
+func (l Interval) GetOperandType() reflect.Type {
+	return checkDataTypePrecedence(l.StartValue, l.EndValue)
+}
+func (l Interval) GetChildren() []Node {
+	return []Node{l.StartValue, l.EndValue}
 }

@@ -33,7 +33,7 @@ func (s *Listener) ExitEmptySimpleUnaryTests(ctx *gen.EmptySimpleUnaryTestsConte
 		Type:    gen.SFeelParserRULE_simple_unary_tests,
 		Literal: lit,
 	}
-	empty := ast.EmptyUnaryTest{ParserToken: tkn}
+	empty := ast.EmptyStatement{ParserToken: tkn}
 	s.stack.Push(empty)
 }
 

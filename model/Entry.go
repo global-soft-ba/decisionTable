@@ -1,18 +1,18 @@
 package model
 
-func CreateEntry(exp string, exprLang ExpressionLanguage) Entry {
-	return Entry{expression: exp, expressionLanguage: exprLang}
+func CreateEntry(exp ExpressionInterface, exprLang ExpressionLanguage) Entry {
+	return Entry{expression: exp, exprLang: exprLang}
 }
 
 type Entry struct {
-	expression         string
-	expressionLanguage ExpressionLanguage
+	expression ExpressionInterface
+	exprLang   ExpressionLanguage
 }
 
 func (e Entry) Expression() string {
-	return e.expression
+	return e.expression.String()
 }
 
 func (e Entry) ExpressionLanguage() ExpressionLanguage {
-	return e.expressionLanguage
+	return e.exprLang
 }

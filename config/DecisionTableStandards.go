@@ -6,7 +6,7 @@ type TableConfigStandard struct {
 	ExpressionLanguage map[model.ExpressionLanguage]string
 	HitPolicies        map[model.HitPolicy]string
 	CollectOperators   map[model.CollectOperator]string
-	VariableType       map[model.VariableTyp]string
+	VariableType       map[model.DataTyp]string
 }
 
 var DecisionTableStandards = map[model.DTableStandard]TableConfigStandard{
@@ -37,7 +37,7 @@ var dmn = TableConfigStandard{
 		model.Count: "",
 	},
 
-	VariableType: map[model.VariableTyp]string{
+	VariableType: map[model.DataTyp]string{
 		model.String:   "",
 		model.Boolean:  "",
 		model.Integer:  "",
@@ -59,7 +59,7 @@ var grule = TableConfigStandard{
 
 	CollectOperators: map[model.CollectOperator]string{},
 	//TODO IN GRL Float = REAL
-	VariableType: map[model.VariableTyp]string{
+	VariableType: map[model.DataTyp]string{
 		model.String:   "",
 		model.Boolean:  "",
 		model.Integer:  "",

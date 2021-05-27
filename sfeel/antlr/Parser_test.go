@@ -50,7 +50,7 @@ func TestParser_Parse(t *testing.T) {
 			want: `not(<1,<3)`,
 		},
 		{
-			name: "empty unary statement",
+			name: "empty statement",
 			args: args{`-`},
 			want: "",
 		},

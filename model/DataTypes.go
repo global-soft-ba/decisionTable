@@ -42,14 +42,14 @@ const (
 	Count CollectOperator = "Count Operator"
 )
 
-type VariableTyp string
+type DataTyp string
 
 const (
-	String   VariableTyp = "string"
-	Boolean  VariableTyp = "boolean"
-	Integer  VariableTyp = "integer"
-	Float    VariableTyp = "float"
-	Long     VariableTyp = "long"
-	Double   VariableTyp = "double"
-	DateTime VariableTyp = "date"
+	String   DataTyp = "string"
+	Boolean  DataTyp = "boolean"
+	Integer  DataTyp = "integer"
+	Float    DataTyp = "float"
+	Long     DataTyp = "long"
+	Double   DataTyp = "double"
+	DateTime DataTyp = "date"
 )

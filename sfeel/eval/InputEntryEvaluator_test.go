@@ -29,7 +29,7 @@ func TestInputEntryEvaluator_Eval(t *testing.T) {
 		},
 		{
 			name:    "correct empty unary evaluation",
-			args:    args{ast.EmptyUnaryTest{}},
+			args:    args{ast.EmptyStatement{}},
 			want:    true,
 			wantErr: false,
 		},

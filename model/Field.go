@@ -8,5 +8,5 @@ package model
 type Field struct {
 	Name string
 	Key  string
-	Typ  VariableTyp
+	Typ  DataTyp
 }
