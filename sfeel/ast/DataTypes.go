@@ -55,7 +55,7 @@ func (l EmptyStatement) ParserLiteral() string {
 func (l EmptyStatement) String() string {
 	return ""
 }
-func (l EmptyStatement) GetOperandType() reflect.Type {
+func (l EmptyStatement) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l)
 }
 func (l EmptyStatement) GetChildren() []Node {
@@ -79,7 +79,7 @@ func (l QualifiedName) String() string {
 
 	return out.String()
 }
-func (l QualifiedName) GetOperandType() reflect.Type {
+func (l QualifiedName) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l)
 }
 func (l QualifiedName) GetChildren() []Node {
@@ -103,7 +103,7 @@ func (l Integer) String() string {
 	out.WriteString(strconv.FormatInt(l.Value, 10))
 	return out.String()
 }
-func (l Integer) GetOperandType() reflect.Type {
+func (l Integer) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l)
 }
 func (l Integer) GetChildren() []Node {
@@ -127,7 +127,7 @@ func (l Float) String() string {
 	out.WriteString(strconv.FormatFloat(l.Value, 'E', -1, 64))
 	return out.String()
 }
-func (l Float) GetOperandType() reflect.Type {
+func (l Float) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l)
 }
 func (l Float) GetChildren() []Node {
@@ -141,7 +141,7 @@ type Boolean struct {
 
 func (l Boolean) ParserLiteral() string { return l.ParserRule.Literal }
 func (l Boolean) String() string        { return strconv.FormatBool(l.Value) }
-func (l Boolean) GetOperandType() reflect.Type {
+func (l Boolean) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l)
 }
 func (l Boolean) GetChildren() []Node {
@@ -155,7 +155,7 @@ type String struct {
 
 func (l String) ParserLiteral() string { return l.ParserRule.Literal }
 func (l String) String() string        { return l.Value }
-func (l String) GetOperandType() reflect.Type {
+func (l String) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l)
 }
 func (l String) GetChildren() []Node {
@@ -169,7 +169,7 @@ type DateTime struct {
 
 func (l DateTime) ParserLiteral() string { return l.ParserRule.Literal }
 func (l DateTime) String() string        { return l.Value.String() }
-func (l DateTime) GetOperandType() reflect.Type {
+func (l DateTime) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l)
 }
 func (l DateTime) GetChildren() []Node {

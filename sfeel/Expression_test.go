@@ -276,13 +276,13 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 				ast:        tt.fields.ast,
 				expression: tt.fields.expression,
 			}
-			got, err := e.ValidateExistenceOfFieldReferences(tt.args.fields)
+			got, err := e.ValidateExistenceOfFieldReferencesInExpression(tt.args.fields)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("ValidateExistenceOfFieldReferences() got = %v, want %v", err, tt.wantErr)
+				t.Errorf("ValidateExistenceOfFieldReferencesInExpression() got = %v, want %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("ValidateExistenceOfFieldReferences() got = %v, want %v", got, tt.want)
+				t.Errorf("ValidateExistenceOfFieldReferencesInExpression() got = %v, want %v", got, tt.want)
 			}
 		})
 	}

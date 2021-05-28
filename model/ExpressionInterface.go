@@ -3,5 +3,5 @@ package model
 type ExpressionInterface interface {
 	String() string
 	ValidateDataTypeOfExpression(varType DataTyp) (bool, error)
-	ValidateExistenceOfFieldReferences(fields []Field) ([]Field, []error)
+	ValidateExistenceOfFieldReferencesInExpression(fields []Field) ([]Field, []error)
 }

@@ -35,7 +35,7 @@ func (l UnaryTests) String() string {
 
 	return out2.String()
 }
-func (l UnaryTests) GetOperandType() reflect.Type {
+func (l UnaryTests) GetOperandDataType() reflect.Type {
 	var result []Node
 	for _, val := range l.UnaryTests {
 		ut := val.(UnaryTest)
@@ -60,7 +60,7 @@ func (l UnaryTest) String() string {
 	out.WriteString(l.Value.String())
 	return out.String()
 }
-func (l UnaryTest) GetOperandType() reflect.Type {
+func (l UnaryTest) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l.Value)
 }
 func (l UnaryTest) GetChildren() []Node {
@@ -86,7 +86,7 @@ func (l Interval) String() string {
 	out.WriteString(l.EndIntervalRule.Literal)
 	return out.String()
 }
-func (l Interval) GetOperandType() reflect.Type {
+func (l Interval) GetOperandDataType() reflect.Type {
 	return checkDataTypePrecedence(l.StartValue, l.EndValue)
 }
 func (l Interval) GetChildren() []Node {

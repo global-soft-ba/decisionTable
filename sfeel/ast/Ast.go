@@ -8,7 +8,7 @@ import (
 type Node interface {
 	ParserLiteral() string
 	String() string
-	GetOperandType() reflect.Type
+	GetOperandDataType() reflect.Type
 	GetChildren() []Node
 }
 

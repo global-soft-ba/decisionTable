@@ -53,7 +53,7 @@ func (e Expression) ValidateDataTypeOfExpression(varType model.DataTyp) (bool, e
 		return false, nil
 	}
 
-	switch e.ast.GetOperandType() {
+	switch e.ast.GetOperandDataType() {
 	case reflect.TypeOf(ast.EmptyStatement{}):
 		return true, nil
 	case reflect.TypeOf(ast.QualifiedName{}):
@@ -80,15 +80,15 @@ func (e Expression) ValidateDataTypeOfExpression(varType model.DataTyp) (bool, e
 		}
 	}
 
-	return false, errors.New(fmt.Sprintf("given data type %s is not compatible with %s", varType, e.ast.GetOperandType()))
+	return false, errors.New(fmt.Sprintf("given data type %s is not compatible with %s", varType, e.ast.GetOperandDataType()))
 }
-func (e Expression) ValidateExistenceOfFieldReferences(fields []model.Field) ([]model.Field, []error) {
+func (e Expression) ValidateExistenceOfFieldReferencesInExpression(fields []model.Field) ([]model.Field, []error) {
 	qualifiedFields := ast.GetAllQualifiedNames(e.ast)
 	var errOut []error
 	var out []model.Field
 
 	for _, val := range qualifiedFields {
-		qf, err := e.getFieldOfQualifiedName(val, fields)
+		qf, err := e.getFieldUsingQualifiedName(val, fields)
 		if err != nil {
 			errOut = append(errOut, err)
 		} else {
@@ -98,7 +98,7 @@ func (e Expression) ValidateExistenceOfFieldReferences(fields []model.Field) ([]
 
 	return out, errOut
 }
-func (e Expression) getFieldOfQualifiedName(name ast.QualifiedName, fields []model.Field) (model.Field, error) {
+func (e Expression) getFieldUsingQualifiedName(name ast.QualifiedName, fields []model.Field) (model.Field, error) {
 	for _, val := range fields {
 		//TODO Extend to allow arbitrary navigation paths on structs
 		if val.Name == name.Value[0] && val.Key == name.Value[1] {
