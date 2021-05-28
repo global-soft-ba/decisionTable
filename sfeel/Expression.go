@@ -10,43 +10,40 @@ import (
 	"reflect"
 )
 
-func CreateInputExpression(exp string) (model.ExpressionInterface, []error) {
+func CreateInputExpression(exp string) model.ExpressionInterface {
 	tree, err := antlr.CreateParser(exp).Parse()
+	evl := eval.CreateInputEntryEvaluator()
 	if err != nil {
-		return Expression{}, err
+		return Expression{ast: nil, evaluator: evl, expression: exp}
 	}
-
-	evl, err := eval.CreateInputEntryEvaluator().Eval(tree)
-	if !evl {
-		return Expression{}, err
-	}
-
-	return Expression{ast: tree, expression: exp}, nil
+	return Expression{ast: tree, evaluator: evl, expression: exp}
 }
-func CreateOutputExpression(exp string) (model.ExpressionInterface, []error) {
+
+func CreateOutputExpression(exp string) model.ExpressionInterface {
 	tree, err := antlr.CreateParser(exp).Parse()
+	evl := eval.CreateOutputEntryEvaluator()
 	if err != nil {
-		return Expression{}, err
+		return Expression{ast: nil, evaluator: evl, expression: exp}
 	}
-
-	evl, err := eval.CreateOutputEntryEvaluator().Eval(tree)
-	if !evl {
-		return Expression{}, err
-	}
-
-	return Expression{ast: tree, expression: exp}, nil
+	return Expression{ast: tree, evaluator: evl, expression: exp}
 }
 
 type Expression struct {
 	ast        ast.Node
+	evaluator  eval.EvaluatorInterface
 	expression string
 }
 
 func (e Expression) String() string {
+	return e.expression
+}
+
+func (e Expression) Validate() (bool, []error) {
 	if e.ast == nil {
-		return ""
+		_, err := antlr.CreateParser(e.expression).Parse()
+		return false, err
 	}
-	return e.ast.String()
+	return e.evaluator.Eval(e.ast)
 }
 func (e Expression) ValidateDataTypeOfExpression(varType model.DataTyp) (bool, error) {
 	if e.ast == nil {
@@ -98,6 +95,7 @@ func (e Expression) ValidateExistenceOfFieldReferencesInExpression(fields []mode
 
 	return out, errOut
 }
+
 func (e Expression) getFieldUsingQualifiedName(name ast.QualifiedName, fields []model.Field) (model.Field, error) {
 	for _, val := range fields {
 		//TODO Extend to allow arbitrary navigation paths on structs

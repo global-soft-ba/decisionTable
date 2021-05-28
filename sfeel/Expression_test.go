@@ -26,13 +26,20 @@ func TestEvalInputEntry(t *testing.T) {
 		{
 			name:    "Incorrect input expression",
 			args:    args{exp: "1+1"},
-			want:    "",
+			want:    "1+1",
+			wantErr: true,
+		},
+		{
+			name:    "Incorrect input expression",
+			args:    args{exp: "1<<<<+1"},
+			want:    "1<<<<+1",
 			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := CreateInputExpression(tt.args.exp)
+			got := CreateInputExpression(tt.args.exp)
+			_, err := got.Validate()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Eval() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -57,13 +64,14 @@ func TestCreateOutputEntry(t *testing.T) {
 		{
 			name:    "incorrect output expression",
 			args:    args{exp: "<1,<2"},
-			want:    "",
+			want:    "<1,<2",
 			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := CreateOutputExpression(tt.args.exp)
+			got := CreateOutputExpression(tt.args.exp)
+			_, err := got.Validate()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Eval() error = %v, wantErr %v", err, tt.wantErr)
 				return
