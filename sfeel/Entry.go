@@ -10,42 +10,45 @@ import (
 	"reflect"
 )
 
-func CreateInputExpression(exp string) model.ExpressionInterface {
+func CreateInputEntry(exp string) model.EntryInterface {
 	tree, err := antlr.CreateParser(exp).Parse()
 	evl := eval.CreateInputEntryEvaluator()
 	if err != nil {
-		return Expression{ast: nil, evaluator: evl, expression: exp}
+		return Entry{ast: nil, evaluator: evl, expression: exp}
 	}
-	return Expression{ast: tree, evaluator: evl, expression: exp}
+	return Entry{ast: tree, evaluator: evl, expression: exp}
 }
 
-func CreateOutputExpression(exp string) model.ExpressionInterface {
+func CreateOutputEntry(exp string) model.EntryInterface {
 	tree, err := antlr.CreateParser(exp).Parse()
 	evl := eval.CreateOutputEntryEvaluator()
 	if err != nil {
-		return Expression{ast: nil, evaluator: evl, expression: exp}
+		return Entry{ast: nil, evaluator: evl, expression: exp}
 	}
-	return Expression{ast: tree, evaluator: evl, expression: exp}
+	return Entry{ast: tree, evaluator: evl, expression: exp}
 }
 
-type Expression struct {
+type Entry struct {
 	ast        ast.Node
 	evaluator  eval.EvaluatorInterface
 	expression string
 }
 
-func (e Expression) String() string {
+func (e Entry) String() string {
 	return e.expression
 }
+func (e Entry) ExpressionLanguage() model.ExpressionLanguage {
+	return model.SFEEL
+}
 
-func (e Expression) Validate() (bool, []error) {
+func (e Entry) Validate() (bool, []error) {
 	if e.ast == nil {
 		_, err := antlr.CreateParser(e.expression).Parse()
 		return false, err
 	}
 	return e.evaluator.Eval(e.ast)
 }
-func (e Expression) ValidateDataTypeOfExpression(varType model.DataTyp) (bool, error) {
+func (e Entry) ValidateDataTypeOfExpression(varType model.DataTyp) (bool, error) {
 	if e.ast == nil {
 		return false, nil
 	}
@@ -79,7 +82,7 @@ func (e Expression) ValidateDataTypeOfExpression(varType model.DataTyp) (bool, e
 
 	return false, errors.New(fmt.Sprintf("given data type %s is not compatible with %s", varType, e.ast.GetOperandDataType()))
 }
-func (e Expression) ValidateExistenceOfFieldReferencesInExpression(fields []model.Field) ([]model.Field, []error) {
+func (e Entry) ValidateExistenceOfFieldReferencesInExpression(fields []model.Field) ([]model.Field, []error) {
 	qualifiedFields := ast.GetAllQualifiedNames(e.ast)
 	var errOut []error
 	var out []model.Field
@@ -96,7 +99,7 @@ func (e Expression) ValidateExistenceOfFieldReferencesInExpression(fields []mode
 	return out, errOut
 }
 
-func (e Expression) getFieldUsingQualifiedName(name ast.QualifiedName, fields []model.Field) (model.Field, error) {
+func (e Entry) getFieldUsingQualifiedName(name ast.QualifiedName, fields []model.Field) (model.Field, error) {
 	for _, val := range fields {
 		//TODO Extend to allow arbitrary navigation paths on structs
 		if val.Name == name.Value[0] && val.Key == name.Value[1] {

@@ -95,12 +95,11 @@ More Details can be found here:
 * [GRULE](http://hyperjumptech.viewdocs.io/grule-rule-engine/GRL_en/)
 * [Decision Model and Notation DMN (OMG)](https://www.omg.org/spec/DMN/1.2/PDF)
 
-## Supported Expression Languages
+## Supported Entry Languages
 The expresion language defined the functions and comparisons of a single rule entry. It depends on the chosen table notations standard.
 So far we support the SFEEL Standard partially. 
 ### SFEEL INPUT EXPRESSIONS
-* [Tutorial - Simple Friendly Enough Expression Language (SFEEL)](https://docs.camunda.org/manual/7.4/reference/dmn11/feel/language-elements/)
-* [Official Standard Document s-FEEL/FEEL (OMG)](https://www.omg.org/spec/DMN/1.3/PDF)
+* [Simple Friendly Enough Entry Language (SFEEL)](https://docs.camunda.org/manual/7.4/reference/dmn11/feel/language-elements/)
 
 # Converter for Standards/Engines
 The following converter are supported, so far:

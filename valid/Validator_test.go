@@ -2,7 +2,7 @@ package valid
 
 import (
 	"decisionTable/model"
-	"decisionTable/valid/expressionlanguages"
+	"decisionTable/sfeel"
 	"reflect"
 	"testing"
 )
@@ -36,29 +36,29 @@ func TestDTableValidator_Validate(t *testing.T) {
 				Rules: []model.Rule{
 					{
 						Description: "R1",
-						InputEntries: []model.Entry{
-							model.CreateEntry("<3", model.SFEEL),
+						InputEntries: []model.EntryInterface{
+							sfeel.CreateInputEntry("<3"),
 						},
-						OutputEntries: []model.Entry{
-							model.CreateEntry("-", model.SFEEL),
+						OutputEntries: []model.EntryInterface{
+							sfeel.CreateOutputEntry("-"),
 						},
 					},
 					{
 						Description: "R2",
-						InputEntries: []model.Entry{
-							model.CreateEntry("<=3", model.SFEEL),
+						InputEntries: []model.EntryInterface{
+							sfeel.CreateInputEntry("<=3"),
 						},
-						OutputEntries: []model.Entry{
-							model.CreateEntry("1.2", model.SFEEL),
+						OutputEntries: []model.EntryInterface{
+							sfeel.CreateOutputEntry("1.2"),
 						},
 					},
 					{
 						Description: "R3",
-						InputEntries: []model.Entry{
-							model.CreateEntry("not(47)", model.SFEEL),
+						InputEntries: []model.EntryInterface{
+							sfeel.CreateInputEntry("not(47)"),
 						},
-						OutputEntries: []model.Entry{
-							model.CreateEntry("1", model.SFEEL),
+						OutputEntries: []model.EntryInterface{
+							sfeel.CreateOutputEntry("1"),
 						},
 					},
 				},
@@ -86,10 +86,10 @@ func TestDTableValidator_Validate(t *testing.T) {
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
-					InputEntries: []model.Entry{
-						model.CreateEntry(`"3"`, model.SFEEL)},
-					OutputEntries: []model.Entry{
-						model.CreateEntry("4", model.SFEEL),
+					InputEntries: []model.EntryInterface{
+						sfeel.CreateInputEntry(`"3"`)},
+					OutputEntries: []model.EntryInterface{
+						sfeel.CreateOutputEntry("4"),
 					},
 				}},
 			},
@@ -117,10 +117,10 @@ func TestDTableValidator_Validate(t *testing.T) {
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
-					InputEntries: []model.Entry{
-						model.CreateEntry(`"3"`, model.SFEEL)},
-					OutputEntries: []model.Entry{
-						model.CreateEntry("4", model.SFEEL)},
+					InputEntries: []model.EntryInterface{
+						sfeel.CreateInputEntry(`"3"`)},
+					OutputEntries: []model.EntryInterface{
+						sfeel.CreateOutputEntry("4")},
 				}},
 			},
 			want:  false,
@@ -137,8 +137,8 @@ func TestDTableValidator_Validate(t *testing.T) {
 				OutputFields:     []model.Field{},
 				Rules: []model.Rule{{
 					Description:   "R1",
-					InputEntries:  []model.Entry{},
-					OutputEntries: []model.Entry{},
+					InputEntries:  []model.EntryInterface{},
+					OutputEntries: []model.EntryInterface{},
 				}},
 			},
 			want:  false,
@@ -164,10 +164,10 @@ func TestDTableValidator_Validate(t *testing.T) {
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
-					InputEntries: []model.Entry{
-						model.CreateEntry(">3", model.SFEEL)},
-					OutputEntries: []model.Entry{
-						model.CreateEntry("3", model.SFEEL),
+					InputEntries: []model.EntryInterface{
+						sfeel.CreateInputEntry(">3")},
+					OutputEntries: []model.EntryInterface{
+						sfeel.CreateOutputEntry("3"),
 					},
 				}},
 			},
@@ -195,11 +195,11 @@ func TestDTableValidator_Validate(t *testing.T) {
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
-					InputEntries: []model.Entry{
-						model.CreateEntry(`"String"`, model.SFEEL),
-						model.CreateEntry(">3", model.SFEEL)},
-					OutputEntries: []model.Entry{
-						model.CreateEntry("-", model.SFEEL),
+					InputEntries: []model.EntryInterface{
+						sfeel.CreateInputEntry(`"String"`),
+						sfeel.CreateInputEntry(">3")},
+					OutputEntries: []model.EntryInterface{
+						sfeel.CreateOutputEntry("-"),
 					},
 				}},
 			},
@@ -227,46 +227,17 @@ func TestDTableValidator_Validate(t *testing.T) {
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
-					InputEntries: []model.Entry{
-						model.CreateEntry(`"String"`, model.SFEEL),
+					InputEntries: []model.EntryInterface{
+						sfeel.CreateInputEntry(`"String"`),
 					},
-					OutputEntries: []model.Entry{
-						model.CreateEntry("-", model.SFEEL),
-						model.CreateEntry("-", model.SFEEL),
+					OutputEntries: []model.EntryInterface{
+						sfeel.CreateOutputEntry("-"),
+						sfeel.CreateOutputEntry("-"),
 					},
 				}},
 			},
 			want:  false,
 			want1: []error{ErrRuleHaveDifferentAmountOfOutputFields},
-		},
-		{
-			name: "Wrong rule expression language",
-			table: model.TableData{
-				Key:              "K1",
-				Name:             "N1",
-				HitPolicy:        model.First,
-				NotationStandard: model.GRULE,
-				InputFields: []model.Field{{
-					Name: "I1",
-					Key:  "L1",
-					Typ:  model.String,
-				},
-				},
-				OutputFields: []model.Field{{
-					Name: "O2",
-					Key:  "L1",
-					Typ:  model.Integer,
-				}},
-				Rules: []model.Rule{{
-					Description: "R1",
-					InputEntries: []model.Entry{
-						model.CreateEntry("3", model.FEEL)},
-					OutputEntries: []model.Entry{
-						model.CreateEntry("3", model.SFEEL)},
-				}},
-			},
-			want:  false,
-			want1: []error{ErrDTableEntryExpressionLangInvalid, expressionlanguages.ErrDTableNoParserFoundForExpressionLanguage},
 		},
 	}
 
@@ -314,10 +285,10 @@ func TestDTableValidator_ValidateInterferences(t *testing.T) {
 				}},
 				Rules: []model.Rule{{
 					Description: "R1",
-					InputEntries: []model.Entry{
-						model.CreateEntry(" =3", model.SFEEL)},
-					OutputEntries: []model.Entry{
-						model.CreateEntry("4", model.SFEEL)},
+					InputEntries: []model.EntryInterface{
+						sfeel.CreateInputEntry(" =3")},
+					OutputEntries: []model.EntryInterface{
+						sfeel.CreateOutputEntry("4")},
 				}},
 			},
 			want: false,

@@ -38,14 +38,14 @@ func TestEvalInputEntry(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := CreateInputExpression(tt.args.exp)
+			got := CreateInputEntry(tt.args.exp)
 			_, err := got.Validate()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Eval() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got.String(), tt.want) {
-				t.Errorf("CreateInputExpression() got = %v, want %v", got, tt.want)
+				t.Errorf("CreateInputEntry() got = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -70,14 +70,14 @@ func TestCreateOutputEntry(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := CreateOutputExpression(tt.args.exp)
+			got := CreateOutputEntry(tt.args.exp)
 			_, err := got.Validate()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Eval() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got.String(), tt.want) {
-				t.Errorf("CreateOutputExpression() got = %v, want %v", got, tt.want)
+				t.Errorf("CreateOutputEntry() got = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -180,7 +180,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			e := Expression{
+			e := Entry{
 				ast:        tt.fields.ast,
 				expression: tt.fields.expression,
 			}
@@ -280,7 +280,7 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			e := Expression{
+			e := Entry{
 				ast:        tt.fields.ast,
 				expression: tt.fields.expression,
 			}

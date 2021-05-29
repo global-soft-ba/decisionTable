@@ -39,3 +39,18 @@ func GetAllQualifiedNames(node Node) []QualifiedName {
 
 	return out
 }
+
+func GetAllTreeNodeTypes(node Node) []string {
+	if len(node.GetChildren()) == 0 {
+		return []string{reflect.TypeOf(node).String()}
+	}
+	var out []string
+	for _, val := range node.GetChildren() {
+		qf := GetAllTreeNodeTypes(val)
+		if qf != nil {
+			out = append(out, qf...)
+		}
+	}
+	out = append(out, reflect.TypeOf(node).String())
+	return out
+}

@@ -3,7 +3,6 @@ package valid
 import (
 	conf "decisionTable/config"
 	"decisionTable/model"
-	"decisionTable/valid/expressionlanguages"
 	"errors"
 )
 
@@ -22,16 +21,16 @@ var (
 	ErrRuleHaveDifferentAmountOfInputFields  = errors.New("amount of input entries does not match input fields of decision table")
 	ErrRuleHaveDifferentAmountOfOutputFields = errors.New("amount of output entries does not match input fields of decision table")
 	ErrDTableEntryExpressionLangInvalid      = errors.New("entry expression language of the table standard is invalid")
+	ErrDTableEntryReferencedFieldTypInvalid  = errors.New("referenced field type does not match field type")
 )
 
-func CreateDecisionTableValidator(dTable model.TableData, prsFac expressionlanguages.ExpressionValidatorFactory) ValidatorInterface {
-	r := Validator{dTable: dTable, prs: prsFac, valid: false, errs: []error{}}
+func CreateDecisionTableValidator(dTable model.TableData) ValidatorInterface {
+	r := Validator{dTable: dTable, valid: false, errs: []error{}}
 	return r
 }
 
 type Validator struct {
 	dTable model.TableData
-	prs    expressionlanguages.ExpressionValidatorFactory
 	valid  bool
 	errs   []error
 }
@@ -213,7 +212,7 @@ func (d Validator) validateInputRuleEntries(r model.Rule) (bool, []error) {
 		}
 
 		if i < len(d.dTable.InputFields) {
-			if ok, err := d.validateInputEntry(d.dTable.InputFields[i], v); !ok {
+			if ok, err := d.validateEntry(v, d.dTable.InputFields[i]); !ok {
 				errResult = append(errResult, err...)
 			}
 		}
@@ -235,7 +234,7 @@ func (d Validator) validateOutputRuleEntries(r model.Rule) (bool, []error) {
 		}
 
 		if i < len(d.dTable.OutputFields) {
-			if ok, err := d.validateOutputEntry(d.dTable.OutputFields[i], v); !ok {
+			if ok, err := d.validateEntry(v, d.dTable.OutputFields[i]); !ok {
 				errResult = append(errResult, err...)
 			}
 		}
@@ -248,27 +247,23 @@ func (d Validator) validateOutputRuleEntries(r model.Rule) (bool, []error) {
 	return true, nil
 }
 
-func (d Validator) validateInputEntry(f model.Field, v model.Entry) (bool, []error) {
-	prs, err := d.prs.GetParser(v.ExpressionLanguage())
-	if err != nil {
+func (d Validator) validateEntry(entry model.EntryInterface, field model.Field) (bool, []error) {
+	if ok, err := entry.Validate(); !ok {
+		return false, err
+	}
+	if ok, err := entry.ValidateDataTypeOfExpression(field.Typ); !ok {
 		return false, []error{err}
 	}
 
-	if ok, errs := prs.ValidateInputEntry(f, v); !ok {
-		return false, errs
-	}
-
-	return true, nil
-}
-
-func (d Validator) validateOutputEntry(f model.Field, v model.Entry) (bool, []error) {
-	prs, err := d.prs.GetParser(v.ExpressionLanguage())
+	fields, err := entry.ValidateExistenceOfFieldReferencesInExpression(append(d.dTable.InputFields, d.dTable.OutputFields...))
 	if err != nil {
-		return false, []error{err}
+		return false, err
 	}
 
-	if ok, errs := prs.ValidateOutputEntry(f, v); !ok {
-		return false, errs
+	for _, val := range fields {
+		if val.Typ != field.Typ {
+			return false, []error{ErrDTableEntryReferencedFieldTypInvalid}
+		}
 	}
 
 	return true, nil

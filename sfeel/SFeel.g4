@@ -75,7 +75,7 @@ real_literal: REAL;
 boolean_literal: 'true' | 'false' ;
 string_literal: STRING+;
 
-// Arithmetic Expression
+// Arithmetic Entry
 POW: '**';
 MUL: '*';
 DIV: '/';

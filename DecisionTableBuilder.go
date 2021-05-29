@@ -2,8 +2,8 @@ package main
 
 import (
 	"decisionTable/model"
+	"decisionTable/sfeel"
 	"decisionTable/valid"
-	"decisionTable/valid/expressionlanguages"
 )
 
 type DecisionTableBuilder struct {
@@ -49,8 +49,8 @@ func (d DecisionTableBuilder) AddOutputField(name string, label string, typ mode
 
 func (d DecisionTableBuilder) AddRule(description string) DecisionTableRuleBuilderInterface {
 	ruleBuilder := DTableRuleBuilder{
-		input:       []model.Entry{},
-		output:      []model.Entry{},
+		input:       []model.EntryInterface{},
+		output:      []model.EntryInterface{},
 		description: description,
 		builder:     d,
 	}
@@ -59,37 +59,47 @@ func (d DecisionTableBuilder) AddRule(description string) DecisionTableRuleBuild
 }
 
 func (d DecisionTableBuilder) Build() (DecisionTable, []error) {
-	parsers := expressionlanguages.CreateParserFactory()
-	validtr := valid.CreateDecisionTableValidator(d.data, parsers)
 
-	valid, err := validtr.Validate()
-	if valid != true {
+	validtr := valid.CreateDecisionTableValidator(d.data)
+
+	val, err := validtr.Validate()
+	if val != true {
 		return DecisionTable{}, err
 	}
 
-	table := DecisionTable{data: d.data, valid: valid}
+	table := DecisionTable{data: d.data, valid: val}
 	table.data.Interferences = validtr.ValidateContainsInterferences()
 	return table, nil
 }
 
 type DTableRuleBuilder struct {
-	input  []model.Entry
-	output []model.Entry
+	input  []model.EntryInterface
+	output []model.EntryInterface
 
 	description string
 	builder     DecisionTableBuilder
 }
 
 func (r DTableRuleBuilder) AddInputEntry(expr string, exprLang model.ExpressionLanguage) DecisionTableRuleBuilderInterface {
-	entry := model.CreateEntry(expr, exprLang)
-	r.input = append(r.input, entry)
-	return r
+	switch exprLang {
+	case model.SFEEL:
+		entry := sfeel.CreateInputEntry(expr)
+		r.input = append(r.input, entry)
+		return r
+	}
+
+	return nil
 }
 
 func (r DTableRuleBuilder) AddOutputEntry(expr string, exprLang model.ExpressionLanguage) DecisionTableRuleBuilderInterface {
-	entry := model.CreateEntry(expr, exprLang)
-	r.output = append(r.output, entry)
-	return r
+	switch exprLang {
+	case model.SFEEL:
+		entry := sfeel.CreateOutputEntry(expr)
+		r.input = append(r.input, entry)
+		return r
+	}
+
+	return nil
 }
 
 func (r DTableRuleBuilder) BuildRule() DecisionTableBuilderInterface {
