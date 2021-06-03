@@ -1,4 +1,4 @@
-package mapper
+package symbols
 
 import (
 	gen "github.com/global-soft-ba/decisionTable/parser/sfeel/generated"

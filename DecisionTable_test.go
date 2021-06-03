@@ -1,7 +1,7 @@
 package main
 
 import (
-	"decisionTable/convert/grule/tableconverter/grl"
+	"decisionTable/conv/grule"
 	"decisionTable/convert/interfaces"
 	"decisionTable/data"
 	"reflect"
@@ -81,7 +81,7 @@ func TestDecisionTable_Convert(t *testing.T) {
 		{
 			name:   "DecisionTable To GruleRuleSet",
 			fields: testTable,
-			args:   args{grl.CreateDTableToGrlConverter()},
+			args:   args{grule.CreateDTableToGrlConverter()},
 			want: []string{
 				"rule row_0 \"R1\" salience 0  {\n when \n   claim.TypeOfClaim == \"Car Accident\"\n   && claim.ExpenditureOfClaim < 1000 \n then \n  Employee.ResponsibleEmployee = \"Müller\";\n  Employee.4EyesPrinciple = false; \n  Complete();\n}",
 				"rule row_1 \"R2\" salience 1  {\n when \n   claim.TypeOfClaim == \"Car Accident\"\n   && ((claim.ExpenditureOfClaim >= 1000) && (claim.ExpenditureOfClaim <= 10000)) \n then \n  Employee.ResponsibleEmployee = \"Meier\";\n  Employee.4EyesPrinciple = false; \n  Complete();\n}",

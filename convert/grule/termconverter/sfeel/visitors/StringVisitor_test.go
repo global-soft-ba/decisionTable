@@ -1,8 +1,8 @@
 package visitors
 
 import (
-	"decisionTable/convert/grule/grlmodel"
-	"decisionTable/convert/grule/termconverter/sfeel/mapper"
+	grlmodel2 "decisionTable/conv/grule/data"
+	"decisionTable/conv/grule/grl/symbols"
 	"decisionTable/data"
 	"decisionTable/parser/sfeel/parser"
 	"reflect"
@@ -11,11 +11,11 @@ import (
 
 func TestStringVisitor_StringInputRules(t *testing.T) {
 	type fields struct {
-		term grlmodel.Term
-		maps mapper.TermMapper
+		term grlmodel2.Term
+		maps symbols.TermMapper
 	}
 
-	mapping := mapper.SettingsGRL
+	mapping := symbols.SettingsGRL
 
 	tests := []struct {
 		name string
@@ -24,7 +24,7 @@ func TestStringVisitor_StringInputRules(t *testing.T) {
 	}{
 		{"equal string input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.String,
@@ -36,7 +36,7 @@ func TestStringVisitor_StringInputRules(t *testing.T) {
 
 		{"disjunctions string input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -48,7 +48,7 @@ func TestStringVisitor_StringInputRules(t *testing.T) {
 		},
 		{"Negation string input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -59,7 +59,7 @@ func TestStringVisitor_StringInputRules(t *testing.T) {
 			`!(credit.score == "1")`},
 		{"Empty string input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -85,11 +85,11 @@ func TestStringVisitor_StringInputRules(t *testing.T) {
 
 func TestStringVisitor_StringOutputRules(t *testing.T) {
 	type fields struct {
-		term grlmodel.Term
-		maps mapper.TermMapper
+		term grlmodel2.Term
+		maps symbols.TermMapper
 	}
 
-	mapping := mapper.SettingsGRL
+	mapping := symbols.SettingsGRL
 
 	tests := []struct {
 		name string
@@ -98,7 +98,7 @@ func TestStringVisitor_StringOutputRules(t *testing.T) {
 	}{
 		{"string assignment",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.String,
@@ -109,7 +109,7 @@ func TestStringVisitor_StringOutputRules(t *testing.T) {
 			`credit.score = "1"`},
 		{"string empty assignment",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.String,

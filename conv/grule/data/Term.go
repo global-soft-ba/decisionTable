@@ -1,4 +1,4 @@
-package grlmodel
+package data
 
 import "decisionTable/data"
 

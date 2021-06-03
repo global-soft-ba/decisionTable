@@ -1,20 +1,20 @@
 package visitors
 
 import (
-	"decisionTable/convert/grule/grlmodel"
-	mapper2 "decisionTable/convert/grule/termconverter/sfeel/mapper"
+	grlmodel2 "decisionTable/conv/grule/data"
+	"decisionTable/conv/grule/grl/symbols"
 	gen "decisionTable/parser/sfeel/generated"
 )
 
-func CreateIntegerVisitor(expr grlmodel.Term, maps mapper2.TermMapper) *IntegerVisitor {
+func CreateIntegerVisitor(expr grlmodel2.Term, maps symbols.TermMapper) *IntegerVisitor {
 	return &IntegerVisitor{gen.BaseSFeelVisitor{}, expr, maps}
 }
 
 // IntegerVisitor IntegerVisitor is a converter between the ParseTree and our grl data model
 type IntegerVisitor struct {
 	gen.BaseSFeelVisitor
-	expr grlmodel.Term
-	maps mapper2.TermMapper
+	expr grlmodel2.Term
+	maps symbols.TermMapper
 }
 
 func (v *IntegerVisitor) VisitEqualComparisonIntegerInputRule(ctx *gen.EqualComparisonIntegerInputRuleContext) interface{} {

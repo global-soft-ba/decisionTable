@@ -1,7 +1,7 @@
-package grl
+package grule
 
 import (
-	"decisionTable/convert/grule/grlmodel"
+	grlmodel2 "decisionTable/conv/grule/data"
 	"decisionTable/data"
 	"reflect"
 	"testing"
@@ -9,7 +9,7 @@ import (
 
 func TestConverter_converting(t *testing.T) {
 	type args struct {
-		ruleSet grlmodel.RuleSet
+		ruleSet grlmodel2.RuleSet
 	}
 	tests := []struct {
 		name    string
@@ -18,24 +18,24 @@ func TestConverter_converting(t *testing.T) {
 		wantErr bool
 	}{
 		{name: "Valid Convert Multiple Expressions",
-			args: args{grlmodel.RuleSet{
+			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
 				HitPolicy:       data.First,
 				CollectOperator: data.List,
 				Interference:    false,
-				Rules: []grlmodel.Rule{
+				Rules: []grlmodel2.Rule{
 					{
 						"0",
 						"R1",
 						0,
 						0,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.Integer, "3", data.SFEEL},
 							{"I2", "L1", data.Integer, ">3", data.SFEEL},
 							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
-						[]grlmodel.Term{{"O1", "L1", data.Integer, "4", data.SFEEL}},
+						[]grlmodel2.Term{{"O1", "L1", data.Integer, "4", data.SFEEL}},
 					},
 				},
 			}},
@@ -43,22 +43,22 @@ func TestConverter_converting(t *testing.T) {
 			wantErr: false,
 		},
 		{name: "Valid Convert Single Expressions",
-			args: args{grlmodel.RuleSet{
+			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
 				HitPolicy:       data.First,
 				CollectOperator: data.List,
 				Interference:    false,
-				Rules: []grlmodel.Rule{
+				Rules: []grlmodel2.Rule{
 					{
 						"0",
 						"R1",
 						0,
 						0,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.Integer, "3", data.SFEEL},
 						},
-						[]grlmodel.Term{{"O1", "L1", data.Integer, "4", data.SFEEL}},
+						[]grlmodel2.Term{{"O1", "L1", data.Integer, "4", data.SFEEL}},
 					},
 				},
 			}},
@@ -66,24 +66,24 @@ func TestConverter_converting(t *testing.T) {
 			wantErr: false,
 		},
 		{name: "Valid Convert Multiple Expressions and Assignments",
-			args: args{grlmodel.RuleSet{
+			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
 				HitPolicy:       data.First,
 				CollectOperator: data.List,
 				Interference:    false,
-				Rules: []grlmodel.Rule{
+				Rules: []grlmodel2.Rule{
 					{
 						"0",
 						"R1",
 						0,
 						0,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.Integer, "3", data.SFEEL},
 							{"I2", "L1", data.Integer, ">3", data.SFEEL},
 							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Integer, "4", data.SFEEL},
 							{"O1", "L1", data.Integer, "4", data.SFEEL},
 						},
@@ -94,24 +94,24 @@ func TestConverter_converting(t *testing.T) {
 			wantErr: false,
 		},
 		{name: "Valid Convert Multiple Rules, Expressions and Assignments with FirstPolicy",
-			args: args{grlmodel.RuleSet{
+			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
 				HitPolicy:       data.First,
 				CollectOperator: data.List,
 				Interference:    false,
-				Rules: []grlmodel.Rule{
+				Rules: []grlmodel2.Rule{
 					{
 						"0",
 						"R1",
 						0,
 						2,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.Integer, "3", data.SFEEL},
 							{"I2", "L1", data.Integer, ">3", data.SFEEL},
 							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Integer, "4", data.SFEEL},
 							{"O1", "L1", data.Integer, "4", data.SFEEL},
 						},
@@ -121,12 +121,12 @@ func TestConverter_converting(t *testing.T) {
 						"R2",
 						1,
 						1,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.Integer, "3", data.SFEEL},
 							{"I2", "L1", data.Integer, ">3", data.SFEEL},
 							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Integer, "4", data.SFEEL},
 							{"O1", "L1", data.Integer, "4", data.SFEEL},
 						},
@@ -136,12 +136,12 @@ func TestConverter_converting(t *testing.T) {
 						"R3",
 						2,
 						0,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.Integer, "3", data.SFEEL},
 							{"I2", "L1", data.Integer, ">3", data.SFEEL},
 							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Integer, "4", data.SFEEL},
 							{"O1", "L1", data.Integer, "4", data.SFEEL},
 						},
@@ -154,24 +154,24 @@ func TestConverter_converting(t *testing.T) {
 			wantErr: false,
 		},
 		{name: "Valid Convert Multiple Rules, Expressions and Assignments with PriorityPolicy",
-			args: args{grlmodel.RuleSet{
+			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
 				HitPolicy:       data.Priority,
 				CollectOperator: data.List,
 				Interference:    false,
-				Rules: []grlmodel.Rule{
+				Rules: []grlmodel2.Rule{
 					{
 						"0",
 						"R1",
 						0,
 						2,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.Integer, "==3", data.SFEEL},
 							{"I2", "L1", data.Integer, ">3", data.SFEEL},
 							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Integer, "=4", data.SFEEL},
 							{"O1", "L1", data.Integer, "=4", data.SFEEL},
 						},
@@ -181,12 +181,12 @@ func TestConverter_converting(t *testing.T) {
 						"R2",
 						1,
 						1,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.Integer, "==3", data.SFEEL},
 							{"I2", "L1", data.Integer, ">3", data.SFEEL},
 							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Integer, "=4", data.SFEEL},
 							{"O1", "L1", data.Integer, "=4", data.SFEEL},
 						},
@@ -196,12 +196,12 @@ func TestConverter_converting(t *testing.T) {
 						"R3",
 						2,
 						0,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.Integer, "==3", data.SFEEL},
 							{"I2", "L1", data.Integer, ">3", data.SFEEL},
 							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Integer, "=4", data.SFEEL},
 							{"O1", "L1", data.Integer, "=4", data.SFEEL},
 						},
@@ -214,24 +214,24 @@ func TestConverter_converting(t *testing.T) {
 			wantErr: false,
 		},
 		{name: "Valid Convert Multiple Rules, Expressions and Assignments with wrong Policy",
-			args: args{grlmodel.RuleSet{
+			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
 				HitPolicy:       data.Any,
 				CollectOperator: data.List,
 				Interference:    false,
-				Rules: []grlmodel.Rule{
+				Rules: []grlmodel2.Rule{
 					{
 						"0",
 						"R1",
 						0,
 						2,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.Integer, "3", data.SFEEL},
 							{"I2", "L1", data.Integer, ">3", data.SFEEL},
 							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Integer, "4", data.SFEEL},
 							{"O1", "L1", data.Integer, "4", data.SFEEL},
 						},
@@ -241,12 +241,12 @@ func TestConverter_converting(t *testing.T) {
 						"R2",
 						1,
 						1,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.Integer, "3", data.SFEEL},
 							{"I2", "L1", data.Integer, "> 3", data.SFEEL},
 							{"I3", "L1", data.Integer, "> 4", data.SFEEL},
 						},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Integer, "4", data.SFEEL},
 							{"O1", "L1", data.Integer, "4", data.SFEEL},
 						},
@@ -256,12 +256,12 @@ func TestConverter_converting(t *testing.T) {
 						"R3",
 						2,
 						0,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.Integer, "3", data.SFEEL},
 							{"I2", "L1", data.Integer, ">3", data.SFEEL},
 							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Integer, "4", data.SFEEL},
 							{"O1", "L1", data.Integer, "4", data.SFEEL},
 						},
@@ -274,22 +274,22 @@ func TestConverter_converting(t *testing.T) {
 			wantErr: false,
 		},
 		{name: "Valid Convert Single Float Expressions",
-			args: args{grlmodel.RuleSet{
+			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
 				HitPolicy:       data.First,
 				CollectOperator: data.List,
 				Interference:    false,
-				Rules: []grlmodel.Rule{
+				Rules: []grlmodel2.Rule{
 					{
 						"0",
 						"R1",
 						0,
 						0,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.Float, "3.3", data.SFEEL},
 						},
-						[]grlmodel.Term{{"O1", "L1", data.String, `"4"`, data.SFEEL}},
+						[]grlmodel2.Term{{"O1", "L1", data.String, `"4"`, data.SFEEL}},
 					},
 				},
 			}},
@@ -297,22 +297,22 @@ func TestConverter_converting(t *testing.T) {
 			wantErr: false,
 		},
 		{name: "Valid Convert Single Boolean Expressions",
-			args: args{grlmodel.RuleSet{
+			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
 				HitPolicy:       data.First,
 				CollectOperator: data.List,
 				Interference:    false,
-				Rules: []grlmodel.Rule{
+				Rules: []grlmodel2.Rule{
 					{
 						"0",
 						"R1",
 						0,
 						0,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.Boolean, "true", data.SFEEL},
 						},
-						[]grlmodel.Term{{"O1", "L1", data.Boolean, "false", data.SFEEL}},
+						[]grlmodel2.Term{{"O1", "L1", data.Boolean, "false", data.SFEEL}},
 					},
 				},
 			}},
@@ -320,22 +320,22 @@ func TestConverter_converting(t *testing.T) {
 			wantErr: false,
 		},
 		{name: "Valid Convert Single String Expressions",
-			args: args{grlmodel.RuleSet{
+			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
 				HitPolicy:       data.First,
 				CollectOperator: data.List,
 				Interference:    false,
-				Rules: []grlmodel.Rule{
+				Rules: []grlmodel2.Rule{
 					{
 						"0",
 						"R1",
 						0,
 						0,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.String, `"true"`, data.SFEEL},
 						},
-						[]grlmodel.Term{{"O1", "L1", data.String, `"false"`, data.SFEEL}},
+						[]grlmodel2.Term{{"O1", "L1", data.String, `"false"`, data.SFEEL}},
 					},
 				},
 			}},
@@ -343,22 +343,22 @@ func TestConverter_converting(t *testing.T) {
 			wantErr: false,
 		},
 		{name: "Valid Convert DatTime String Expressions",
-			args: args{grlmodel.RuleSet{
+			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
 				HitPolicy:       data.First,
 				CollectOperator: data.List,
 				Interference:    false,
-				Rules: []grlmodel.Rule{
+				Rules: []grlmodel2.Rule{
 					{
 						"0",
 						"R1",
 						0,
 						0,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.DateTime, `DateAndTime("2021-01-01T12:00:00")`, data.SFEEL},
 						},
-						[]grlmodel.Term{{"O1", "L1", data.DateTime, `DateAndTime("2021-01-01T13:00:00")`, data.SFEEL}},
+						[]grlmodel2.Term{{"O1", "L1", data.DateTime, `DateAndTime("2021-01-01T13:00:00")`, data.SFEEL}},
 					},
 				},
 			}},

@@ -1,8 +1,8 @@
 package visitors
 
 import (
-	"decisionTable/convert/grule/grlmodel"
-	"decisionTable/convert/grule/termconverter/sfeel/mapper"
+	grlmodel2 "decisionTable/conv/grule/data"
+	"decisionTable/conv/grule/grl/symbols"
 	"decisionTable/data"
 	"decisionTable/parser/sfeel/parser"
 	"reflect"
@@ -11,11 +11,11 @@ import (
 
 func TestBoolVisitor_BoolInputRules(t *testing.T) {
 	type fields struct {
-		term grlmodel.Term
-		maps mapper.TermMapper
+		term grlmodel2.Term
+		maps symbols.TermMapper
 	}
 
-	mapping := mapper.SettingsGRL
+	mapping := symbols.SettingsGRL
 
 	tests := []struct {
 		name string
@@ -24,7 +24,7 @@ func TestBoolVisitor_BoolInputRules(t *testing.T) {
 	}{
 		{"equal bool input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Boolean,
@@ -35,7 +35,7 @@ func TestBoolVisitor_BoolInputRules(t *testing.T) {
 			`credit.score == false`},
 		{"Empty bool input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -61,11 +61,11 @@ func TestBoolVisitor_BoolInputRules(t *testing.T) {
 
 func TestBoolVisitor_BoolOutputRules(t *testing.T) {
 	type fields struct {
-		term grlmodel.Term
-		maps mapper.TermMapper
+		term grlmodel2.Term
+		maps symbols.TermMapper
 	}
 
-	mapping := mapper.SettingsGRL
+	mapping := symbols.SettingsGRL
 
 	tests := []struct {
 		name string
@@ -74,7 +74,7 @@ func TestBoolVisitor_BoolOutputRules(t *testing.T) {
 	}{
 		{"boolean assignment",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Boolean,
@@ -85,7 +85,7 @@ func TestBoolVisitor_BoolOutputRules(t *testing.T) {
 			"credit.score = true"},
 		{"boolean empty assignment",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Boolean,

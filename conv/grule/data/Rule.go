@@ -1,4 +1,4 @@
-package grlmodel
+package data
 
 type Rule struct {
 	Name        string

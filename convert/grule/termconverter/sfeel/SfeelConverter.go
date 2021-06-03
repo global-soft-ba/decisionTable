@@ -1,27 +1,27 @@
 package sfeel
 
 import (
-	"decisionTable/convert/grule/grlmodel"
-	"decisionTable/convert/grule/termconverter/sfeel/mapper"
+	grlmodel2 "decisionTable/conv/grule/data"
+	"decisionTable/conv/grule/grl/symbols"
 	"decisionTable/convert/grule/termconverter/sfeel/visitors"
 	"decisionTable/data"
 	"decisionTable/parser/sfeel/parser"
 )
 
 func CreateSfeelTermToGrlConverter() SFeelTermConverter {
-	return SFeelTermConverter{mapper.SettingsGRL}
+	return SFeelTermConverter{symbols.SettingsGRL}
 }
 
 func CreateSfeelTermToJsonConverter() SFeelTermConverter {
-	return SFeelTermConverter{mapper.SettingsJSON}
+	return SFeelTermConverter{symbols.SettingsJSON}
 }
 
 // SFeelTermConverter is a converter between the ParseTree and our grl data model
 type SFeelTermConverter struct {
-	maps mapper.TermMapper
+	maps symbols.TermMapper
 }
 
-func (c SFeelTermConverter) ConvertExpression(expr grlmodel.Term) grlmodel.Term {
+func (c SFeelTermConverter) ConvertExpression(expr grlmodel2.Term) grlmodel2.Term {
 	prs := parser.CreateSfeelParser(expr.Expression)
 
 	switch expr.Typ {
@@ -51,11 +51,11 @@ func (c SFeelTermConverter) ConvertExpression(expr grlmodel.Term) grlmodel.Term 
 		expr.Expression = tree.Accept(conv).(string)
 		return expr
 	default:
-		return grlmodel.Term{}
+		return grlmodel2.Term{}
 	}
 }
 
-func (c SFeelTermConverter) ConvertAssignments(expr grlmodel.Term) grlmodel.Term {
+func (c SFeelTermConverter) ConvertAssignments(expr grlmodel2.Term) grlmodel2.Term {
 	prs := parser.CreateSfeelParser(expr.Expression)
 
 	switch expr.Typ {
@@ -85,6 +85,6 @@ func (c SFeelTermConverter) ConvertAssignments(expr grlmodel.Term) grlmodel.Term
 		expr.Expression = tree.Accept(conv).(string)
 		return expr
 	default:
-		return grlmodel.Term{}
+		return grlmodel2.Term{}
 	}
 }

@@ -1,8 +1,8 @@
 package visitors
 
 import (
-	"decisionTable/convert/grule/grlmodel"
-	"decisionTable/convert/grule/termconverter/sfeel/mapper"
+	grlmodel2 "decisionTable/conv/grule/data"
+	"decisionTable/conv/grule/grl/symbols"
 	"decisionTable/data"
 	"decisionTable/parser/sfeel/parser"
 	"reflect"
@@ -11,11 +11,11 @@ import (
 
 func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 	type fields struct {
-		term grlmodel.Term
-		maps mapper.TermMapper
+		term grlmodel2.Term
+		maps symbols.TermMapper
 	}
 
-	mapping := mapper.SettingsGRL
+	mapping := symbols.SettingsGRL
 
 	tests := []struct {
 		name string
@@ -24,7 +24,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 	}{
 		{"integer comparison LESS",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -35,7 +35,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 			"credit.score < 1"},
 		{"integer comparison LESSEQ",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -46,7 +46,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 			"credit.score <= 1"},
 		{"integer comparison GR",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -57,7 +57,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 			"credit.score > 1"},
 		{"integer comparison GREQ",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -68,7 +68,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 			"credit.score >= 1"},
 		{"empty integer input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -79,7 +79,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 			""},
 		{"equal integer input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -90,7 +90,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 			"credit.score == 1"},
 		{"range IN OUT integer input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -101,7 +101,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 			"((credit.score >= 1) && (credit.score <= 90))"},
 		{"range IN IN integer input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -112,7 +112,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 			"((credit.score >= 1) && (credit.score < 90))"},
 		{"range OUT IN integer input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -123,7 +123,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 			"((credit.score > 1) && (credit.score < 90))"},
 		{"range OUT IN integer input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -134,7 +134,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 			"((credit.score > 1) && (credit.score <= 90))"},
 		{"disjunctions integer input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -146,7 +146,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 		},
 		{"Negation integer input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -172,11 +172,11 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 
 func TestIntegerVisitor_IntegerOutputRules(t *testing.T) {
 	type fields struct {
-		term grlmodel.Term
-		maps mapper.TermMapper
+		term grlmodel2.Term
+		maps symbols.TermMapper
 	}
 
-	mapping := mapper.SettingsGRL
+	mapping := symbols.SettingsGRL
 
 	tests := []struct {
 		name string
@@ -185,7 +185,7 @@ func TestIntegerVisitor_IntegerOutputRules(t *testing.T) {
 	}{
 		{"integer assignment",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -196,7 +196,7 @@ func TestIntegerVisitor_IntegerOutputRules(t *testing.T) {
 			"credit.score = 1"},
 		{"integer empty assignment",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,

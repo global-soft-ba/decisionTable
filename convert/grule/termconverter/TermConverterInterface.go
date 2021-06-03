@@ -1,8 +1,10 @@
 package termconverter
 
-import "decisionTable/convert/grule/grlmodel"
+import (
+	grlmodel2 "decisionTable/conv/grule/data"
+)
 
 type TermConverterInterface interface {
-	ConvertExpression(expr grlmodel.Term) grlmodel.Term
-	ConvertAssignments(expr grlmodel.Term) grlmodel.Term
+	ConvertExpression(expr grlmodel2.Term) grlmodel2.Term
+	ConvertAssignments(expr grlmodel2.Term) grlmodel2.Term
 }

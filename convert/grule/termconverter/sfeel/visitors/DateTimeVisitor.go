@@ -1,19 +1,19 @@
 package visitors
 
 import (
-	"decisionTable/convert/grule/grlmodel"
-	mapper2 "decisionTable/convert/grule/termconverter/sfeel/mapper"
+	grlmodel2 "decisionTable/conv/grule/data"
+	"decisionTable/conv/grule/grl/symbols"
 	gen "decisionTable/parser/sfeel/generated"
 )
 
-func CreateDateTimeVisitor(expr grlmodel.Term, maps mapper2.TermMapper) *DateTimeVisitor {
+func CreateDateTimeVisitor(expr grlmodel2.Term, maps symbols.TermMapper) *DateTimeVisitor {
 	return &DateTimeVisitor{gen.BaseSFeelVisitor{}, expr, maps}
 }
 
 type DateTimeVisitor struct {
 	gen.BaseSFeelVisitor
-	expr grlmodel.Term
-	maps mapper2.TermMapper
+	expr grlmodel2.Term
+	maps symbols.TermMapper
 }
 
 func (v *DateTimeVisitor) VisitEqualComparisonDateTimeInputRule(ctx *gen.EqualComparisonDateTimeInputRuleContext) interface{} {

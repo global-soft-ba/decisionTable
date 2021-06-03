@@ -1,19 +1,19 @@
 package visitors
 
 import (
-	"decisionTable/convert/grule/grlmodel"
-	mapper2 "decisionTable/convert/grule/termconverter/sfeel/mapper"
+	grlmodel2 "decisionTable/conv/grule/data"
+	"decisionTable/conv/grule/grl/symbols"
 	gen "decisionTable/parser/sfeel/generated"
 )
 
-func CreateNumberVisitor(expr grlmodel.Term, maps mapper2.TermMapper) *NumberVisitor {
+func CreateNumberVisitor(expr grlmodel2.Term, maps symbols.TermMapper) *NumberVisitor {
 	return &NumberVisitor{gen.BaseSFeelVisitor{}, expr, maps}
 }
 
 type NumberVisitor struct {
 	gen.BaseSFeelVisitor
-	expr grlmodel.Term
-	maps mapper2.TermMapper
+	expr grlmodel2.Term
+	maps symbols.TermMapper
 }
 
 func (v *NumberVisitor) VisitEqualComparisonNumberInputRule(ctx *gen.EqualComparisonNumberInputRuleContext) interface{} {

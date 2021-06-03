@@ -1,4 +1,4 @@
-package mapper
+package symbols
 
 var SettingsJSON = TermMapper{
 	TargetToken:         map[int]string{},

@@ -1,8 +1,8 @@
-package mapper
+package symbols
 
 import (
 	"bytes"
-	"decisionTable/convert/grule/grlmodel"
+	grlmodel2 "decisionTable/conv/grule/data"
 	"errors"
 	"regexp"
 	"strconv"
@@ -33,7 +33,7 @@ const (
 )
 
 type TemplateData struct {
-	Expr grlmodel.Term
+	Expr grlmodel2.Term
 	Op   string
 	Val  string
 }
@@ -63,11 +63,11 @@ func (m TermMapper) executeTemplate(tmpl string, data interface{}) string {
 	return tpl.String()
 }
 
-func (m TermMapper) MapEmpty(expr grlmodel.Term) string {
+func (m TermMapper) MapEmpty(expr grlmodel2.Term) string {
 	return ""
 }
 
-func (m TermMapper) MapComparison(expr grlmodel.Term, tokenTyp int, val string) string {
+func (m TermMapper) MapComparison(expr grlmodel2.Term, tokenTyp int, val string) string {
 	tmpl := m.Templates[COMPARISON]
 	op := m.ComparisonOperators[tokenTyp]
 
@@ -75,7 +75,7 @@ func (m TermMapper) MapComparison(expr grlmodel.Term, tokenTyp int, val string) 
 	return m.executeTemplate(tmpl, data)
 }
 
-func (m TermMapper) MapEqualComparison(expr grlmodel.Term, val string) string {
+func (m TermMapper) MapEqualComparison(expr grlmodel2.Term, val string) string {
 	op := m.TargetToken[EQUAL]
 	tmpl := m.Templates[EQUALCOMPARISON]
 
@@ -83,7 +83,7 @@ func (m TermMapper) MapEqualComparison(expr grlmodel.Term, val string) string {
 	return m.executeTemplate(tmpl, data)
 }
 
-func (m TermMapper) MapRange(expr grlmodel.Term, opStart int, valStart string, opEnd int, valEnd string) string {
+func (m TermMapper) MapRange(expr grlmodel2.Term, opStart int, valStart string, opEnd int, valEnd string) string {
 	tmpl := m.Templates[RANGES]
 	ops := m.StartRanges[opStart]
 	ope := m.EndRanges[opEnd]
@@ -140,7 +140,7 @@ func (m TermMapper) MapDateAndTimeFormat(expr string) string {
 	return m.executeTemplate(tmpl, data)
 }
 
-func (m TermMapper) MapAssignment(expr grlmodel.Term, val string) string {
+func (m TermMapper) MapAssignment(expr grlmodel2.Term, val string) string {
 	tmpl := m.Templates[ASSIGNMENT]
 	op := m.TargetToken[ASSIGN]
 

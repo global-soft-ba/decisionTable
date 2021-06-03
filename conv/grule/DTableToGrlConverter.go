@@ -1,10 +1,10 @@
-package grl
+package grule
 
 import (
 	"bytes"
-	"decisionTable/convert/grule/grlmodel"
-	"decisionTable/convert/grule/mapper"
-	"decisionTable/convert/grule/tableconverter/grl/templates"
+	grlmodel2 "decisionTable/conv/grule/data"
+	mapper2 "decisionTable/conv/grule/mapper"
+	templates2 "decisionTable/conv/grule/templates"
 	"decisionTable/convert/grule/termconverter"
 	"decisionTable/data"
 	"text/template"
@@ -33,7 +33,7 @@ type DTableToGrlConverter struct {
 
 func (c DTableToGrlConverter) Convert(data data.Table) (interface{}, error) {
 
-	grlModel, err := mapper.CreateDTableMapper().MapDTableToRuleSet(data)
+	grlModel, err := mapper2.CreateDTableMapper().MapDTableToRuleSet(data)
 	if err != nil {
 		return []string{}, err
 	}
@@ -50,23 +50,23 @@ func (c DTableToGrlConverter) buildTemplate(hitPolicy data.HitPolicy, interferen
 
 	var t *template.Template
 	// TODo build only GRL Template / What with Json?
-	t, err := template.New(Rule).Parse(templates.RULE)
+	t, err := template.New(Rule).Parse(templates2.RULE)
 	if err != nil {
 		return &template.Template{}, err
 	}
-	_, err = t.New(RuleName).Parse(templates.RULENAME)
+	_, err = t.New(RuleName).Parse(templates2.RULENAME)
 	if err != nil {
 		return &template.Template{}, err
 	}
-	_, err = t.New(Expressions).Parse(templates.WHEN)
+	_, err = t.New(Expressions).Parse(templates2.WHEN)
 	if err != nil {
 		return &template.Template{}, err
 	}
-	_, err = t.New(Assignments).Parse(templates.THEN)
+	_, err = t.New(Assignments).Parse(templates2.THEN)
 	if err != nil {
 		return &template.Template{}, err
 	}
-	_, err = t.New(Entries).Parse(templates.ENTRY)
+	_, err = t.New(Entries).Parse(templates2.ENTRY)
 	if err != nil {
 		return &template.Template{}, err
 	}
@@ -85,26 +85,26 @@ func (c DTableToGrlConverter) buildTemplate(hitPolicy data.HitPolicy, interferen
 func (c DTableToGrlConverter) buildPolicyTemplate(hitPolicy data.HitPolicy) string {
 	switch hitPolicy {
 	case data.Unique:
-		return templates.UNIQUE
+		return templates2.UNIQUE
 	case data.First:
-		return templates.FIRST
+		return templates2.FIRST
 	case data.Priority:
-		return templates.PRIORITY
+		return templates2.PRIORITY
 	default:
-		return templates.DEFAULT
+		return templates2.DEFAULT
 	}
 }
 
 func (c DTableToGrlConverter) buildInterferenceTemplate(interference bool) string {
 	switch interference {
 	case true:
-		return templates.INTERFERENCE
+		return templates2.INTERFERENCE
 	default:
-		return templates.NONINTERFERENCE
+		return templates2.NONINTERFERENCE
 	}
 }
 
-func (c DTableToGrlConverter) convertRuleSetIntoGRL(ruleSet grlmodel.RuleSet) ([]string, error) {
+func (c DTableToGrlConverter) convertRuleSetIntoGRL(ruleSet grlmodel2.RuleSet) ([]string, error) {
 	var result []string
 
 	tmpl, err := c.buildTemplate(ruleSet.HitPolicy, ruleSet.Interference)
@@ -130,7 +130,7 @@ func (c DTableToGrlConverter) convertRuleSetIntoGRL(ruleSet grlmodel.RuleSet) ([
 	return result, nil
 }
 
-func (c DTableToGrlConverter) convertRuleExpressionsIntoGRL(rule grlmodel.Rule) (grlmodel.Rule, error) {
+func (c DTableToGrlConverter) convertRuleExpressionsIntoGRL(rule grlmodel2.Rule) (grlmodel2.Rule, error) {
 	result, err := c.convertInputExpressionsIntoGRL(rule)
 	if err != nil {
 		return result, err
@@ -144,14 +144,14 @@ func (c DTableToGrlConverter) convertRuleExpressionsIntoGRL(rule grlmodel.Rule) 
 	return result, nil
 }
 
-func (c DTableToGrlConverter) convertInputExpressionsIntoGRL(rule grlmodel.Rule) (grlmodel.Rule, error) {
+func (c DTableToGrlConverter) convertInputExpressionsIntoGRL(rule grlmodel2.Rule) (grlmodel2.Rule, error) {
 	result := rule
-	var expr []grlmodel.Term
+	var expr []grlmodel2.Term
 
 	for _, v := range rule.Expressions {
 		expConv, err := c.expConvFac.GetExpressionConverter(v.ExpressionLanguage, c.format)
 		if err != nil {
-			return grlmodel.Rule{}, err
+			return grlmodel2.Rule{}, err
 		}
 
 		term := expConv.ConvertExpression(v)
@@ -165,14 +165,14 @@ func (c DTableToGrlConverter) convertInputExpressionsIntoGRL(rule grlmodel.Rule)
 	return result, nil
 }
 
-func (c DTableToGrlConverter) convertOutputExpressionsIntoGRL(rule grlmodel.Rule) (grlmodel.Rule, error) {
+func (c DTableToGrlConverter) convertOutputExpressionsIntoGRL(rule grlmodel2.Rule) (grlmodel2.Rule, error) {
 	result := rule
-	var assgn []grlmodel.Term
+	var assgn []grlmodel2.Term
 
 	for _, v := range rule.Assignments {
 		expConv, err := c.expConvFac.GetExpressionConverter(v.ExpressionLanguage, c.format)
 		if err != nil {
-			return grlmodel.Rule{}, err
+			return grlmodel2.Rule{}, err
 		}
 		term := expConv.ConvertAssignments(v)
 		//Remove empty expressions

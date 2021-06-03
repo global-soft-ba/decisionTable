@@ -1,8 +1,8 @@
 package visitors
 
 import (
-	"decisionTable/convert/grule/grlmodel"
-	"decisionTable/convert/grule/termconverter/sfeel/mapper"
+	grlmodel2 "decisionTable/conv/grule/data"
+	"decisionTable/conv/grule/grl/symbols"
 	"decisionTable/data"
 	"decisionTable/parser/sfeel/parser"
 	"reflect"
@@ -11,11 +11,11 @@ import (
 
 func TestNumberVisitor_FloatInputRules(t *testing.T) {
 	type fields struct {
-		term grlmodel.Term
-		maps mapper.TermMapper
+		term grlmodel2.Term
+		maps symbols.TermMapper
 	}
 
-	mapping := mapper.SettingsGRL
+	mapping := symbols.SettingsGRL
 
 	tests := []struct {
 		name string
@@ -24,7 +24,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 	}{
 		{"number comparison LESS",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Float,
@@ -35,7 +35,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			"credit.score < 1.2"},
 		{"number comparison LESSEQ",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Float,
@@ -46,7 +46,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			"credit.score <= 1.1"},
 		{"number comparison GR",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Float,
@@ -57,7 +57,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			"credit.score > 1.2"},
 		{"number comparison GREQ",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Float,
@@ -68,7 +68,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			"credit.score >= 1"},
 		{"empty number input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Float,
@@ -79,7 +79,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			""},
 		{"equal number input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Float,
@@ -90,7 +90,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			"credit.score == 1.1"},
 		{"range IN OUT number input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Float,
@@ -101,7 +101,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			"((credit.score >= 1.1) && (credit.score <= 90))"},
 		{"range IN IN number input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Float,
@@ -112,7 +112,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			"((credit.score >= 1.1) && (credit.score < 90.1))"},
 		{"range OUT IN number input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Float,
@@ -123,7 +123,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			"((credit.score > 1.1) && (credit.score < 90))"},
 		{"range OUT IN number input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -134,7 +134,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 			"((credit.score > 1) && (credit.score <= 90))"},
 		{"disjunctions number input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -146,7 +146,7 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 		},
 		{"Negation number input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Integer,
@@ -172,11 +172,11 @@ func TestNumberVisitor_FloatInputRules(t *testing.T) {
 
 func TestNumberVisitor_NumberOutputRules(t *testing.T) {
 	type fields struct {
-		term grlmodel.Term
-		maps mapper.TermMapper
+		term grlmodel2.Term
+		maps symbols.TermMapper
 	}
 
-	mapping := mapper.SettingsGRL
+	mapping := symbols.SettingsGRL
 
 	tests := []struct {
 		name string
@@ -185,7 +185,7 @@ func TestNumberVisitor_NumberOutputRules(t *testing.T) {
 	}{
 		{"float assignment",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Float,
@@ -196,7 +196,7 @@ func TestNumberVisitor_NumberOutputRules(t *testing.T) {
 			"credit.score = 1"},
 		{"float empty assignment",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "score",
 					Key:        "credit",
 					Typ:        data.Float,

@@ -1,7 +1,7 @@
 package mapper
 
 import (
-	"decisionTable/convert/grule/grlmodel"
+	grlmodel2 "decisionTable/conv/grule/data"
 	"decisionTable/data"
 	"reflect"
 	"testing"
@@ -14,7 +14,7 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		want    grlmodel.RuleSet
+		want    grlmodel2.RuleSet
 		wantErr bool
 	}{
 		{name: "Valid Table",
@@ -46,19 +46,19 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						},
 					}},
 				}},
-			want: grlmodel.RuleSet{
+			want: grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
 				HitPolicy:       data.Priority,
 				CollectOperator: data.List,
-				Rules: []grlmodel.Rule{
+				Rules: []grlmodel2.Rule{
 					{
 						"0",
 						"R1",
 						0,
 						0,
-						[]grlmodel.Term{{"I1", "L1", data.String, "==3", data.SFEEL}},
-						[]grlmodel.Term{{"O1", "L1", data.Float, "4", data.SFEEL}},
+						[]grlmodel2.Term{{"I1", "L1", data.String, "==3", data.SFEEL}},
+						[]grlmodel2.Term{{"O1", "L1", data.Float, "4", data.SFEEL}},
 					},
 				},
 			},
@@ -110,21 +110,21 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 							},
 						}},
 				}},
-			want: grlmodel.RuleSet{
+			want: grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
 				HitPolicy:       data.First,
 				CollectOperator: data.List,
-				Rules: []grlmodel.Rule{
+				Rules: []grlmodel2.Rule{
 					{
 						"0",
 						"R1",
 						0,
 						0,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.String, "==3", data.SFEEL},
 							{"I2", "L1", data.String, "==3", data.SFEEL}},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Float, "4", data.SFEEL},
 							{"O2", "L1", data.Float, "4", data.SFEEL},
 						},
@@ -191,21 +191,21 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						},
 					},
 				}},
-			want: grlmodel.RuleSet{
+			want: grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
 				HitPolicy:       data.First,
 				CollectOperator: data.List,
-				Rules: []grlmodel.Rule{
+				Rules: []grlmodel2.Rule{
 					{
 						"0",
 						"R1",
 						0,
 						1,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.String, "==3", data.SFEEL},
 							{"I2", "L1", data.String, "==3", data.SFEEL}},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Float, "4", data.SFEEL},
 							{"O2", "L1", data.Float, "4", data.SFEEL},
 						},
@@ -215,10 +215,10 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						"R2",
 						1,
 						0,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.String, ">3", data.SFEEL},
 							{"I2", "L1", data.String, ">3", data.SFEEL}},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Float, "5", data.SFEEL},
 							{"O2", "L1", data.Float, "5", data.SFEEL},
 						},
@@ -261,7 +261,7 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 							data.CreateEntry("4", data.SFEEL)},
 					}},
 				}},
-			want:    grlmodel.RuleSet{},
+			want:    grlmodel2.RuleSet{},
 			wantErr: true,
 		},
 		{
@@ -322,21 +322,21 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						},
 					},
 				}},
-			want: grlmodel.RuleSet{
+			want: grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
 				HitPolicy:       data.Priority,
 				CollectOperator: data.List,
-				Rules: []grlmodel.Rule{
+				Rules: []grlmodel2.Rule{
 					{
 						"0",
 						"R1",
 						0,
 						1,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.String, "==3", data.SFEEL},
 							{"I2", "L1", data.String, "==3", data.SFEEL}},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Float, "4", data.SFEEL},
 							{"O2", "L1", data.Float, "4", data.SFEEL},
 						},
@@ -346,10 +346,10 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						"R2",
 						1,
 						0,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.String, ">3", data.SFEEL},
 							{"I2", "L1", data.String, ">3", data.SFEEL}},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Float, "5", data.SFEEL},
 							{"O2", "L1", data.Float, "5", data.SFEEL},
 						},
@@ -427,21 +427,21 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						},
 					},
 				}},
-			want: grlmodel.RuleSet{
+			want: grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
 				HitPolicy:       data.First,
 				CollectOperator: data.List,
-				Rules: []grlmodel.Rule{
+				Rules: []grlmodel2.Rule{
 					{
 						"0",
 						"R1",
 						0,
 						2,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.String, "==3", data.SFEEL},
 							{"I2", "L1", data.String, "==3", data.SFEEL}},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Float, "4", data.SFEEL},
 							{"O2", "L1", data.Float, "4", data.SFEEL},
 						},
@@ -451,10 +451,10 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						"R2",
 						1,
 						1,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.String, ">3", data.SFEEL},
 							{"I2", "L1", data.String, ">3", data.SFEEL}},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Float, "5", data.SFEEL},
 							{"O2", "L1", data.Float, "5", data.SFEEL},
 						},
@@ -464,10 +464,10 @@ func TestDTableToGrlMapper_MapToRuleSet(t *testing.T) {
 						"R3",
 						2,
 						0,
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"I1", "L1", data.String, ">3", data.SFEEL},
 							{"I2", "L1", data.String, ">3", data.SFEEL}},
-						[]grlmodel.Term{
+						[]grlmodel2.Term{
 							{"O1", "L1", data.Float, "5", data.SFEEL},
 							{"O2", "L1", data.Float, "5", data.SFEEL},
 						},

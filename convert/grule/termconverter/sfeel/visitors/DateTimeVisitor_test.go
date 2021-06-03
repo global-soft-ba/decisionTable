@@ -1,8 +1,8 @@
 package visitors
 
 import (
-	"decisionTable/convert/grule/grlmodel"
-	"decisionTable/convert/grule/termconverter/sfeel/mapper"
+	grlmodel2 "decisionTable/conv/grule/data"
+	"decisionTable/conv/grule/grl/symbols"
 	"decisionTable/data"
 	"decisionTable/parser/sfeel/parser"
 	"reflect"
@@ -11,11 +11,11 @@ import (
 
 func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 	type fields struct {
-		term grlmodel.Term
-		maps mapper.TermMapper
+		term grlmodel2.Term
+		maps symbols.TermMapper
 	}
 
-	mapping := mapper.SettingsGRL
+	mapping := symbols.SettingsGRL
 
 	tests := []struct {
 		name string
@@ -24,7 +24,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 	}{
 		{"equal datetime input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "time",
 					Key:        "credit",
 					Typ:        data.DateTime,
@@ -35,7 +35,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			"credit.time == MakeTime(2021,2,1,13,1,0)"},
 		{"datetime comparison LESS",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "time",
 					Key:        "credit",
 					Typ:        data.DateTime,
@@ -46,7 +46,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			"credit.time < MakeTime(2021,1,1,12,0,0)"},
 		{"integer comparison LESSEQ",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "time",
 					Key:        "credit",
 					Typ:        data.DateTime,
@@ -57,7 +57,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			"credit.time <= MakeTime(2021,1,1,12,0,0)"},
 		{"integer comparison GR",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "time",
 					Key:        "credit",
 					Typ:        data.DateTime,
@@ -68,7 +68,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			"credit.time > MakeTime(2021,1,1,12,0,0)"},
 		{"datetime comparison GREQ",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "time",
 					Key:        "credit",
 					Typ:        data.DateTime,
@@ -79,7 +79,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			"credit.time >= MakeTime(2021,1,1,12,0,0)"},
 		{"empty datetime input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "time",
 					Key:        "credit",
 					Typ:        data.DateTime,
@@ -90,7 +90,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			""},
 		{"range IN IN datetime input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "time",
 					Key:        "credit",
 					Typ:        data.DateTime,
@@ -101,7 +101,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			"((credit.time >= MakeTime(2021,1,1,12,0,0)) && (credit.time <= MakeTime(2021,2,1,12,0,0)))"},
 		{"range IN OUT datetime input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "time",
 					Key:        "credit",
 					Typ:        data.DateTime,
@@ -112,7 +112,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			`((credit.time >= MakeTime(2021,1,1,12,0,0)) && (credit.time < MakeTime(2021,2,1,12,0,0)))`},
 		{"range OUT OUT datetime input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "time",
 					Key:        "credit",
 					Typ:        data.DateTime,
@@ -123,7 +123,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			`((credit.time > MakeTime(2021,1,1,12,0,0)) && (credit.time < MakeTime(2021,2,1,12,0,0)))`},
 		{"range OUT IN datetime input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "time",
 					Key:        "credit",
 					Typ:        data.DateTime,
@@ -134,7 +134,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			`((credit.time > MakeTime(2021,1,1,12,0,0)) && (credit.time <= MakeTime(2021,2,1,12,0,0)))`},
 		{"disjunctions datetime input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "time",
 					Key:        "credit",
 					Typ:        data.DateTime,
@@ -145,7 +145,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 			"((credit.time == MakeTime(2021,1,1,12,0,0)) || (credit.time == MakeTime(2021,2,1,12,0,0)) || (credit.time == MakeTime(2021,3,1,12,0,0)))"},
 		{"Negation integer input",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "time",
 					Key:        "credit",
 					Typ:        data.DateTime,
@@ -171,11 +171,11 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 
 func TestDateTimeVisitor_DateTimeOutputRules(t *testing.T) {
 	type fields struct {
-		term grlmodel.Term
-		maps mapper.TermMapper
+		term grlmodel2.Term
+		maps symbols.TermMapper
 	}
 
-	mapping := mapper.SettingsGRL
+	mapping := symbols.SettingsGRL
 
 	tests := []struct {
 		name string
@@ -184,7 +184,7 @@ func TestDateTimeVisitor_DateTimeOutputRules(t *testing.T) {
 	}{
 		{"datetime assignment",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "time",
 					Key:        "credit",
 					Typ:        data.DateTime,
@@ -195,7 +195,7 @@ func TestDateTimeVisitor_DateTimeOutputRules(t *testing.T) {
 			"credit.time = MakeTime(2021,1,1,12,0,0)"},
 		{"datetime empty assignment",
 			fields{
-				grlmodel.Term{
+				grlmodel2.Term{
 					Name:       "time",
 					Key:        "credit",
 					Typ:        data.DateTime,
