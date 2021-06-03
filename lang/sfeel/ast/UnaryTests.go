@@ -69,8 +69,8 @@ func (l UnaryTest) GetChildren() []Node {
 
 type Interval struct {
 	ParserRule        Rule
-	StartIntervalRule Rule
-	EndIntervalRule   Rule
+	StartIntervalRule Token
+	EndIntervalRule   Token
 	StartValue        Node
 	EndValue          Node
 }

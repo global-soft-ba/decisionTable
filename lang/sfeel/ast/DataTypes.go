@@ -45,6 +45,12 @@ func checkDataTypePrecedences(types ...Node) reflect.Type {
 	}
 }
 
+// SFeelParser rules. - just for verifiction to see if the parser works correct
+type Rule struct {
+	Type    int
+	Literal string
+}
+
 type EmptyStatement struct {
 	ParserToken Token
 }

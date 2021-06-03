@@ -112,6 +112,7 @@ func (e Entry) getFieldUsingQualifiedName(name ast.QualifiedName, fields []data.
 }
 
 func (e Entry) Convert(listener conv.SFeelBaseListenerInterface) conv.SFeelBaseListenerInterface {
+	//TODO Return SymbolTable?
 	tree := conv.CreateTreeWalker(listener)
 	return tree.Walk(e.ast)
 }

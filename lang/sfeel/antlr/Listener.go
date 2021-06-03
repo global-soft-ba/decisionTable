@@ -9,14 +9,15 @@ import (
 )
 
 func CreateListener() Listener {
-	listener := Listener{stack: newStack()}
+	listener := Listener{stack: newStack(), tokenMap: TokenTable}
 	return listener
 }
 
 type Listener struct {
 	parser.BaseSFeelListener
-	Errors []error
-	stack  *stack
+	tokenMap map[int]int
+	Errors   []error
+	stack    *stack
 }
 
 func (s *Listener) GetAST() ast.Node {
@@ -30,7 +31,7 @@ func (s *Listener) GetAST() ast.Node {
 func (s *Listener) ExitEmptySimpleUnaryTests(ctx *parser.EmptySimpleUnaryTestsContext) {
 	lit := ctx.GetStart().GetText()
 	tkn := ast.Token{
-		Type:    parser.SFeelParserRULE_simple_unary_tests,
+		Type:    -1,
 		Literal: lit,
 	}
 	empty := ast.EmptyStatement{ParserToken: tkn}
@@ -81,7 +82,7 @@ func (s *Listener) ExitEqualUnaryComparison(ctx *parser.EqualUnaryComparisonCont
 
 func (s *Listener) ExitUnaryComparison(ctx *parser.UnaryComparisonContext) {
 	prs := ast.Rule{Type: parser.SFeelParserRULE_unary_comparison, Literal: ctx.GetText()}
-	op := ast.Token{Type: ctx.GetStart().GetTokenType(), Literal: ctx.GetStart().GetText()}
+	op := ast.Token{Type: s.tokenMap[ctx.GetStart().GetTokenType()], Literal: ctx.GetStart().GetText()}
 	val := s.stack.Pop()
 
 	n := ast.UnaryTest{
@@ -97,15 +98,15 @@ func (s *Listener) ExitInterval(ctx *parser.IntervalContext) {
 		Type:    parser.SFeelParserRULE_interval,
 		Literal: ctx.GetText(),
 	}
-	endRule := s.stack.Pop().(ast.Rule)
+	endToken := s.stack.Pop().(ast.Token)
 	endVal := s.stack.Pop().(ast.Node)
 	startVal := s.stack.Pop().(ast.Node)
-	startRule := s.stack.Pop().(ast.Rule)
+	startToken := s.stack.Pop().(ast.Token)
 
 	inVal := ast.Interval{
 		ParserRule:        prs,
-		StartIntervalRule: startRule,
-		EndIntervalRule:   endRule,
+		StartIntervalRule: startToken,
+		EndIntervalRule:   endToken,
 		StartValue:        startVal,
 		EndValue:          endVal,
 	}
@@ -115,22 +116,22 @@ func (s *Listener) ExitInterval(ctx *parser.IntervalContext) {
 }
 
 func (s *Listener) ExitOpen_interval_start(ctx *parser.Open_interval_startContext) {
-	r := ast.Rule{Type: parser.SFeelParserRULE_open_interval_start, Literal: ctx.GetText()}
+	r := ast.Token{Type: s.tokenMap[parser.SFeelParserRULE_open_interval_start], Literal: ctx.GetText()}
 	s.stack.Push(r)
 }
 
 func (s *Listener) ExitClosed_interval_start(ctx *parser.Closed_interval_startContext) {
-	r := ast.Rule{Type: parser.SFeelParserRULE_closed_interval_start, Literal: ctx.GetText()}
+	r := ast.Token{Type: s.tokenMap[parser.SFeelParserRULE_closed_interval_start], Literal: ctx.GetText()}
 	s.stack.Push(r)
 }
 
 func (s *Listener) ExitOpen_interval_end(ctx *parser.Open_interval_endContext) {
-	r := ast.Rule{Type: parser.SFeelParserRULE_open_interval_end, Literal: ctx.GetText()}
+	r := ast.Token{Type: s.tokenMap[parser.SFeelParserRULE_open_interval_end], Literal: ctx.GetText()}
 	s.stack.Push(r)
 }
 
 func (s *Listener) ExitClosed_interval_end(ctx *parser.Closed_interval_endContext) {
-	r := ast.Rule{Type: parser.SFeelParserRULE_closed_interval_end, Literal: ctx.GetText()}
+	r := ast.Token{Type: s.tokenMap[parser.SFeelParserRULE_closed_interval_end], Literal: ctx.GetText()}
 	s.stack.Push(r)
 }
 

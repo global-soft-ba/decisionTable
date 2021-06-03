@@ -12,18 +12,6 @@ type Node interface {
 	GetChildren() []Node
 }
 
-// SFeelParser tokens
-type Token struct {
-	Type    int
-	Literal string
-}
-
-// SFeelParser rules.
-type Rule struct {
-	Type    int
-	Literal string
-}
-
 func GetAllQualifiedNames(node Node) []QualifiedName {
 	if (reflect.TypeOf(node) == reflect.TypeOf(QualifiedName{})) {
 		return []QualifiedName{node.(QualifiedName)}
