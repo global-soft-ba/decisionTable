@@ -2,7 +2,6 @@ package conv
 
 import (
 	"decisionTable/lang/sfeel/ast"
-	"fmt"
 	"testing"
 )
 
@@ -23,6 +22,11 @@ func TestWalker_Walk(t *testing.T) {
 			fields: fields{&SFeelBaseListener{}},
 			args:   args{ast.Integer{}},
 		},
+		{
+			name:   "simple unary tests",
+			fields: fields{&SFeelBaseListener{}},
+			args:   args{ast.UnaryTests{}},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -30,7 +34,7 @@ func TestWalker_Walk(t *testing.T) {
 				listener: tt.fields.listener,
 			}
 			walker.Walk(tt.args.node)
-			fmt.Println(walker)
+
 		})
 	}
 }

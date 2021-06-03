@@ -21,7 +21,17 @@ func TestSFeelConverter_Convert(t *testing.T) {
 		{
 			name:   "simple integer test",
 			fields: fields{listener: SFeelListener{data: "Init"}},
-			args:   args{sfeel.CreateInputEntry("1")},
+			args:   args{sfeel.CreateInputEntry("123456789")},
+		},
+		{
+			name:   "simple unary test",
+			fields: fields{listener: SFeelListener{data: "Init"}},
+			args:   args{sfeel.CreateInputEntry("<1")},
+		},
+		{
+			name:   "simple unary tests",
+			fields: fields{listener: SFeelListener{data: "Init"}},
+			args:   args{sfeel.CreateInputEntry("<1,>=4,>5")},
 		},
 	}
 	for _, tt := range tests {

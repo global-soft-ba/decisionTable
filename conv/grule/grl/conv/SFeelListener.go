@@ -1,8 +1,9 @@
 package conv
 
 import (
+	sfeel "decisionTable/lang/sfeel/ast"
 	"decisionTable/lang/sfeel/conv"
-	"fmt"
+	"strconv"
 )
 
 type SFeelListener struct {
@@ -10,7 +11,7 @@ type SFeelListener struct {
 	data string
 }
 
-func (l *SFeelListener) ExitInteger() {
-	fmt.Println("Hallo Integer")
-	l.data = "Hello Integer"
+func (l *SFeelListener) ExitInteger(ctx sfeel.Integer) {
+
+	l.data = strconv.FormatInt(ctx.Value, 10)
 }
