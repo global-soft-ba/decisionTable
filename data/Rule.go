@@ -1,4 +1,4 @@
-package model
+package data
 
 type Rule struct {
 	Description   string

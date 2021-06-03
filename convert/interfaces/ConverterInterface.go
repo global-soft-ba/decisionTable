@@ -1,9 +1,9 @@
 package interfaces
 
 import (
-	"github.com/global-soft-ba/decisionTable/model"
+	"decisionTable/data"
 )
 
 type ConverterInterface interface {
-	Convert(data model.TableData) (interface{}, error)
+	Convert(data data.Table) (interface{}, error)
 }

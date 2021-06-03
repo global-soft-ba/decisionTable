@@ -2,20 +2,20 @@ package json
 
 import (
 	"decisionTable/convert/grule/termconverter"
-	"decisionTable/model"
+	"decisionTable/data"
 )
 
 func CreateDTableToJsonConverter() DTableToJsonConverter {
 	conv := termconverter.CreateTermConverterFactory()
-	output := model.JSON
+	output := data.JSON
 	return DTableToJsonConverter{conv, output}
 }
 
 type DTableToJsonConverter struct {
 	expConvFac termconverter.TermConverterFactory
-	format     model.OutputFormat
+	format     data.OutputFormat
 }
 
-func (c DTableToJsonConverter) Convert(data model.TableData) (interface{}, error) {
+func (c DTableToJsonConverter) Convert(data data.Table) (interface{}, error) {
 	panic("not implemented")
 }

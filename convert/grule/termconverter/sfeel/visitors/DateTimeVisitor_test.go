@@ -3,7 +3,7 @@ package visitors
 import (
 	"decisionTable/convert/grule/grlmodel"
 	"decisionTable/convert/grule/termconverter/sfeel/mapper"
-	"decisionTable/model"
+	"decisionTable/data"
 	"decisionTable/parser/sfeel/parser"
 	"reflect"
 	"testing"
@@ -27,7 +27,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "time",
 					Key:        "credit",
-					Typ:        model.DateTime,
+					Typ:        data.DateTime,
 					Expression: `DateAndTime("2021-02-01T13:01:00")`,
 				},
 				mapping,
@@ -38,7 +38,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "time",
 					Key:        "credit",
-					Typ:        model.DateTime,
+					Typ:        data.DateTime,
 					Expression: `<DateAndTime("2021-01-01T12:00:00")`,
 				},
 				mapping,
@@ -49,7 +49,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "time",
 					Key:        "credit",
-					Typ:        model.DateTime,
+					Typ:        data.DateTime,
 					Expression: `<=DateAndTime("2021-01-01T12:00:00")`,
 				},
 				mapping,
@@ -60,7 +60,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "time",
 					Key:        "credit",
-					Typ:        model.DateTime,
+					Typ:        data.DateTime,
 					Expression: `>DateAndTime("2021-01-01T12:00:00")`,
 				},
 				mapping,
@@ -71,7 +71,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "time",
 					Key:        "credit",
-					Typ:        model.DateTime,
+					Typ:        data.DateTime,
 					Expression: `>=DateAndTime("2021-01-01T12:00:00")`,
 				},
 				mapping,
@@ -82,7 +82,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "time",
 					Key:        "credit",
-					Typ:        model.DateTime,
+					Typ:        data.DateTime,
 					Expression: "-",
 				},
 				mapping,
@@ -93,7 +93,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "time",
 					Key:        "credit",
-					Typ:        model.DateTime,
+					Typ:        data.DateTime,
 					Expression: `[DateAndTime("2021-01-01T12:00:00")..DateAndTime("2021-02-01T12:00:00")]`,
 				},
 				mapping,
@@ -104,7 +104,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "time",
 					Key:        "credit",
-					Typ:        model.DateTime,
+					Typ:        data.DateTime,
 					Expression: `[DateAndTime("2021-01-01T12:00:00")..DateAndTime("2021-02-01T12:00:00")[`,
 				},
 				mapping,
@@ -115,7 +115,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "time",
 					Key:        "credit",
-					Typ:        model.DateTime,
+					Typ:        data.DateTime,
 					Expression: `]DateAndTime("2021-01-01T12:00:00")..DateAndTime("2021-02-01T12:00:00")[`,
 				},
 				mapping,
@@ -126,7 +126,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "time",
 					Key:        "credit",
-					Typ:        model.DateTime,
+					Typ:        data.DateTime,
 					Expression: `]DateAndTime("2021-01-01T12:00:00")..DateAndTime("2021-02-01T12:00:00")]`,
 				},
 				mapping,
@@ -137,7 +137,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "time",
 					Key:        "credit",
-					Typ:        model.DateTime,
+					Typ:        data.DateTime,
 					Expression: `DateAndTime("2021-01-01T12:00:00"),DateAndTime("2021-02-01T12:00:00"),DateAndTime("2021-03-01T12:00:00")`,
 				},
 				mapping,
@@ -148,7 +148,7 @@ func TestDateTimeVisitor_DateTimeInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "time",
 					Key:        "credit",
-					Typ:        model.DateTime,
+					Typ:        data.DateTime,
 					Expression: `not(DateAndTime("2021-01-01T12:00:00"))`,
 				},
 				mapping,
@@ -187,7 +187,7 @@ func TestDateTimeVisitor_DateTimeOutputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "time",
 					Key:        "credit",
-					Typ:        model.DateTime,
+					Typ:        data.DateTime,
 					Expression: `DateAndTime("2021-01-01T12:00:00")`,
 				},
 				mapping,
@@ -198,7 +198,7 @@ func TestDateTimeVisitor_DateTimeOutputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "time",
 					Key:        "credit",
-					Typ:        model.DateTime,
+					Typ:        data.DateTime,
 					Expression: "-",
 				},
 				mapping,

@@ -2,7 +2,7 @@ package mapper
 
 import (
 	"decisionTable/convert/grule/grlmodel"
-	"decisionTable/model"
+	"decisionTable/data"
 	"errors"
 	"strconv"
 )
@@ -18,7 +18,7 @@ func CreateDTableMapper() DTableMapper {
 
 type DTableMapper struct{}
 
-func (c DTableMapper) MapDTableToRuleSet(data model.TableData) (grlmodel.RuleSet, error) {
+func (c DTableMapper) MapDTableToRuleSet(data data.Table) (grlmodel.RuleSet, error) {
 	result := grlmodel.RuleSet{
 		Key:             data.Key,
 		Name:            data.Name,
@@ -39,7 +39,7 @@ func (c DTableMapper) MapDTableToRuleSet(data model.TableData) (grlmodel.RuleSet
 	return result, nil
 }
 
-func (c DTableMapper) mapEntriesAndFieldsToRule(columId int, maxRules int, rule model.Rule, inputFields []model.Field, outputFields []model.Field) (grlmodel.Rule, error) {
+func (c DTableMapper) mapEntriesAndFieldsToRule(columId int, maxRules int, rule data.Rule, inputFields []data.Field, outputFields []data.Field) (grlmodel.Rule, error) {
 	r := grlmodel.Rule{
 		Name:        strconv.Itoa(columId),
 		Description: rule.Description,
@@ -64,7 +64,7 @@ func (c DTableMapper) mapEntriesAndFieldsToRule(columId int, maxRules int, rule 
 	return r, nil
 }
 
-func (c DTableMapper) mapEntryToExpressions(entries []model.Entry, fields []model.Field) ([]grlmodel.Term, error) {
+func (c DTableMapper) mapEntryToExpressions(entries []data.Entry, fields []data.Field) ([]grlmodel.Term, error) {
 	var result []grlmodel.Term
 
 	fieldCount := len(fields)
@@ -86,7 +86,7 @@ func (c DTableMapper) mapEntryToExpressions(entries []model.Entry, fields []mode
 	return result, nil
 }
 
-func (c DTableMapper) mapToExpression(entry model.Entry, field model.Field) (grlmodel.Term, error) {
+func (c DTableMapper) mapToExpression(entry data.Entry, field data.Field) (grlmodel.Term, error) {
 	expr := grlmodel.Term{
 		Name:               field.Name,
 		Key:                field.Key,

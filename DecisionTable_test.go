@@ -3,7 +3,7 @@ package main
 import (
 	"decisionTable/convert/grule/tableconverter/grl"
 	"decisionTable/convert/interfaces"
-	"decisionTable/model"
+	"decisionTable/data"
 	"reflect"
 	"testing"
 )
@@ -12,27 +12,27 @@ func TestDecisionTable(t *testing.T) {
 	testTable, err := CreateDecisionTable().
 		SetName("Determine Employee").
 		SetDefinitionKey("determineEmployee").
-		SetNotationStandard(model.GRULE).
-		SetHitPolicy(model.Unique).
-		AddInputField("Type of claim", "claim", model.String).
-		AddInputField("Expenditure of claim", "claim", model.Integer).
-		AddOutputField("Responsible employee", "Employee", model.String).
-		AddOutputField("4 eyes principle", "Employee", model.Boolean).
+		SetNotationStandard(data.GRULE).
+		SetHitPolicy(data.Unique).
+		AddInputField("Type of claim", "claim", data.String).
+		AddInputField("Expenditure of claim", "claim", data.Integer).
+		AddOutputField("Responsible employee", "Employee", data.String).
+		AddOutputField("4 eyes principle", "Employee", data.Boolean).
 		AddRule("R1").
-		AddInputEntry(`"Car Accident"`, model.SFEEL).
-		AddInputEntry("<1000", model.SFEEL).
-		AddOutputEntry(`"Müller"`, model.SFEEL).
-		AddOutputEntry("false", model.SFEEL).BuildRule().
+		AddInputEntry(`"Car Accident"`, data.SFEEL).
+		AddInputEntry("<1000", data.SFEEL).
+		AddOutputEntry(`"Müller"`, data.SFEEL).
+		AddOutputEntry("false", data.SFEEL).BuildRule().
 		AddRule("R2").
-		AddInputEntry(`"Car Accident"`, model.SFEEL).
-		AddInputEntry("[1000..10000]", model.SFEEL).
-		AddOutputEntry(`"Meier"`, model.SFEEL).
-		AddOutputEntry("false", model.SFEEL).BuildRule().
+		AddInputEntry(`"Car Accident"`, data.SFEEL).
+		AddInputEntry("[1000..10000]", data.SFEEL).
+		AddOutputEntry(`"Meier"`, data.SFEEL).
+		AddOutputEntry("false", data.SFEEL).BuildRule().
 		AddRule("R3").
-		AddInputEntry(`"Car Accident"`, model.SFEEL).
-		AddInputEntry(">=10000", model.SFEEL).
-		AddOutputEntry(`"Schmidt"`, model.SFEEL).
-		AddOutputEntry("true", model.SFEEL).BuildRule().
+		AddInputEntry(`"Car Accident"`, data.SFEEL).
+		AddInputEntry(">=10000", data.SFEEL).
+		AddOutputEntry(`"Schmidt"`, data.SFEEL).
+		AddOutputEntry("true", data.SFEEL).BuildRule().
 		Build()
 
 	if got := testTable.valid; got != true {
@@ -45,27 +45,27 @@ func TestDecisionTable_Convert(t *testing.T) {
 	testTable, _ := CreateDecisionTable().
 		SetName("Determine Employee").
 		SetDefinitionKey("determineEmployee").
-		SetNotationStandard(model.GRULE).
-		SetHitPolicy(model.Unique).
-		AddInputField("TypeOfClaim", "claim", model.String).
-		AddInputField("ExpenditureOfClaim", "claim", model.Integer).
-		AddOutputField("ResponsibleEmployee", "Employee", model.String).
-		AddOutputField("4EyesPrinciple", "Employee", model.Boolean).
+		SetNotationStandard(data.GRULE).
+		SetHitPolicy(data.Unique).
+		AddInputField("TypeOfClaim", "claim", data.String).
+		AddInputField("ExpenditureOfClaim", "claim", data.Integer).
+		AddOutputField("ResponsibleEmployee", "Employee", data.String).
+		AddOutputField("4EyesPrinciple", "Employee", data.Boolean).
 		AddRule("R1").
-		AddInputEntry(`"Car Accident"`, model.SFEEL).
-		AddInputEntry("<1000", model.SFEEL).
-		AddOutputEntry(`"Müller"`, model.SFEEL).
-		AddOutputEntry("false", model.SFEEL).BuildRule().
+		AddInputEntry(`"Car Accident"`, data.SFEEL).
+		AddInputEntry("<1000", data.SFEEL).
+		AddOutputEntry(`"Müller"`, data.SFEEL).
+		AddOutputEntry("false", data.SFEEL).BuildRule().
 		AddRule("R2").
-		AddInputEntry(`"Car Accident"`, model.SFEEL).
-		AddInputEntry("[1000..10000]", model.SFEEL).
-		AddOutputEntry(`"Meier"`, model.SFEEL).
-		AddOutputEntry("false", model.SFEEL).BuildRule().
+		AddInputEntry(`"Car Accident"`, data.SFEEL).
+		AddInputEntry("[1000..10000]", data.SFEEL).
+		AddOutputEntry(`"Meier"`, data.SFEEL).
+		AddOutputEntry("false", data.SFEEL).BuildRule().
 		AddRule("R3").
-		AddInputEntry("-", model.SFEEL).
-		AddInputEntry(">=10000", model.SFEEL).
-		AddOutputEntry("-", model.SFEEL).
-		AddOutputEntry("true", model.SFEEL).BuildRule().
+		AddInputEntry("-", data.SFEEL).
+		AddInputEntry(">=10000", data.SFEEL).
+		AddOutputEntry("-", data.SFEEL).
+		AddOutputEntry("true", data.SFEEL).BuildRule().
 		Build()
 
 	type args struct {

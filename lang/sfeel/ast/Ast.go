@@ -4,7 +4,7 @@ import (
 	"reflect"
 )
 
-// The base Node interface
+// The base Node interface which represents abstract syntac trees
 type Node interface {
 	ParserLiteral() string
 	String() string

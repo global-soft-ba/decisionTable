@@ -4,7 +4,7 @@ import (
 	"decisionTable/convert/grule/tableconverter/grl"
 	"decisionTable/convert/grule/tableconverter/json"
 	intf "decisionTable/convert/interfaces"
-	"decisionTable/model"
+	"decisionTable/data"
 	err "errors"
 )
 
@@ -18,11 +18,11 @@ func CreateDTableToGruleConverterFactory() DTableToGruleConverterFactory {
 
 type DTableToGruleConverterFactory struct{}
 
-func (g DTableToGruleConverterFactory) GetFormatConverter(format model.OutputFormat) (intf.ConverterInterface, error) {
+func (g DTableToGruleConverterFactory) GetFormatConverter(format data.OutputFormat) (intf.ConverterInterface, error) {
 	switch format {
-	case model.GRL:
+	case data.GRL:
 		return grl.CreateDTableToGrlConverter(), nil
-	case model.JSON:
+	case data.JSON:
 		return json.CreateDTableToJsonConverter(), nil
 	default:
 		return nil, ErrDTableNoConverterFoundForOutputFormat

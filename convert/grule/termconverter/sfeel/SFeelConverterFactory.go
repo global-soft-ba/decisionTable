@@ -1,8 +1,8 @@
 package sfeel
 
 import (
+	"decisionTable/data"
 	"errors"
-	"github.com/global-soft-ba/decisionTable/model"
 )
 
 var (
@@ -15,11 +15,11 @@ func CreateSFeelConverterFactory() ConverterFactory {
 
 type ConverterFactory struct{}
 
-func (s ConverterFactory) GetConverterForFormat(format model.OutputFormat) (SFeelTermConverter, error) {
+func (s ConverterFactory) GetConverterForFormat(format data.OutputFormat) (SFeelTermConverter, error) {
 	switch format {
-	case model.GRL:
+	case data.GRL:
 		return CreateSfeelTermToGrlConverter(), nil
-	case model.JSON:
+	case data.JSON:
 		return CreateSfeelTermToJsonConverter(), nil
 	default:
 		return SFeelTermConverter{}, ErrExpressionLanguageConverterForOutputFormatNotFound

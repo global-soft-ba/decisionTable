@@ -1,4 +1,4 @@
-package model
+package data
 
 type OutputFormat string
 

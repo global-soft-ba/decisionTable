@@ -3,7 +3,7 @@ package convert
 import (
 	"decisionTable/convert/grule"
 	"decisionTable/convert/interfaces"
-	"decisionTable/model"
+	"decisionTable/data"
 	"errors"
 )
 
@@ -17,17 +17,17 @@ func CreateTableConverterFactory() DTableConverterFactory {
 
 type DTableConverterFactory struct{}
 
-func (c DTableConverterFactory) GetTableConverter(standard model.DTableStandard, format model.OutputFormat) (interfaces.ConverterInterface, error) {
+func (c DTableConverterFactory) GetTableConverter(standard data.DTableStandard, format data.OutputFormat) (interfaces.ConverterInterface, error) {
 	switch standard {
-	case model.GRULE:
+	case data.GRULE:
 		conv, err := grule.CreateDTableToGruleConverterFactory().GetFormatConverter(format)
 		if err != nil {
 			return nil, err
 		}
 		return conv, nil
-	case model.DROOLS:
+	case data.DROOLS:
 		panic("implement me")
-	case model.DMN:
+	case data.DMN:
 		panic("implement me")
 	default:
 		return nil, ErrDTableNoConverterFoundForTableStandard

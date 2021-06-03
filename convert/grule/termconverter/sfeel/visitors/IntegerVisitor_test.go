@@ -3,7 +3,7 @@ package visitors
 import (
 	"decisionTable/convert/grule/grlmodel"
 	"decisionTable/convert/grule/termconverter/sfeel/mapper"
-	"decisionTable/model"
+	"decisionTable/data"
 	"decisionTable/parser/sfeel/parser"
 	"reflect"
 	"testing"
@@ -27,7 +27,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: "<1",
 				},
 				mapping,
@@ -38,7 +38,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: "<=1",
 				},
 				mapping,
@@ -49,7 +49,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: ">1",
 				},
 				mapping,
@@ -60,7 +60,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: ">=1",
 				},
 				mapping,
@@ -71,7 +71,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: "-",
 				},
 				mapping,
@@ -82,7 +82,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: "1",
 				},
 				mapping,
@@ -93,7 +93,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: "[1..90]",
 				},
 				mapping,
@@ -104,7 +104,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: "[1..90[",
 				},
 				mapping,
@@ -115,7 +115,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: "]1..90[",
 				},
 				mapping,
@@ -126,7 +126,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: "]1..90]",
 				},
 				mapping,
@@ -137,7 +137,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: "<1,>=2,[3..8],4,7",
 				},
 				mapping,
@@ -149,7 +149,7 @@ func TestIntegerVisitor_IntegerInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: "not(1)",
 				},
 				mapping,
@@ -188,7 +188,7 @@ func TestIntegerVisitor_IntegerOutputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: "1",
 				},
 				mapping,
@@ -199,7 +199,7 @@ func TestIntegerVisitor_IntegerOutputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: "-",
 				},
 				mapping,

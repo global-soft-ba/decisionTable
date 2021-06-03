@@ -1,7 +1,7 @@
 package eval
 
 import (
-	"decisionTable/sfeel/ast"
+	ast "decisionTable/lang/sfeel/ast"
 	"errors"
 	"fmt"
 	"reflect"

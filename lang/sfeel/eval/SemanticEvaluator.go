@@ -1,21 +1,21 @@
 package eval
 
 import (
-	"decisionTable/sfeel/ast"
+	ast "decisionTable/lang/sfeel/ast"
 	"errors"
 	"fmt"
 	"reflect"
 )
 
 func CreateTypeCheckingEvaluator() EvaluatorInterface {
-	return TypeCheckingEvaluator{}
+	return SemanticEvaluator{}
 }
 
-type TypeCheckingEvaluator struct {
+type SemanticEvaluator struct {
 	node ast.Node
 }
 
-func (e TypeCheckingEvaluator) Eval(node ast.Node) (bool, []error) {
+func (e SemanticEvaluator) Eval(node ast.Node) (bool, []error) {
 	e.node = node
 
 	switch e.node.(type) {

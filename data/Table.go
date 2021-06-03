@@ -1,6 +1,6 @@
-package model
+package data
 
-type TableData struct {
+type Table struct {
 	Key              string
 	Name             string
 	HitPolicy        HitPolicy

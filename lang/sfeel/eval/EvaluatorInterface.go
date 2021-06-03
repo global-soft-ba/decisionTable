@@ -1,6 +1,8 @@
 package eval
 
-import "decisionTable/sfeel/ast"
+import (
+	"decisionTable/lang/sfeel/ast"
+)
 
 type EvaluatorInterface interface {
 	Eval(node ast.Node) (bool, []error)

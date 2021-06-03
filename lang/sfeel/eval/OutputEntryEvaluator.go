@@ -1,7 +1,7 @@
 package eval
 
 import (
-	"decisionTable/sfeel/ast"
+	ast "decisionTable/lang/sfeel/ast"
 	"errors"
 	"fmt"
 	"reflect"
@@ -19,10 +19,12 @@ type OutputEntryEvaluator struct {
 
 func (e OutputEntryEvaluator) Eval(node ast.Node) (bool, []error) {
 	e.node = node
-	/*
-		switch e.node.(type) {
-			default: return true, nil
-		}
-	*/
+	switch e.node.(type) {
+	case ast.EmptyStatement:
+		// No additional evaluation necessary
+		return true, nil
+
+	}
+
 	return false, []error{errors.New(fmt.Sprintf("given node type %s is not allowed as output entry", reflect.TypeOf(e.node)))}
 }

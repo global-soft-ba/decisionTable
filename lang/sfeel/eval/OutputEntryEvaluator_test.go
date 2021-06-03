@@ -1,11 +1,11 @@
 package eval
 
 import (
-	"decisionTable/sfeel/ast"
+	ast "decisionTable/lang/sfeel/ast"
 	"testing"
 )
 
-func TestInputEntryEvaluator_Eval(t *testing.T) {
+func TestOutputEntryEvaluator_Eval(t *testing.T) {
 	type args struct {
 		node ast.Node
 	}
@@ -16,27 +16,15 @@ func TestInputEntryEvaluator_Eval(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name:    "incorrect datatype evaluation",
-			args:    args{ast.Float{}},
+			name:    "incorrect unary evaluation",
+			args:    args{ast.UnaryTests{}},
 			want:    false,
 			wantErr: true,
-		},
-		{
-			name:    "correct unary evaluation",
-			args:    args{ast.UnaryTests{}},
-			want:    true,
-			wantErr: false,
-		},
-		{
-			name:    "correct empty unary evaluation",
-			args:    args{ast.EmptyStatement{}},
-			want:    true,
-			wantErr: false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			e := CreateInputEntryEvaluator()
+			e := CreateOutputEntryEvaluator()
 			got, err := e.Eval(tt.args.node)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Eval() error = %v, wantErr %v", err, tt.wantErr)

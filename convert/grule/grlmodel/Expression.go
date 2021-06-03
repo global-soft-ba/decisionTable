@@ -1,11 +1,11 @@
 package grlmodel
 
-import "github.com/global-soft-ba/decisionTable/model"
+import "decisionTable/data"
 
 type Term struct {
 	Name               string
 	Key                string
-	Typ                model.DataTyp
+	Typ                data.DataTyp
 	Expression         string
-	ExpressionLanguage model.ExpressionLanguage
+	ExpressionLanguage data.ExpressionLanguage
 }

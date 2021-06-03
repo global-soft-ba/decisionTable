@@ -2,7 +2,7 @@ package valid
 
 import (
 	conf "decisionTable/config"
-	"decisionTable/model"
+	"decisionTable/data"
 	"errors"
 )
 
@@ -24,13 +24,13 @@ var (
 	ErrDTableEntryReferencedFieldTypInvalid  = errors.New("referenced field type does not match field type")
 )
 
-func CreateDecisionTableValidator(dTable model.TableData) ValidatorInterface {
+func CreateDecisionTableValidator(dTable data.Table) ValidatorInterface {
 	r := Validator{dTable: dTable, valid: false, errs: []error{}}
 	return r
 }
 
 type Validator struct {
-	dTable model.TableData
+	dTable data.Table
 	valid  bool
 	errs   []error
 }
@@ -85,7 +85,7 @@ func (d Validator) validateHitPolicy() (bool, []error) {
 }
 
 func (d Validator) validateCollectOperator() (bool, []error) {
-	if d.dTable.HitPolicy == model.Collect {
+	if d.dTable.HitPolicy == data.Collect {
 		if _, ok := conf.DecisionTableStandards[d.dTable.NotationStandard].CollectOperators[d.dTable.CollectOperator]; !ok {
 			return false, []error{ErrDTableCollectOperator}
 		}
@@ -187,7 +187,7 @@ func (d Validator) validateRules() (bool, []error) {
 	return true, nil
 }
 
-func (d Validator) validateFields(f model.Field) (bool, error) {
+func (d Validator) validateFields(f data.Field) (bool, error) {
 	if len(f.Name) == 0 {
 		return false, ErrDTableFieldNameEmpty
 	}
@@ -203,7 +203,7 @@ func (d Validator) validateFields(f model.Field) (bool, error) {
 	return true, nil
 }
 
-func (d Validator) validateInputRuleEntries(r model.Rule) (bool, []error) {
+func (d Validator) validateInputRuleEntries(r data.Rule) (bool, []error) {
 	var errResult []error
 
 	for i, v := range r.InputEntries {
@@ -225,7 +225,7 @@ func (d Validator) validateInputRuleEntries(r model.Rule) (bool, []error) {
 	return true, nil
 }
 
-func (d Validator) validateOutputRuleEntries(r model.Rule) (bool, []error) {
+func (d Validator) validateOutputRuleEntries(r data.Rule) (bool, []error) {
 	var errResult []error
 
 	for i, v := range r.OutputEntries {
@@ -247,7 +247,7 @@ func (d Validator) validateOutputRuleEntries(r model.Rule) (bool, []error) {
 	return true, nil
 }
 
-func (d Validator) validateEntry(entry model.EntryInterface, field model.Field) (bool, []error) {
+func (d Validator) validateEntry(entry data.EntryInterface, field data.Field) (bool, []error) {
 	if ok, err := entry.Validate(); !ok {
 		return false, err
 	}
@@ -281,7 +281,7 @@ func (d Validator) ValidateContainsInterferences() bool {
 	return false
 }
 
-func (d Validator) fieldIsContained(field model.Field, setOfFields []model.Field) bool {
+func (d Validator) fieldIsContained(field data.Field, setOfFields []data.Field) bool {
 	for _, val := range setOfFields {
 		if (val.Key == field.Key) && (val.Name == field.Name) {
 			return true

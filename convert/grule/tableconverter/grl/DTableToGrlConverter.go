@@ -6,7 +6,7 @@ import (
 	"decisionTable/convert/grule/mapper"
 	"decisionTable/convert/grule/tableconverter/grl/templates"
 	"decisionTable/convert/grule/termconverter"
-	"decisionTable/model"
+	"decisionTable/data"
 	"text/template"
 )
 
@@ -22,16 +22,16 @@ const (
 
 func CreateDTableToGrlConverter() DTableToGrlConverter {
 	conv := termconverter.CreateTermConverterFactory()
-	output := model.GRL
+	output := data.GRL
 	return DTableToGrlConverter{conv, output}
 }
 
 type DTableToGrlConverter struct {
 	expConvFac termconverter.TermConverterFactory
-	format     model.OutputFormat
+	format     data.OutputFormat
 }
 
-func (c DTableToGrlConverter) Convert(data model.TableData) (interface{}, error) {
+func (c DTableToGrlConverter) Convert(data data.Table) (interface{}, error) {
 
 	grlModel, err := mapper.CreateDTableMapper().MapDTableToRuleSet(data)
 	if err != nil {
@@ -46,7 +46,7 @@ func (c DTableToGrlConverter) Convert(data model.TableData) (interface{}, error)
 	return result, nil
 }
 
-func (c DTableToGrlConverter) buildTemplate(hitPolicy model.HitPolicy, interference bool) (*template.Template, error) {
+func (c DTableToGrlConverter) buildTemplate(hitPolicy data.HitPolicy, interference bool) (*template.Template, error) {
 
 	var t *template.Template
 	// TODo build only GRL Template / What with Json?
@@ -82,13 +82,13 @@ func (c DTableToGrlConverter) buildTemplate(hitPolicy model.HitPolicy, interfere
 	return t, err
 }
 
-func (c DTableToGrlConverter) buildPolicyTemplate(hitPolicy model.HitPolicy) string {
+func (c DTableToGrlConverter) buildPolicyTemplate(hitPolicy data.HitPolicy) string {
 	switch hitPolicy {
-	case model.Unique:
+	case data.Unique:
 		return templates.UNIQUE
-	case model.First:
+	case data.First:
 		return templates.FIRST
-	case model.Priority:
+	case data.Priority:
 		return templates.PRIORITY
 	default:
 		return templates.DEFAULT

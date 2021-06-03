@@ -1,12 +1,12 @@
 package grlmodel
 
-import "github.com/global-soft-ba/decisionTable/model"
+import "decisionTable/data"
 
 type RuleSet struct {
 	Key             string
 	Name            string
-	HitPolicy       model.HitPolicy
-	CollectOperator model.CollectOperator
+	HitPolicy       data.HitPolicy
+	CollectOperator data.CollectOperator
 	Interference    bool
 	Rules           []Rule
 }

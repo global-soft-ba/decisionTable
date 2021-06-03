@@ -1,64 +1,64 @@
 package valid
 
 import (
-	"decisionTable/model"
-	"decisionTable/sfeel"
+	"decisionTable/data"
+	sfeel2 "decisionTable/lang/sfeel"
 	"reflect"
 	"testing"
 )
 
-func TestDTableValidator_Validate(t *testing.T) {
+func TestDTableValidator_SFeel_Validate(t *testing.T) {
 	tests := []struct {
 		name  string
-		table model.TableData
+		table data.Table
 		want  bool
 		want1 []error
 	}{
 		{
 			name: "Valid Grule Table",
-			table: model.TableData{
+			table: data.Table{
 				Key:              "test1",
 				Name:             "TableOne",
-				HitPolicy:        model.First,
-				CollectOperator:  model.List,
-				NotationStandard: model.GRULE,
-				InputFields: []model.Field{{
+				HitPolicy:        data.First,
+				CollectOperator:  data.List,
+				NotationStandard: data.GRULE,
+				InputFields: []data.Field{{
 					Name: "I1",
 					Key:  "L1",
-					Typ:  model.Integer,
+					Typ:  data.Integer,
 				},
 				},
-				OutputFields: []model.Field{{
+				OutputFields: []data.Field{{
 					Name: "O1",
 					Key:  "L1",
-					Typ:  model.Float,
+					Typ:  data.Float,
 				}},
-				Rules: []model.Rule{
+				Rules: []data.Rule{
 					{
 						Description: "R1",
-						InputEntries: []model.EntryInterface{
-							sfeel.CreateInputEntry("<3"),
+						InputEntries: []data.EntryInterface{
+							sfeel2.CreateInputEntry("<3"),
 						},
-						OutputEntries: []model.EntryInterface{
-							sfeel.CreateOutputEntry("-"),
+						OutputEntries: []data.EntryInterface{
+							sfeel2.CreateOutputEntry("-"),
 						},
 					},
 					{
 						Description: "R2",
-						InputEntries: []model.EntryInterface{
-							sfeel.CreateInputEntry("<=3"),
+						InputEntries: []data.EntryInterface{
+							sfeel2.CreateInputEntry("<=3"),
 						},
-						OutputEntries: []model.EntryInterface{
-							sfeel.CreateOutputEntry("1.2"),
+						OutputEntries: []data.EntryInterface{
+							sfeel2.CreateOutputEntry("1.2"),
 						},
 					},
 					{
 						Description: "R3",
-						InputEntries: []model.EntryInterface{
-							sfeel.CreateInputEntry("not(47)"),
+						InputEntries: []data.EntryInterface{
+							sfeel2.CreateInputEntry("not(47)"),
 						},
-						OutputEntries: []model.EntryInterface{
-							sfeel.CreateOutputEntry("1"),
+						OutputEntries: []data.EntryInterface{
+							sfeel2.CreateOutputEntry("1"),
 						},
 					},
 				},
@@ -68,28 +68,28 @@ func TestDTableValidator_Validate(t *testing.T) {
 		},
 		{
 			name: "Wrong hit policy for the NotationStandard",
-			table: model.TableData{
+			table: data.Table{
 				Key:              "test1",
 				Name:             "TableOne",
-				HitPolicy:        model.Any,
-				NotationStandard: model.GRULE,
-				InputFields: []model.Field{{
+				HitPolicy:        data.Any,
+				NotationStandard: data.GRULE,
+				InputFields: []data.Field{{
 					Name: "I1",
 					Key:  "L1",
-					Typ:  model.String,
+					Typ:  data.String,
 				},
 				},
-				OutputFields: []model.Field{{
+				OutputFields: []data.Field{{
 					Name: "O1",
 					Key:  "L1",
-					Typ:  model.Integer,
+					Typ:  data.Integer,
 				}},
-				Rules: []model.Rule{{
+				Rules: []data.Rule{{
 					Description: "R1",
-					InputEntries: []model.EntryInterface{
-						sfeel.CreateInputEntry(`"3"`)},
-					OutputEntries: []model.EntryInterface{
-						sfeel.CreateOutputEntry("4"),
+					InputEntries: []data.EntryInterface{
+						sfeel2.CreateInputEntry(`"3"`)},
+					OutputEntries: []data.EntryInterface{
+						sfeel2.CreateOutputEntry("4"),
 					},
 				}},
 			},
@@ -98,29 +98,29 @@ func TestDTableValidator_Validate(t *testing.T) {
 		},
 		{
 			name: "Wrong CollectOperators DMN",
-			table: model.TableData{
+			table: data.Table{
 				Key:              "K1",
 				Name:             "N1",
-				HitPolicy:        model.Collect,
+				HitPolicy:        data.Collect,
 				CollectOperator:  "XYZ",
-				NotationStandard: model.DMN,
-				InputFields: []model.Field{{
+				NotationStandard: data.DMN,
+				InputFields: []data.Field{{
 					Name: "I1",
 					Key:  "L1",
-					Typ:  model.String,
+					Typ:  data.String,
 				},
 				},
-				OutputFields: []model.Field{{
+				OutputFields: []data.Field{{
 					Name: "O1",
 					Key:  "L1",
-					Typ:  model.Integer,
+					Typ:  data.Integer,
 				}},
-				Rules: []model.Rule{{
+				Rules: []data.Rule{{
 					Description: "R1",
-					InputEntries: []model.EntryInterface{
-						sfeel.CreateInputEntry(`"3"`)},
-					OutputEntries: []model.EntryInterface{
-						sfeel.CreateOutputEntry("4")},
+					InputEntries: []data.EntryInterface{
+						sfeel2.CreateInputEntry(`"3"`)},
+					OutputEntries: []data.EntryInterface{
+						sfeel2.CreateOutputEntry("4")},
 				}},
 			},
 			want:  false,
@@ -128,17 +128,17 @@ func TestDTableValidator_Validate(t *testing.T) {
 		},
 		{
 			name: "Empty input and output fields",
-			table: model.TableData{
+			table: data.Table{
 				Key:              "K1",
 				Name:             "N1",
-				HitPolicy:        model.First,
-				NotationStandard: model.GRULE,
-				InputFields:      []model.Field{},
-				OutputFields:     []model.Field{},
-				Rules: []model.Rule{{
+				HitPolicy:        data.First,
+				NotationStandard: data.GRULE,
+				InputFields:      []data.Field{},
+				OutputFields:     []data.Field{},
+				Rules: []data.Rule{{
 					Description:   "R1",
-					InputEntries:  []model.EntryInterface{},
-					OutputEntries: []model.EntryInterface{},
+					InputEntries:  []data.EntryInterface{},
+					OutputEntries: []data.EntryInterface{},
 				}},
 			},
 			want:  false,
@@ -146,28 +146,28 @@ func TestDTableValidator_Validate(t *testing.T) {
 		},
 		{
 			name: "Wrong Field definition",
-			table: model.TableData{
+			table: data.Table{
 				Key:              "K1",
 				Name:             "N1",
-				HitPolicy:        model.First,
-				NotationStandard: model.GRULE,
-				InputFields: []model.Field{{
+				HitPolicy:        data.First,
+				NotationStandard: data.GRULE,
+				InputFields: []data.Field{{
 					Name: "I1",
 					Key:  "L1",
-					Typ:  model.Double,
+					Typ:  data.Double,
 				},
 				},
-				OutputFields: []model.Field{{
+				OutputFields: []data.Field{{
 					Name: "",
 					Key:  "L1",
-					Typ:  model.Integer,
+					Typ:  data.Integer,
 				}},
-				Rules: []model.Rule{{
+				Rules: []data.Rule{{
 					Description: "R1",
-					InputEntries: []model.EntryInterface{
-						sfeel.CreateInputEntry(">3")},
-					OutputEntries: []model.EntryInterface{
-						sfeel.CreateOutputEntry("3"),
+					InputEntries: []data.EntryInterface{
+						sfeel2.CreateInputEntry(">3")},
+					OutputEntries: []data.EntryInterface{
+						sfeel2.CreateOutputEntry("3"),
 					},
 				}},
 			},
@@ -176,30 +176,30 @@ func TestDTableValidator_Validate(t *testing.T) {
 		},
 		{
 			name: "Wrong mount of input entries regarding data schemas",
-			table: model.TableData{
+			table: data.Table{
 				Key:              "K1",
 				Name:             "N1",
-				HitPolicy:        model.First,
-				NotationStandard: model.GRULE,
-				InputFields: []model.Field{
+				HitPolicy:        data.First,
+				NotationStandard: data.GRULE,
+				InputFields: []data.Field{
 					{
 						Name: "I1",
 						Key:  "L1",
-						Typ:  model.String,
+						Typ:  data.String,
 					},
 				},
-				OutputFields: []model.Field{{
+				OutputFields: []data.Field{{
 					Name: "O2",
 					Key:  "L1",
-					Typ:  model.Integer,
+					Typ:  data.Integer,
 				}},
-				Rules: []model.Rule{{
+				Rules: []data.Rule{{
 					Description: "R1",
-					InputEntries: []model.EntryInterface{
-						sfeel.CreateInputEntry(`"String"`),
-						sfeel.CreateInputEntry(">3")},
-					OutputEntries: []model.EntryInterface{
-						sfeel.CreateOutputEntry("-"),
+					InputEntries: []data.EntryInterface{
+						sfeel2.CreateInputEntry(`"String"`),
+						sfeel2.CreateInputEntry(">3")},
+					OutputEntries: []data.EntryInterface{
+						sfeel2.CreateOutputEntry("-"),
 					},
 				}},
 			},
@@ -208,31 +208,31 @@ func TestDTableValidator_Validate(t *testing.T) {
 		},
 		{
 			name: "Wrong mount of output entries regarding data schemas",
-			table: model.TableData{
+			table: data.Table{
 				Key:              "K1",
 				Name:             "N1",
-				HitPolicy:        model.First,
-				NotationStandard: model.GRULE,
-				InputFields: []model.Field{
+				HitPolicy:        data.First,
+				NotationStandard: data.GRULE,
+				InputFields: []data.Field{
 					{
 						Name: "I1",
 						Key:  "L1",
-						Typ:  model.String,
+						Typ:  data.String,
 					},
 				},
-				OutputFields: []model.Field{{
+				OutputFields: []data.Field{{
 					Name: "O2",
 					Key:  "L1",
-					Typ:  model.Integer,
+					Typ:  data.Integer,
 				}},
-				Rules: []model.Rule{{
+				Rules: []data.Rule{{
 					Description: "R1",
-					InputEntries: []model.EntryInterface{
-						sfeel.CreateInputEntry(`"String"`),
+					InputEntries: []data.EntryInterface{
+						sfeel2.CreateInputEntry(`"String"`),
 					},
-					OutputEntries: []model.EntryInterface{
-						sfeel.CreateOutputEntry("-"),
-						sfeel.CreateOutputEntry("-"),
+					OutputEntries: []data.EntryInterface{
+						sfeel2.CreateOutputEntry("-"),
+						sfeel2.CreateOutputEntry("-"),
 					},
 				}},
 			},
@@ -261,34 +261,34 @@ func TestDTableValidator_ValidateInterferences(t *testing.T) {
 
 	tests := []struct {
 		name  string
-		field model.TableData
+		field data.Table
 		want  bool
 	}{
 		{
 			name: "Valid Table Without Interferences",
-			field: model.TableData{
+			field: data.Table{
 				Key:              "test1",
 				Name:             "TableOne",
-				HitPolicy:        model.First,
-				CollectOperator:  model.List,
-				NotationStandard: model.GRULE,
-				InputFields: []model.Field{{
+				HitPolicy:        data.First,
+				CollectOperator:  data.List,
+				NotationStandard: data.GRULE,
+				InputFields: []data.Field{{
 					Name: "I1",
 					Key:  "L1",
-					Typ:  model.String,
+					Typ:  data.String,
 				},
 				},
-				OutputFields: []model.Field{{
+				OutputFields: []data.Field{{
 					Name: "O1",
 					Key:  "L1",
-					Typ:  model.Float,
+					Typ:  data.Float,
 				}},
-				Rules: []model.Rule{{
+				Rules: []data.Rule{{
 					Description: "R1",
-					InputEntries: []model.EntryInterface{
-						sfeel.CreateInputEntry(" =3")},
-					OutputEntries: []model.EntryInterface{
-						sfeel.CreateOutputEntry("4")},
+					InputEntries: []data.EntryInterface{
+						sfeel2.CreateInputEntry(" =3")},
+					OutputEntries: []data.EntryInterface{
+						sfeel2.CreateOutputEntry("4")},
 				}},
 			},
 			want: false,

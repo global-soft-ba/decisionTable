@@ -1,8 +1,8 @@
 package sfeel
 
 import (
-	"decisionTable/model"
-	"decisionTable/sfeel/ast"
+	"decisionTable/data"
+	ast "decisionTable/lang/sfeel/ast"
 	"reflect"
 	"testing"
 )
@@ -89,7 +89,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 		expression string
 	}
 	type args struct {
-		varType model.DataTyp
+		varType data.DataTyp
 	}
 	tests := []struct {
 		name    string
@@ -101,21 +101,21 @@ func TestExpression_ValidateDataType(t *testing.T) {
 		{
 			name:    "correct validation integer",
 			fields:  fields{ast: ast.Integer{}},
-			args:    args{model.Integer},
+			args:    args{data.Integer},
 			want:    true,
 			wantErr: false,
 		},
 		{
 			name:    "correct validation string",
 			fields:  fields{ast: ast.String{}},
-			args:    args{model.String},
+			args:    args{data.String},
 			want:    true,
 			wantErr: false,
 		},
 		{
 			name:    "incorrect validation string",
 			fields:  fields{ast: ast.String{}},
-			args:    args{model.Float},
+			args:    args{data.Float},
 			want:    false,
 			wantErr: true,
 		},
@@ -124,7 +124,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 			fields: fields{
 				ast: ast.Interval{StartValue: ast.Integer{}, EndValue: ast.Float{}},
 			},
-			args:    args{model.Float},
+			args:    args{data.Float},
 			want:    true,
 			wantErr: false,
 		},
@@ -133,7 +133,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 			fields: fields{
 				ast: ast.Interval{StartValue: ast.Integer{}, EndValue: ast.Float{}},
 			},
-			args:    args{model.Integer},
+			args:    args{data.Integer},
 			want:    false,
 			wantErr: true,
 		},
@@ -142,7 +142,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 			fields: fields{
 				ast: ast.UnaryTest{Value: ast.Integer{}},
 			},
-			args:    args{model.Integer},
+			args:    args{data.Integer},
 			want:    true,
 			wantErr: false,
 		},
@@ -151,7 +151,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 			fields: fields{
 				ast: ast.UnaryTest{Value: ast.Integer{}},
 			},
-			args:    args{model.Boolean},
+			args:    args{data.Boolean},
 			want:    false,
 			wantErr: true,
 		},
@@ -165,7 +165,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 						ast.UnaryTest{Value: ast.Boolean{}},
 					},
 				}},
-			args:    args{model.Boolean},
+			args:    args{data.Boolean},
 			want:    true,
 			wantErr: false,
 		},
@@ -173,7 +173,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 			name: "empty unary validation",
 			fields: fields{
 				ast: ast.EmptyStatement{}},
-			args:    args{model.Boolean},
+			args:    args{data.Boolean},
 			want:    true,
 			wantErr: false,
 		},
@@ -202,13 +202,13 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 		expression string
 	}
 	type args struct {
-		fields []model.Field
+		fields []data.Field
 	}
 	tests := []struct {
 		name    string
 		fields  fields
 		args    args
-		want    []model.Field
+		want    []data.Field
 		wantErr bool
 	}{
 		{
@@ -216,12 +216,12 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 			fields: fields{
 				ast: ast.QualifiedName{Value: []string{"b", "c"}},
 			},
-			args: args{fields: []model.Field{
-				model.Field{Name: "a", Key: "b", Typ: model.Integer},
-				model.Field{Name: "b", Key: "c", Typ: model.Integer},
-				model.Field{Name: "a", Key: "c", Typ: model.Integer},
+			args: args{fields: []data.Field{
+				data.Field{Name: "a", Key: "b", Typ: data.Integer},
+				data.Field{Name: "b", Key: "c", Typ: data.Integer},
+				data.Field{Name: "a", Key: "c", Typ: data.Integer},
 			}},
-			want:    []model.Field{model.Field{Name: "b", Key: "c", Typ: model.Integer}},
+			want:    []data.Field{data.Field{Name: "b", Key: "c", Typ: data.Integer}},
 			wantErr: false,
 		},
 		{
@@ -229,12 +229,12 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 			fields: fields{
 				ast: ast.UnaryTest{Value: ast.QualifiedName{Value: []string{"a", "b"}}},
 			},
-			args: args{fields: []model.Field{
-				model.Field{Name: "a", Key: "b", Typ: model.Integer},
-				model.Field{Name: "b", Key: "c", Typ: model.Integer},
-				model.Field{Name: "a", Key: "c", Typ: model.Integer},
+			args: args{fields: []data.Field{
+				data.Field{Name: "a", Key: "b", Typ: data.Integer},
+				data.Field{Name: "b", Key: "c", Typ: data.Integer},
+				data.Field{Name: "a", Key: "c", Typ: data.Integer},
 			}},
-			want:    []model.Field{model.Field{Name: "a", Key: "b", Typ: model.Integer}},
+			want:    []data.Field{data.Field{Name: "a", Key: "b", Typ: data.Integer}},
 			wantErr: false,
 		},
 		{
@@ -250,17 +250,17 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 					},
 				},
 			},
-			args: args{fields: []model.Field{
-				model.Field{Name: "a", Key: "b", Typ: model.Integer},
-				model.Field{Name: "b", Key: "c", Typ: model.Integer},
-				model.Field{Name: "a", Key: "c", Typ: model.Integer},
+			args: args{fields: []data.Field{
+				data.Field{Name: "a", Key: "b", Typ: data.Integer},
+				data.Field{Name: "b", Key: "c", Typ: data.Integer},
+				data.Field{Name: "a", Key: "c", Typ: data.Integer},
 			}},
-			want: []model.Field{
-				model.Field{Name: "b", Key: "c", Typ: model.Integer},
-				model.Field{Name: "a", Key: "c", Typ: model.Integer},
-				model.Field{Name: "a", Key: "b", Typ: model.Integer},
-				model.Field{Name: "a", Key: "b", Typ: model.Integer},
-				model.Field{Name: "a", Key: "c", Typ: model.Integer},
+			want: []data.Field{
+				data.Field{Name: "b", Key: "c", Typ: data.Integer},
+				data.Field{Name: "a", Key: "c", Typ: data.Integer},
+				data.Field{Name: "a", Key: "b", Typ: data.Integer},
+				data.Field{Name: "a", Key: "b", Typ: data.Integer},
+				data.Field{Name: "a", Key: "c", Typ: data.Integer},
 			},
 			wantErr: false,
 		},
@@ -269,10 +269,10 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 			fields: fields{
 				ast: ast.UnaryTest{Value: ast.QualifiedName{Value: []string{"x", "x"}}},
 			},
-			args: args{fields: []model.Field{
-				model.Field{Name: "a", Key: "b", Typ: model.Integer},
-				model.Field{Name: "b", Key: "c", Typ: model.Integer},
-				model.Field{Name: "a", Key: "c", Typ: model.Integer},
+			args: args{fields: []data.Field{
+				data.Field{Name: "a", Key: "b", Typ: data.Integer},
+				data.Field{Name: "b", Key: "c", Typ: data.Integer},
+				data.Field{Name: "a", Key: "c", Typ: data.Integer},
 			}},
 			want:    nil,
 			wantErr: true,

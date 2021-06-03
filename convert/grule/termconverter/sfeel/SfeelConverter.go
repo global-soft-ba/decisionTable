@@ -4,7 +4,7 @@ import (
 	"decisionTable/convert/grule/grlmodel"
 	"decisionTable/convert/grule/termconverter/sfeel/mapper"
 	"decisionTable/convert/grule/termconverter/sfeel/visitors"
-	"decisionTable/model"
+	"decisionTable/data"
 	"decisionTable/parser/sfeel/parser"
 )
 
@@ -25,27 +25,27 @@ func (c SFeelTermConverter) ConvertExpression(expr grlmodel.Term) grlmodel.Term 
 	prs := parser.CreateSfeelParser(expr.Expression)
 
 	switch expr.Typ {
-	case model.Integer:
+	case data.Integer:
 		tree := prs.Parse().ValidIntegerInput()
 		conv := visitors.CreateIntegerVisitor(expr, c.maps)
 		expr.Expression = tree.Accept(conv).(string)
 		return expr
-	case model.Float:
+	case data.Float:
 		tree := prs.Parse().ValidNumberInput()
 		conv := visitors.CreateNumberVisitor(expr, c.maps)
 		expr.Expression = tree.Accept(conv).(string)
 		return expr
-	case model.String:
+	case data.String:
 		tree := prs.Parse().ValidStringInput()
 		conv := visitors.CreateStringVisitor(expr, c.maps)
 		expr.Expression = tree.Accept(conv).(string)
 		return expr
-	case model.Boolean:
+	case data.Boolean:
 		tree := prs.Parse().ValidBoolInput()
 		conv := visitors.CreateBoolVisitor(expr, c.maps)
 		expr.Expression = tree.Accept(conv).(string)
 		return expr
-	case model.DateTime:
+	case data.DateTime:
 		tree := prs.Parse().ValidDateTimeInput()
 		conv := visitors.CreateDateTimeVisitor(expr, c.maps)
 		expr.Expression = tree.Accept(conv).(string)
@@ -59,27 +59,27 @@ func (c SFeelTermConverter) ConvertAssignments(expr grlmodel.Term) grlmodel.Term
 	prs := parser.CreateSfeelParser(expr.Expression)
 
 	switch expr.Typ {
-	case model.Integer:
+	case data.Integer:
 		tree := prs.Parse().ValidIntegerOutput()
 		conv := visitors.CreateIntegerVisitor(expr, c.maps)
 		expr.Expression = tree.Accept(conv).(string)
 		return expr
-	case model.Float:
+	case data.Float:
 		tree := prs.Parse().ValidNumberOutput()
 		conv := visitors.CreateNumberVisitor(expr, c.maps)
 		expr.Expression = tree.Accept(conv).(string)
 		return expr
-	case model.String:
+	case data.String:
 		tree := prs.Parse().ValidStringOutput()
 		conv := visitors.CreateStringVisitor(expr, c.maps)
 		expr.Expression = tree.Accept(conv).(string)
 		return expr
-	case model.Boolean:
+	case data.Boolean:
 		tree := prs.Parse().ValidBoolOutput()
 		conv := visitors.CreateBoolVisitor(expr, c.maps)
 		expr.Expression = tree.Accept(conv).(string)
 		return expr
-	case model.DateTime:
+	case data.DateTime:
 		tree := prs.Parse().ValidDateTimeOutput()
 		conv := visitors.CreateDateTimeVisitor(expr, c.maps)
 		expr.Expression = tree.Accept(conv).(string)

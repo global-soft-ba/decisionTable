@@ -2,7 +2,7 @@ package grl
 
 import (
 	"decisionTable/convert/grule/grlmodel"
-	"decisionTable/model"
+	"decisionTable/data"
 	"reflect"
 	"testing"
 )
@@ -21,8 +21,8 @@ func TestConverter_converting(t *testing.T) {
 			args: args{grlmodel.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
-				HitPolicy:       model.First,
-				CollectOperator: model.List,
+				HitPolicy:       data.First,
+				CollectOperator: data.List,
 				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
@@ -31,11 +31,11 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "3", model.SFEEL},
-							{"I2", "L1", model.Integer, ">3", model.SFEEL},
-							{"I3", "L1", model.Integer, ">4", model.SFEEL},
+							{"I1", "L1", data.Integer, "3", data.SFEEL},
+							{"I2", "L1", data.Integer, ">3", data.SFEEL},
+							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
-						[]grlmodel.Term{{"O1", "L1", model.Integer, "4", model.SFEEL}},
+						[]grlmodel.Term{{"O1", "L1", data.Integer, "4", data.SFEEL}},
 					},
 				},
 			}},
@@ -46,8 +46,8 @@ func TestConverter_converting(t *testing.T) {
 			args: args{grlmodel.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
-				HitPolicy:       model.First,
-				CollectOperator: model.List,
+				HitPolicy:       data.First,
+				CollectOperator: data.List,
 				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
@@ -56,9 +56,9 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "3", model.SFEEL},
+							{"I1", "L1", data.Integer, "3", data.SFEEL},
 						},
-						[]grlmodel.Term{{"O1", "L1", model.Integer, "4", model.SFEEL}},
+						[]grlmodel.Term{{"O1", "L1", data.Integer, "4", data.SFEEL}},
 					},
 				},
 			}},
@@ -69,8 +69,8 @@ func TestConverter_converting(t *testing.T) {
 			args: args{grlmodel.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
-				HitPolicy:       model.First,
-				CollectOperator: model.List,
+				HitPolicy:       data.First,
+				CollectOperator: data.List,
 				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
@@ -79,13 +79,13 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "3", model.SFEEL},
-							{"I2", "L1", model.Integer, ">3", model.SFEEL},
-							{"I3", "L1", model.Integer, ">4", model.SFEEL},
+							{"I1", "L1", data.Integer, "3", data.SFEEL},
+							{"I2", "L1", data.Integer, ">3", data.SFEEL},
+							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "4", model.SFEEL},
-							{"O1", "L1", model.Integer, "4", model.SFEEL},
+							{"O1", "L1", data.Integer, "4", data.SFEEL},
+							{"O1", "L1", data.Integer, "4", data.SFEEL},
 						},
 					},
 				},
@@ -97,8 +97,8 @@ func TestConverter_converting(t *testing.T) {
 			args: args{grlmodel.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
-				HitPolicy:       model.First,
-				CollectOperator: model.List,
+				HitPolicy:       data.First,
+				CollectOperator: data.List,
 				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
@@ -107,13 +107,13 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						2,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "3", model.SFEEL},
-							{"I2", "L1", model.Integer, ">3", model.SFEEL},
-							{"I3", "L1", model.Integer, ">4", model.SFEEL},
+							{"I1", "L1", data.Integer, "3", data.SFEEL},
+							{"I2", "L1", data.Integer, ">3", data.SFEEL},
+							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "4", model.SFEEL},
-							{"O1", "L1", model.Integer, "4", model.SFEEL},
+							{"O1", "L1", data.Integer, "4", data.SFEEL},
+							{"O1", "L1", data.Integer, "4", data.SFEEL},
 						},
 					},
 					{
@@ -122,13 +122,13 @@ func TestConverter_converting(t *testing.T) {
 						1,
 						1,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "3", model.SFEEL},
-							{"I2", "L1", model.Integer, ">3", model.SFEEL},
-							{"I3", "L1", model.Integer, ">4", model.SFEEL},
+							{"I1", "L1", data.Integer, "3", data.SFEEL},
+							{"I2", "L1", data.Integer, ">3", data.SFEEL},
+							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "4", model.SFEEL},
-							{"O1", "L1", model.Integer, "4", model.SFEEL},
+							{"O1", "L1", data.Integer, "4", data.SFEEL},
+							{"O1", "L1", data.Integer, "4", data.SFEEL},
 						},
 					},
 					{
@@ -137,13 +137,13 @@ func TestConverter_converting(t *testing.T) {
 						2,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "3", model.SFEEL},
-							{"I2", "L1", model.Integer, ">3", model.SFEEL},
-							{"I3", "L1", model.Integer, ">4", model.SFEEL},
+							{"I1", "L1", data.Integer, "3", data.SFEEL},
+							{"I2", "L1", data.Integer, ">3", data.SFEEL},
+							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "4", model.SFEEL},
-							{"O1", "L1", model.Integer, "4", model.SFEEL},
+							{"O1", "L1", data.Integer, "4", data.SFEEL},
+							{"O1", "L1", data.Integer, "4", data.SFEEL},
 						},
 					},
 				},
@@ -157,8 +157,8 @@ func TestConverter_converting(t *testing.T) {
 			args: args{grlmodel.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
-				HitPolicy:       model.Priority,
-				CollectOperator: model.List,
+				HitPolicy:       data.Priority,
+				CollectOperator: data.List,
 				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
@@ -167,13 +167,13 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						2,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "==3", model.SFEEL},
-							{"I2", "L1", model.Integer, ">3", model.SFEEL},
-							{"I3", "L1", model.Integer, ">4", model.SFEEL},
+							{"I1", "L1", data.Integer, "==3", data.SFEEL},
+							{"I2", "L1", data.Integer, ">3", data.SFEEL},
+							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "=4", model.SFEEL},
-							{"O1", "L1", model.Integer, "=4", model.SFEEL},
+							{"O1", "L1", data.Integer, "=4", data.SFEEL},
+							{"O1", "L1", data.Integer, "=4", data.SFEEL},
 						},
 					},
 					{
@@ -182,13 +182,13 @@ func TestConverter_converting(t *testing.T) {
 						1,
 						1,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "==3", model.SFEEL},
-							{"I2", "L1", model.Integer, ">3", model.SFEEL},
-							{"I3", "L1", model.Integer, ">4", model.SFEEL},
+							{"I1", "L1", data.Integer, "==3", data.SFEEL},
+							{"I2", "L1", data.Integer, ">3", data.SFEEL},
+							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "=4", model.SFEEL},
-							{"O1", "L1", model.Integer, "=4", model.SFEEL},
+							{"O1", "L1", data.Integer, "=4", data.SFEEL},
+							{"O1", "L1", data.Integer, "=4", data.SFEEL},
 						},
 					},
 					{
@@ -197,13 +197,13 @@ func TestConverter_converting(t *testing.T) {
 						2,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "==3", model.SFEEL},
-							{"I2", "L1", model.Integer, ">3", model.SFEEL},
-							{"I3", "L1", model.Integer, ">4", model.SFEEL},
+							{"I1", "L1", data.Integer, "==3", data.SFEEL},
+							{"I2", "L1", data.Integer, ">3", data.SFEEL},
+							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "=4", model.SFEEL},
-							{"O1", "L1", model.Integer, "=4", model.SFEEL},
+							{"O1", "L1", data.Integer, "=4", data.SFEEL},
+							{"O1", "L1", data.Integer, "=4", data.SFEEL},
 						},
 					},
 				},
@@ -217,8 +217,8 @@ func TestConverter_converting(t *testing.T) {
 			args: args{grlmodel.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
-				HitPolicy:       model.Any,
-				CollectOperator: model.List,
+				HitPolicy:       data.Any,
+				CollectOperator: data.List,
 				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
@@ -227,13 +227,13 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						2,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "3", model.SFEEL},
-							{"I2", "L1", model.Integer, ">3", model.SFEEL},
-							{"I3", "L1", model.Integer, ">4", model.SFEEL},
+							{"I1", "L1", data.Integer, "3", data.SFEEL},
+							{"I2", "L1", data.Integer, ">3", data.SFEEL},
+							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "4", model.SFEEL},
-							{"O1", "L1", model.Integer, "4", model.SFEEL},
+							{"O1", "L1", data.Integer, "4", data.SFEEL},
+							{"O1", "L1", data.Integer, "4", data.SFEEL},
 						},
 					},
 					{
@@ -242,13 +242,13 @@ func TestConverter_converting(t *testing.T) {
 						1,
 						1,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "3", model.SFEEL},
-							{"I2", "L1", model.Integer, "> 3", model.SFEEL},
-							{"I3", "L1", model.Integer, "> 4", model.SFEEL},
+							{"I1", "L1", data.Integer, "3", data.SFEEL},
+							{"I2", "L1", data.Integer, "> 3", data.SFEEL},
+							{"I3", "L1", data.Integer, "> 4", data.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "4", model.SFEEL},
-							{"O1", "L1", model.Integer, "4", model.SFEEL},
+							{"O1", "L1", data.Integer, "4", data.SFEEL},
+							{"O1", "L1", data.Integer, "4", data.SFEEL},
 						},
 					},
 					{
@@ -257,13 +257,13 @@ func TestConverter_converting(t *testing.T) {
 						2,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Integer, "3", model.SFEEL},
-							{"I2", "L1", model.Integer, ">3", model.SFEEL},
-							{"I3", "L1", model.Integer, ">4", model.SFEEL},
+							{"I1", "L1", data.Integer, "3", data.SFEEL},
+							{"I2", "L1", data.Integer, ">3", data.SFEEL},
+							{"I3", "L1", data.Integer, ">4", data.SFEEL},
 						},
 						[]grlmodel.Term{
-							{"O1", "L1", model.Integer, "4", model.SFEEL},
-							{"O1", "L1", model.Integer, "4", model.SFEEL},
+							{"O1", "L1", data.Integer, "4", data.SFEEL},
+							{"O1", "L1", data.Integer, "4", data.SFEEL},
 						},
 					},
 				},
@@ -277,8 +277,8 @@ func TestConverter_converting(t *testing.T) {
 			args: args{grlmodel.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
-				HitPolicy:       model.First,
-				CollectOperator: model.List,
+				HitPolicy:       data.First,
+				CollectOperator: data.List,
 				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
@@ -287,9 +287,9 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Float, "3.3", model.SFEEL},
+							{"I1", "L1", data.Float, "3.3", data.SFEEL},
 						},
-						[]grlmodel.Term{{"O1", "L1", model.String, `"4"`, model.SFEEL}},
+						[]grlmodel.Term{{"O1", "L1", data.String, `"4"`, data.SFEEL}},
 					},
 				},
 			}},
@@ -300,8 +300,8 @@ func TestConverter_converting(t *testing.T) {
 			args: args{grlmodel.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
-				HitPolicy:       model.First,
-				CollectOperator: model.List,
+				HitPolicy:       data.First,
+				CollectOperator: data.List,
 				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
@@ -310,9 +310,9 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.Boolean, "true", model.SFEEL},
+							{"I1", "L1", data.Boolean, "true", data.SFEEL},
 						},
-						[]grlmodel.Term{{"O1", "L1", model.Boolean, "false", model.SFEEL}},
+						[]grlmodel.Term{{"O1", "L1", data.Boolean, "false", data.SFEEL}},
 					},
 				},
 			}},
@@ -323,8 +323,8 @@ func TestConverter_converting(t *testing.T) {
 			args: args{grlmodel.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
-				HitPolicy:       model.First,
-				CollectOperator: model.List,
+				HitPolicy:       data.First,
+				CollectOperator: data.List,
 				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
@@ -333,9 +333,9 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.String, `"true"`, model.SFEEL},
+							{"I1", "L1", data.String, `"true"`, data.SFEEL},
 						},
-						[]grlmodel.Term{{"O1", "L1", model.String, `"false"`, model.SFEEL}},
+						[]grlmodel.Term{{"O1", "L1", data.String, `"false"`, data.SFEEL}},
 					},
 				},
 			}},
@@ -346,8 +346,8 @@ func TestConverter_converting(t *testing.T) {
 			args: args{grlmodel.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
-				HitPolicy:       model.First,
-				CollectOperator: model.List,
+				HitPolicy:       data.First,
+				CollectOperator: data.List,
 				Interference:    false,
 				Rules: []grlmodel.Rule{
 					{
@@ -356,9 +356,9 @@ func TestConverter_converting(t *testing.T) {
 						0,
 						0,
 						[]grlmodel.Term{
-							{"I1", "L1", model.DateTime, `DateAndTime("2021-01-01T12:00:00")`, model.SFEEL},
+							{"I1", "L1", data.DateTime, `DateAndTime("2021-01-01T12:00:00")`, data.SFEEL},
 						},
-						[]grlmodel.Term{{"O1", "L1", model.DateTime, `DateAndTime("2021-01-01T13:00:00")`, model.SFEEL}},
+						[]grlmodel.Term{{"O1", "L1", data.DateTime, `DateAndTime("2021-01-01T13:00:00")`, data.SFEEL}},
 					},
 				},
 			}},

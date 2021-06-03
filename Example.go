@@ -2,7 +2,7 @@ package main
 
 import (
 	conv "decisionTable/convert"
-	"decisionTable/model"
+	"decisionTable/data"
 	"fmt"
 	"github.com/hyperjumptech/grule-rule-engine/ast"
 	"github.com/hyperjumptech/grule-rule-engine/builder"
@@ -50,42 +50,42 @@ func main() {
 	table, _ := CreateDecisionTable().
 		SetName("Determine Employee").
 		SetDefinitionKey("determineEmployee").
-		SetNotationStandard(model.GRULE).
-		SetHitPolicy(model.Unique).
-		AddInputField("TypeOfClaim", "Claim", model.String).
-		AddInputField("ExpenditureOfClaim", "Claim", model.Integer).
-		AddInputField("TimeOfClaim", "Claim", model.DateTime).
-		AddOutputField("ResponsibleEmployee", "Employee", model.String).
-		AddOutputField("FourEyesPrinciple", "Employee", model.Boolean).
-		AddOutputField("LastTime", "Employee", model.DateTime).
+		SetNotationStandard(data.GRULE).
+		SetHitPolicy(data.Unique).
+		AddInputField("TypeOfClaim", "Claim", data.String).
+		AddInputField("ExpenditureOfClaim", "Claim", data.Integer).
+		AddInputField("TimeOfClaim", "Claim", data.DateTime).
+		AddOutputField("ResponsibleEmployee", "Employee", data.String).
+		AddOutputField("FourEyesPrinciple", "Employee", data.Boolean).
+		AddOutputField("LastTime", "Employee", data.DateTime).
 		AddRule("R1").
-		AddInputEntry(`"Car Accident"`, model.SFEEL).
-		AddInputEntry("<1000", model.SFEEL).
-		AddInputEntry(`>=DateAndTime("2021-01-02T12:00:00")`, model.SFEEL).
-		AddOutputEntry(`"Müller"`, model.SFEEL).
-		AddOutputEntry("false", model.SFEEL).
-		AddOutputEntry(`DateAndTime("2023-01-03T23:59:59")`, model.SFEEL).
+		AddInputEntry(`"Car Accident"`, data.SFEEL).
+		AddInputEntry("<1000", data.SFEEL).
+		AddInputEntry(`>=DateAndTime("2021-01-02T12:00:00")`, data.SFEEL).
+		AddOutputEntry(`"Müller"`, data.SFEEL).
+		AddOutputEntry("false", data.SFEEL).
+		AddOutputEntry(`DateAndTime("2023-01-03T23:59:59")`, data.SFEEL).
 		BuildRule().
 		AddRule("R2").
-		AddInputEntry(`"Car Accident"`, model.SFEEL).
-		AddInputEntry("[1000..10000]", model.SFEEL).
-		AddInputEntry("-", model.SFEEL).
-		AddOutputEntry(`"Schulz"`, model.SFEEL).
-		AddOutputEntry("false", model.SFEEL).
-		AddOutputEntry("-", model.SFEEL).
+		AddInputEntry(`"Car Accident"`, data.SFEEL).
+		AddInputEntry("[1000..10000]", data.SFEEL).
+		AddInputEntry("-", data.SFEEL).
+		AddOutputEntry(`"Schulz"`, data.SFEEL).
+		AddOutputEntry("false", data.SFEEL).
+		AddOutputEntry("-", data.SFEEL).
 		BuildRule().
 		AddRule("R3").
-		AddInputEntry("-", model.SFEEL).
-		AddInputEntry(">=10000", model.SFEEL).
-		AddInputEntry("-", model.SFEEL).
-		AddOutputEntry("-", model.SFEEL).
-		AddOutputEntry("true", model.SFEEL).
-		AddOutputEntry("-", model.SFEEL).
+		AddInputEntry("-", data.SFEEL).
+		AddInputEntry(">=10000", data.SFEEL).
+		AddInputEntry("-", data.SFEEL).
+		AddOutputEntry("-", data.SFEEL).
+		AddOutputEntry("true", data.SFEEL).
+		AddOutputEntry("-", data.SFEEL).
 		BuildRule().
 		Build()
 
 	// Convert Table Into Grule Rules
-	converter, _ := conv.CreateTableConverterFactory().GetTableConverter(model.GRULE, model.GRL)
+	converter, _ := conv.CreateTableConverterFactory().GetTableConverter(data.GRULE, data.GRL)
 	rules, err := table.Convert(converter)
 	if err != nil {
 		fmt.Print("Error:", err)

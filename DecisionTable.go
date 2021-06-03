@@ -2,7 +2,7 @@ package main
 
 import (
 	"decisionTable/convert/interfaces"
-	"decisionTable/model"
+	"decisionTable/data"
 	"errors"
 )
 
@@ -16,7 +16,7 @@ func CreateDecisionTable() DecisionTableBuilderInterface {
 }
 
 type DecisionTable struct {
-	data  model.TableData
+	data  data.Table
 	valid bool
 }
 
@@ -28,15 +28,15 @@ func (d DecisionTable) Name() string {
 	return d.data.Name
 }
 
-func (d DecisionTable) HitPolicy() model.HitPolicy {
+func (d DecisionTable) HitPolicy() data.HitPolicy {
 	return d.data.HitPolicy
 }
 
-func (d DecisionTable) CollectOperator() model.CollectOperator {
+func (d DecisionTable) CollectOperator() data.CollectOperator {
 	return d.data.CollectOperator
 }
 
-func (d DecisionTable) NotationStandard() model.DTableStandard {
+func (d DecisionTable) NotationStandard() data.DTableStandard {
 	return d.data.NotationStandard
 }
 
@@ -44,15 +44,15 @@ func (d DecisionTable) Valid() bool {
 	return d.valid
 }
 
-func (d DecisionTable) InputFields() []model.Field {
+func (d DecisionTable) InputFields() []data.Field {
 	return d.data.InputFields
 }
 
-func (d DecisionTable) OutputFields() []model.Field {
+func (d DecisionTable) OutputFields() []data.Field {
 	return d.data.OutputFields
 }
 
-func (d DecisionTable) Rules() []model.Rule {
+func (d DecisionTable) Rules() []data.Rule {
 	return d.data.Rules
 }
 

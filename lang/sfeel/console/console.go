@@ -3,10 +3,10 @@ package main
 import (
 	"bufio"
 	"bytes"
-	"decisionTable/sfeel/antlr"
-	parsererror "decisionTable/sfeel/antlr/errors"
-	"decisionTable/sfeel/ast"
-	"decisionTable/sfeel/eval"
+	antlr2 "decisionTable/lang/sfeel/antlr"
+	errors2 "decisionTable/lang/sfeel/antlr/errors"
+	ast2 "decisionTable/lang/sfeel/ast"
+	eval2 "decisionTable/lang/sfeel/eval"
 	"fmt"
 	"io"
 	"os"
@@ -14,7 +14,7 @@ import (
 )
 
 const PROMPT = ">> "
-const REPLY = "==="
+const REPLY = "==> "
 
 func Start(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
@@ -27,21 +27,25 @@ func Start(in io.Reader, out io.Writer) {
 		}
 		exp := scanner.Text()
 
-		tree, err := antlr.CreateParser(exp).Parse()
+		tree, err := antlr2.CreateParser(exp).Parse()
 		if len(err) != 0 {
 			printParserErrors(out, err)
 			continue
 		}
-		io.WriteString(out, REPLY+"identified expression as type: "+printTreeTypes(ast.GetAllTreeNodeTypes(tree))+"\n")
+		io.WriteString(out, REPLY+"parser literal: "+tree.ParserLiteral()+"\n")
+		io.WriteString(out, REPLY+"ast string representation: "+tree.String()+"\n")
+		io.WriteString(out, REPLY+"identified expression as type: "+printTreeTypes(ast2.GetAllTreeNodeTypes(tree))+"\n")
 
-		_, err = eval.CreateInputEntryEvaluator().Eval(tree)
+		_, err = eval2.CreateInputEntryEvaluator().Eval(tree)
 		if len(err) != 0 {
 			printEvaluatorErrors(out, err, "input")
 		} else {
 			io.WriteString(out, REPLY+"input evaluator: VALID"+"\n")
 		}
 
-		_, err = eval.CreateOutputEntryEvaluator().Eval(tree)
+		io.WriteString(out, REPLY+"semantic evaluator: NOT IMPLEMENTED"+"\n")
+
+		_, err = eval2.CreateOutputEntryEvaluator().Eval(tree)
 		if len(err) != 0 {
 			printEvaluatorErrors(out, err, "output")
 		} else {
@@ -74,7 +78,7 @@ func printEvaluatorErrors(out io.Writer, errors []error, env string) {
 func printParserErrors(out io.Writer, errors []error) {
 	io.WriteString(out, REPLY+"parser errors:\n")
 	for _, msg := range errors {
-		err := msg.(parsererror.ExpressionSyntaxError)
+		err := msg.(errors2.ExpressionSyntaxError)
 		line := strconv.Itoa(err.Line())
 		col := strconv.Itoa(err.Column())
 

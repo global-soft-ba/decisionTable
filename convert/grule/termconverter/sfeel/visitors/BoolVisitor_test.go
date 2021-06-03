@@ -3,7 +3,7 @@ package visitors
 import (
 	"decisionTable/convert/grule/grlmodel"
 	"decisionTable/convert/grule/termconverter/sfeel/mapper"
-	"decisionTable/model"
+	"decisionTable/data"
 	"decisionTable/parser/sfeel/parser"
 	"reflect"
 	"testing"
@@ -27,7 +27,7 @@ func TestBoolVisitor_BoolInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Boolean,
+					Typ:        data.Boolean,
 					Expression: "false",
 				},
 				mapping,
@@ -38,7 +38,7 @@ func TestBoolVisitor_BoolInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: "-",
 				},
 				mapping,
@@ -77,7 +77,7 @@ func TestBoolVisitor_BoolOutputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Boolean,
+					Typ:        data.Boolean,
 					Expression: "true",
 				},
 				mapping,
@@ -88,7 +88,7 @@ func TestBoolVisitor_BoolOutputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Boolean,
+					Typ:        data.Boolean,
 					Expression: "-",
 				},
 				mapping,

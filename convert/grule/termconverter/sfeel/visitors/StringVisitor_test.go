@@ -3,7 +3,7 @@ package visitors
 import (
 	"decisionTable/convert/grule/grlmodel"
 	"decisionTable/convert/grule/termconverter/sfeel/mapper"
-	"decisionTable/model"
+	"decisionTable/data"
 	"decisionTable/parser/sfeel/parser"
 	"reflect"
 	"testing"
@@ -27,7 +27,7 @@ func TestStringVisitor_StringInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.String,
+					Typ:        data.String,
 					Expression: `"1"`,
 				},
 				mapping,
@@ -39,7 +39,7 @@ func TestStringVisitor_StringInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: `"1","2","ABC"`,
 				},
 				mapping,
@@ -51,7 +51,7 @@ func TestStringVisitor_StringInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: `not("1")`,
 				},
 				mapping,
@@ -62,7 +62,7 @@ func TestStringVisitor_StringInputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.Integer,
+					Typ:        data.Integer,
 					Expression: "-",
 				},
 				mapping,
@@ -101,7 +101,7 @@ func TestStringVisitor_StringOutputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.String,
+					Typ:        data.String,
 					Expression: `"1"`,
 				},
 				mapping,
@@ -112,7 +112,7 @@ func TestStringVisitor_StringOutputRules(t *testing.T) {
 				grlmodel.Term{
 					Name:       "score",
 					Key:        "credit",
-					Typ:        model.String,
+					Typ:        data.String,
 					Expression: "-",
 				},
 				mapping,
