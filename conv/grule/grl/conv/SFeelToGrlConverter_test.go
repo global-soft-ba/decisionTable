@@ -29,7 +29,8 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			c := CreateSFeelToGrlConverter()
-			if got := c.Convert(tt.args.fieldName, tt.args.sfeelEntry); got != tt.want {
+			got, _ := c.Convert(tt.args.fieldName, tt.args.sfeelEntry)
+			if got != tt.want {
 				t.Errorf("Convert() = %v, want %v", got, tt.want)
 			}
 		})

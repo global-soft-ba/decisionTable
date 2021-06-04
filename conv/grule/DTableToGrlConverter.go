@@ -2,9 +2,9 @@ package grule
 
 import (
 	"bytes"
+	mapper2 "decisionTable/conv/grule/conv"
+	"decisionTable/conv/grule/conv/templates"
 	grlmodel2 "decisionTable/conv/grule/data"
-	mapper2 "decisionTable/conv/grule/mapper"
-	templates2 "decisionTable/conv/grule/templates"
 	"decisionTable/convert/grule/termconverter"
 	"decisionTable/data"
 	"text/template"
@@ -22,13 +22,13 @@ const (
 
 func CreateDTableToGrlConverter() DTableToGrlConverter {
 	conv := termconverter.CreateTermConverterFactory()
-	output := data.GRL
+	output := grlmodel2.GRL
 	return DTableToGrlConverter{conv, output}
 }
 
 type DTableToGrlConverter struct {
 	expConvFac termconverter.TermConverterFactory
-	format     data.OutputFormat
+	format     grlmodel2.OutputFormat
 }
 
 func (c DTableToGrlConverter) Convert(data data.Table) (interface{}, error) {
@@ -49,24 +49,24 @@ func (c DTableToGrlConverter) Convert(data data.Table) (interface{}, error) {
 func (c DTableToGrlConverter) buildTemplate(hitPolicy data.HitPolicy, interference bool) (*template.Template, error) {
 
 	var t *template.Template
-	// TODo build only GRL Template / What with Json?
-	t, err := template.New(Rule).Parse(templates2.RULE)
+	// TODo build only GRL Template / What with json?
+	t, err := template.New(Rule).Parse(templates.RULE)
 	if err != nil {
 		return &template.Template{}, err
 	}
-	_, err = t.New(RuleName).Parse(templates2.RULENAME)
+	_, err = t.New(RuleName).Parse(templates.RULENAME)
 	if err != nil {
 		return &template.Template{}, err
 	}
-	_, err = t.New(Expressions).Parse(templates2.WHEN)
+	_, err = t.New(Expressions).Parse(templates.WHEN)
 	if err != nil {
 		return &template.Template{}, err
 	}
-	_, err = t.New(Assignments).Parse(templates2.THEN)
+	_, err = t.New(Assignments).Parse(templates.THEN)
 	if err != nil {
 		return &template.Template{}, err
 	}
-	_, err = t.New(Entries).Parse(templates2.ENTRY)
+	_, err = t.New(Entries).Parse(templates.ENTRY)
 	if err != nil {
 		return &template.Template{}, err
 	}
@@ -85,22 +85,22 @@ func (c DTableToGrlConverter) buildTemplate(hitPolicy data.HitPolicy, interferen
 func (c DTableToGrlConverter) buildPolicyTemplate(hitPolicy data.HitPolicy) string {
 	switch hitPolicy {
 	case data.Unique:
-		return templates2.UNIQUE
+		return templates.UNIQUE
 	case data.First:
-		return templates2.FIRST
+		return templates.FIRST
 	case data.Priority:
-		return templates2.PRIORITY
+		return templates.PRIORITY
 	default:
-		return templates2.DEFAULT
+		return templates.DEFAULT
 	}
 }
 
 func (c DTableToGrlConverter) buildInterferenceTemplate(interference bool) string {
 	switch interference {
 	case true:
-		return templates2.INTERFERENCE
+		return templates.INTERFERENCE
 	default:
-		return templates2.NONINTERFERENCE
+		return templates.NONINTERFERENCE
 	}
 }
 
@@ -118,7 +118,7 @@ func (c DTableToGrlConverter) convertRuleSetIntoGRL(ruleSet grlmodel2.RuleSet) (
 		}
 
 		var tpl bytes.Buffer
-		err = tmpl.Execute(&tpl, convRule) // Converts along the templates
+		err = tmpl.Execute(&tpl, convRule) // Converts along the grl
 
 		if err != nil {
 			return []string{}, err

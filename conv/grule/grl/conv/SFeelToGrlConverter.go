@@ -15,7 +15,7 @@ type SFeelToGrlConverter struct {
 	listener SFeelToGrlAstConverterListener
 }
 
-func (c SFeelToGrlConverter) Convert(fieldName string, sfeelEntry data.EntryInterface) string {
+func (c SFeelToGrlConverter) Convert(fieldName string, sfeelEntry data.EntryInterface) (string, error) {
 	c.listener.fieldName = fieldName
 
 	// Build grl ast data model from sfeel ast model
@@ -23,9 +23,14 @@ func (c SFeelToGrlConverter) Convert(fieldName string, sfeelEntry data.EntryInte
 	grlTree := c.listener.GetAST()
 
 	// Walk the grl ast tree and convert
-	gen, _ := generate.CreateGrlGeneratorListener()
+	gen, err := generate.CreateGrlGeneratorListener()
+
+	if err != nil {
+		return "", err
+	}
+
 	walker := grl.CreateGRLTreeWalker(gen)
 	walker.Walk(grlTree)
 
-	return gen.GetCode()
+	return gen.GetCode(), nil
 }

@@ -1,4 +1,4 @@
-package mapper
+package conv
 
 import (
 	grlmodel2 "decisionTable/conv/grule/data"
