@@ -1,7 +1,6 @@
 package main
 
 import (
-	conv "decisionTable/convert"
 	"decisionTable/data"
 	"fmt"
 	"github.com/hyperjumptech/grule-rule-engine/ast"
@@ -85,8 +84,7 @@ func main() {
 		Build()
 
 	// Convert Table Into Grule Rules
-	converter, _ := conv.CreateTableConverterFactory().GetTableConverter(data.GRULE, data.GRL)
-	rules, err := table.Convert(converter)
+	rules, err := table.Convert()
 	if err != nil {
 		fmt.Print("Error:", err)
 	}

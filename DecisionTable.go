@@ -1,7 +1,7 @@
 package main
 
 import (
-	"decisionTable/convert/interfaces"
+	conv "decisionTable/conv"
 	"decisionTable/data"
 	"errors"
 )
@@ -60,10 +60,16 @@ func (d DecisionTable) Interferences() bool {
 	return d.data.Interferences
 }
 
-func (d DecisionTable) Convert(converter interfaces.ConverterInterface) (interface{}, error) {
-
+func (d DecisionTable) Convert() (interface{}, error) {
 	if !d.valid {
 		return []string{}, ErrDTableNotValid
 	}
-	return converter.Convert(d.data)
+
+	tableConverter := conv.CreateConverter()
+	res, err := tableConverter.Convert(d.data)
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
 }
