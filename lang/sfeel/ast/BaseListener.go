@@ -2,8 +2,6 @@ package ast
 
 import (
 	"decisionTable/ast"
-	"fmt"
-	"reflect"
 )
 
 func CreateSFeelTreeWalker(listener SFeelListenerInterface) ast.TreeWalker {
@@ -16,7 +14,6 @@ type BaseListener struct {
 
 func (l *BaseListener) EnterNode(node ast.Node) {}
 func (l *BaseListener) ExitNode(node ast.Node) {
-	fmt.Println("Exit Node ", node.String(), " ->", reflect.TypeOf(node))
 	switch node.(type) {
 	case EmptyStatement:
 		l.sfeel.ExitEmptyStatement(node.(EmptyStatement))
