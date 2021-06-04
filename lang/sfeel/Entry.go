@@ -2,18 +2,17 @@ package sfeel
 
 import (
 	"decisionTable/data"
-	antlr2 "decisionTable/lang/sfeel/antlr"
-	ast "decisionTable/lang/sfeel/ast"
-	"decisionTable/lang/sfeel/conv"
-	eval2 "decisionTable/lang/sfeel/eval"
+	"decisionTable/lang/sfeel/antlr"
+	sfeel "decisionTable/lang/sfeel/ast"
+	"decisionTable/lang/sfeel/eval"
 	"errors"
 	"fmt"
 	"reflect"
 )
 
 func CreateInputEntry(exp string) data.EntryInterface {
-	tree, err := antlr2.CreateParser(exp).Parse()
-	evl := eval2.CreateInputEntryEvaluator()
+	tree, err := antlr.CreateParser(exp).Parse()
+	evl := eval.CreateInputEntryEvaluator()
 	if err != nil {
 		return Entry{ast: nil, evaluator: evl, expression: exp}
 	}
@@ -21,8 +20,8 @@ func CreateInputEntry(exp string) data.EntryInterface {
 }
 
 func CreateOutputEntry(exp string) data.EntryInterface {
-	tree, err := antlr2.CreateParser(exp).Parse()
-	evl := eval2.CreateOutputEntryEvaluator()
+	tree, err := antlr.CreateParser(exp).Parse()
+	evl := eval.CreateOutputEntryEvaluator()
 	if err != nil {
 		return Entry{ast: nil, evaluator: evl, expression: exp}
 	}
@@ -30,8 +29,8 @@ func CreateOutputEntry(exp string) data.EntryInterface {
 }
 
 type Entry struct {
-	ast        ast.Node
-	evaluator  eval2.EvaluatorInterface
+	ast        sfeel.Node
+	evaluator  eval.EvaluatorInterface
 	expression string
 }
 
@@ -45,7 +44,7 @@ func (e Entry) ExpressionLanguage() data.ExpressionLanguage {
 
 func (e Entry) Validate() (bool, []error) {
 	if e.ast == nil {
-		_, err := antlr2.CreateParser(e.expression).Parse()
+		_, err := antlr.CreateParser(e.expression).Parse()
 		return false, err
 	}
 	return e.evaluator.Eval(e.ast)
@@ -56,27 +55,27 @@ func (e Entry) ValidateDataTypeOfExpression(varType data.DataTyp) (bool, error) 
 	}
 
 	switch e.ast.GetOperandDataType() {
-	case reflect.TypeOf(ast.EmptyStatement{}):
+	case reflect.TypeOf(sfeel.EmptyStatement{}):
 		return true, nil
-	case reflect.TypeOf(ast.QualifiedName{}):
+	case reflect.TypeOf(sfeel.QualifiedName{}):
 		return true, nil
-	case reflect.TypeOf(ast.Integer{}):
+	case reflect.TypeOf(sfeel.Integer{}):
 		if varType == data.Integer {
 			return true, nil
 		}
-	case reflect.TypeOf(ast.Float{}):
+	case reflect.TypeOf(sfeel.Float{}):
 		if varType == data.Float {
 			return true, nil
 		}
-	case reflect.TypeOf(ast.String{}):
+	case reflect.TypeOf(sfeel.String{}):
 		if varType == data.String {
 			return true, nil
 		}
-	case reflect.TypeOf(ast.Boolean{}):
+	case reflect.TypeOf(sfeel.Boolean{}):
 		if varType == data.Boolean {
 			return true, nil
 		}
-	case reflect.TypeOf(ast.DateTime{}):
+	case reflect.TypeOf(sfeel.DateTime{}):
 		if varType == data.DateTime {
 			return true, nil
 		}
@@ -85,7 +84,7 @@ func (e Entry) ValidateDataTypeOfExpression(varType data.DataTyp) (bool, error) 
 	return false, errors.New(fmt.Sprintf("given data type %s is not compatible with %s", varType, e.ast.GetOperandDataType()))
 }
 func (e Entry) ValidateExistenceOfFieldReferencesInExpression(fields []data.Field) ([]data.Field, []error) {
-	qualifiedFields := ast.GetAllQualifiedNames(e.ast)
+	qualifiedFields := sfeel.GetAllQualifiedNames(e.ast)
 	var errOut []error
 	var out []data.Field
 
@@ -101,7 +100,7 @@ func (e Entry) ValidateExistenceOfFieldReferencesInExpression(fields []data.Fiel
 	return out, errOut
 }
 
-func (e Entry) getFieldUsingQualifiedName(name ast.QualifiedName, fields []data.Field) (data.Field, error) {
+func (e Entry) getFieldUsingQualifiedName(name sfeel.QualifiedName, fields []data.Field) (data.Field, error) {
 	for _, val := range fields {
 		//TODO Extend to allow arbitrary navigation paths on structs
 		if val.Name == name.Value[0] && val.Key == name.Value[1] {
@@ -111,8 +110,7 @@ func (e Entry) getFieldUsingQualifiedName(name ast.QualifiedName, fields []data.
 	return data.Field{}, errors.New(fmt.Sprintf("couldn't find qualified name %s in field list", name.String()))
 }
 
-func (e Entry) Convert(listener conv.SFeelBaseListenerInterface) conv.SFeelBaseListenerInterface {
-	//TODO Return SymbolTable?
-	tree := conv.CreateTreeWalker(listener)
-	return tree.Walk(e.ast)
+func (e Entry) Convert(listener sfeel.SFeelListenerInterface) {
+	tree := sfeel.CreateSFeelTreeWalker(listener)
+	tree.Walk(e.ast)
 }

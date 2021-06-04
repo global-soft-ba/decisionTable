@@ -1,8 +1,9 @@
 package sfeel
 
 import (
+	"decisionTable/ast"
 	"decisionTable/data"
-	ast "decisionTable/lang/sfeel/ast"
+	sfeel "decisionTable/lang/sfeel/ast"
 	"reflect"
 	"testing"
 )
@@ -85,7 +86,7 @@ func TestCreateOutputEntry(t *testing.T) {
 
 func TestExpression_ValidateDataType(t *testing.T) {
 	type fields struct {
-		ast        ast.Node
+		ast        sfeel.Node
 		expression string
 	}
 	type args struct {
@@ -100,21 +101,21 @@ func TestExpression_ValidateDataType(t *testing.T) {
 	}{
 		{
 			name:    "correct validation integer",
-			fields:  fields{ast: ast.Integer{}},
+			fields:  fields{ast: sfeel.Integer{}},
 			args:    args{data.Integer},
 			want:    true,
 			wantErr: false,
 		},
 		{
 			name:    "correct validation string",
-			fields:  fields{ast: ast.String{}},
+			fields:  fields{ast: sfeel.String{}},
 			args:    args{data.String},
 			want:    true,
 			wantErr: false,
 		},
 		{
 			name:    "incorrect validation string",
-			fields:  fields{ast: ast.String{}},
+			fields:  fields{ast: sfeel.String{}},
 			args:    args{data.Float},
 			want:    false,
 			wantErr: true,
@@ -122,7 +123,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 		{
 			name: "correct validation interval",
 			fields: fields{
-				ast: ast.Interval{StartValue: ast.Integer{}, EndValue: ast.Float{}},
+				ast: sfeel.Interval{StartValue: sfeel.Integer{}, EndValue: sfeel.Float{}},
 			},
 			args:    args{data.Float},
 			want:    true,
@@ -131,7 +132,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 		{
 			name: "incorrect validation interval",
 			fields: fields{
-				ast: ast.Interval{StartValue: ast.Integer{}, EndValue: ast.Float{}},
+				ast: sfeel.Interval{StartValue: sfeel.Integer{}, EndValue: sfeel.Float{}},
 			},
 			args:    args{data.Integer},
 			want:    false,
@@ -140,7 +141,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 		{
 			name: "correct validation unary test",
 			fields: fields{
-				ast: ast.UnaryTest{Value: ast.Integer{}},
+				ast: sfeel.UnaryTest{Value: sfeel.Integer{}},
 			},
 			args:    args{data.Integer},
 			want:    true,
@@ -149,7 +150,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 		{
 			name: "incorrect validation unary test",
 			fields: fields{
-				ast: ast.UnaryTest{Value: ast.Integer{}},
+				ast: sfeel.UnaryTest{Value: sfeel.Integer{}},
 			},
 			args:    args{data.Boolean},
 			want:    false,
@@ -158,11 +159,11 @@ func TestExpression_ValidateDataType(t *testing.T) {
 		{
 			name: "correct validation unary tests",
 			fields: fields{
-				ast: ast.UnaryTests{
+				ast: sfeel.UnaryTests{
 					UnaryTests: []ast.Node{
-						ast.UnaryTest{Value: ast.Boolean{}},
-						ast.UnaryTest{Value: ast.Boolean{}},
-						ast.UnaryTest{Value: ast.Boolean{}},
+						sfeel.UnaryTest{Value: sfeel.Boolean{}},
+						sfeel.UnaryTest{Value: sfeel.Boolean{}},
+						sfeel.UnaryTest{Value: sfeel.Boolean{}},
 					},
 				}},
 			args:    args{data.Boolean},
@@ -172,7 +173,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 		{
 			name: "empty unary validation",
 			fields: fields{
-				ast: ast.EmptyStatement{}},
+				ast: sfeel.EmptyStatement{}},
 			args:    args{data.Boolean},
 			want:    true,
 			wantErr: false,
@@ -198,7 +199,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 
 func TestExpression_ValidateFieldReferences(t *testing.T) {
 	type fields struct {
-		ast        ast.Node
+		ast        sfeel.Node
 		expression string
 	}
 	type args struct {
@@ -214,7 +215,7 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 		{
 			name: "simple test",
 			fields: fields{
-				ast: ast.QualifiedName{Value: []string{"b", "c"}},
+				ast: sfeel.QualifiedName{Value: []string{"b", "c"}},
 			},
 			args: args{fields: []data.Field{
 				data.Field{Name: "a", Key: "b", Typ: data.Integer},
@@ -227,7 +228,7 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 		{
 			name: "nested 1 level test",
 			fields: fields{
-				ast: ast.UnaryTest{Value: ast.QualifiedName{Value: []string{"a", "b"}}},
+				ast: sfeel.UnaryTest{Value: sfeel.QualifiedName{Value: []string{"a", "b"}}},
 			},
 			args: args{fields: []data.Field{
 				data.Field{Name: "a", Key: "b", Typ: data.Integer},
@@ -240,13 +241,13 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 		{
 			name: "nested 2 level test",
 			fields: fields{
-				ast: ast.UnaryTests{
+				ast: sfeel.UnaryTests{
 					UnaryTests: []ast.Node{
-						ast.UnaryTest{Value: ast.UnaryTest{Value: ast.QualifiedName{Value: []string{"b", "c"}}}},
-						ast.UnaryTest{Value: ast.UnaryTest{Value: ast.QualifiedName{Value: []string{"a", "c"}}}},
-						ast.UnaryTest{Value: ast.UnaryTest{Value: ast.QualifiedName{Value: []string{"a", "b"}}}},
-						ast.UnaryTest{Value: ast.QualifiedName{Value: []string{"a", "b"}}},
-						ast.UnaryTest{Value: ast.QualifiedName{Value: []string{"a", "c"}}},
+						sfeel.UnaryTest{Value: sfeel.UnaryTest{Value: sfeel.QualifiedName{Value: []string{"b", "c"}}}},
+						sfeel.UnaryTest{Value: sfeel.UnaryTest{Value: sfeel.QualifiedName{Value: []string{"a", "c"}}}},
+						sfeel.UnaryTest{Value: sfeel.UnaryTest{Value: sfeel.QualifiedName{Value: []string{"a", "b"}}}},
+						sfeel.UnaryTest{Value: sfeel.QualifiedName{Value: []string{"a", "b"}}},
+						sfeel.UnaryTest{Value: sfeel.QualifiedName{Value: []string{"a", "c"}}},
 					},
 				},
 			},
@@ -267,7 +268,7 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 		{
 			name: "invalid qualified name",
 			fields: fields{
-				ast: ast.UnaryTest{Value: ast.QualifiedName{Value: []string{"x", "x"}}},
+				ast: sfeel.UnaryTest{Value: sfeel.QualifiedName{Value: []string{"x", "x"}}},
 			},
 			args: args{fields: []data.Field{
 				data.Field{Name: "a", Key: "b", Typ: data.Integer},

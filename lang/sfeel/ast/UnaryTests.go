@@ -2,13 +2,14 @@ package ast
 
 import (
 	"bytes"
+	"decisionTable/ast"
 	"reflect"
 )
 
 type UnaryTests struct {
 	ParserRules Rule
 	Negation    Rule
-	UnaryTests  []Node
+	UnaryTests  []ast.Node
 }
 
 func (l UnaryTests) ParserLiteral() string {
@@ -36,14 +37,14 @@ func (l UnaryTests) String() string {
 	return out2.String()
 }
 func (l UnaryTests) GetOperandDataType() reflect.Type {
-	var result []Node
+	var result []ast.Node
 	for _, val := range l.UnaryTests {
 		ut := val.(UnaryTest)
 		result = append(result, ut.Value)
 	}
 	return checkDataTypePrecedences(result...)
 }
-func (l UnaryTests) GetChildren() []Node {
+func (l UnaryTests) GetChildren() []ast.Node {
 	return l.UnaryTests
 }
 
@@ -63,8 +64,8 @@ func (l UnaryTest) String() string {
 func (l UnaryTest) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l.Value)
 }
-func (l UnaryTest) GetChildren() []Node {
-	return []Node{l.Value}
+func (l UnaryTest) GetChildren() []ast.Node {
+	return []ast.Node{l.Value}
 }
 
 type Interval struct {
@@ -89,6 +90,6 @@ func (l Interval) String() string {
 func (l Interval) GetOperandDataType() reflect.Type {
 	return checkDataTypePrecedence(l.StartValue, l.EndValue)
 }
-func (l Interval) GetChildren() []Node {
-	return []Node{l.StartValue, l.EndValue}
+func (l Interval) GetChildren() []ast.Node {
+	return []ast.Node{l.StartValue, l.EndValue}
 }

@@ -1,6 +1,8 @@
 package data
 
-import "decisionTable/lang/sfeel/conv"
+import (
+	"decisionTable/lang/sfeel/ast"
+)
 
 type EntryInterface interface {
 	String() string
@@ -10,5 +12,5 @@ type EntryInterface interface {
 	ValidateDataTypeOfExpression(varType DataTyp) (bool, error)
 	ValidateExistenceOfFieldReferencesInExpression(fields []Field) ([]Field, []error)
 
-	Convert(listener conv.SFeelBaseListenerInterface) conv.SFeelBaseListenerInterface
+	Convert(listener ast.SFeelListenerInterface)
 }

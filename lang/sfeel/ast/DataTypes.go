@@ -2,12 +2,13 @@ package ast
 
 import (
 	"bytes"
+	"decisionTable/ast"
 	"reflect"
 	"strconv"
 	"time"
 )
 
-func checkDataTypePrecedence(typ1 Node, typ2 Node) reflect.Type {
+func checkDataTypePrecedence(typ1 ast.Node, typ2 ast.Node) reflect.Type {
 	if reflect.TypeOf(typ1) == reflect.TypeOf(typ2) {
 		return reflect.TypeOf(typ1)
 	}
@@ -23,7 +24,7 @@ func checkDataTypePrecedence(typ1 Node, typ2 Node) reflect.Type {
 	}
 	return nil
 }
-func checkDataTypePrecedences(types ...Node) reflect.Type {
+func checkDataTypePrecedences(types ...ast.Node) reflect.Type {
 	length := len(types)
 
 	switch length {
@@ -64,7 +65,7 @@ func (l EmptyStatement) String() string {
 func (l EmptyStatement) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l)
 }
-func (l EmptyStatement) GetChildren() []Node {
+func (l EmptyStatement) GetChildren() []ast.Node {
 	return nil
 }
 
@@ -88,7 +89,7 @@ func (l QualifiedName) String() string {
 func (l QualifiedName) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l)
 }
-func (l QualifiedName) GetChildren() []Node {
+func (l QualifiedName) GetChildren() []ast.Node {
 	return nil
 }
 
@@ -112,7 +113,7 @@ func (l Integer) String() string {
 func (l Integer) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l)
 }
-func (l Integer) GetChildren() []Node {
+func (l Integer) GetChildren() []ast.Node {
 	return nil
 }
 
@@ -136,7 +137,7 @@ func (l Float) String() string {
 func (l Float) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l)
 }
-func (l Float) GetChildren() []Node {
+func (l Float) GetChildren() []ast.Node {
 	return nil
 }
 
@@ -150,7 +151,7 @@ func (l Boolean) String() string        { return strconv.FormatBool(l.Value) }
 func (l Boolean) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l)
 }
-func (l Boolean) GetChildren() []Node {
+func (l Boolean) GetChildren() []ast.Node {
 	return nil
 }
 
@@ -164,7 +165,7 @@ func (l String) String() string        { return l.Value }
 func (l String) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l)
 }
-func (l String) GetChildren() []Node {
+func (l String) GetChildren() []ast.Node {
 	return nil
 }
 
@@ -178,6 +179,6 @@ func (l DateTime) String() string        { return l.Value.String() }
 func (l DateTime) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l)
 }
-func (l DateTime) GetChildren() []Node {
+func (l DateTime) GetChildren() []ast.Node {
 	return nil
 }

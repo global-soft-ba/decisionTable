@@ -1,18 +1,18 @@
 package ast
 
 import (
+	"decisionTable/ast"
 	"reflect"
 )
 
-// The base Node interface which represents abstract syntac trees
+// Extend interface for SFeel and Parser Topics
 type Node interface {
+	ast.Node
 	ParserLiteral() string
-	String() string
 	GetOperandDataType() reflect.Type
-	GetChildren() []Node
 }
 
-func GetAllQualifiedNames(node Node) []QualifiedName {
+func GetAllQualifiedNames(node ast.Node) []QualifiedName {
 	if (reflect.TypeOf(node) == reflect.TypeOf(QualifiedName{})) {
 		return []QualifiedName{node.(QualifiedName)}
 	}
@@ -28,7 +28,7 @@ func GetAllQualifiedNames(node Node) []QualifiedName {
 	return out
 }
 
-func GetAllTreeNodeTypes(node Node) []string {
+func GetAllTreeNodeTypes(node ast.Node) []string {
 	if len(node.GetChildren()) == 0 {
 		return []string{reflect.TypeOf(node).String()}
 	}

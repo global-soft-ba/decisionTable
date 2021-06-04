@@ -1,13 +1,14 @@
 package ast
 
 import (
+	"decisionTable/ast"
 	"reflect"
 	"testing"
 )
 
 func TestCheckDataTypePrecedence(t *testing.T) {
 	type args struct {
-		types []Node
+		types []ast.Node
 	}
 	tests := []struct {
 		name string
@@ -16,17 +17,17 @@ func TestCheckDataTypePrecedence(t *testing.T) {
 	}{
 		{
 			name: "precedence single value",
-			args: args{[]Node{Integer{}, Integer{}, Integer{}, Integer{}, Integer{}, Integer{}}},
+			args: args{[]ast.Node{Integer{}, Integer{}, Integer{}, Integer{}, Integer{}, Integer{}}},
 			want: reflect.TypeOf(Integer{}),
 		},
 		{
 			name: "precedence value float",
-			args: args{[]Node{Integer{}, Integer{}, Float{}, Integer{}, Integer{}, Integer{}}},
+			args: args{[]ast.Node{Integer{}, Integer{}, Float{}, Integer{}, Integer{}, Integer{}}},
 			want: reflect.TypeOf(Float{}),
 		},
 		{
 			name: "empty precedence",
-			args: args{[]Node{Float{}, Boolean{}, Integer{}, Float{}, Integer{}, Integer{}, Integer{}}},
+			args: args{[]ast.Node{Float{}, Boolean{}, Integer{}, Float{}, Integer{}, Integer{}, Integer{}}},
 			want: nil,
 		},
 	}
