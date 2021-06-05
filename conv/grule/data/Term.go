@@ -6,6 +6,6 @@ type Term struct {
 	Name               string
 	Key                string
 	Typ                data.DataTyp
-	Expression         string
+	Expression         ExpressionInterface
 	ExpressionLanguage data.ExpressionLanguage
 }

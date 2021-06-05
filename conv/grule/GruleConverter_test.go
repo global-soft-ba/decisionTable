@@ -17,7 +17,7 @@ func TestConverter_converting(t *testing.T) {
 		want    []string
 		wantErr bool
 	}{
-		{name: "Valid Convert Multiple Expressions",
+		{name: "Valid ConvertToGrlAst Multiple Expressions",
 			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
@@ -42,7 +42,7 @@ func TestConverter_converting(t *testing.T) {
 			want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n   L1.I1 == 3\n   && L1.I2 > 3\n   && L1.I3 > 4 \n then \n  L1.O1 = 4; \n  Complete();\n}"},
 			wantErr: false,
 		},
-		{name: "Valid Convert Single Expressions",
+		{name: "Valid ConvertToGrlAst Single Expressions",
 			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
@@ -65,7 +65,7 @@ func TestConverter_converting(t *testing.T) {
 			want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n   L1.I1 == 3 \n then \n  L1.O1 = 4; \n  Complete();\n}"},
 			wantErr: false,
 		},
-		{name: "Valid Convert Multiple Expressions and Assignments",
+		{name: "Valid ConvertToGrlAst Multiple Expressions and Assignments",
 			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
@@ -93,7 +93,7 @@ func TestConverter_converting(t *testing.T) {
 			want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n   L1.I1 == 3\n   && L1.I2 > 3\n   && L1.I3 > 4 \n then \n  L1.O1 = 4;\n  L1.O1 = 4; \n  Complete();\n}"},
 			wantErr: false,
 		},
-		{name: "Valid Convert Multiple Rules, Expressions and Assignments with FirstPolicy",
+		{name: "Valid ConvertToGrlAst Multiple Rules, Expressions and Assignments with FirstPolicy",
 			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
@@ -153,7 +153,7 @@ func TestConverter_converting(t *testing.T) {
 				"rule row_2 \"R3\" salience 0 {\n when \n   L1.I1 == 3\n   && L1.I2 > 3\n   && L1.I3 > 4 \n then \n  L1.O1 = 4;\n  L1.O1 = 4; \n  Complete();\n}"},
 			wantErr: false,
 		},
-		{name: "Valid Convert Multiple Rules, Expressions and Assignments with PriorityPolicy",
+		{name: "Valid ConvertToGrlAst Multiple Rules, Expressions and Assignments with PriorityPolicy",
 			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
@@ -213,7 +213,7 @@ func TestConverter_converting(t *testing.T) {
 				"rule row_2 \"R3\" salience 2 {\n when \n   L1.I1 == 3\n   && L1.I2 > 3\n   && L1.I3 > 4 \n then \n  L1.O1 = 4;\n  L1.O1 = 4; \n  Complete();\n}"},
 			wantErr: false,
 		},
-		{name: "Valid Convert Multiple Rules, Expressions and Assignments with wrong Policy",
+		{name: "Valid ConvertToGrlAst Multiple Rules, Expressions and Assignments with wrong Policy",
 			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
@@ -273,7 +273,7 @@ func TestConverter_converting(t *testing.T) {
 				"rule row_2 \"R3\"  {\n when \n   L1.I1 == 3\n   && L1.I2 > 3\n   && L1.I3 > 4 \n then \n  L1.O1 = 4;\n  L1.O1 = 4; \n  Complete();\n}"},
 			wantErr: false,
 		},
-		{name: "Valid Convert Single Float Expressions",
+		{name: "Valid ConvertToGrlAst Single Float Expressions",
 			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
@@ -296,7 +296,7 @@ func TestConverter_converting(t *testing.T) {
 			want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n   L1.I1 == 3.3 \n then \n  L1.O1 = \"4\"; \n  Complete();\n}"},
 			wantErr: false,
 		},
-		{name: "Valid Convert Single Boolean Expressions",
+		{name: "Valid ConvertToGrlAst Single Boolean Expressions",
 			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
@@ -319,7 +319,7 @@ func TestConverter_converting(t *testing.T) {
 			want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n   L1.I1 == true \n then \n  L1.O1 = false; \n  Complete();\n}"},
 			wantErr: false,
 		},
-		{name: "Valid Convert Single String Expressions",
+		{name: "Valid ConvertToGrlAst Single String Expressions",
 			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
@@ -342,7 +342,7 @@ func TestConverter_converting(t *testing.T) {
 			want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n   L1.I1 == \"true\" \n then \n  L1.O1 = \"false\"; \n  Complete();\n}"},
 			wantErr: false,
 		},
-		{name: "Valid Convert DatTime String Expressions",
+		{name: "Valid ConvertToGrlAst DatTime String Expressions",
 			args: args{grlmodel2.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",

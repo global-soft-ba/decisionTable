@@ -83,7 +83,7 @@ func main() {
 		BuildRule().
 		Build()
 
-	// Convert Table Into Grule Rules
+	// ConvertToGrlAst Table Into Grule Rules
 	rules, err := table.Convert()
 	if err != nil {
 		fmt.Print("Error:", err)

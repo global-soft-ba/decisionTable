@@ -96,11 +96,11 @@ func TestDecisionTable_Convert(t *testing.T) {
 
 			got, err := d.Convert(tt.args.converter)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("Convert() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("ConvertToGrlAst() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Convert() got = %v, want %v", got, tt.want)
+				t.Errorf("ConvertToGrlAst() got = %v, want %v", got, tt.want)
 			}
 		})
 	}

@@ -2,7 +2,14 @@ package conv
 
 import (
 	grule "decisionTable/conv/grule/data"
-	"decisionTable/data"
+	"decisionTable/conv/grule/grl"
+	dtable "decisionTable/data"
+	"errors"
+	"strconv"
+)
+
+var (
+	ErrMapperIndexOutOfBound = errors.New("index of input or output fields is out of bound ")
 )
 
 func CreateTableToGruleConverter() TableToGruleConverter {
@@ -11,90 +18,105 @@ func CreateTableToGruleConverter() TableToGruleConverter {
 
 type TableToGruleConverter struct{}
 
-func (c TableToGruleConverter) Convert(table data.Table) (grule.RuleSet, error) {
-	return grule.RuleSet{}, nil
+func (c TableToGruleConverter) Convert(table dtable.Table) (grule.RuleSet, error) {
+	return c.convertTableToRuleSet(table)
 }
 
-/*
-
-func (c TableToGruleConverter) convertRuleSetIntoGRL(ruleSet grule.RuleSet) ([]string, error) {
-	var result []string
-
-	tmpl, err := c.buildTemplate(ruleSet.HitPolicy, ruleSet.Interference)
-	if err != nil {
-		return []string{}, err
+func (c TableToGruleConverter) convertTableToRuleSet(table dtable.Table) (grule.RuleSet, error) {
+	result := grule.RuleSet{
+		Key:             table.Key,
+		Name:            table.Name,
+		HitPolicy:       table.HitPolicy,
+		CollectOperator: table.CollectOperator,
+		Interference:    table.Interferences,
+		Rules:           []grule.Rule{},
 	}
-	for _, v := range ruleSet.Rules {
-		convRule, errConv := c.convertRuleExpressionsIntoGRL(v)
-		if errConv != nil {
-			return []string{}, err
+
+	res, err := c.convertIntoGruleRules(table)
+	if err != nil {
+		return grule.RuleSet{}, err
+	}
+
+	result.Rules = res
+	return result, nil
+}
+
+func (c TableToGruleConverter) convertIntoGruleRules(table dtable.Table) ([]grule.Rule, error) {
+	var res []grule.Rule
+
+	maxRules := len(table.Rules)
+	for i, val := range table.Rules {
+		rule, err := c.convertEntriesToRule(i, maxRules, val, table.InputFields, table.OutputFields)
+		if err != nil {
+			return []grule.Rule{}, err
+		}
+		res = append(res, rule)
+	}
+
+	return res, nil
+}
+
+func (c TableToGruleConverter) convertEntriesToRule(columId int, maxRules int, rule dtable.Rule, inputFields []dtable.Field, outputFields []dtable.Field) (grule.Rule, error) {
+	r := grule.Rule{
+		Name:        strconv.Itoa(columId),
+		Description: rule.Description,
+		Salience:    columId,
+		InvSalience: maxRules - columId - 1, //Necessary for HitPolicies
+		Expressions: nil,
+		Assignments: nil,
+	}
+
+	expr, err := c.convertEntriesToTerms(rule.InputEntries, inputFields)
+	if err != nil {
+		return grule.Rule{}, err
+	}
+
+	asst, err := c.convertEntriesToTerms(rule.OutputEntries, outputFields)
+	if err != nil {
+		return grule.Rule{}, err
+	}
+
+	r.Expressions = expr
+	r.Assignments = asst
+	return r, nil
+}
+
+func (c TableToGruleConverter) convertEntriesToTerms(entries []dtable.EntryInterface, fields []dtable.Field) ([]grule.Term, error) {
+	var result []grule.Term
+
+	fieldCount := len(fields)
+	for i, val := range entries {
+		if i >= fieldCount {
+			return []grule.Term{}, ErrMapperIndexOutOfBound
 		}
 
-		var tpl bytes.Buffer
-		err = tmpl.Execute(&tpl, convRule) // Converts along the grl
+		entry, err := c.convertEntryToExpression(val, fields[i])
 
 		if err != nil {
-			return []string{}, err
+			return []grule.Term{}, err
 		}
-
-		result = append(result, tpl.String())
+		result = append(result, entry)
 	}
 
 	return result, nil
 }
 
-func (c TableToGruleConverter) convertRuleExpressionsIntoGRL(rule grule.Rule) (grule.Rule, error) {
-	result, err := c.convertInputExpressionsIntoGRL(rule)
+func (c TableToGruleConverter) convertEntryToExpression(entry dtable.EntryInterface, field dtable.Field) (grule.Term, error) {
+	term := grule.Term{
+		Name:               field.Name,
+		Key:                field.Key,
+		Typ:                field.Typ,
+		Expression:         nil,
+		ExpressionLanguage: entry.ExpressionLanguage(),
+	}
+	//ToDo Need a general concept for Names
+	name := term.Name + "." + term.Key
+
+	res, err := grl.CreateExpression(name, entry)
 	if err != nil {
-		return result, err
+		return grule.Term{}, err
 	}
+	term.Expression = res
 
-	result, err = c.convertOutputExpressionsIntoGRL(result)
-	if err != nil {
-		return result, err
-	}
-
-	return result, nil
+	return term, nil
 }
-
-func (c TableToGruleConverter) convertInputExpressionsIntoGRL(rule grule.Rule) (grule.Rule, error) {
-	result := rule
-	var expr []grule.Term
-
-	for _, v := range rule.Expressions {
-		expConv, err := c.expConvFac.GetExpressionConverter(v.ExpressionLanguage, c.format)
-		if err != nil {
-			return grule.Rule{}, err
-		}
-
-		term := expConv.ConvertExpression(v)
-		//Remove empty expressions
-		if term.Expression != "" {
-			expr = append(expr, term)
-		}
-	}
-
-	result.Expressions = expr
-	return result, nil
-}
-
-func (c TableToGruleConverter) convertOutputExpressionsIntoGRL(rule grule.Rule) (grule.Rule, error) {
-	result := rule
-	var assgn []grule.Term
-
-	for _, v := range rule.Assignments {
-		expConv, err := c.expConvFac.GetExpressionConverter(v.ExpressionLanguage, c.format)
-		if err != nil {
-			return grule.Rule{}, err
-		}
-		term := expConv.ConvertAssignments(v)
-		//Remove empty expressions
-		if term.Expression != "" {
-			assgn = append(assgn, term)
-		}
-	}
-
-	result.Assignments = assgn
-	return result, nil
-}
-*/
