@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	ErrGruleExpressionLanguageNotSupported = errors.New("expression language is not supported")
+	ErrGruleExpressionLanguageNotSupported = errors.New("expression language of entry is not supported")
 	ErrGruleOutputFormatNotSupported       = errors.New("output format not supported")
 )
 
