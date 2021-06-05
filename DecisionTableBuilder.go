@@ -35,14 +35,12 @@ func (d DecisionTableBuilder) SetNotationStandard(lang data.DTableStandard) Deci
 	return d
 }
 
-func (d DecisionTableBuilder) AddInputField(name string, label string, typ data.DataTyp) DecisionTableBuilderInterface {
-	field := data.Field{Name: name, Key: label, Typ: typ}
+func (d DecisionTableBuilder) AddInputField(field data.FieldInterface) DecisionTableBuilderInterface {
 	d.data.InputFields = append(d.data.InputFields, field)
 	return d
 }
 
-func (d DecisionTableBuilder) AddOutputField(name string, label string, typ data.DataTyp) DecisionTableBuilderInterface {
-	field := data.Field{Name: name, Key: label, Typ: typ}
+func (d DecisionTableBuilder) AddOutputField(field data.FieldInterface) DecisionTableBuilderInterface {
 	d.data.OutputFields = append(d.data.OutputFields, field)
 	return d
 }

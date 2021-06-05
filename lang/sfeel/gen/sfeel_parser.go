@@ -111,7 +111,7 @@ var literalNames = []string{
 	"'*'", "'/'", "'+'", "'-'", "'<'", "'<='", "'>'", "'>='", "'='", "'!='",
 }
 var symbolicNames = []string{
-	"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Name", "POW",
+	"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Field", "POW",
 	"MUL", "DIV", "ADD", "SUB", "LESS", "LESSEQ", "GREATER", "GREATEREQ", "EQUAL",
 	"NOTEQUAL", "INTEGER", "REAL", "STRING", "WS",
 }

@@ -44,11 +44,11 @@ func (d DecisionTable) Valid() bool {
 	return d.valid
 }
 
-func (d DecisionTable) InputFields() []data.Field {
+func (d DecisionTable) InputFields() []data.FieldInterface {
 	return d.data.InputFields
 }
 
-func (d DecisionTable) OutputFields() []data.Field {
+func (d DecisionTable) OutputFields() []data.FieldInterface {
 	return d.data.OutputFields
 }
 

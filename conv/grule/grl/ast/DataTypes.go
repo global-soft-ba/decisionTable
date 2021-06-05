@@ -2,6 +2,7 @@ package ast
 
 import (
 	"decisionTable/ast"
+	"decisionTable/data"
 	"strconv"
 )
 
@@ -15,6 +16,11 @@ func (s String) String() string {
 
 func (s String) GetChildren() []ast.Node {
 	return nil
+}
+
+//TODo Qualified Name and FieldInterface
+type QualifiedName struct {
+	val data.FieldInterface
 }
 
 type Integer struct {

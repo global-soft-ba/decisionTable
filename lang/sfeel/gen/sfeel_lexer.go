@@ -136,14 +136,14 @@ var lexerLiteralNames = []string{
 }
 
 var lexerSymbolicNames = []string{
-	"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Name", "POW",
+	"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Field", "POW",
 	"MUL", "DIV", "ADD", "SUB", "LESS", "LESSEQ", "GREATER", "GREATEREQ", "EQUAL",
 	"NOTEQUAL", "INTEGER", "REAL", "STRING", "WS",
 }
 
 var lexerRuleNames = []string{
 	"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "T__7", "T__8",
-	"T__9", "T__10", "T__11", "T__12", "T__13", "Name", "Name_start_char",
+	"T__9", "T__10", "T__11", "T__12", "T__13", "Field", "Name_start_char",
 	"Name_part_char", "POW", "MUL", "DIV", "ADD", "SUB", "LESS", "LESSEQ",
 	"GREATER", "GREATEREQ", "EQUAL", "NOTEQUAL", "INTEGER", "REAL", "STRING",
 	"NONCONTROL_CHAR", "LETTER", "LOWER", "UPPER", "DIGIT", "SPACE", "SYMBOL",

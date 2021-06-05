@@ -11,8 +11,8 @@ type DecisionTableBuilderInterface interface {
 	SetNotationStandard(lang data.DTableStandard) DecisionTableBuilderInterface
 	SetHitPolicy(policy data.HitPolicy) DecisionTableBuilderInterface
 	SetCollectOperator(collector data.CollectOperator) DecisionTableBuilderInterface
-	AddInputField(name string, label string, typ data.DataTyp) DecisionTableBuilderInterface
-	AddOutputField(name string, label string, typ data.DataTyp) DecisionTableBuilderInterface
+	AddInputField(field data.FieldInterface) DecisionTableBuilderInterface
+	AddOutputField(field data.FieldInterface) DecisionTableBuilderInterface
 	AddRule(description string) DecisionTableRuleBuilderInterface
 }
 

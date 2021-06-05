@@ -8,7 +8,7 @@ type Table struct {
 	NotationStandard DTableStandard
 	Interferences    bool
 
-	InputFields  []Field
-	OutputFields []Field
+	InputFields  []FieldInterface
+	OutputFields []FieldInterface
 	Rules        []Rule
 }

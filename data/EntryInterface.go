@@ -10,7 +10,7 @@ type EntryInterface interface {
 
 	Validate() (bool, []error)
 	ValidateDataTypeOfExpression(varType DataTyp) (bool, error)
-	ValidateExistenceOfFieldReferencesInExpression(fields []Field) ([]Field, []error)
+	ValidateExistenceOfFieldReferencesInExpression(fields []FieldInterface) ([]FieldInterface, []error)
 
 	Convert(listener ast.SFeelListenerInterface)
 }

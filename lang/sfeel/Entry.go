@@ -83,10 +83,10 @@ func (e Entry) ValidateDataTypeOfExpression(varType data.DataTyp) (bool, error) 
 
 	return false, errors.New(fmt.Sprintf("given data type %s is not compatible with %s", varType, e.ast.GetOperandDataType()))
 }
-func (e Entry) ValidateExistenceOfFieldReferencesInExpression(fields []data.Field) ([]data.Field, []error) {
+func (e Entry) ValidateExistenceOfFieldReferencesInExpression(fields []data.FieldInterface) ([]data.FieldInterface, []error) {
 	qualifiedFields := sfeel.GetAllQualifiedNames(e.ast)
 	var errOut []error
-	var out []data.Field
+	var out []data.FieldInterface
 
 	for _, val := range qualifiedFields {
 		qf, err := e.getFieldUsingQualifiedName(val, fields)
@@ -100,14 +100,13 @@ func (e Entry) ValidateExistenceOfFieldReferencesInExpression(fields []data.Fiel
 	return out, errOut
 }
 
-func (e Entry) getFieldUsingQualifiedName(name sfeel.QualifiedName, fields []data.Field) (data.Field, error) {
+func (e Entry) getFieldUsingQualifiedName(name sfeel.QualifiedName, fields []data.FieldInterface) (data.FieldInterface, error) {
 	for _, val := range fields {
-		//TODO Extend to allow arbitrary navigation paths on structs
-		if val.Name == name.Value[0] && val.Key == name.Value[1] {
+		if val.GetQualifiedName(sfeel.SFeelSeparatorQualifiedName) == name.String() {
 			return val, nil
 		}
 	}
-	return data.Field{}, errors.New(fmt.Sprintf("couldn't find qualified name %s in field list", name.String()))
+	return nil, errors.New(fmt.Sprintf("couldn't find qualified name %s in field list", name.String()))
 }
 
 func (e Entry) Convert(listener sfeel.SFeelListenerInterface) {

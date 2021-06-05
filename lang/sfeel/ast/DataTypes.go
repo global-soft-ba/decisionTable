@@ -79,7 +79,7 @@ func (l QualifiedName) String() string {
 	var out bytes.Buffer
 	for i, val := range l.Value {
 		if i > 0 {
-			out.WriteString(".")
+			out.WriteString(SFeelSeparatorQualifiedName)
 		}
 		out.WriteString(val)
 	}

@@ -56,7 +56,7 @@ func (c TableToGruleConverter) convertIntoGruleRules(table dtable.Table) ([]grul
 	return res, nil
 }
 
-func (c TableToGruleConverter) convertEntriesToRule(columId int, maxRules int, rule dtable.Rule, inputFields []dtable.Field, outputFields []dtable.Field) (grule.Rule, error) {
+func (c TableToGruleConverter) convertEntriesToRule(columId int, maxRules int, rule dtable.Rule, inputFields []dtable.FieldInterface, outputFields []dtable.FieldInterface) (grule.Rule, error) {
 	r := grule.Rule{
 		Name:        strconv.Itoa(columId),
 		Description: rule.Description,
@@ -81,7 +81,7 @@ func (c TableToGruleConverter) convertEntriesToRule(columId int, maxRules int, r
 	return r, nil
 }
 
-func (c TableToGruleConverter) convertEntriesToTerms(entries []dtable.EntryInterface, fields []dtable.Field) ([]grule.Term, error) {
+func (c TableToGruleConverter) convertEntriesToTerms(entries []dtable.EntryInterface, fields []dtable.FieldInterface) ([]grule.Term, error) {
 	var result []grule.Term
 
 	fieldCount := len(fields)
@@ -101,18 +101,14 @@ func (c TableToGruleConverter) convertEntriesToTerms(entries []dtable.EntryInter
 	return result, nil
 }
 
-func (c TableToGruleConverter) convertEntryToExpression(entry dtable.EntryInterface, field dtable.Field) (grule.Term, error) {
+func (c TableToGruleConverter) convertEntryToExpression(entry dtable.EntryInterface, field dtable.FieldInterface) (grule.Term, error) {
 	term := grule.Term{
-		Name:               field.Name,
-		Key:                field.Key,
-		Typ:                field.Typ,
+		Field:              field,
 		Expression:         nil,
 		ExpressionLanguage: entry.ExpressionLanguage(),
 	}
-	//ToDo Need a general concept for Names
-	name := term.Name + "." + term.Key
 
-	res, err := grl.CreateExpression(name, entry)
+	res, err := grl.CreateExpression(field.Id(), entry)
 	if err != nil {
 		return grule.Term{}, err
 	}

@@ -11,7 +11,7 @@ func CreateGruleGenerator() GruleGenerator {
 type GruleGenerator struct{}
 
 func (g GruleGenerator) Generate(rules data.RuleSet) (interface{}, error) {
-	return nil, nil
+	panic("implement me")
 }
 
 /*

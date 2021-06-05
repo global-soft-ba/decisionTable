@@ -22,13 +22,13 @@ func TestDTableValidator_SFeel_Validate(t *testing.T) {
 				HitPolicy:        data.First,
 				CollectOperator:  data.List,
 				NotationStandard: data.GRULE,
-				InputFields: []data.Field{{
+				InputFields: []data.FieldInterface{data.Field{
 					Name: "I1",
 					Key:  "L1",
 					Typ:  data.Integer,
 				},
 				},
-				OutputFields: []data.Field{{
+				OutputFields: []data.FieldInterface{data.Field{
 					Name: "O1",
 					Key:  "L1",
 					Typ:  data.Float,
@@ -73,13 +73,13 @@ func TestDTableValidator_SFeel_Validate(t *testing.T) {
 				Name:             "TableOne",
 				HitPolicy:        data.Any,
 				NotationStandard: data.GRULE,
-				InputFields: []data.Field{{
+				InputFields: []data.FieldInterface{data.Field{
 					Name: "I1",
 					Key:  "L1",
 					Typ:  data.String,
 				},
 				},
-				OutputFields: []data.Field{{
+				OutputFields: []data.FieldInterface{data.Field{
 					Name: "O1",
 					Key:  "L1",
 					Typ:  data.Integer,
@@ -104,13 +104,13 @@ func TestDTableValidator_SFeel_Validate(t *testing.T) {
 				HitPolicy:        data.Collect,
 				CollectOperator:  "XYZ",
 				NotationStandard: data.DMN,
-				InputFields: []data.Field{{
+				InputFields: []data.FieldInterface{data.Field{
 					Name: "I1",
 					Key:  "L1",
 					Typ:  data.String,
 				},
 				},
-				OutputFields: []data.Field{{
+				OutputFields: []data.FieldInterface{data.Field{
 					Name: "O1",
 					Key:  "L1",
 					Typ:  data.Integer,
@@ -133,8 +133,8 @@ func TestDTableValidator_SFeel_Validate(t *testing.T) {
 				Name:             "N1",
 				HitPolicy:        data.First,
 				NotationStandard: data.GRULE,
-				InputFields:      []data.Field{},
-				OutputFields:     []data.Field{},
+				InputFields:      []data.FieldInterface{},
+				OutputFields:     []data.FieldInterface{},
 				Rules: []data.Rule{{
 					Description:   "R1",
 					InputEntries:  []data.EntryInterface{},
@@ -151,13 +151,13 @@ func TestDTableValidator_SFeel_Validate(t *testing.T) {
 				Name:             "N1",
 				HitPolicy:        data.First,
 				NotationStandard: data.GRULE,
-				InputFields: []data.Field{{
+				InputFields: []data.FieldInterface{data.Field{
 					Name: "I1",
 					Key:  "L1",
 					Typ:  data.Double,
 				},
 				},
-				OutputFields: []data.Field{{
+				OutputFields: []data.FieldInterface{data.Field{
 					Name: "",
 					Key:  "L1",
 					Typ:  data.Integer,
@@ -172,7 +172,7 @@ func TestDTableValidator_SFeel_Validate(t *testing.T) {
 				}},
 			},
 			want:  false,
-			want1: []error{ErrDTableFieldTypInvalid, ErrDTableFieldNameEmpty},
+			want1: []error{ErrDTableFieldTypInvalid, ErrDTableFieldIdIsEmpty},
 		},
 		{
 			name: "Wrong mount of input entries regarding data schemas",
@@ -181,14 +181,14 @@ func TestDTableValidator_SFeel_Validate(t *testing.T) {
 				Name:             "N1",
 				HitPolicy:        data.First,
 				NotationStandard: data.GRULE,
-				InputFields: []data.Field{
-					{
+				InputFields: []data.FieldInterface{
+					data.Field{
 						Name: "I1",
 						Key:  "L1",
 						Typ:  data.String,
 					},
 				},
-				OutputFields: []data.Field{{
+				OutputFields: []data.FieldInterface{data.Field{
 					Name: "O2",
 					Key:  "L1",
 					Typ:  data.Integer,
@@ -213,14 +213,14 @@ func TestDTableValidator_SFeel_Validate(t *testing.T) {
 				Name:             "N1",
 				HitPolicy:        data.First,
 				NotationStandard: data.GRULE,
-				InputFields: []data.Field{
-					{
+				InputFields: []data.FieldInterface{
+					data.Field{
 						Name: "I1",
 						Key:  "L1",
 						Typ:  data.String,
 					},
 				},
-				OutputFields: []data.Field{{
+				OutputFields: []data.FieldInterface{data.Field{
 					Name: "O2",
 					Key:  "L1",
 					Typ:  data.Integer,
@@ -272,13 +272,13 @@ func TestDTableValidator_ValidateInterferences(t *testing.T) {
 				HitPolicy:        data.First,
 				CollectOperator:  data.List,
 				NotationStandard: data.GRULE,
-				InputFields: []data.Field{{
+				InputFields: []data.FieldInterface{data.Field{
 					Name: "I1",
 					Key:  "L1",
 					Typ:  data.String,
 				},
 				},
-				OutputFields: []data.Field{{
+				OutputFields: []data.FieldInterface{data.Field{
 					Name: "O1",
 					Key:  "L1",
 					Typ:  data.Float,

@@ -203,13 +203,13 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 		expression string
 	}
 	type args struct {
-		fields []data.Field
+		fields []data.FieldInterface
 	}
 	tests := []struct {
 		name    string
 		fields  fields
 		args    args
-		want    []data.Field
+		want    []data.FieldInterface
 		wantErr bool
 	}{
 		{
@@ -217,12 +217,12 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 			fields: fields{
 				ast: sfeel.QualifiedName{Value: []string{"b", "c"}},
 			},
-			args: args{fields: []data.Field{
+			args: args{fields: []data.FieldInterface{
 				data.Field{Name: "a", Key: "b", Typ: data.Integer},
 				data.Field{Name: "b", Key: "c", Typ: data.Integer},
 				data.Field{Name: "a", Key: "c", Typ: data.Integer},
 			}},
-			want:    []data.Field{data.Field{Name: "b", Key: "c", Typ: data.Integer}},
+			want:    []data.FieldInterface{data.Field{Name: "b", Key: "c", Typ: data.Integer}},
 			wantErr: false,
 		},
 		{
@@ -230,12 +230,12 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 			fields: fields{
 				ast: sfeel.UnaryTest{Value: sfeel.QualifiedName{Value: []string{"a", "b"}}},
 			},
-			args: args{fields: []data.Field{
+			args: args{fields: []data.FieldInterface{
 				data.Field{Name: "a", Key: "b", Typ: data.Integer},
 				data.Field{Name: "b", Key: "c", Typ: data.Integer},
 				data.Field{Name: "a", Key: "c", Typ: data.Integer},
 			}},
-			want:    []data.Field{data.Field{Name: "a", Key: "b", Typ: data.Integer}},
+			want:    []data.FieldInterface{data.Field{Name: "a", Key: "b", Typ: data.Integer}},
 			wantErr: false,
 		},
 		{
@@ -251,12 +251,12 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 					},
 				},
 			},
-			args: args{fields: []data.Field{
+			args: args{fields: []data.FieldInterface{
 				data.Field{Name: "a", Key: "b", Typ: data.Integer},
 				data.Field{Name: "b", Key: "c", Typ: data.Integer},
 				data.Field{Name: "a", Key: "c", Typ: data.Integer},
 			}},
-			want: []data.Field{
+			want: []data.FieldInterface{
 				data.Field{Name: "b", Key: "c", Typ: data.Integer},
 				data.Field{Name: "a", Key: "c", Typ: data.Integer},
 				data.Field{Name: "a", Key: "b", Typ: data.Integer},
@@ -270,7 +270,7 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 			fields: fields{
 				ast: sfeel.UnaryTest{Value: sfeel.QualifiedName{Value: []string{"x", "x"}}},
 			},
-			args: args{fields: []data.Field{
+			args: args{fields: []data.FieldInterface{
 				data.Field{Name: "a", Key: "b", Typ: data.Integer},
 				data.Field{Name: "b", Key: "c", Typ: data.Integer},
 				data.Field{Name: "a", Key: "c", Typ: data.Integer},

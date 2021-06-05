@@ -16,6 +16,8 @@ const (
 	SFeelClosedIntervalEND
 	SFeelOpenIntervalSTART
 	SFeelOpenIntervalEND
+
+	SFeelSeparatorQualifiedName = "."
 )
 
 // SFeel Tokens for converter

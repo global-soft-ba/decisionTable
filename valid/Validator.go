@@ -14,8 +14,7 @@ var (
 	ErrDTableInputEmpty      = errors.New("at least one input is required")
 	ErrDTableOutputEmpty     = errors.New("at least one output is required")
 
-	ErrDTableFieldNameEmpty  = errors.New("field name is empty")
-	ErrDTableFieldLabelEmpty = errors.New("field label is empty")
+	ErrDTableFieldIdIsEmpty  = errors.New("field id is empty")
 	ErrDTableFieldTypInvalid = errors.New("field type is invalid")
 
 	ErrRuleHaveDifferentAmountOfInputFields  = errors.New("amount of input entries does not match input fields of decision table")
@@ -187,16 +186,12 @@ func (d Validator) validateRules() (bool, []error) {
 	return true, nil
 }
 
-func (d Validator) validateFields(f data.Field) (bool, error) {
-	if len(f.Name) == 0 {
-		return false, ErrDTableFieldNameEmpty
+func (d Validator) validateFields(f data.FieldInterface) (bool, error) {
+	if f.Id() == "" {
+		return false, ErrDTableFieldIdIsEmpty
 	}
 
-	if len(f.Key) == 0 {
-		return false, ErrDTableFieldLabelEmpty
-	}
-
-	if _, ok := conf.DecisionTableStandards[d.dTable.NotationStandard].VariableType[f.Typ]; !ok {
+	if _, ok := conf.DecisionTableStandards[d.dTable.NotationStandard].VariableType[f.DataTyp()]; !ok {
 		return false, ErrDTableFieldTypInvalid
 	}
 
@@ -247,11 +242,11 @@ func (d Validator) validateOutputRuleEntries(r data.Rule) (bool, []error) {
 	return true, nil
 }
 
-func (d Validator) validateEntry(entry data.EntryInterface, field data.Field) (bool, []error) {
+func (d Validator) validateEntry(entry data.EntryInterface, field data.FieldInterface) (bool, []error) {
 	if ok, err := entry.Validate(); !ok {
 		return false, err
 	}
-	if ok, err := entry.ValidateDataTypeOfExpression(field.Typ); !ok {
+	if ok, err := entry.ValidateDataTypeOfExpression(field.DataTyp()); !ok {
 		return false, []error{err}
 	}
 
@@ -261,7 +256,7 @@ func (d Validator) validateEntry(entry data.EntryInterface, field data.Field) (b
 	}
 
 	for _, val := range fields {
-		if val.Typ != field.Typ {
+		if val.DataTyp() != field.DataTyp() {
 			return false, []error{ErrDTableEntryReferencedFieldTypInvalid}
 		}
 	}
@@ -281,9 +276,9 @@ func (d Validator) ValidateContainsInterferences() bool {
 	return false
 }
 
-func (d Validator) fieldIsContained(field data.Field, setOfFields []data.Field) bool {
+func (d Validator) fieldIsContained(field data.FieldInterface, setOfFields []data.FieldInterface) bool {
 	for _, val := range setOfFields {
-		if (val.Key == field.Key) && (val.Name == field.Name) {
+		if val.Id() == field.Id() {
 			return true
 		}
 	}

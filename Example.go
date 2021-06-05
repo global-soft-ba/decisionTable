@@ -51,12 +51,12 @@ func main() {
 		SetDefinitionKey("determineEmployee").
 		SetNotationStandard(data.GRULE).
 		SetHitPolicy(data.Unique).
-		AddInputField("TypeOfClaim", "Claim", data.String).
-		AddInputField("ExpenditureOfClaim", "Claim", data.Integer).
-		AddInputField("TimeOfClaim", "Claim", data.DateTime).
-		AddOutputField("ResponsibleEmployee", "Employee", data.String).
-		AddOutputField("FourEyesPrinciple", "Employee", data.Boolean).
-		AddOutputField("LastTime", "Employee", data.DateTime).
+		AddInputField(data.Field{Name: "TypeOfClaim", Key: "Claim", Typ: data.String}).
+		AddInputField(data.Field{Name: "ExpenditureOfClaim", Key: "Claim", Typ: data.Integer}).
+		AddInputField(data.Field{Name: "TimeOfClaim", Key: "Claim", Typ: data.DateTime}).
+		AddOutputField(data.Field{Name: "ResponsibleEmployee", Key: "Employee", Typ: data.String}).
+		AddOutputField(data.Field{Name: "FourEyesPrinciple", Key: "Employee", Typ: data.Boolean}).
+		AddOutputField(data.Field{Name: "LastTime", Key: "Employee", Typ: data.DateTime}).
 		AddRule("R1").
 		AddInputEntry(`"Car Accident"`, data.SFEEL).
 		AddInputEntry("<1000", data.SFEEL).

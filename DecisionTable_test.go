@@ -14,10 +14,10 @@ func TestDecisionTable(t *testing.T) {
 		SetDefinitionKey("determineEmployee").
 		SetNotationStandard(data.GRULE).
 		SetHitPolicy(data.Unique).
-		AddInputField("Type of claim", "claim", data.String).
-		AddInputField("Expenditure of claim", "claim", data.Integer).
-		AddOutputField("Responsible employee", "Employee", data.String).
-		AddOutputField("4 eyes principle", "Employee", data.Boolean).
+		AddInputField(data.Field{Name: "Type of claim", Key: "claim", Typ: data.String}).
+		AddInputField(data.Field{Name: "Expenditure of claim", Key: "claim", Typ: data.Integer}).
+		AddOutputField(data.Field{Name: "Responsible employee", Key: "Employee", Typ: data.String}).
+		AddOutputField(data.Field{Name: "4 eyes principle", Key: "Employee", Typ: data.Boolean}).
 		AddRule("R1").
 		AddInputEntry(`"Car Accident"`, data.SFEEL).
 		AddInputEntry("<1000", data.SFEEL).
@@ -47,10 +47,10 @@ func TestDecisionTable_Convert(t *testing.T) {
 		SetDefinitionKey("determineEmployee").
 		SetNotationStandard(data.GRULE).
 		SetHitPolicy(data.Unique).
-		AddInputField("TypeOfClaim", "claim", data.String).
-		AddInputField("ExpenditureOfClaim", "claim", data.Integer).
-		AddOutputField("ResponsibleEmployee", "Employee", data.String).
-		AddOutputField("4EyesPrinciple", "Employee", data.Boolean).
+		AddInputField(data.Field{Name: "TypeOfClaim", Key: "claim", Typ: data.String}).
+		AddInputField(data.Field{Name: "ExpenditureOfClaim", Key: "claim", Typ: data.Integer}).
+		AddOutputField(data.Field{Name: "ResponsibleEmployee", Key: "Employee", Typ: data.String}).
+		AddOutputField(data.Field{Name: "4EyesPrinciple", Key: "Employee", Typ: data.Boolean}).
 		AddRule("R1").
 		AddInputEntry(`"Car Accident"`, data.SFEEL).
 		AddInputEntry("<1000", data.SFEEL).
