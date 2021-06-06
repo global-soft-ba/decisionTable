@@ -34,7 +34,6 @@ type Entry struct {
 	expression string
 }
 
-//Use within decisionTable
 func (e Entry) String() string {
 	return e.expression
 }
