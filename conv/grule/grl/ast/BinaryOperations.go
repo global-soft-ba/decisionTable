@@ -32,15 +32,19 @@ type LogicalOperations struct {
 
 func (l LogicalOperations) String() string {
 	var out bytes.Buffer
+
+	out.WriteString("(")
 	out.WriteString(l.Left.String())
 	out.WriteString(" ")
 
-	out.WriteString("opId:")
+	out.WriteString(":")
 	op := strconv.Itoa(l.Operator)
 	out.WriteString(op)
+	out.WriteString(":")
 
 	out.WriteString(" ")
 	out.WriteString(l.Right.String())
+	out.WriteString(")")
 	return out.String()
 }
 
@@ -56,13 +60,17 @@ type ComparisonOperations struct {
 
 func (c ComparisonOperations) String() string {
 	var out bytes.Buffer
+	out.WriteString("(")
 	out.WriteString(c.Left.String())
 	out.WriteString(" ")
-	out.WriteString("opId:")
+	out.WriteString(":")
 	op := strconv.Itoa(c.Operator)
 	out.WriteString(op)
+	out.WriteString(":")
+
 	out.WriteString(" ")
 	out.WriteString(c.Right.String())
+	out.WriteString(")")
 	return out.String()
 }
 

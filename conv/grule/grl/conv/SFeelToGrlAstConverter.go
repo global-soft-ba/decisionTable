@@ -14,8 +14,8 @@ type SFeelToGrlAstConverter struct {
 	listener SFeelToGrlAstConverterListener
 }
 
-func (c SFeelToGrlAstConverter) ConvertToGrlAst(fieldName string, sfeelEntry data.EntryInterface) (ast.Node, error) {
-	c.listener.fieldName = fieldName
+func (c SFeelToGrlAstConverter) ConvertToGrlAst(field data.FieldInterface, sfeelEntry data.EntryInterface) (ast.Node, error) {
+	c.listener.field = field
 	sfeelEntry.Convert(&c.listener)
 	grlTree := c.listener.GetAST()
 

@@ -1,8 +1,9 @@
 package ast
 
 import (
+	"bytes"
 	"decisionTable/ast"
-	"decisionTable/data"
+	sfeel "decisionTable/lang/sfeel/ast"
 	"strconv"
 )
 
@@ -18,9 +19,28 @@ func (s String) GetChildren() []ast.Node {
 	return nil
 }
 
-//TODo Qualified Name and FieldInterface
 type QualifiedName struct {
-	val data.FieldInterface
+	Val []string
+}
+
+func (q QualifiedName) String() string {
+	var out bytes.Buffer
+	for i, val := range q.Val {
+		if i > 0 {
+			out.WriteString(sfeel.SFeelSeparatorQualifiedName)
+		}
+		out.WriteString(val)
+	}
+
+	return out.String()
+}
+
+func (q QualifiedName) GetQualifiedName() string {
+	return q.String()
+}
+
+func (q QualifiedName) GetChildren() []ast.Node {
+	return nil
 }
 
 type Integer struct {

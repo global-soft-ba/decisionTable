@@ -1,8 +1,6 @@
 package main
 
 import (
-	"decisionTable/conv/grule"
-	interfaces2 "decisionTable/conv/interfaces"
 	"decisionTable/data"
 	"reflect"
 	"testing"
@@ -14,10 +12,10 @@ func TestDecisionTable(t *testing.T) {
 		SetDefinitionKey("determineEmployee").
 		SetNotationStandard(data.GRULE).
 		SetHitPolicy(data.Unique).
-		AddInputField(data.Field{Name: "Type of claim", Key: "claim", Typ: data.String}).
-		AddInputField(data.Field{Name: "Expenditure of claim", Key: "claim", Typ: data.Integer}).
-		AddOutputField(data.Field{Name: "Responsible employee", Key: "Employee", Typ: data.String}).
-		AddOutputField(data.Field{Name: "4 eyes principle", Key: "Employee", Typ: data.Boolean}).
+		AddInputField(data.TestField{Name: "Type of claim", Key: "claim", Typ: data.String}).
+		AddInputField(data.TestField{Name: "Expenditure of claim", Key: "claim", Typ: data.Integer}).
+		AddOutputField(data.TestField{Name: "Responsible employee", Key: "Employee", Typ: data.String}).
+		AddOutputField(data.TestField{Name: "4 eyes principle", Key: "Employee", Typ: data.Boolean}).
 		AddRule("R1").
 		AddInputEntry(`"Car Accident"`, data.SFEEL).
 		AddInputEntry("<1000", data.SFEEL).
@@ -47,10 +45,10 @@ func TestDecisionTable_Convert(t *testing.T) {
 		SetDefinitionKey("determineEmployee").
 		SetNotationStandard(data.GRULE).
 		SetHitPolicy(data.Unique).
-		AddInputField(data.Field{Name: "TypeOfClaim", Key: "claim", Typ: data.String}).
-		AddInputField(data.Field{Name: "ExpenditureOfClaim", Key: "claim", Typ: data.Integer}).
-		AddOutputField(data.Field{Name: "ResponsibleEmployee", Key: "Employee", Typ: data.String}).
-		AddOutputField(data.Field{Name: "4EyesPrinciple", Key: "Employee", Typ: data.Boolean}).
+		AddInputField(data.TestField{Name: "TypeOfClaim", Key: "claim", Typ: data.String}).
+		AddInputField(data.TestField{Name: "ExpenditureOfClaim", Key: "claim", Typ: data.Integer}).
+		AddOutputField(data.TestField{Name: "ResponsibleEmployee", Key: "Employee", Typ: data.String}).
+		AddOutputField(data.TestField{Name: "4EyesPrinciple", Key: "Employee", Typ: data.Boolean}).
 		AddRule("R1").
 		AddInputEntry(`"Car Accident"`, data.SFEEL).
 		AddInputEntry("<1000", data.SFEEL).
@@ -68,20 +66,16 @@ func TestDecisionTable_Convert(t *testing.T) {
 		AddOutputEntry("true", data.SFEEL).BuildRule().
 		Build()
 
-	type args struct {
-		converter interfaces2.ConverterInterface
-	}
 	tests := []struct {
-		name    string
-		fields  DecisionTable
-		args    args
+		name   string
+		fields DecisionTable
+
 		want    []string
 		wantErr bool
 	}{
 		{
 			name:   "DecisionTable To GruleRuleSet",
 			fields: testTable,
-			args:   args{grule.CreateGruleConverter()},
 			want: []string{
 				"rule row_0 \"R1\" salience 0  {\n when \n   claim.TypeOfClaim == \"Car Accident\"\n   && claim.ExpenditureOfClaim < 1000 \n then \n  Employee.ResponsibleEmployee = \"Müller\";\n  Employee.4EyesPrinciple = false; \n  Complete();\n}",
 				"rule row_1 \"R2\" salience 1  {\n when \n   claim.TypeOfClaim == \"Car Accident\"\n   && ((claim.ExpenditureOfClaim >= 1000) && (claim.ExpenditureOfClaim <= 10000)) \n then \n  Employee.ResponsibleEmployee = \"Meier\";\n  Employee.4EyesPrinciple = false; \n  Complete();\n}",
@@ -94,7 +88,7 @@ func TestDecisionTable_Convert(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			d := tt.fields
 
-			got, err := d.Convert(tt.args.converter)
+			got, err := d.Convert()
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ConvertToGrlAst() error = %v, wantErr %v", err, tt.wantErr)
 				return

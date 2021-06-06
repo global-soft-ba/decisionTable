@@ -9,7 +9,7 @@ import (
 func TestSFeelToGrlConverter_Convert(t *testing.T) {
 
 	type args struct {
-		fieldName  string
+		field      data.FieldInterface
 		sfeelEntry data.EntryInterface
 	}
 	tests := []struct {
@@ -20,16 +20,20 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 		{
 			name: "simple interval convert",
 			args: args{
-				"X",
+				data.TestField{
+					Name: "X",
+					Key:  "Y",
+					Typ:  data.Integer,
+				},
 				sfeel.CreateInputEntry("[1..6]"),
 			},
-			want: "X opId:6 1 opId:0 X opId:4 6",
+			want: "((X.Y :6: 1) :0: (X.Y :4: 6))",
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			c := CreateSFeelToGrlAstConverter()
-			got, _ := c.ConvertToGrlAst(tt.args.fieldName, tt.args.sfeelEntry)
+			got, _ := c.ConvertToGrlAst(tt.args.field, tt.args.sfeelEntry)
 			if got.String() != tt.want {
 				t.Errorf("ConvertToGrlAst() = %v, want %v", got, tt.want)
 			}

@@ -3,6 +3,7 @@ package conv
 import (
 	"decisionTable/ast"
 	grl "decisionTable/conv/grule/grl/ast"
+	"decisionTable/data"
 	sfeel "decisionTable/lang/sfeel/ast"
 )
 
@@ -23,7 +24,7 @@ func CreateSFeelToGrlAstConverterListener() SFeelToGrlAstConverterListener {
 
 type SFeelToGrlAstConverterListener struct {
 	sfeel.SFeelListener
-	fieldName     string
+	field         data.FieldInterface
 	stack         *ast.Stack
 	symbolMapping map[int]int
 	Errors        []error
@@ -38,19 +39,24 @@ func (l *SFeelToGrlAstConverterListener) ExitInteger(ctx sfeel.Integer) {
 	l.stack.Push(i)
 }
 
+func (l *SFeelToGrlAstConverterListener) ExitQualifiedName(ctx sfeel.QualifiedName) {
+	q := grl.QualifiedName{Val: ctx.Value}
+	l.stack.Push(q)
+}
+
 func (l *SFeelToGrlAstConverterListener) ExitInterval(ctx sfeel.Interval) {
 
 	rightVal := l.stack.Pop()
 	leftVal := l.stack.Pop()
 
 	left := grl.ComparisonOperations{
-		Left:     grl.String{Val: l.fieldName},
+		Left:     grl.String{Val: l.field.GetQualifiedName()},
 		Operator: l.symbolMapping[ctx.StartIntervalRule.Type],
 		Right:    leftVal.(ast.Node),
 	}
 
 	right := grl.ComparisonOperations{
-		Left:     grl.String{Val: l.fieldName},
+		Left:     grl.String{Val: l.field.GetQualifiedName()},
 		Operator: l.symbolMapping[ctx.EndIntervalRule.Type],
 		Right:    rightVal.(ast.Node),
 	}

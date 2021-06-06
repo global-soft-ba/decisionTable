@@ -15,13 +15,13 @@ var (
 	ErrGruleOutputFormatNotSupported       = errors.New("output format not supported")
 )
 
-func CreateExpression(fieldName string, entry dTable.EntryInterface) (grule.ExpressionInterface, error) {
+func CreateExpression(field dTable.FieldInterface, entry dTable.EntryInterface) (grule.ExpressionInterface, error) {
 
 	lang := entry.ExpressionLanguage()
 
 	switch lang {
 	case dTable.SFEEL:
-		res, err := conv.CreateSFeelToGrlAstConverter().ConvertToGrlAst(fieldName, entry)
+		res, err := conv.CreateSFeelToGrlAstConverter().ConvertToGrlAst(field, entry)
 		if err != nil {
 			return nil, err
 		}

@@ -5,7 +5,12 @@ import (
 	"decisionTable/ast"
 	grl "decisionTable/conv/grule/grl/ast"
 	templates "decisionTable/conv/grule/grl/generate/grl"
+	"errors"
 	"text/template"
+)
+
+var (
+	ErrConverterGRLSymbolNotFound = errors.New("Operator not found in operator symbol table")
 )
 
 func CreateGrlGeneratorListener() (GrlGeneratorListener, error) {
@@ -26,23 +31,25 @@ type operation struct {
 	Right string
 }
 
+//ToDo error handling with stack, type casts and templates
 type GrlGeneratorListener struct {
 	grl.GrlListener
 	stack               *ast.Stack
 	OperationsTemplates template.Template
 	OperatorTable       map[int]string
+	Errors              []error
 }
 
-func (g GrlGeneratorListener) GetCode() string {
+func (g *GrlGeneratorListener) GetCode() string {
 	return g.stack.Pop().(string)
 }
 
-func (g GrlGeneratorListener) executeTemplate(op int, tmplName string) string {
+func (g *GrlGeneratorListener) executeTemplate(op int, tmplName string) string {
 	var tpl bytes.Buffer
 
 	rightVal := g.stack.Pop()
 	leftVal := g.stack.Pop()
-	operator := g.OperatorTable[op]
+	operator := g.executeOperatorMapping(op)
 
 	data := operation{
 		Left:  leftVal.(string),
@@ -55,20 +62,29 @@ func (g GrlGeneratorListener) executeTemplate(op int, tmplName string) string {
 	return tpl.String()
 }
 
-func (g GrlGeneratorListener) ExitLogicalOperations(ctx grl.LogicalOperations) {
+func (g *GrlGeneratorListener) executeOperatorMapping(op int) string {
+	val, ok := g.OperatorTable[op]
+	if !ok {
+		g.Errors = append(g.Errors, ErrConverterGRLSymbolNotFound)
+	}
+
+	return val
+}
+
+func (g *GrlGeneratorListener) ExitLogicalOperations(ctx grl.LogicalOperations) {
 	r := g.executeTemplate(ctx.Operator, templates.BinaryOperation)
 	g.stack.Push(r)
 }
 
-func (g GrlGeneratorListener) ExitComparisonOperations(ctx grl.ComparisonOperations) {
+func (g *GrlGeneratorListener) ExitComparisonOperations(ctx grl.ComparisonOperations) {
 	r := g.executeTemplate(ctx.Operator, templates.BinaryOperation)
 	g.stack.Push(r)
 }
 
-func (g GrlGeneratorListener) ExitInteger(ctx grl.Integer) {
+func (g *GrlGeneratorListener) ExitInteger(ctx grl.Integer) {
 	g.stack.Push(ctx.String())
 }
 
-func (g GrlGeneratorListener) ExitString(ctx grl.String) {
+func (g *GrlGeneratorListener) ExitString(ctx grl.String) {
 	g.stack.Push(ctx.String())
 }

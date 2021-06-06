@@ -1,6 +1,6 @@
 package data
 
-// This is just a example implementation of the FieldInterface
+// This is just a example implementation of the FieldInterface used in test cases
 
 type TestField struct {
 	Name string

@@ -108,7 +108,7 @@ func (c TableToGruleConverter) convertEntryToExpression(entry dtable.EntryInterf
 		ExpressionLanguage: entry.ExpressionLanguage(),
 	}
 
-	res, err := grl.CreateExpression(field.Id(), entry)
+	res, err := grl.CreateExpression(field, entry)
 	if err != nil {
 		return grule.Term{}, err
 	}

@@ -22,13 +22,13 @@ func TestDTableValidator_SFeel_Validate(t *testing.T) {
 				HitPolicy:        data.First,
 				CollectOperator:  data.List,
 				NotationStandard: data.GRULE,
-				InputFields: []data.FieldInterface{data.Field{
+				InputFields: []data.FieldInterface{data.TestField{
 					Name: "I1",
 					Key:  "L1",
 					Typ:  data.Integer,
 				},
 				},
-				OutputFields: []data.FieldInterface{data.Field{
+				OutputFields: []data.FieldInterface{data.TestField{
 					Name: "O1",
 					Key:  "L1",
 					Typ:  data.Float,
@@ -73,13 +73,13 @@ func TestDTableValidator_SFeel_Validate(t *testing.T) {
 				Name:             "TableOne",
 				HitPolicy:        data.Any,
 				NotationStandard: data.GRULE,
-				InputFields: []data.FieldInterface{data.Field{
+				InputFields: []data.FieldInterface{data.TestField{
 					Name: "I1",
 					Key:  "L1",
 					Typ:  data.String,
 				},
 				},
-				OutputFields: []data.FieldInterface{data.Field{
+				OutputFields: []data.FieldInterface{data.TestField{
 					Name: "O1",
 					Key:  "L1",
 					Typ:  data.Integer,
@@ -104,13 +104,13 @@ func TestDTableValidator_SFeel_Validate(t *testing.T) {
 				HitPolicy:        data.Collect,
 				CollectOperator:  "XYZ",
 				NotationStandard: data.DMN,
-				InputFields: []data.FieldInterface{data.Field{
+				InputFields: []data.FieldInterface{data.TestField{
 					Name: "I1",
 					Key:  "L1",
 					Typ:  data.String,
 				},
 				},
-				OutputFields: []data.FieldInterface{data.Field{
+				OutputFields: []data.FieldInterface{data.TestField{
 					Name: "O1",
 					Key:  "L1",
 					Typ:  data.Integer,
@@ -145,19 +145,19 @@ func TestDTableValidator_SFeel_Validate(t *testing.T) {
 			want1: []error{ErrDTableInputEmpty, ErrDTableOutputEmpty},
 		},
 		{
-			name: "Wrong Field definition",
+			name: "Wrong TestField definition",
 			table: data.Table{
 				Key:              "K1",
 				Name:             "N1",
 				HitPolicy:        data.First,
 				NotationStandard: data.GRULE,
-				InputFields: []data.FieldInterface{data.Field{
+				InputFields: []data.FieldInterface{data.TestField{
 					Name: "I1",
 					Key:  "L1",
 					Typ:  data.Double,
 				},
 				},
-				OutputFields: []data.FieldInterface{data.Field{
+				OutputFields: []data.FieldInterface{data.TestField{
 					Name: "",
 					Key:  "L1",
 					Typ:  data.Integer,
@@ -182,13 +182,13 @@ func TestDTableValidator_SFeel_Validate(t *testing.T) {
 				HitPolicy:        data.First,
 				NotationStandard: data.GRULE,
 				InputFields: []data.FieldInterface{
-					data.Field{
+					data.TestField{
 						Name: "I1",
 						Key:  "L1",
 						Typ:  data.String,
 					},
 				},
-				OutputFields: []data.FieldInterface{data.Field{
+				OutputFields: []data.FieldInterface{data.TestField{
 					Name: "O2",
 					Key:  "L1",
 					Typ:  data.Integer,
@@ -214,13 +214,13 @@ func TestDTableValidator_SFeel_Validate(t *testing.T) {
 				HitPolicy:        data.First,
 				NotationStandard: data.GRULE,
 				InputFields: []data.FieldInterface{
-					data.Field{
+					data.TestField{
 						Name: "I1",
 						Key:  "L1",
 						Typ:  data.String,
 					},
 				},
-				OutputFields: []data.FieldInterface{data.Field{
+				OutputFields: []data.FieldInterface{data.TestField{
 					Name: "O2",
 					Key:  "L1",
 					Typ:  data.Integer,
@@ -272,13 +272,13 @@ func TestDTableValidator_ValidateInterferences(t *testing.T) {
 				HitPolicy:        data.First,
 				CollectOperator:  data.List,
 				NotationStandard: data.GRULE,
-				InputFields: []data.FieldInterface{data.Field{
+				InputFields: []data.FieldInterface{data.TestField{
 					Name: "I1",
 					Key:  "L1",
 					Typ:  data.String,
 				},
 				},
-				OutputFields: []data.FieldInterface{data.Field{
+				OutputFields: []data.FieldInterface{data.TestField{
 					Name: "O1",
 					Key:  "L1",
 					Typ:  data.Float,
