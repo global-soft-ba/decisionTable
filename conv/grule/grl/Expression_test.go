@@ -10,8 +10,8 @@ import (
 
 func TestCreateExpression(t *testing.T) {
 	type args struct {
-		fieldName string
-		entry     dTable.EntryInterface
+		field dTable.FieldInterface
+		entry dTable.EntryInterface
 	}
 	tests := []struct {
 		name    string
@@ -22,16 +22,16 @@ func TestCreateExpression(t *testing.T) {
 		{
 			name: "convert sfeel.interval  to ast",
 			args: args{
-				fieldName: "X",
-				entry:     sfeel.CreateInputEntry("[1..6]"),
+				field: dTable.TestField{Name: "X", Key: "Y", Typ: dTable.Integer},
+				entry: sfeel.CreateInputEntry("[1..6]"),
 			},
-			want:    "X opId:6 1 opId:0 X opId:4 6",
+			want:    "((X.Y :6: 1) :0: (X.Y :4: 6))",
 			wantErr: false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := CreateExpression(tt.args.fieldName, tt.args.entry)
+			got, err := CreateExpression(tt.args.field, tt.args.entry)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("CreateExpression() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -45,8 +45,8 @@ func TestCreateExpression(t *testing.T) {
 
 func TestExpression_Convert(t *testing.T) {
 	type fields struct {
-		fieldName string
-		entry     dTable.EntryInterface
+		field dTable.FieldInterface
+		entry dTable.EntryInterface
 	}
 	type args struct {
 		targetFormat data.OutputFormat
@@ -61,18 +61,18 @@ func TestExpression_Convert(t *testing.T) {
 		{
 			name: "convert interval to grl",
 			fields: fields{
-				fieldName: "X",
-				entry:     sfeel.CreateInputEntry("[1..6]"),
+				field: dTable.TestField{Name: "X", Key: "Y", Typ: dTable.Integer},
+				entry: sfeel.CreateInputEntry("[1..6]"),
 			},
 			args:    args{targetFormat: data.GRL},
-			want:    "((X >= 1) && (X <= 6))",
+			want:    "((X.Y >= 1) && (X.Y <= 6))",
 			wantErr: false,
 		},
 		{
 			name: "convert interval to grl",
 			fields: fields{
-				fieldName: "X",
-				entry:     sfeel.CreateInputEntry("[1..6]"),
+				field: dTable.TestField{Name: "X", Key: "Y", Typ: dTable.Integer},
+				entry: sfeel.CreateInputEntry("[1..6]"),
 			},
 			args:    args{targetFormat: data.JSON},
 			want:    "",
@@ -81,7 +81,7 @@ func TestExpression_Convert(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			e, _ := CreateExpression(tt.fields.fieldName, tt.fields.entry)
+			e, _ := CreateExpression(tt.fields.field, tt.fields.entry)
 			got, err := e.Convert(tt.args.targetFormat)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Convert() error = %v, wantErr %v", err, tt.wantErr)

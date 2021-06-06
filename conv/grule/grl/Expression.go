@@ -47,7 +47,7 @@ func (e Expression) Convert(targetFormat grule.OutputFormat) (string, error) {
 			return "", err
 		}
 
-		walker := grl.CreateGRLTreeWalker(gen)
+		walker := grl.CreateGRLTreeWalker(&gen)
 		walker.Walk(e.tree)
 		return gen.GetCode(), nil
 	}
