@@ -1,6 +1,84 @@
 package grl
 
+import (
+	"decisionTable/conv/grule/data"
+	dTable "decisionTable/data"
+	"text/template"
+)
+
+func GenerateTemplates(hitPolicy dTable.HitPolicy, interference bool) (*template.Template, error) {
+	var t *template.Template
+
+	t, err := template.New(RULE).Funcs(
+		template.FuncMap{
+			"getFormat": func() data.OutputFormat {
+				return data.GRL
+			},
+		},
+	).Parse(RULE)
+	if err != nil {
+		return &template.Template{}, err
+	}
+
+	_, err = t.New(RULENAME).Parse(RULENAME)
+	if err != nil {
+		return &template.Template{}, err
+	}
+
+	_, err = t.New(WHEN).Parse(WHEN)
+	if err != nil {
+		return &template.Template{}, err
+	}
+
+	_, err = t.New(THEN).Parse(THEN)
+	if err != nil {
+		return &template.Template{}, err
+	}
+
+	_, err = t.New(ENTRY).Parse(ENTRY)
+	if err != nil {
+		return &template.Template{}, err
+	}
+
+	_, err = t.New(SALIENCE).Parse(generatePolicyTemplate(hitPolicy))
+	if err != nil {
+		return &template.Template{}, err
+	}
+
+	_, err = t.New(INTERFERENCE).Parse(generateInterferenceTemplate(interference))
+	if err != nil {
+		return &template.Template{}, err
+	}
+
+	return t, nil
+}
+
+func generatePolicyTemplate(hitPolicy dTable.HitPolicy) string {
+	switch hitPolicy {
+	case dTable.Unique:
+		return HitPolicyUnique
+	case dTable.First:
+		return HitPolicyFirst
+	case dTable.Priority:
+		return HitPolicyPriority
+	default:
+		return HitPolicyDefault
+	}
+}
+
+func generateInterferenceTemplate(interference bool) string {
+	switch interference {
+	case true:
+		return InterferenceExists
+	default:
+		return InterferenceNotExists
+	}
+}
+
 /*
+We use nested templates, so we walk along the internal grule data model
+
+
 	rule <RuleName> <RuleDescription> [salience <priority>] {
     when
         <boolean expression>
@@ -11,12 +89,12 @@ package grl
 */
 
 const RULE = `rule {{ template "RULENAME" . }} {{template "SALIENCE" . }} {
- when {{ template "WHEN" .}} 
- then {{ template "THEN" .}} 
+ when {{ template "WHEN" .}}
+ then {{ template "THEN" .}}
  {{ template "INTERFERENCE" }}
 }`
 
-const RULENAME = `{{define "RULENAME"}}row_{{ .Field }} "{{ .Description }}"{{end}}`
+const RULENAME = `{{define "RULENAME"}}row_{{ .Name }} "{{ .Description }}"{{end}}`
 
 const WHEN = `{{define "WHEN" }}
 {{- range $index, $val := .Expressions }}
@@ -34,7 +112,7 @@ const THEN = `{{define "THEN"}}
  {{- end}}
 {{- end}}`
 
-const ENTRY = `{{define "ENTRY"}}{{.Expression}}{{end}}`
+const ENTRY = `{{define "ENTRY"}} {{.Expression.Convert getFormat }} {{end}}`
 
 // HitPolicies
 /* We assume that the table has unique non overlapping conditions. So maximal hit conditions can be one (or nothing).
@@ -46,39 +124,15 @@ const ENTRY = `{{define "ENTRY"}}{{.Expression}}{{end}}`
 
 // UNIQUE Case with fallback in case of overlapping expressions
 const (
+	SALIENCE          = `SALIENCE`
 	HitPolicyDefault  = `{{define "SALIENCE"}}{{end}}`
 	HitPolicyUnique   = `{{define "SALIENCE"}}salience {{.Salience}} {{end}}`
-	FIRSTHitPolicy    = `{{define "SALIENCE"}}salience {{.InvSalience}}{{end}}`
-	PRIORITYHitPolicy = `{{define "SALIENCE"}}salience {{.Salience}}{{end}}`
+	HitPolicyFirst    = `{{define "SALIENCE"}}salience {{.InvSalience}}{{end}}`
+	HitPolicyPriority = `{{define "SALIENCE"}}salience {{.Salience}}{{end}}`
 )
 
 const (
-	INTERFERENCE    = `{{define "INTERFERENCE"}}{{end}}`
-	NONINTERFERENCE = `{{define "INTERFERENCE"}} Complete();{{end}}`
+	INTERFERENCE          = `INTERFERENCE`
+	InterferenceExists    = `{{define "INTERFERENCE"}}{{end}}`
+	InterferenceNotExists = `{{define "INTERFERENCE"}} Complete(); {{end}}`
 )
-
-/*
-
-func buildPolicyTemplate(hitPolicy data.HitPolicy) string {
-	switch hitPolicy {
-	case data.Unique:
-		return grl.UNIQUE
-	case data.First:
-		return grl.FIRST
-	case data.Priority:
-		return grl.PRIORITY
-	default:
-		return grl.DEFAULT
-	}
-}
-
-func buildInterferenceTemplate(interference bool) string {
-	switch interference {
-	case true:
-		return grl.INTERFERENCE
-	default:
-		return grl.NONINTERFERENCE
-	}
-}
-
-*/
