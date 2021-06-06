@@ -102,7 +102,7 @@ func (e Entry) ValidateExistenceOfFieldReferencesInExpression(fields []data.Fiel
 
 func (e Entry) getFieldUsingQualifiedName(name sfeel.QualifiedName, fields []data.FieldInterface) (data.FieldInterface, error) {
 	for _, val := range fields {
-		if val.GetQualifiedName(sfeel.SFeelSeparatorQualifiedName) == name.String() {
+		if val.GetQualifiedName() == name.GetQualifiedName() {
 			return val, nil
 		}
 	}

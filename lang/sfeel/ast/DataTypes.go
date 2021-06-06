@@ -86,6 +86,9 @@ func (l QualifiedName) String() string {
 
 	return out.String()
 }
+func (l QualifiedName) GetQualifiedName() string {
+	return l.String()
+}
 func (l QualifiedName) GetOperandDataType() reflect.Type {
 	return reflect.TypeOf(l)
 }
