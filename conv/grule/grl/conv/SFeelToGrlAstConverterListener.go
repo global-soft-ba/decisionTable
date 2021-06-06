@@ -34,16 +34,6 @@ func (l *SFeelToGrlAstConverterListener) GetAST() ast.Node {
 	return l.stack.Pop().(ast.Node)
 }
 
-func (l *SFeelToGrlAstConverterListener) ExitInteger(ctx sfeel.Integer) {
-	i := grl.Integer{Val: ctx.Value}
-	l.stack.Push(i)
-}
-
-func (l *SFeelToGrlAstConverterListener) ExitQualifiedName(ctx sfeel.QualifiedName) {
-	q := grl.QualifiedName{Val: ctx.Value}
-	l.stack.Push(q)
-}
-
 func (l *SFeelToGrlAstConverterListener) ExitInterval(ctx sfeel.Interval) {
 
 	rightVal := l.stack.Pop()
@@ -68,4 +58,25 @@ func (l *SFeelToGrlAstConverterListener) ExitInterval(ctx sfeel.Interval) {
 	}
 
 	l.stack.Push(logicOp)
+}
+
+func (l *SFeelToGrlAstConverterListener) ExitUnaryTest(ctx sfeel.UnaryTest) {
+	rightVal := l.stack.Pop()
+	comp := grl.ComparisonOperations{
+		Left:     grl.String{Val: l.field.GetQualifiedName()},
+		Operator: grl.ComparisonOperatorEQUAL,
+		Right:    rightVal.(ast.Node),
+	}
+
+	l.stack.Push(comp)
+}
+
+func (l *SFeelToGrlAstConverterListener) ExitInteger(ctx sfeel.Integer) {
+	i := grl.Integer{Val: ctx.Value}
+	l.stack.Push(i)
+}
+
+func (l *SFeelToGrlAstConverterListener) ExitQualifiedName(ctx sfeel.QualifiedName) {
+	q := grl.QualifiedName{Val: ctx.Value}
+	l.stack.Push(q)
 }

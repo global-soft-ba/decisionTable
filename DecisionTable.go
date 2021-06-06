@@ -60,13 +60,15 @@ func (d DecisionTable) Interferences() bool {
 	return d.data.Interferences
 }
 
-func (d DecisionTable) Convert() (interface{}, error) {
+//ToDo define explicit output format type (instead of string) into engine standard (notation standard)
+func (d DecisionTable) Convert(format string) (interface{}, error) {
 	if !d.valid {
 		return []string{}, ErrDTableNotValid
 	}
 
 	tableConverter := conv.CreateConverter()
-	res, err := tableConverter.Convert(d.data)
+
+	res, err := tableConverter.Convert(d.data, format)
 	if err != nil {
 		return nil, err
 	}

@@ -16,12 +16,12 @@ func CreateConverter() Converter {
 
 type Converter struct{}
 
-func (c Converter) Convert(table data.Table) (interface{}, error) {
+func (c Converter) Convert(table data.Table, format string) (interface{}, error) {
 
 	switch table.NotationStandard {
 	case data.GRULE:
-		conv := grule.CreateGruleConverter()
-		res, err := conv.Convert(table)
+		conv := grule.CreateConverter()
+		res, err := conv.Convert(table, format)
 		if err != nil {
 			return nil, err
 		}

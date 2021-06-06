@@ -9,8 +9,8 @@ import (
 	"testing"
 )
 
-func CreateTestExpression(fieldName string, entry dtable.EntryInterface) grule.ExpressionInterface {
-	res, _ := grl.CreateExpression(fieldName, entry)
+func CreateTestExpression(field dtable.FieldInterface, entry dtable.EntryInterface) grule.ExpressionInterface {
+	res, _ := grl.CreateExpression(field, entry)
 	return res
 }
 
@@ -66,13 +66,13 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 						Expressions: []grule.Term{
 							{
 								dtable.TestField{"I1", "L1", dtable.String},
-								CreateTestExpression("I1.L1", sfeel.CreateInputEntry("3")),
+								CreateTestExpression(dtable.TestField{"I1", "L1", dtable.String}, sfeel.CreateInputEntry("3")),
 								dtable.SFEEL},
 						},
 						Assignments: []grule.Term{
 							{
 								Field:              dtable.TestField{"O1", "L1", dtable.Float},
-								Expression:         CreateTestExpression("I1.L1", sfeel.CreateOutputEntry("4")),
+								Expression:         CreateTestExpression(dtable.TestField{"O1", "L1", dtable.Float}, sfeel.CreateOutputEntry("4")),
 								ExpressionLanguage: dtable.SFEEL,
 							},
 						},
@@ -97,6 +97,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 	}
 }
 
+//ToDo Migrate testcases
 /*
 {name: "Valid Table",
 			args: args{

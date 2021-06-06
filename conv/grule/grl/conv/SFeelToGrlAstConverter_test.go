@@ -29,6 +29,18 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 			},
 			want: "((X.Y :6: 1) :0: (X.Y :4: 6))",
 		},
+		{
+			name: "simple unary test convert",
+			args: args{
+				data.TestField{
+					Name: "X",
+					Key:  "Y",
+					Typ:  data.Integer,
+				},
+				sfeel.CreateInputEntry("8"),
+			},
+			want: "(X.Y :2: 8)",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
