@@ -1,7 +1,7 @@
 package json
 
 import (
-	dTable "decisionTable/data"
+	dTable "github.com/global-soft-ba/decisionTable/data"
 	"text/template"
 )
 

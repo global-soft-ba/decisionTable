@@ -1,7 +1,7 @@
 package interfaces
 
 import (
-	"decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data"
 )
 
 type ConverterInterface interface {

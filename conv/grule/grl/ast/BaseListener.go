@@ -1,6 +1,6 @@
 package ast
 
-import "decisionTable/ast"
+import "github.com/global-soft-ba/decisionTable/ast"
 
 func CreateGRLTreeWalker(listener GrlListenerInterface) ast.TreeWalker {
 	return ast.CreateTreeWalker(&BaseListener{listener})

@@ -2,7 +2,7 @@ package ast
 
 import (
 	"bytes"
-	"decisionTable/ast"
+	"github.com/global-soft-ba/decisionTable/ast"
 	"strconv"
 )
 

@@ -1,10 +1,10 @@
 package antlr
 
 import (
-	"decisionTable/lang/sfeel/antlr/errors"
-	"decisionTable/lang/sfeel/ast"
-	parser2 "decisionTable/lang/sfeel/gen"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
+	"github.com/global-soft-ba/decisionTable/lang/sfeel/antlr/errors"
+	"github.com/global-soft-ba/decisionTable/lang/sfeel/ast"
+	parser2 "github.com/global-soft-ba/decisionTable/lang/sfeel/gen"
 )
 
 // ToDo Parser cannot be reused (it is not thread safe). So we assume that for each evaluation of an expression a new parser must be created

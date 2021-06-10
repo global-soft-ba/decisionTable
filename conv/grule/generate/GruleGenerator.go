@@ -2,10 +2,10 @@ package generate
 
 import (
 	"bytes"
-	grule "decisionTable/conv/grule/data"
-	"decisionTable/conv/grule/generate/grl"
-	"decisionTable/conv/grule/generate/json"
 	"errors"
+	grule "github.com/global-soft-ba/decisionTable/conv/grule/data"
+	"github.com/global-soft-ba/decisionTable/conv/grule/generate/grl"
+	"github.com/global-soft-ba/decisionTable/conv/grule/generate/json"
 	"text/template"
 )
 

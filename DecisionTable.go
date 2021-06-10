@@ -1,9 +1,9 @@
 package main
 
 import (
-	conv "decisionTable/conv"
-	"decisionTable/data"
 	"errors"
+	conv "github.com/global-soft-ba/decisionTable/conv"
+	"github.com/global-soft-ba/decisionTable/data"
 )
 
 var (

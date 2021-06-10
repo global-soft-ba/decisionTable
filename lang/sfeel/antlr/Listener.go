@@ -1,10 +1,10 @@
 package antlr
 
 import (
-	ast "decisionTable/ast"
-	"decisionTable/lang/sfeel/antlr/errors"
-	sfeel "decisionTable/lang/sfeel/ast"
-	"decisionTable/lang/sfeel/gen"
+	ast "github.com/global-soft-ba/decisionTable/ast"
+	"github.com/global-soft-ba/decisionTable/lang/sfeel/antlr/errors"
+	sfeel "github.com/global-soft-ba/decisionTable/lang/sfeel/ast"
+	"github.com/global-soft-ba/decisionTable/lang/sfeel/gen"
 	"reflect"
 	"strconv"
 )

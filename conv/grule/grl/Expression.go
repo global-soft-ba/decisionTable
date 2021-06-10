@@ -1,13 +1,13 @@
 package grl
 
 import (
-	"decisionTable/ast"
-	grule "decisionTable/conv/grule/data"
-	grl "decisionTable/conv/grule/grl/ast"
-	conv "decisionTable/conv/grule/grl/conv"
-	"decisionTable/conv/grule/grl/generate"
-	dTable "decisionTable/data"
 	"errors"
+	"github.com/global-soft-ba/decisionTable/ast"
+	grule "github.com/global-soft-ba/decisionTable/conv/grule/data"
+	grl "github.com/global-soft-ba/decisionTable/conv/grule/grl/ast"
+	conv "github.com/global-soft-ba/decisionTable/conv/grule/grl/conv"
+	"github.com/global-soft-ba/decisionTable/conv/grule/grl/generate"
+	dTable "github.com/global-soft-ba/decisionTable/data"
 )
 
 var (

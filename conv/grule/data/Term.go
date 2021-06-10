@@ -1,6 +1,6 @@
 package data
 
-import "decisionTable/data"
+import "github.com/global-soft-ba/decisionTable/data"
 
 type Term struct {
 	Field              data.FieldInterface

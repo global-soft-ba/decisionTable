@@ -1,10 +1,10 @@
 package conv
 
 import (
-	grule "decisionTable/conv/grule/data"
-	"decisionTable/conv/grule/grl"
-	dtable "decisionTable/data"
 	"errors"
+	grule "github.com/global-soft-ba/decisionTable/conv/grule/data"
+	"github.com/global-soft-ba/decisionTable/conv/grule/grl"
+	dtable "github.com/global-soft-ba/decisionTable/data"
 	"strconv"
 )
 

@@ -2,8 +2,8 @@ package ast
 
 import (
 	"bytes"
-	"decisionTable/ast"
-	sfeel "decisionTable/lang/sfeel/ast"
+	"github.com/global-soft-ba/decisionTable/ast"
+	sfeel "github.com/global-soft-ba/decisionTable/lang/sfeel/ast"
 	"strconv"
 )
 

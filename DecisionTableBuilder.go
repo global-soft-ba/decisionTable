@@ -1,9 +1,9 @@
 package main
 
 import (
-	"decisionTable/data"
-	sfeel2 "decisionTable/lang/sfeel"
-	"decisionTable/valid"
+	"github.com/global-soft-ba/decisionTable/data"
+	sfeel2 "github.com/global-soft-ba/decisionTable/lang/sfeel"
+	"github.com/global-soft-ba/decisionTable/valid"
 )
 
 type DecisionTableBuilder struct {

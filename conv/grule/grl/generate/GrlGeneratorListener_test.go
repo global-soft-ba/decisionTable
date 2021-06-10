@@ -1,8 +1,8 @@
 package generate
 
 import (
-	"decisionTable/ast"
-	grl "decisionTable/conv/grule/grl/ast"
+	"github.com/global-soft-ba/decisionTable/ast"
+	grl "github.com/global-soft-ba/decisionTable/conv/grule/grl/ast"
 	"testing"
 )
 

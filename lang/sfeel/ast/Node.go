@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"decisionTable/ast"
+	"github.com/global-soft-ba/decisionTable/ast"
 	"reflect"
 )
 

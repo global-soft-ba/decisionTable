@@ -1,8 +1,8 @@
 package conv
 
 import (
-	"decisionTable/ast"
-	"decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/ast"
+	"github.com/global-soft-ba/decisionTable/data"
 )
 
 func CreateSFeelToGrlAstConverter() SFeelToGrlAstConverter {

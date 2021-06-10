@@ -1,8 +1,8 @@
 package antlr
 
 import (
-	"decisionTable/lang/sfeel/ast"
-	gen "decisionTable/lang/sfeel/gen"
+	"github.com/global-soft-ba/decisionTable/lang/sfeel/ast"
+	gen "github.com/global-soft-ba/decisionTable/lang/sfeel/gen"
 )
 
 var (

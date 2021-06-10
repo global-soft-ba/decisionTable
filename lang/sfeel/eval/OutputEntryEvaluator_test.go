@@ -1,7 +1,7 @@
 package eval
 
 import (
-	ast "decisionTable/lang/sfeel/ast"
+	ast "github.com/global-soft-ba/decisionTable/lang/sfeel/ast"
 	"testing"
 )
 

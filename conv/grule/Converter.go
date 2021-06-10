@@ -1,10 +1,10 @@
 package grule
 
 import (
-	"decisionTable/conv/grule/conv"
-	"decisionTable/conv/grule/generate"
-	"decisionTable/conv/interfaces"
-	"decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/conv/grule/conv"
+	"github.com/global-soft-ba/decisionTable/conv/grule/generate"
+	"github.com/global-soft-ba/decisionTable/conv/interfaces"
+	"github.com/global-soft-ba/decisionTable/data"
 )
 
 func CreateConverter() interfaces.ConverterInterface {

@@ -1,7 +1,7 @@
 package grl
 
 import (
-	grl "decisionTable/conv/grule/grl/ast"
+	grl "github.com/global-soft-ba/decisionTable/conv/grule/grl/ast"
 	"text/template"
 )
 

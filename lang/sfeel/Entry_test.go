@@ -1,9 +1,9 @@
 package sfeel
 
 import (
-	"decisionTable/ast"
-	"decisionTable/data"
-	sfeel "decisionTable/lang/sfeel/ast"
+	"github.com/global-soft-ba/decisionTable/ast"
+	"github.com/global-soft-ba/decisionTable/data"
+	sfeel "github.com/global-soft-ba/decisionTable/lang/sfeel/ast"
 	"reflect"
 	"testing"
 )

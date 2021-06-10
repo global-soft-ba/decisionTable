@@ -1,7 +1,7 @@
 package main
 
 import (
-	"decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data"
 	"reflect"
 	"testing"
 )

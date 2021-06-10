@@ -1,12 +1,12 @@
 package sfeel
 
 import (
-	"decisionTable/data"
-	"decisionTable/lang/sfeel/antlr"
-	sfeel "decisionTable/lang/sfeel/ast"
-	"decisionTable/lang/sfeel/eval"
 	"errors"
 	"fmt"
+	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/lang/sfeel/antlr"
+	sfeel "github.com/global-soft-ba/decisionTable/lang/sfeel/ast"
+	"github.com/global-soft-ba/decisionTable/lang/sfeel/eval"
 	"reflect"
 )
 

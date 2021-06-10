@@ -2,10 +2,10 @@ package generate
 
 import (
 	"bytes"
-	"decisionTable/ast"
-	grl "decisionTable/conv/grule/grl/ast"
-	templates "decisionTable/conv/grule/grl/generate/grl"
 	"errors"
+	"github.com/global-soft-ba/decisionTable/ast"
+	grl "github.com/global-soft-ba/decisionTable/conv/grule/grl/ast"
+	templates "github.com/global-soft-ba/decisionTable/conv/grule/grl/generate/grl"
 	"text/template"
 )
 

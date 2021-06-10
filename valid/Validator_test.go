@@ -1,8 +1,8 @@
 package valid
 
 import (
-	"decisionTable/data"
-	sfeel2 "decisionTable/lang/sfeel"
+	"github.com/global-soft-ba/decisionTable/data"
+	sfeel2 "github.com/global-soft-ba/decisionTable/lang/sfeel"
 	"reflect"
 	"testing"
 )

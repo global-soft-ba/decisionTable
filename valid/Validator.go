@@ -1,9 +1,9 @@
 package valid
 
 import (
-	conf "decisionTable/config"
-	"decisionTable/data"
 	"errors"
+	conf "github.com/global-soft-ba/decisionTable/config"
+	"github.com/global-soft-ba/decisionTable/data"
 )
 
 var (

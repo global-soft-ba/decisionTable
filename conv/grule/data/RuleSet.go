@@ -1,6 +1,6 @@
 package data
 
-import "decisionTable/data"
+import "github.com/global-soft-ba/decisionTable/data"
 
 type RuleSet struct {
 	Key             string

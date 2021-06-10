@@ -1,7 +1,7 @@
 package data
 
 import (
-	"decisionTable/lang/sfeel/ast"
+	"github.com/global-soft-ba/decisionTable/lang/sfeel/ast"
 )
 
 type EntryInterface interface {

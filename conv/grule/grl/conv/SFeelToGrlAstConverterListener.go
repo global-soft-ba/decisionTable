@@ -1,10 +1,10 @@
 package conv
 
 import (
-	"decisionTable/ast"
-	grl "decisionTable/conv/grule/grl/ast"
-	"decisionTable/data"
-	sfeel "decisionTable/lang/sfeel/ast"
+	"github.com/global-soft-ba/decisionTable/ast"
+	grl "github.com/global-soft-ba/decisionTable/conv/grule/grl/ast"
+	"github.com/global-soft-ba/decisionTable/data"
+	sfeel "github.com/global-soft-ba/decisionTable/lang/sfeel/ast"
 )
 
 var OperatorMappingTable = map[int]int{

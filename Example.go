@@ -1,8 +1,8 @@
 package main
 
 import (
-	"decisionTable/data"
 	"fmt"
+	"github.com/global-soft-ba/decisionTable/data"
 	"github.com/hyperjumptech/grule-rule-engine/ast"
 	"github.com/hyperjumptech/grule-rule-engine/builder"
 	"github.com/hyperjumptech/grule-rule-engine/engine"

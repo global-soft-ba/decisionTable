@@ -1,6 +1,6 @@
 package types
 
-import "decisionTable/data"
+import "github.com/global-soft-ba/decisionTable/data"
 
 type TableConfigStandard struct {
 	ExpressionLanguage map[data.ExpressionLanguage]string

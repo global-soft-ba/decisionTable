@@ -1,7 +1,7 @@
 package eval
 
 import (
-	"decisionTable/lang/sfeel/ast"
+	"github.com/global-soft-ba/decisionTable/lang/sfeel/ast"
 )
 
 type EvaluatorInterface interface {
