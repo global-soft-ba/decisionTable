@@ -1,6 +1,6 @@
 package termconverter
 
-import "decisionTable/converters/grule/grlmodel"
+import "github.com/global-soft-ba/decisionTable/converters/grule/grlmodel"
 
 type TermConverterInterface interface {
 	ConvertExpression(expr grlmodel.Term) grlmodel.Term

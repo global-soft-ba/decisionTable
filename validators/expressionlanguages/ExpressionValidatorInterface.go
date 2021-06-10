@@ -1,7 +1,7 @@
 package expressionlanguages
 
 import (
-	"decisionTable/model"
+	"github.com/global-soft-ba/decisionTable/model"
 )
 
 type ExpressionValidatorInterface interface {

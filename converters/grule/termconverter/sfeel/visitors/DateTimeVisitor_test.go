@@ -1,10 +1,10 @@
 package visitors
 
 import (
-	"decisionTable/converters/grule/grlmodel"
-	"decisionTable/converters/grule/termconverter/sfeel/mapper"
-	"decisionTable/model"
-	"decisionTable/parser/sfeel/parser"
+	"github.com/global-soft-ba/decisionTable/converters/grule/grlmodel"
+	"github.com/global-soft-ba/decisionTable/converters/grule/termconverter/sfeel/mapper"
+	"github.com/global-soft-ba/decisionTable/model"
+	"github.com/global-soft-ba/decisionTable/parser/sfeel/parser"
 	"reflect"
 	"testing"
 )

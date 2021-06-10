@@ -1,9 +1,9 @@
 package main
 
 import (
-	"decisionTable/converters/grule/tableconverter/grl"
-	"decisionTable/converters/interfaces"
-	"decisionTable/model"
+	"github.com/global-soft-ba/decisionTable/converters/grule/tableconverter/grl"
+	"github.com/global-soft-ba/decisionTable/converters/interfaces"
+	"github.com/global-soft-ba/decisionTable/model"
 	"reflect"
 	"testing"
 )

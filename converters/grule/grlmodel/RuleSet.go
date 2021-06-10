@@ -1,6 +1,6 @@
 package grlmodel
 
-import "decisionTable/model"
+import "github.com/global-soft-ba/decisionTable/model"
 
 type RuleSet struct {
 	Key             string

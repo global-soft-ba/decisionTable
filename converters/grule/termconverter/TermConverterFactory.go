@@ -1,9 +1,9 @@
 package termconverter
 
 import (
-	"decisionTable/converters/grule/termconverter/sfeel"
-	"decisionTable/model"
 	"errors"
+	"github.com/global-soft-ba/decisionTable/converters/grule/termconverter/sfeel"
+	"github.com/global-soft-ba/decisionTable/model"
 )
 
 var (

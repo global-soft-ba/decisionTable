@@ -1,8 +1,8 @@
 package validators
 
 import (
-	"decisionTable/model"
-	"decisionTable/validators/expressionlanguages"
+	"github.com/global-soft-ba/decisionTable/model"
+	"github.com/global-soft-ba/decisionTable/validators/expressionlanguages"
 	"reflect"
 	"testing"
 )

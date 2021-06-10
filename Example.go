@@ -1,9 +1,9 @@
 package main
 
 import (
-	conv "decisionTable/converters"
-	"decisionTable/model"
 	"fmt"
+	conv "github.com/global-soft-ba/decisionTable/converters"
+	"github.com/global-soft-ba/decisionTable/model"
 	"github.com/hyperjumptech/grule-rule-engine/ast"
 	"github.com/hyperjumptech/grule-rule-engine/builder"
 	"github.com/hyperjumptech/grule-rule-engine/engine"

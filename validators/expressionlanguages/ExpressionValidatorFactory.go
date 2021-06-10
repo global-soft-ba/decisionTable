@@ -1,9 +1,9 @@
 package expressionlanguages
 
 import (
-	"decisionTable/model"
-	sFeelValidator "decisionTable/validators/expressionlanguages/sfeel"
 	err "errors"
+	"github.com/global-soft-ba/decisionTable/model"
+	sFeelValidator "github.com/global-soft-ba/decisionTable/validators/expressionlanguages/sfeel"
 )
 
 var (

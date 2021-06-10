@@ -1,8 +1,8 @@
 package json
 
 import (
-	"decisionTable/converters/grule/termconverter"
-	"decisionTable/model"
+	"github.com/global-soft-ba/decisionTable/converters/grule/termconverter"
+	"github.com/global-soft-ba/decisionTable/model"
 )
 
 func CreateDTableToJsonConverter() DTableToJsonConverter {

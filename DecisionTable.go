@@ -1,9 +1,9 @@
 package main
 
 import (
-	"decisionTable/converters/interfaces"
-	"decisionTable/model"
 	"errors"
+	"github.com/global-soft-ba/decisionTable/converters/interfaces"
+	"github.com/global-soft-ba/decisionTable/model"
 )
 
 var (

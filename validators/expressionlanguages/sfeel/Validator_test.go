@@ -1,8 +1,8 @@
 package sfeel
 
 import (
-	"decisionTable/model"
 	"fmt"
+	"github.com/global-soft-ba/decisionTable/model"
 	"testing"
 )
 

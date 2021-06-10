@@ -1,11 +1,11 @@
 package grule
 
 import (
-	"decisionTable/converters/grule/tableconverter/grl"
-	"decisionTable/converters/grule/tableconverter/json"
-	intf "decisionTable/converters/interfaces"
-	"decisionTable/model"
 	err "errors"
+	"github.com/global-soft-ba/decisionTable/converters/grule/tableconverter/grl"
+	"github.com/global-soft-ba/decisionTable/converters/grule/tableconverter/json"
+	intf "github.com/global-soft-ba/decisionTable/converters/interfaces"
+	"github.com/global-soft-ba/decisionTable/model"
 )
 
 var (

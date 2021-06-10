@@ -1,11 +1,11 @@
 package sfeel
 
 import (
-	"decisionTable/converters/grule/grlmodel"
-	"decisionTable/converters/grule/termconverter/sfeel/mapper"
-	"decisionTable/converters/grule/termconverter/sfeel/visitors"
-	"decisionTable/model"
-	"decisionTable/parser/sfeel/parser"
+	"github.com/global-soft-ba/decisionTable/converters/grule/grlmodel"
+	"github.com/global-soft-ba/decisionTable/converters/grule/termconverter/sfeel/mapper"
+	"github.com/global-soft-ba/decisionTable/converters/grule/termconverter/sfeel/visitors"
+	"github.com/global-soft-ba/decisionTable/model"
+	"github.com/global-soft-ba/decisionTable/parser/sfeel/parser"
 )
 
 func CreateSfeelTermToGrlConverter() SFeelTermConverter {

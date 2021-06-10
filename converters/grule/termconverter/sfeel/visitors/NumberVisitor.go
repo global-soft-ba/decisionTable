@@ -1,9 +1,9 @@
 package visitors
 
 import (
-	"decisionTable/converters/grule/grlmodel"
-	mapper2 "decisionTable/converters/grule/termconverter/sfeel/mapper"
-	gen "decisionTable/parser/sfeel/generated"
+	"github.com/global-soft-ba/decisionTable/converters/grule/grlmodel"
+	mapper2 "github.com/global-soft-ba/decisionTable/converters/grule/termconverter/sfeel/mapper"
+	gen "github.com/global-soft-ba/decisionTable/parser/sfeel/generated"
 )
 
 func CreateNumberVisitor(expr grlmodel.Term, maps mapper2.TermMapper) *NumberVisitor {

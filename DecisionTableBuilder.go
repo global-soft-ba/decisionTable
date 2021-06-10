@@ -1,9 +1,9 @@
 package main
 
 import (
-	"decisionTable/model"
-	"decisionTable/validators"
-	"decisionTable/validators/expressionlanguages"
+	"github.com/global-soft-ba/decisionTable/model"
+	"github.com/global-soft-ba/decisionTable/validators"
+	"github.com/global-soft-ba/decisionTable/validators/expressionlanguages"
 )
 
 type DecisionTableBuilder struct {

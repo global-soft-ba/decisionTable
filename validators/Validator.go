@@ -1,10 +1,10 @@
 package validators
 
 import (
-	conf "decisionTable/config"
-	"decisionTable/model"
-	"decisionTable/validators/expressionlanguages"
 	"errors"
+	conf "github.com/global-soft-ba/decisionTable/config"
+	"github.com/global-soft-ba/decisionTable/model"
+	"github.com/global-soft-ba/decisionTable/validators/expressionlanguages"
 )
 
 var (

@@ -1,9 +1,9 @@
 package parser
 
 import (
-	errors2 "decisionTable/parser/sfeel/errors"
-	gen "decisionTable/parser/sfeel/generated"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
+	errors2 "github.com/global-soft-ba/decisionTable/parser/sfeel/errors"
+	gen "github.com/global-soft-ba/decisionTable/parser/sfeel/generated"
 )
 
 func CreateSfeelParser(expr string) SfeelParser {

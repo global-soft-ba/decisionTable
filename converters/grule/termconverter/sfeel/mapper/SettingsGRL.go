@@ -1,7 +1,7 @@
 package mapper
 
 import (
-	gen "decisionTable/parser/sfeel/generated"
+	gen "github.com/global-soft-ba/decisionTable/parser/sfeel/generated"
 )
 
 var SettingsGRL = TermMapper{

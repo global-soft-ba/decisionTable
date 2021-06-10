@@ -1,4 +1,4 @@
-module decisionTable
+module github.com/global-soft-ba/decisionTable
 
 go 1.15
 

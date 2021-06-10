@@ -2,8 +2,8 @@ package mapper
 
 import (
 	"bytes"
-	"decisionTable/converters/grule/grlmodel"
 	"errors"
+	"github.com/global-soft-ba/decisionTable/converters/grule/grlmodel"
 	"regexp"
 	"strconv"
 	"text/template"

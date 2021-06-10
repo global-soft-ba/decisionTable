@@ -1,7 +1,7 @@
 package main
 
 import (
-	"decisionTable/model"
+	"github.com/global-soft-ba/decisionTable/model"
 )
 
 type DecisionTableBuilderInterface interface {

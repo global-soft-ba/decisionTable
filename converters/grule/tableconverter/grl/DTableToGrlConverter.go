@@ -2,11 +2,11 @@ package grl
 
 import (
 	"bytes"
-	"decisionTable/converters/grule/grlmodel"
-	"decisionTable/converters/grule/mapper"
-	"decisionTable/converters/grule/tableconverter/grl/templates"
-	"decisionTable/converters/grule/termconverter"
-	"decisionTable/model"
+	"github.com/global-soft-ba/decisionTable/converters/grule/grlmodel"
+	"github.com/global-soft-ba/decisionTable/converters/grule/mapper"
+	"github.com/global-soft-ba/decisionTable/converters/grule/tableconverter/grl/templates"
+	"github.com/global-soft-ba/decisionTable/converters/grule/termconverter"
+	"github.com/global-soft-ba/decisionTable/model"
 	"text/template"
 )
 

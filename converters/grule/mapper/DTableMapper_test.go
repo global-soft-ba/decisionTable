@@ -1,8 +1,8 @@
 package mapper
 
 import (
-	"decisionTable/converters/grule/grlmodel"
-	"decisionTable/model"
+	"github.com/global-soft-ba/decisionTable/converters/grule/grlmodel"
+	"github.com/global-soft-ba/decisionTable/model"
 	"reflect"
 	"testing"
 )

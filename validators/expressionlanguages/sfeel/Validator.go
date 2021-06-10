@@ -1,8 +1,8 @@
 package sfeel
 
 import (
-	"decisionTable/model"
-	"decisionTable/parser/sfeel/parser"
+	"github.com/global-soft-ba/decisionTable/model"
+	"github.com/global-soft-ba/decisionTable/parser/sfeel/parser"
 )
 
 func CreateValidator() Validator {
