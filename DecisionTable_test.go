@@ -1,4 +1,4 @@
-package main
+package decisionTable
 
 import (
 	"github.com/global-soft-ba/decisionTable/converters/grule/tableconverter/grl"
