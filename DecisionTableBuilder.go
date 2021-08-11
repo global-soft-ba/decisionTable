@@ -1,9 +1,8 @@
-package main
+package decisionTable
 
 import (
 	"github.com/global-soft-ba/decisionTable/data"
 	sfeel2 "github.com/global-soft-ba/decisionTable/lang/sfeel"
-	"github.com/global-soft-ba/decisionTable/valid"
 )
 
 type DecisionTableBuilder struct {
@@ -58,16 +57,21 @@ func (d DecisionTableBuilder) AddRule(description string) DecisionTableRuleBuild
 
 func (d DecisionTableBuilder) Build() (DecisionTable, []error) {
 
-	validtr := valid.CreateDecisionTableValidator(d.data)
+	table := DecisionTable{data: d.data, valid: false}
+	validtr := CreateDecisionTableValidator()
 
-	val, err := validtr.Validate()
+	val, err := validtr.Validate(table)
 	if val != true {
 		return DecisionTable{}, err
 	}
 
-	table := DecisionTable{data: d.data, valid: val}
-	table.data.Interferences = validtr.ValidateContainsInterferences()
+	table.valid = val
+	table.data.Interferences = validtr.ValidateContainsInterferences(table)
 	return table, nil
+}
+
+func (d DecisionTableBuilder) BuildWithoutValidation() DecisionTable {
+	return DecisionTable{data: d.data, valid: false}
 }
 
 type DTableRuleBuilder struct {
@@ -93,7 +97,7 @@ func (r DTableRuleBuilder) AddOutputEntry(expr string, exprLang data.ExpressionL
 	switch exprLang {
 	case data.SFEEL:
 		entry := sfeel2.CreateOutputEntry(expr)
-		r.input = append(r.input, entry)
+		r.output = append(r.output, entry)
 		return r
 	}
 

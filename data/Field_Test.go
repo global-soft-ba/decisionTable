@@ -9,6 +9,10 @@ type TestField struct {
 }
 
 func (f TestField) Id() string {
+	if f.Key == "" && f.Name == "" {
+		return ""
+	}
+
 	return f.Key + "." + f.Name
 }
 

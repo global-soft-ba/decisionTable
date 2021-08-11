@@ -1,4 +1,4 @@
-package main
+package decisionTable
 
 import (
 	"github.com/global-soft-ba/decisionTable/data"
@@ -6,6 +6,7 @@ import (
 
 type DecisionTableBuilderInterface interface {
 	Build() (DecisionTable, []error)
+	BuildWithoutValidation() DecisionTable
 	SetDefinitionKey(key string) DecisionTableBuilderInterface
 	SetName(name string) DecisionTableBuilderInterface
 	SetNotationStandard(lang data.DTableStandard) DecisionTableBuilderInterface

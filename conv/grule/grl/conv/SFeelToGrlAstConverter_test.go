@@ -25,7 +25,7 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 					Key:  "Y",
 					Typ:  data.Integer,
 				},
-				sfeel.CreateInputEntry("[1..6]"),
+				sfeel.CreateInputEntry("[1..6]"), // ((X.Y >= 1) && (X.Y <= 6))
 			},
 			want: "((X.Y :6: 1) :0: (X.Y :4: 6))",
 		},

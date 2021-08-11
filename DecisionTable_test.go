@@ -1,4 +1,4 @@
-package main
+package decisionTable
 
 import (
 	"github.com/global-soft-ba/decisionTable/data"
@@ -88,7 +88,7 @@ func TestDecisionTable_Convert(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			d := tt.fields
 
-			got, err := d.Convert()
+			got, err := d.Convert(string(data.GRULE))
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ConvertToGrlAst() error = %v, wantErr %v", err, tt.wantErr)
 				return
