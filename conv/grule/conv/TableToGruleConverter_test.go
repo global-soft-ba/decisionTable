@@ -25,7 +25,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 		want    grule.RuleSet
 		wantErr bool
 	}{
-		{name: "Valid Table",
+		{name: "Validate Table",
 			args: args{
 				table: dtable.Table{
 					Key:              "test1",
@@ -99,7 +99,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 
 //ToDo Migrate testcases
 /*
-{name: "Valid Table",
+{name: "Validate Table",
 			args: args{
 				data: model.TableData{
 					Key:              "test1",
@@ -147,7 +147,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name: "Valid Multi Row Table",
+			name: "Validate Multi Row Table",
 			args: args{
 				data: model.TableData{
 					Key:              "test1",
@@ -216,7 +216,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name: "Valid Multi Row and Rule Table with First Policy",
+			name: "Validate Multi Row and Rule Table with First Policy",
 			args: args{
 				data: model.TableData{
 					Key:              "test1",
@@ -347,7 +347,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name: "Valid Multi Row and Multi Rule Table with Priority Policy",
+			name: "Validate Multi Row and Multi Rule Table with Priority Policy",
 			args: args{
 				data: model.TableData{
 					Key:              "test1",
@@ -441,7 +441,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name: "Valid Multi Row and Multi Rule Table with First Policy",
+			name: "Validate Multi Row and Multi Rule Table with First Policy",
 			args: args{
 				data: model.TableData{
 					Key:              "test1",

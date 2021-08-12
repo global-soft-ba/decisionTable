@@ -23,7 +23,7 @@ var (
 	ErrDTableEntryReferencedFieldTypInvalid  = errors.New("referenced field type does not match field type")
 )
 
-func CreateDecisionTableValidator() Validator {
+func CreateDecisionTableValidator() ValidatorInterface {
 	return Validator{}
 }
 

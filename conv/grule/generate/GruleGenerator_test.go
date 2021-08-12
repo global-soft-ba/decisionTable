@@ -167,7 +167,7 @@ func TestGruleGenerator_Generate(t *testing.T) {
 
 /* MIgrate test cases
 
-{name: "Valid ConvertToGrlAst Multiple Expressions",
+{name: "Validate ConvertToGrlAst Multiple Expressions",
 		args: args{grlmodel2.RuleSet{
 			Key:             "test1",
 			Name:            "TableOne",
@@ -192,7 +192,7 @@ func TestGruleGenerator_Generate(t *testing.T) {
 		want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n   L1.I1 == 3\n   && L1.I2 > 3\n   && L1.I3 > 4 \n then \n  L1.O1 = 4; \n  Complete();\n}"},
 		wantErr: false,
 	},
-	{name: "Valid ConvertToGrlAst Single Expressions",
+	{name: "Validate ConvertToGrlAst Single Expressions",
 		args: args{grlmodel2.RuleSet{
 			Key:             "test1",
 			Name:            "TableOne",
@@ -215,7 +215,7 @@ func TestGruleGenerator_Generate(t *testing.T) {
 		want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n   L1.I1 == 3 \n then \n  L1.O1 = 4; \n  Complete();\n}"},
 		wantErr: false,
 	},
-	{name: "Valid ConvertToGrlAst Multiple Expressions and Assignments",
+	{name: "Validate ConvertToGrlAst Multiple Expressions and Assignments",
 		args: args{grlmodel2.RuleSet{
 			Key:             "test1",
 			Name:            "TableOne",
@@ -243,7 +243,7 @@ func TestGruleGenerator_Generate(t *testing.T) {
 		want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n   L1.I1 == 3\n   && L1.I2 > 3\n   && L1.I3 > 4 \n then \n  L1.O1 = 4;\n  L1.O1 = 4; \n  Complete();\n}"},
 		wantErr: false,
 	},
-	{name: "Valid ConvertToGrlAst Multiple Rules, Expressions and Assignments with FirstPolicy",
+	{name: "Validate ConvertToGrlAst Multiple Rules, Expressions and Assignments with FirstPolicy",
 		args: args{grlmodel2.RuleSet{
 			Key:             "test1",
 			Name:            "TableOne",
@@ -303,7 +303,7 @@ func TestGruleGenerator_Generate(t *testing.T) {
 			"rule row_2 \"R3\" salience 0 {\n when \n   L1.I1 == 3\n   && L1.I2 > 3\n   && L1.I3 > 4 \n then \n  L1.O1 = 4;\n  L1.O1 = 4; \n  Complete();\n}"},
 		wantErr: false,
 	},
-	{name: "Valid ConvertToGrlAst Multiple Rules, Expressions and Assignments with PriorityPolicy",
+	{name: "Validate ConvertToGrlAst Multiple Rules, Expressions and Assignments with PriorityPolicy",
 		args: args{grlmodel2.RuleSet{
 			Key:             "test1",
 			Name:            "TableOne",
@@ -363,7 +363,7 @@ func TestGruleGenerator_Generate(t *testing.T) {
 			"rule row_2 \"R3\" salience 2 {\n when \n   L1.I1 == 3\n   && L1.I2 > 3\n   && L1.I3 > 4 \n then \n  L1.O1 = 4;\n  L1.O1 = 4; \n  Complete();\n}"},
 		wantErr: false,
 	},
-	{name: "Valid ConvertToGrlAst Multiple Rules, Expressions and Assignments with wrong Policy",
+	{name: "Validate ConvertToGrlAst Multiple Rules, Expressions and Assignments with wrong Policy",
 		args: args{grlmodel2.RuleSet{
 			Key:             "test1",
 			Name:            "TableOne",
@@ -423,7 +423,7 @@ func TestGruleGenerator_Generate(t *testing.T) {
 			"rule row_2 \"R3\"  {\n when \n   L1.I1 == 3\n   && L1.I2 > 3\n   && L1.I3 > 4 \n then \n  L1.O1 = 4;\n  L1.O1 = 4; \n  Complete();\n}"},
 		wantErr: false,
 	},
-	{name: "Valid ConvertToGrlAst Single Float Expressions",
+	{name: "Validate ConvertToGrlAst Single Float Expressions",
 		args: args{grlmodel2.RuleSet{
 			Key:             "test1",
 			Name:            "TableOne",
@@ -446,7 +446,7 @@ func TestGruleGenerator_Generate(t *testing.T) {
 		want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n   L1.I1 == 3.3 \n then \n  L1.O1 = \"4\"; \n  Complete();\n}"},
 		wantErr: false,
 	},
-	{name: "Valid ConvertToGrlAst Single Boolean Expressions",
+	{name: "Validate ConvertToGrlAst Single Boolean Expressions",
 		args: args{grlmodel2.RuleSet{
 			Key:             "test1",
 			Name:            "TableOne",
@@ -469,7 +469,7 @@ func TestGruleGenerator_Generate(t *testing.T) {
 		want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n   L1.I1 == true \n then \n  L1.O1 = false; \n  Complete();\n}"},
 		wantErr: false,
 	},
-	{name: "Valid ConvertToGrlAst Single String Expressions",
+	{name: "Validate ConvertToGrlAst Single String Expressions",
 		args: args{grlmodel2.RuleSet{
 			Key:             "test1",
 			Name:            "TableOne",
@@ -492,7 +492,7 @@ func TestGruleGenerator_Generate(t *testing.T) {
 		want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n   L1.I1 == \"true\" \n then \n  L1.O1 = \"false\"; \n  Complete();\n}"},
 		wantErr: false,
 	},
-	{name: "Valid ConvertToGrlAst DatTime String Expressions",
+	{name: "Validate ConvertToGrlAst DatTime String Expressions",
 		args: args{grlmodel2.RuleSet{
 			Key:             "test1",
 			Name:            "TableOne",

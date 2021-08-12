@@ -56,22 +56,17 @@ func (d DecisionTableBuilder) AddRule(description string) DecisionTableRuleBuild
 }
 
 func (d DecisionTableBuilder) Build() (DecisionTable, []error) {
+	table := DecisionTable{data: d.data}
+	val, err := table.Validate()
 
-	table := DecisionTable{data: d.data, valid: false}
-	validtr := CreateDecisionTableValidator()
-
-	val, err := validtr.Validate(table)
 	if val != true {
 		return DecisionTable{}, err
 	}
-
-	table.valid = val
-	table.data.Interferences = validtr.ValidateContainsInterferences(table)
 	return table, nil
 }
 
 func (d DecisionTableBuilder) BuildWithoutValidation() DecisionTable {
-	return DecisionTable{data: d.data, valid: false}
+	return DecisionTable{data: d.data}
 }
 
 type DTableRuleBuilder struct {

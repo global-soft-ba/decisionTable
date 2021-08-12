@@ -2,7 +2,7 @@ package decisionTable
 
 import (
 	"errors"
-	conv "github.com/global-soft-ba/decisionTable/conv"
+	"github.com/global-soft-ba/decisionTable/conv"
 	"github.com/global-soft-ba/decisionTable/data"
 )
 
@@ -16,8 +16,7 @@ func CreateDecisionTable() DecisionTableBuilderInterface {
 }
 
 type DecisionTable struct {
-	data  data.Table
-	valid bool
+	data data.Table
 }
 
 func (d DecisionTable) Key() string {
@@ -40,10 +39,6 @@ func (d DecisionTable) NotationStandard() data.DTableStandard {
 	return d.data.NotationStandard
 }
 
-func (d DecisionTable) Valid() bool {
-	return d.valid
-}
-
 func (d DecisionTable) InputFields() []data.FieldInterface {
 	return d.data.InputFields
 }
@@ -62,7 +57,7 @@ func (d DecisionTable) Interferences() bool {
 
 //ToDo define explicit output format type (instead of string) into engine standard (notation standard)
 func (d DecisionTable) Convert(format string) (interface{}, error) {
-	if !d.valid {
+	if ok, _ := d.Validate(); !ok {
 		return []string{}, ErrDTableNotValid
 	}
 
@@ -74,4 +69,14 @@ func (d DecisionTable) Convert(format string) (interface{}, error) {
 	}
 
 	return res, nil
+}
+
+func (d *DecisionTable) Validate() (bool, []error) {
+	validator := CreateDecisionTableValidator()
+	val, err := validator.Validate(*d)
+	if val != true {
+		return false, err
+	}
+	d.data.Interferences = validator.ValidateContainsInterferences(*d)
+	return true, []error(nil)
 }

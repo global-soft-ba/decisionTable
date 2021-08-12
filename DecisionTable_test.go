@@ -33,7 +33,7 @@ func TestDecisionTable(t *testing.T) {
 		AddOutputEntry("true", data.SFEEL).BuildRule().
 		Build()
 
-	if got := testTable.valid; got != true {
+	if got, _ := testTable.Validate(); got != true {
 		t.Errorf("Example Decision Table is invalid, got = %v, want true, with error %v", got, err)
 	}
 }
