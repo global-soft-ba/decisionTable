@@ -3,6 +3,7 @@ package decisionTable
 import (
 	"errors"
 	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/valid"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -38,13 +39,13 @@ func TestValidate_InvalidTables(t *testing.T) {
 				SetDefinitionKey("Key").
 				BuildWithoutValidation(),
 			want: false,
-			err:  ErrDTableNameEmpty,
+			err:  valid.ErrDTableNameEmpty,
 		},
 		{name: "table key is missing",
 			table: CreateDecisionTable().
 				BuildWithoutValidation(),
 			want: false,
-			err:  ErrDTableKeyEmpty,
+			err:  valid.ErrDTableKeyEmpty,
 		},
 		{name: "HitPolicy not valid2 for notation standard",
 			table: CreateDecisionTable().
@@ -52,7 +53,7 @@ func TestValidate_InvalidTables(t *testing.T) {
 				SetNotationStandard(data.GRULE).
 				BuildWithoutValidation(),
 			want: false,
-			err:  ErrDTableHitPolicy,
+			err:  valid.ErrDTableHitPolicy,
 		},
 		{name: "CollectOperator not valid2 for notation standard",
 			table: CreateDecisionTable().
@@ -61,7 +62,7 @@ func TestValidate_InvalidTables(t *testing.T) {
 				SetCollectOperator("XYZ").
 				BuildWithoutValidation(),
 			want: false,
-			err:  ErrDTableCollectOperator,
+			err:  valid.ErrDTableCollectOperator,
 		},
 		{name: "InputField datatype does not match notation standard",
 			table: CreateDecisionTable().
@@ -69,14 +70,14 @@ func TestValidate_InvalidTables(t *testing.T) {
 				AddInputField(data.TestField{Name: "I1", Key: "L1", Typ: data.Float}).
 				BuildWithoutValidation(),
 			want: false,
-			err:  ErrDTableFieldTypInvalid,
+			err:  valid.ErrDTableFieldTypInvalid,
 		},
 		{name: "InputField is missing",
 			table: CreateDecisionTable().
 				SetNotationStandard(data.DMN).
 				BuildWithoutValidation(),
 			want: false,
-			err:  ErrDTableInputEmpty,
+			err:  valid.ErrDTableInputEmpty,
 		},
 		{name: "InputField ID is missing ",
 			table: CreateDecisionTable().
@@ -84,7 +85,7 @@ func TestValidate_InvalidTables(t *testing.T) {
 				AddInputField(data.TestField{Typ: data.Float}).
 				BuildWithoutValidation(),
 			want: false,
-			err:  ErrDTableFieldIdIsEmpty,
+			err:  valid.ErrDTableFieldIdIsEmpty,
 		},
 		{name: "OutputField ID is missing",
 			table: CreateDecisionTable().
@@ -92,14 +93,14 @@ func TestValidate_InvalidTables(t *testing.T) {
 				AddOutputField(data.TestField{Typ: data.Float}).
 				BuildWithoutValidation(),
 			want: false,
-			err:  ErrDTableFieldIdIsEmpty,
+			err:  valid.ErrDTableFieldIdIsEmpty,
 		},
 		{name: "OutputField is  missing",
 			table: CreateDecisionTable().
 				SetNotationStandard(data.DMN).
 				BuildWithoutValidation(),
 			want: false,
-			err:  ErrDTableOutputEmpty,
+			err:  valid.ErrDTableOutputEmpty,
 		},
 		{name: "OutputField datatype does not match notation standard",
 			table: CreateDecisionTable().
@@ -107,7 +108,7 @@ func TestValidate_InvalidTables(t *testing.T) {
 				AddOutputField(data.TestField{Name: "I1", Key: "L1", Typ: data.Float}).
 				BuildWithoutValidation(),
 			want: false,
-			err:  ErrDTableFieldTypInvalid,
+			err:  valid.ErrDTableFieldTypInvalid,
 		},
 		{name: "Amount of rules does not match amount of input fields",
 			table: CreateDecisionTable().
@@ -121,7 +122,7 @@ func TestValidate_InvalidTables(t *testing.T) {
 				BuildRule().
 				BuildWithoutValidation(),
 			want: false,
-			err:  ErrRuleHaveDifferentAmountOfInputFields,
+			err:  valid.ErrRuleHaveDifferentAmountOfInputFields,
 		},
 		{name: "Amount of rules does not match amount of output fields",
 			table: CreateDecisionTable().
@@ -135,7 +136,7 @@ func TestValidate_InvalidTables(t *testing.T) {
 				BuildRule().
 				BuildWithoutValidation(),
 			want: false,
-			err:  ErrRuleHaveDifferentAmountOfOutputFields,
+			err:  valid.ErrRuleHaveDifferentAmountOfOutputFields,
 		},
 		{name: "Input rule entry contains wrong expression",
 			table: CreateDecisionTable().
@@ -171,8 +172,7 @@ func TestValidate_InvalidTables(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			validator := CreateDecisionTableValidator()
-			result, err := validator.Validate(tt.table)
+			result, err := tt.table.Validate()
 			if !assert.Equal(t, tt.want, result) {
 				t.Errorf("validate() got = %v, want %v", result, tt.want)
 			}
@@ -236,8 +236,7 @@ func TestValidate_InvalidTableEntries(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			validator := CreateDecisionTableValidator()
-			result, _ := validator.Validate(tt.table)
+			result, _ := tt.table.Validate()
 			if !assert.Equal(t, tt.want, result) {
 				t.Errorf("validate() got = %v, want %v", result, tt.want)
 			}
@@ -289,8 +288,8 @@ func TestValidate_CheckForInterferences(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			validator := CreateDecisionTableValidator()
-			result := validator.ValidateContainsInterferences(tt.table)
+			result, _ := tt.table.Validate()
+			result = tt.table.Interferences()
 			if !assert.Equal(t, tt.want, result) {
 				t.Errorf("valid2ateContainsInterferences() got = %v, want %v", result, tt.want)
 			}

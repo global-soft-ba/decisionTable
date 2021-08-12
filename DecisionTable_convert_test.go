@@ -6,38 +6,6 @@ import (
 	"testing"
 )
 
-func TestDecisionTable(t *testing.T) {
-	testTable, err := CreateDecisionTable().
-		SetName("Determine Employee").
-		SetDefinitionKey("determineEmployee").
-		SetNotationStandard(data.GRULE).
-		SetHitPolicy(data.Unique).
-		AddInputField(data.TestField{Name: "Type of claim", Key: "claim", Typ: data.String}).
-		AddInputField(data.TestField{Name: "Expenditure of claim", Key: "claim", Typ: data.Integer}).
-		AddOutputField(data.TestField{Name: "Responsible employee", Key: "Employee", Typ: data.String}).
-		AddOutputField(data.TestField{Name: "4 eyes principle", Key: "Employee", Typ: data.Boolean}).
-		AddRule("R1").
-		AddInputEntry(`"Car Accident"`, data.SFEEL).
-		AddInputEntry("<1000", data.SFEEL).
-		AddOutputEntry(`"Müller"`, data.SFEEL).
-		AddOutputEntry("false", data.SFEEL).BuildRule().
-		AddRule("R2").
-		AddInputEntry(`"Car Accident"`, data.SFEEL).
-		AddInputEntry("[1000..10000]", data.SFEEL).
-		AddOutputEntry(`"Meier"`, data.SFEEL).
-		AddOutputEntry("false", data.SFEEL).BuildRule().
-		AddRule("R3").
-		AddInputEntry(`"Car Accident"`, data.SFEEL).
-		AddInputEntry(">=10000", data.SFEEL).
-		AddOutputEntry(`"Schmidt"`, data.SFEEL).
-		AddOutputEntry("true", data.SFEEL).BuildRule().
-		Build()
-
-	if got, _ := testTable.Validate(); got != true {
-		t.Errorf("Example Decision Table is invalid, got = %v, want true, with error %v", got, err)
-	}
-}
-
 func TestDecisionTable_Convert(t *testing.T) {
 
 	testTable, _ := CreateDecisionTable().

@@ -11,7 +11,7 @@ The library allows:
 
 
 # Table Example
-![Image of Decision Table](img.png)
+![Image of Decision Table](_img.png)
 
 # Decision Table Builder (Code Example)
 ```

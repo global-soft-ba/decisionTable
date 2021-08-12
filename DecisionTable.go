@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/global-soft-ba/decisionTable/conv"
 	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/valid"
 )
 
 var (
@@ -72,11 +73,11 @@ func (d DecisionTable) Convert(format string) (interface{}, error) {
 }
 
 func (d *DecisionTable) Validate() (bool, []error) {
-	validator := CreateDecisionTableValidator()
-	val, err := validator.Validate(*d)
+	validator := valid.CreateDecisionTableValidator()
+	val, err := validator.Validate(d.data)
 	if val != true {
 		return false, err
 	}
-	d.data.Interferences = validator.ValidateContainsInterferences(*d)
+	d.data.Interferences = validator.ValidateContainsInterferences(d.data)
 	return true, []error(nil)
 }
