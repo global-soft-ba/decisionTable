@@ -1,4 +1,4 @@
-// Code generated from SFeel.g4 by ANTLR 4.9.2. DO NOT EDIT.
+// Code generated from ./SFeel.g4 by ANTLR 4.9.2. DO NOT EDIT.
 
 package parser // SFeel
 
@@ -21,11 +21,17 @@ func (s *BaseSFeelListener) EnterEveryRule(ctx antlr.ParserRuleContext) {}
 // ExitEveryRule is called when any rule is exited.
 func (s *BaseSFeelListener) ExitEveryRule(ctx antlr.ParserRuleContext) {}
 
-// EnterStart is called when production start is entered.
-func (s *BaseSFeelListener) EnterStart(ctx *StartContext) {}
+// EnterInput is called when production input is entered.
+func (s *BaseSFeelListener) EnterInput(ctx *InputContext) {}
 
-// ExitStart is called when production start is exited.
-func (s *BaseSFeelListener) ExitStart(ctx *StartContext) {}
+// ExitInput is called when production input is exited.
+func (s *BaseSFeelListener) ExitInput(ctx *InputContext) {}
+
+// EnterOutput is called when production output is entered.
+func (s *BaseSFeelListener) EnterOutput(ctx *OutputContext) {}
+
+// ExitOutput is called when production output is exited.
+func (s *BaseSFeelListener) ExitOutput(ctx *OutputContext) {}
 
 // EnterSimpleUnaryTests is called when production SimpleUnaryTests is entered.
 func (s *BaseSFeelListener) EnterSimpleUnaryTests(ctx *SimpleUnaryTestsContext) {}
@@ -101,11 +107,23 @@ func (s *BaseSFeelListener) EnterClosed_interval_end(ctx *Closed_interval_endCon
 // ExitClosed_interval_end is called when production closed_interval_end is exited.
 func (s *BaseSFeelListener) ExitClosed_interval_end(ctx *Closed_interval_endContext) {}
 
-// EnterSimple_expressions is called when production simple_expressions is entered.
-func (s *BaseSFeelListener) EnterSimple_expressions(ctx *Simple_expressionsContext) {}
+// EnterEmpty_expression is called when production empty_expression is entered.
+func (s *BaseSFeelListener) EnterEmpty_expression(ctx *Empty_expressionContext) {}
 
-// ExitSimple_expressions is called when production simple_expressions is exited.
-func (s *BaseSFeelListener) ExitSimple_expressions(ctx *Simple_expressionsContext) {}
+// ExitEmpty_expression is called when production empty_expression is exited.
+func (s *BaseSFeelListener) ExitEmpty_expression(ctx *Empty_expressionContext) {}
+
+// EnterSimpleExpressions is called when production SimpleExpressions is entered.
+func (s *BaseSFeelListener) EnterSimpleExpressions(ctx *SimpleExpressionsContext) {}
+
+// ExitSimpleExpressions is called when production SimpleExpressions is exited.
+func (s *BaseSFeelListener) ExitSimpleExpressions(ctx *SimpleExpressionsContext) {}
+
+// EnterEmptySimpleExpressions is called when production EmptySimpleExpressions is entered.
+func (s *BaseSFeelListener) EnterEmptySimpleExpressions(ctx *EmptySimpleExpressionsContext) {}
+
+// ExitEmptySimpleExpressions is called when production EmptySimpleExpressions is exited.
+func (s *BaseSFeelListener) ExitEmptySimpleExpressions(ctx *EmptySimpleExpressionsContext) {}
 
 // EnterExpression is called when production expression is entered.
 func (s *BaseSFeelListener) EnterExpression(ctx *ExpressionContext) {}

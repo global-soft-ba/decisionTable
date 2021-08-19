@@ -1,4 +1,4 @@
-// Code generated from SFeel.g4 by ANTLR 4.9.2. DO NOT EDIT.
+// Code generated from ./SFeel.g4 by ANTLR 4.9.2. DO NOT EDIT.
 
 package parser // SFeel
 
@@ -8,7 +8,11 @@ type BaseSFeelVisitor struct {
 	*antlr.BaseParseTreeVisitor
 }
 
-func (v *BaseSFeelVisitor) VisitStart(ctx *StartContext) interface{} {
+func (v *BaseSFeelVisitor) VisitInput(ctx *InputContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitOutput(ctx *OutputContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -60,7 +64,15 @@ func (v *BaseSFeelVisitor) VisitClosed_interval_end(ctx *Closed_interval_endCont
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSFeelVisitor) VisitSimple_expressions(ctx *Simple_expressionsContext) interface{} {
+func (v *BaseSFeelVisitor) VisitEmpty_expression(ctx *Empty_expressionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitSimpleExpressions(ctx *SimpleExpressionsContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSFeelVisitor) VisitEmptySimpleExpressions(ctx *EmptySimpleExpressionsContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

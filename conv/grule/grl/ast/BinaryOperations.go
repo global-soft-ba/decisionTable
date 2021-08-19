@@ -2,9 +2,45 @@ package ast
 
 import (
 	"bytes"
+	"fmt"
 	"github.com/global-soft-ba/decisionTable/ast"
 	"strconv"
 )
+
+type PowOperation struct {
+	Base     ast.Node
+	Exponent ast.Node
+}
+
+func (m PowOperation) String() string {
+	var out bytes.Buffer
+	out.WriteString(fmt.Sprintf("%s**%s", m.Base.String(), m.Exponent.String()))
+	return out.String()
+}
+
+func (m PowOperation) GetChildren() []ast.Node {
+	return []ast.Node{m.Base, m.Exponent}
+}
+
+type AssignmentOperations struct {
+	Left     ast.Node
+	Operator int
+	Right    ast.Node
+}
+
+func (m AssignmentOperations) String() string {
+	var out bytes.Buffer
+	out.WriteString(m.Left.String())
+	out.WriteString(" ")
+	out.WriteString(strconv.Itoa(m.Operator))
+	out.WriteString(" ")
+	out.WriteString(m.Right.String())
+	return out.String()
+}
+
+func (m AssignmentOperations) GetChildren() []ast.Node {
+	return []ast.Node{m.Left, m.Right}
+}
 
 type MathOperations struct {
 	Left     ast.Node

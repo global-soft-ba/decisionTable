@@ -1,17 +1,14 @@
 grammar SFeel;
 //OMG Version 1.3
 
-
-start
-    : simple_unary_tests EOF // Each input entry SHALL be an instance of simple unary tests (grammar rule 12 - OMG Standard)
-    | simple_expressions EOF; // Each output entry SHALL be a simple expression (grammar rule 3 - OMG Standard).
-
+input:  simple_unary_tests EOF; // Each input entry SHALL be an instance of simple unary tests (grammar rule 12 - OMG Standard)
+output: simple_expressions EOF; // Each output entry SHALL be a simple expression (grammar rule 3 - OMG Standard)
 
 // Unaray Tests
 simple_unary_tests   //Disjunctions
     : simple_positive_unary_tests                       #SimpleUnaryTests
     | 'not(' simple_positive_unary_tests ')'            #NegationSimpleUnaryTests
-    | '-'                                               #EmptySimpleUnaryTests
+    | empty_expression                                  #EmptySimpleUnaryTests
     ;
 
 simple_positive_unary_tests: simple_positive_unary_test ( ',' simple_positive_unary_test )* ;
@@ -28,16 +25,20 @@ closed_interval_start: '[' ;
 open_interval_end: ')' | '[' ;
 closed_interval_end: ']' ;
 
+empty_expression: '-';
+
 // Simple Expressions
-simple_expressions: simple_expression  (',' simple_expression)* ; //Disjunctions
+simple_expressions
+    : simple_expression  (',' simple_expression)*  #SimpleExpressions //Disjunction
+    | empty_expression                             #EmptySimpleExpressions;
 expression: simple_expression ;
-simple_expression: arithmetic_expression | simple_value | comparison ;
+simple_expression: simple_value | arithmetic_expression | comparison ;
 
 // Comparison Operations
 comparison
-        : simple_value (LESS | LESSEQ | GREATER | GREATEREQ | EQUAL | NOTEQUAL) expression
-        | arithmetic_expression (LESS | LESSEQ | GREATER | GREATEREQ | EQUAL | NOTEQUAL) expression
-        | comparison (LESS | LESSEQ | GREATER | GREATEREQ | EQUAL | NOTEQUAL) expression
+        : simple_value operator=(LESS | LESSEQ | GREATER | GREATEREQ | EQUAL | NOTEQUAL) expression
+        | arithmetic_expression operator=(LESS | LESSEQ | GREATER | GREATEREQ | EQUAL | NOTEQUAL) expression
+        | comparison operator=(LESS | LESSEQ | GREATER | GREATEREQ | EQUAL | NOTEQUAL) expression
         ;
 
 // Arithmetic Expressions
@@ -54,7 +55,7 @@ arithmetic_expression
 
 
 // Simple Primitives
-endpoint: simple_value ;
+endpoint: qualified_name | simple_literal ;
 simple_value: qualified_name | simple_literal ;
 
 

@@ -1,4 +1,4 @@
-// Code generated from SFeel.g4 by ANTLR 4.9.2. DO NOT EDIT.
+// Code generated from ./SFeel.g4 by ANTLR 4.9.2. DO NOT EDIT.
 
 package parser // SFeel
 
@@ -8,8 +8,11 @@ import "github.com/antlr/antlr4/runtime/Go/antlr"
 type SFeelVisitor interface {
 	antlr.ParseTreeVisitor
 
-	// Visit a parse tree produced by SFeelParser#start.
-	VisitStart(ctx *StartContext) interface{}
+	// Visit a parse tree produced by SFeelParser#input.
+	VisitInput(ctx *InputContext) interface{}
+
+	// Visit a parse tree produced by SFeelParser#output.
+	VisitOutput(ctx *OutputContext) interface{}
 
 	// Visit a parse tree produced by SFeelParser#SimpleUnaryTests.
 	VisitSimpleUnaryTests(ctx *SimpleUnaryTestsContext) interface{}
@@ -47,8 +50,14 @@ type SFeelVisitor interface {
 	// Visit a parse tree produced by SFeelParser#closed_interval_end.
 	VisitClosed_interval_end(ctx *Closed_interval_endContext) interface{}
 
-	// Visit a parse tree produced by SFeelParser#simple_expressions.
-	VisitSimple_expressions(ctx *Simple_expressionsContext) interface{}
+	// Visit a parse tree produced by SFeelParser#empty_expression.
+	VisitEmpty_expression(ctx *Empty_expressionContext) interface{}
+
+	// Visit a parse tree produced by SFeelParser#SimpleExpressions.
+	VisitSimpleExpressions(ctx *SimpleExpressionsContext) interface{}
+
+	// Visit a parse tree produced by SFeelParser#EmptySimpleExpressions.
+	VisitEmptySimpleExpressions(ctx *EmptySimpleExpressionsContext) interface{}
 
 	// Visit a parse tree produced by SFeelParser#expression.
 	VisitExpression(ctx *ExpressionContext) interface{}

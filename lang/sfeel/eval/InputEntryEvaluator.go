@@ -22,6 +22,9 @@ func (e InputEntryEvaluator) Eval(node ast.Node) (bool, []error) {
 	case ast.UnaryTests:
 		// No additional Evaluation necessary
 		return true, nil
+	case ast.UnaryTest:
+		// No additional Evaluation necessary
+		return true, nil
 	case ast.EmptyStatement:
 		// No additional evaluation necessary
 		return true, nil

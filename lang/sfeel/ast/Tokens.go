@@ -1,7 +1,8 @@
 package ast
 
 const (
-	SFeelOperatorPOW = iota
+	SFeelAssignmentEqual = iota - 1
+	SFeelOperatorPOW
 	SFeelOperatorMUL
 	SFeelOperatorDIV
 	SFeelOperatorADD

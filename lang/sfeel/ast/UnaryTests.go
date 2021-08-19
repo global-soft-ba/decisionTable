@@ -37,12 +37,7 @@ func (l UnaryTests) String() string {
 	return out2.String()
 }
 func (l UnaryTests) GetOperandDataType() reflect.Type {
-	var result []ast.Node
-	for _, val := range l.UnaryTests {
-		ut := val.(UnaryTest)
-		result = append(result, ut.Value)
-	}
-	return checkDataTypePrecedences(result...)
+	return checkDataTypePrecedences(l.UnaryTests...)
 }
 func (l UnaryTests) GetChildren() []ast.Node {
 	return l.UnaryTests

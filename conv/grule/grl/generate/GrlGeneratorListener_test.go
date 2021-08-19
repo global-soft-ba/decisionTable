@@ -32,11 +32,11 @@ func TestGrlGeneratorListener_GetCode(t *testing.T) {
 			fields: fields{
 				node: grl.ComparisonOperations{
 					Left:     grl.Integer{Val: 1},
-					Operator: -1,
+					Operator: grl.AssignmentEQUAL,
 					Right:    grl.Integer{Val: 2},
 				},
 			},
-			want: "(1 2)",
+			want: "(1 = 2)",
 		},
 		{
 			name: "nested addition test",

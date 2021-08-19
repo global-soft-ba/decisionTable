@@ -27,7 +27,7 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 				},
 				sfeel.CreateInputEntry("[1..6]"), // ((X.Y >= 1) && (X.Y <= 6))
 			},
-			want: "((X.Y :6: 1) :0: (X.Y :4: 6))",
+			want: "((X.Y :7: 1) :0: (X.Y :5: 6))",
 		},
 		{
 			name: "simple unary test convert",
@@ -40,6 +40,90 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 				sfeel.CreateInputEntry("8"),
 			},
 			want: "(X.Y :2: 8)",
+		},
+		{
+			name: "simple expression simple value test convert",
+			args: args{
+				data.TestField{
+					Name: "X",
+					Key:  "Y",
+					Typ:  data.Integer,
+				},
+				sfeel.CreateOutputEntry("8"),
+			},
+			want: "X.Y -1 8",
+		},
+		{
+			name: "simple expression parentheses test convert",
+			args: args{
+				data.TestField{
+					Name: "X",
+					Key:  "Y",
+					Typ:  data.Integer,
+				},
+				sfeel.CreateOutputEntry("(8)"),
+			},
+			want: "X.Y -1 (8)",
+		},
+		{
+			name: "simple expression arithmetic negation test convert",
+			args: args{
+				data.TestField{
+					Name: "X",
+					Key:  "Y",
+					Typ:  data.Integer,
+				},
+				sfeel.CreateOutputEntry(`-"asd"`),
+			},
+			want: `X.Y -1 -"asd"`,
+		},
+		{
+			name: "simple expression arithmetic negation of integer test convert",
+			args: args{
+				data.TestField{
+					Name: "X",
+					Key:  "Y",
+					Typ:  data.Integer,
+				},
+				sfeel.CreateOutputEntry(`-1`),
+			},
+			want: `X.Y -1 -1`,
+		},
+		{
+			name: "simple expression arithmetic negation of negative integer test convert",
+			args: args{
+				data.TestField{
+					Name: "X",
+					Key:  "Y",
+					Typ:  data.Integer,
+				},
+				sfeel.CreateOutputEntry(`--1`),
+			},
+			want: `X.Y -1 --1`,
+		},
+		{
+			name: "simple expression arithmetic power operation test convert",
+			args: args{
+				data.TestField{
+					Name: "X",
+					Key:  "Y",
+					Typ:  data.Integer,
+				},
+				sfeel.CreateOutputEntry(`1**2`),
+			},
+			want: `X.Y -1 1**2`,
+		},
+		{
+			name: "simple expression arithmetic multiplication test convert",
+			args: args{
+				data.TestField{
+					Name: "X",
+					Key:  "Y",
+					Typ:  data.Integer,
+				},
+				sfeel.CreateOutputEntry(`2+2`),
+			},
+			want: `X.Y -1 282`,
 		},
 	}
 	for _, tt := range tests {

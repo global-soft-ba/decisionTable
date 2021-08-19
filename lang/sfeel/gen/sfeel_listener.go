@@ -1,4 +1,4 @@
-// Code generated from SFeel.g4 by ANTLR 4.9.2. DO NOT EDIT.
+// Code generated from ./SFeel.g4 by ANTLR 4.9.2. DO NOT EDIT.
 
 package parser // SFeel
 
@@ -8,8 +8,11 @@ import "github.com/antlr/antlr4/runtime/Go/antlr"
 type SFeelListener interface {
 	antlr.ParseTreeListener
 
-	// EnterStart is called when entering the start production.
-	EnterStart(c *StartContext)
+	// EnterInput is called when entering the input production.
+	EnterInput(c *InputContext)
+
+	// EnterOutput is called when entering the output production.
+	EnterOutput(c *OutputContext)
 
 	// EnterSimpleUnaryTests is called when entering the SimpleUnaryTests production.
 	EnterSimpleUnaryTests(c *SimpleUnaryTestsContext)
@@ -47,8 +50,14 @@ type SFeelListener interface {
 	// EnterClosed_interval_end is called when entering the closed_interval_end production.
 	EnterClosed_interval_end(c *Closed_interval_endContext)
 
-	// EnterSimple_expressions is called when entering the simple_expressions production.
-	EnterSimple_expressions(c *Simple_expressionsContext)
+	// EnterEmpty_expression is called when entering the empty_expression production.
+	EnterEmpty_expression(c *Empty_expressionContext)
+
+	// EnterSimpleExpressions is called when entering the SimpleExpressions production.
+	EnterSimpleExpressions(c *SimpleExpressionsContext)
+
+	// EnterEmptySimpleExpressions is called when entering the EmptySimpleExpressions production.
+	EnterEmptySimpleExpressions(c *EmptySimpleExpressionsContext)
 
 	// EnterExpression is called when entering the expression production.
 	EnterExpression(c *ExpressionContext)
@@ -107,8 +116,11 @@ type SFeelListener interface {
 	// EnterString_literal is called when entering the string_literal production.
 	EnterString_literal(c *String_literalContext)
 
-	// ExitStart is called when exiting the start production.
-	ExitStart(c *StartContext)
+	// ExitInput is called when exiting the input production.
+	ExitInput(c *InputContext)
+
+	// ExitOutput is called when exiting the output production.
+	ExitOutput(c *OutputContext)
 
 	// ExitSimpleUnaryTests is called when exiting the SimpleUnaryTests production.
 	ExitSimpleUnaryTests(c *SimpleUnaryTestsContext)
@@ -146,8 +158,14 @@ type SFeelListener interface {
 	// ExitClosed_interval_end is called when exiting the closed_interval_end production.
 	ExitClosed_interval_end(c *Closed_interval_endContext)
 
-	// ExitSimple_expressions is called when exiting the simple_expressions production.
-	ExitSimple_expressions(c *Simple_expressionsContext)
+	// ExitEmpty_expression is called when exiting the empty_expression production.
+	ExitEmpty_expression(c *Empty_expressionContext)
+
+	// ExitSimpleExpressions is called when exiting the SimpleExpressions production.
+	ExitSimpleExpressions(c *SimpleExpressionsContext)
+
+	// ExitEmptySimpleExpressions is called when exiting the EmptySimpleExpressions production.
+	ExitEmptySimpleExpressions(c *EmptySimpleExpressionsContext)
 
 	// ExitExpression is called when exiting the expression production.
 	ExitExpression(c *ExpressionContext)

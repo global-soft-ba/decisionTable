@@ -27,7 +27,7 @@ func Start(in io.Reader, out io.Writer) {
 		}
 		exp := scanner.Text()
 
-		tree, err := antlr2.CreateParser(exp).Parse()
+		tree, err := antlr2.CreateParser(exp).ParseInput() //TODO: FIX parser with input/output parser
 		if len(err) != 0 {
 			printParserErrors(out, err)
 			continue

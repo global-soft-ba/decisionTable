@@ -7,6 +7,7 @@ import (
 	"github.com/global-soft-ba/decisionTable/lang/sfeel/gen"
 	"reflect"
 	"strconv"
+	"time"
 )
 
 func CreateListener() Listener {
@@ -75,7 +76,7 @@ func (s *Listener) ExitEqualUnaryComparison(ctx *parser.EqualUnaryComparisonCont
 
 	n := sfeel.UnaryTest{
 		ParserRule: rule,
-		Operator:   sfeel.Token{Type: -1},
+		Operator:   sfeel.Token{Type: sfeel.SFeelOperatorEQUAL},
 		Value:      val.(sfeel.Node),
 	}
 	s.stack.Push(n)
@@ -214,6 +215,164 @@ func (s *Listener) ExitBoolean_literal(ctx *parser.Boolean_literalContext) {
 }
 
 func (s *Listener) ExitDate_time_literal(ctx *parser.Date_time_literalContext) {
-	//ToDo Date-Time Datatype
-	panic("implement me")
+	rule := sfeel.Rule{Type: parser.SFeelParserRULE_date_time_literal, Literal: ctx.GetText()}
+	val, err := time.Parse("", rule.Literal)
+
+	if err != nil {
+		s.Errors = append(s.Errors, err)
+	} else {
+		n := sfeel.DateTime{ParserRule: rule, Value: val}
+		s.stack.Push(n)
+	}
+}
+
+//Simple expressions
+func (s *Listener) ExitExpression(ctx *parser.ExpressionContext) {
+	rule := sfeel.Rule{Type: parser.SFeelParserRULE_expression, Literal: ctx.GetText()}
+	val := s.stack.Pop()
+	n := sfeel.Expression{
+		ParserRule:       rule,
+		SimpleExpression: val.(ast.Node),
+	}
+
+	s.stack.Push(n)
+}
+
+func (s *Listener) ExitSimple_expression(ctx *parser.Simple_expressionContext) {
+	rule := sfeel.Rule{Type: parser.SFeelParserRULE_expression, Literal: ctx.GetText()}
+	val := s.stack.Pop()
+	n := sfeel.SimpleExpression{
+		ParserRule: rule,
+		Operator:   sfeel.Token{Type: sfeel.SFeelAssignmentEqual, Literal: ctx.GetText()},
+		Value:      val.(ast.Node),
+	}
+
+	s.stack.Push(n)
+}
+
+func (s *Listener) ExitSimpleExpressions(ctx *parser.SimpleExpressionsContext) {
+	rule := sfeel.Rule{Type: parser.SFeelParserRULE_simple_expressions, Literal: ctx.GetText()}
+	simpleExpressions := sfeel.SimpleExpressions{ParserRule: rule}
+	length := s.stack.Len()
+	for i := 0; i < length; i++ {
+		val := s.stack.Pop().(sfeel.Node)
+		simpleExpressions.SimpleExpressions = append(simpleExpressions.SimpleExpressions, val)
+	}
+
+	s.stack.Push(simpleExpressions)
+}
+
+func (s *Listener) ExitEmptySimpleExpressions(ctx *parser.EmptySimpleExpressionsContext) {
+	lit := ctx.GetStart().GetText()
+	tkn := sfeel.Token{
+		Type:    -1,
+		Literal: lit,
+	}
+	empty := sfeel.EmptyStatement{ParserToken: tkn}
+	s.stack.Push(empty)
+}
+
+func (s *Listener) ExitArithmeticNegation(ctx *parser.ArithmeticNegationContext) {
+	rule := sfeel.Rule{Type: parser.SFeelParserRULE_arithmetic_expression, Literal: ctx.GetText()}
+	val := s.stack.Pop()
+	n := sfeel.ArithmeticNegation{
+		ParserRule: rule,
+		Value:      val.(sfeel.Node),
+	}
+	s.stack.Push(n)
+}
+
+func (s *Listener) ExitSimple_value(ctx *parser.Simple_valueContext) {
+	rule := sfeel.Rule{Type: parser.SFeelParserRULE_simple_value, Literal: ctx.GetText()}
+	val := s.stack.Pop()
+
+	n := sfeel.SimpleValue{
+		ParserRule: rule,
+		Operator:   sfeel.Token{Type: sfeel.SFeelAssignmentEqual, Literal: ctx.GetStart().GetText()},
+		Value:      val.(sfeel.Node),
+	}
+	s.stack.Push(n)
+}
+
+func (s *Listener) ExitParentheses(ctx *parser.ParenthesesContext) {
+	rule := sfeel.Rule{Type: parser.SFeelParserRULE_arithmetic_expression, Literal: ctx.GetText()}
+	val := s.stack.Pop()
+
+	n := sfeel.Parentheses{
+		ParserRule: rule,
+		Value:      val.(sfeel.Node),
+	}
+	s.stack.Push(n)
+}
+
+func (s *Listener) ExitPower(ctx *parser.PowerContext) {
+	rule := sfeel.Rule{
+		Type:    parser.SFeelParserRULE_arithmetic_expression,
+		Literal: ctx.GetText(),
+	}
+	rightVal := s.stack.Pop()
+	leftVal := s.stack.Pop()
+	p := sfeel.ArithmeticExpression{
+		ParserRule: rule,
+		Left:       leftVal.(ast.Node),
+		Operator: sfeel.Token{
+			Type:    s.tokenMap[ctx.GetOperator().GetTokenType()],
+			Literal: ctx.GetOperator().GetText(),
+		},
+		Right: rightVal.(ast.Node),
+	}
+	s.stack.Push(p)
+}
+
+func (s *Listener) ExitMultiplicationOrDivision(ctx *parser.MultiplicationOrDivisionContext) {
+	rule := sfeel.Rule{
+		Type:    parser.SFeelParserRULE_arithmetic_expression,
+		Literal: ctx.GetText(),
+	}
+	rightVal := s.stack.Pop()
+	leftVal := s.stack.Pop()
+	p := sfeel.ArithmeticExpression{
+		ParserRule: rule,
+		Left:       leftVal.(ast.Node),
+		Operator: sfeel.Token{
+			Type:    s.tokenMap[ctx.GetOperator().GetTokenType()],
+			Literal: ctx.GetOperator().GetText(),
+		},
+		Right: rightVal.(ast.Node),
+	}
+	s.stack.Push(p)
+}
+
+func (s *Listener) ExitAdditionOrSubtraction(ctx *parser.AdditionOrSubtractionContext) {
+	rule := sfeel.Rule{
+		Type:    parser.SFeelParserRULE_arithmetic_expression,
+		Literal: ctx.GetText(),
+	}
+	rightVal := s.stack.Pop()
+	leftVal := s.stack.Pop()
+	p := sfeel.ArithmeticExpression{
+		ParserRule: rule,
+		Left:       leftVal.(ast.Node),
+		Operator: sfeel.Token{
+			Type:    s.tokenMap[ctx.GetOperator().GetTokenType()],
+			Literal: ctx.GetOperator().GetText(),
+		},
+		Right: rightVal.(ast.Node),
+	}
+	s.stack.Push(p)
+}
+
+func (s *Listener) ExitComparison(ctx *parser.ComparisonContext) {
+	rule := sfeel.Rule{Type: parser.SFeelParserRULE_comparison, Literal: ctx.GetText()}
+	op := sfeel.Token{Type: s.tokenMap[ctx.GetOperator().GetTokenType()], Literal: ctx.GetOperator().GetText()}
+	rightVal := s.stack.Pop()
+	leftVal := s.stack.Pop()
+	n := sfeel.Comparison{
+		ParserRule: rule,
+		Left:       leftVal.(ast.Node),
+		Operator:   op,
+		Right:      rightVal.(ast.Node),
+	}
+
+	s.stack.Push(n)
 }

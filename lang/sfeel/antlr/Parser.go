@@ -52,16 +52,16 @@ func (p Parser) Errors() []error {
 	return p.errorListener.Errors
 }
 
-func (p Parser) Parse() (ast.Node, []error) {
-	parseTree := p.Parser().Start()
-	if okay := p.syntaxCheck(parseTree); !okay {
+func (p Parser) ParseInput() (ast.Node, []error) {
+	parseTree := p.Parser().Input()
+	if okay := p.inputSyntaxCheck(parseTree); !okay {
 		return nil, p.errorListener.Errors
 	}
 
-	return p.buildAst(parseTree)
+	return p.buildInputAst(parseTree)
 }
 
-func (p Parser) syntaxCheck(tree parser2.IStartContext) bool {
+func (p Parser) inputSyntaxCheck(tree parser2.IInputContext) bool {
 	base := parser2.BaseSFeelListener{}
 	antlr.ParseTreeWalkerDefault.Walk(&base, tree)
 	if len(p.errorListener.Errors) != 0 {
@@ -71,7 +71,35 @@ func (p Parser) syntaxCheck(tree parser2.IStartContext) bool {
 	return true
 }
 
-func (p Parser) buildAst(tree parser2.IStartContext) (ast.Node, []error) {
+func (p Parser) buildInputAst(tree parser2.IInputContext) (ast.Node, []error) {
+	lis := CreateListener()
+	antlr.ParseTreeWalkerDefault.Walk(&lis, tree)
+	if len(lis.Errors) != 0 {
+		return nil, lis.Errors
+	}
+	return lis.GetAST(), nil
+}
+
+func (p Parser) ParseOutput() (ast.Node, []error) {
+	parseTree := p.Parser().Output()
+	if okay := p.outputSyntaxCheck(parseTree); !okay {
+		return nil, p.errorListener.Errors
+	}
+
+	return p.buildOutputAst(parseTree)
+}
+
+func (p Parser) outputSyntaxCheck(tree parser2.IOutputContext) bool {
+	base := parser2.BaseSFeelListener{}
+	antlr.ParseTreeWalkerDefault.Walk(&base, tree)
+	if len(p.errorListener.Errors) != 0 {
+		return false
+	}
+
+	return true
+}
+
+func (p Parser) buildOutputAst(tree parser2.IOutputContext) (ast.Node, []error) {
 	lis := CreateListener()
 	antlr.ParseTreeWalkerDefault.Walk(&lis, tree)
 	if len(lis.Errors) != 0 {

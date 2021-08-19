@@ -4,6 +4,7 @@ import (
 	"errors"
 	grule "github.com/global-soft-ba/decisionTable/conv/grule/data"
 	"github.com/global-soft-ba/decisionTable/conv/grule/grl"
+	"github.com/global-soft-ba/decisionTable/conv/grule/grl/conv"
 	dtable "github.com/global-soft-ba/decisionTable/data"
 	"strconv"
 )
@@ -93,6 +94,9 @@ func (c TableToGruleConverter) convertEntriesToTerms(entries []dtable.EntryInter
 		entry, err := c.convertEntryToExpression(val, fields[i])
 
 		if err != nil {
+			if errors.Is(err, conv.ErrEmptyStatement) {
+				continue
+			}
 			return []grule.Term{}, err
 		}
 		result = append(result, entry)

@@ -98,21 +98,21 @@ const RULENAME = `{{define "RULENAME"}}row_{{ .Name }} "{{ .Description }}"{{end
 
 const WHEN = `{{define "WHEN" }}
 {{- range $index, $val := .Expressions }}
-  {{- if eq $index 0}}
-   {{template "ENTRY" $val}}
-   {{- else}}
-   && {{template "ENTRY" $val}}
-  {{- end}}
- {{- end}}
+{{- if eq $index 0}}
+	{{template "ENTRY" $val}}
+	{{- else}}
+	&& {{template "ENTRY" $val}}
+{{- end}}
+{{- end}}
 {{- end}}`
 
 const THEN = `{{define "THEN"}}
  {{- range $index, $val := .Assignments }}
-  {{template "ENTRY" $val}};
+	{{template "ENTRY" $val}};
  {{- end}}
 {{- end}}`
 
-const ENTRY = `{{define "ENTRY"}} {{.Expression.Convert getFormat }} {{end}}`
+const ENTRY = `{{define "ENTRY"}}{{.Expression.Convert getFormat }}{{end}}`
 
 // HitPolicies
 /* We assume that the table has unique non overlapping conditions. So maximal hit conditions can be one (or nothing).
@@ -126,7 +126,7 @@ const ENTRY = `{{define "ENTRY"}} {{.Expression.Convert getFormat }} {{end}}`
 const (
 	SALIENCE          = `SALIENCE`
 	HitPolicyDefault  = `{{define "SALIENCE"}}{{end}}`
-	HitPolicyUnique   = `{{define "SALIENCE"}}salience {{.Salience}} {{end}}`
+	HitPolicyUnique   = `{{define "SALIENCE"}}salience {{.Salience}}{{end}}`
 	HitPolicyFirst    = `{{define "SALIENCE"}}salience {{.InvSalience}}{{end}}`
 	HitPolicyPriority = `{{define "SALIENCE"}}salience {{.Salience}}{{end}}`
 )
@@ -134,5 +134,5 @@ const (
 const (
 	INTERFERENCE          = `INTERFERENCE`
 	InterferenceExists    = `{{define "INTERFERENCE"}}{{end}}`
-	InterferenceNotExists = `{{define "INTERFERENCE"}} Complete(); {{end}}`
+	InterferenceNotExists = `{{define "INTERFERENCE"}}Complete();{{end}}`
 )

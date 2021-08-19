@@ -1,9 +1,11 @@
 package ast
 
 const (
-	LogicalAND = iota
+	AssignmentEQUAL = iota - 1
+	LogicalAND
 	LogicalOR
 	ComparisonOperatorEQUAL
+	ComparisonOperatorNOTEQUAL
 	ComparisonOperatorLESS
 	ComparisonOperatorLESSEQ
 	ComparisonOperatorGREATER

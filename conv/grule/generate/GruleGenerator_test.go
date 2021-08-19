@@ -28,7 +28,7 @@ func TestGruleGenerator_Generate(t *testing.T) {
 		{
 			name: "integer unary test",
 			args: args{
-				targetFormat: string(grule.GRL),
+				targetFormat: string(dtable.GRULE),
 				rules: grule.RuleSet{
 					Key:             "test1",
 					Name:            "TableOne",
@@ -55,13 +55,13 @@ func TestGruleGenerator_Generate(t *testing.T) {
 					},
 				},
 			},
-			want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n    (I1.L1 == 8) \n then \n   (O1.L1 == 4) ;\n  Complete(); \n}"},
+			want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n\t(I1.L1 == 8)\n then \n\tO1.L1 = 4;\n Complete();\n}"},
 			wantErr: false,
 		},
 		{
 			name: "integer unary with first hit policies",
 			args: args{
-				targetFormat: string(grule.GRL),
+				targetFormat: string(dtable.GRULE),
 				rules: grule.RuleSet{
 					Key:             "test1",
 					Name:            "TableOne",
@@ -111,15 +111,15 @@ func TestGruleGenerator_Generate(t *testing.T) {
 				},
 			},
 			want: []string{
-				"rule row_0 \"R1\" salience 1 {\n when \n    (I1.L1 == 8) \n then \n   (O1.L1 == 4) ;\n \n}",
-				"rule row_1 \"R2\" salience 0 {\n when \n    (I1.L1 == 10) \n then \n   (O1.L1 == 100) ;\n \n}",
+				"rule row_0 \"R1\" salience 1 {\n when \n\t(I1.L1 == 8)\n then \n\tO1.L1 = 4;\n \n}",
+				"rule row_1 \"R2\" salience 0 {\n when \n\t(I1.L1 == 10)\n then \n\tO1.L1 = 100;\n \n}",
 			},
 			wantErr: false,
 		},
 		{
 			name: "integer interval test",
 			args: args{
-				targetFormat: string(grule.GRL),
+				targetFormat: string(dtable.GRULE),
 				rules: grule.RuleSet{
 					Key:             "test1",
 					Name:            "TableOne",
@@ -146,7 +146,7 @@ func TestGruleGenerator_Generate(t *testing.T) {
 					},
 				},
 			},
-			want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n    ((I1.L1 >= 1) && (I1.L1 < 6)) \n then \n   (O1.L1 == 4) ;\n  Complete(); \n}"},
+			want:    []string{"rule row_0 \"R1\" salience 0 {\n when \n\t((I1.L1 >= 1) && (I1.L1 < 6))\n then \n\tO1.L1 = 4;\n Complete();\n}"},
 			wantErr: false,
 		},
 	}

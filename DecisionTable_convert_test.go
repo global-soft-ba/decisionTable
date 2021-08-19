@@ -13,10 +13,10 @@ func TestDecisionTable_Convert(t *testing.T) {
 		SetDefinitionKey("determineEmployee").
 		SetNotationStandard(data.GRULE).
 		SetHitPolicy(data.Unique).
-		AddInputField(data.TestField{Name: "TypeOfClaim", Key: "claim", Typ: data.String}).
-		AddInputField(data.TestField{Name: "ExpenditureOfClaim", Key: "claim", Typ: data.Integer}).
-		AddOutputField(data.TestField{Name: "ResponsibleEmployee", Key: "Employee", Typ: data.String}).
-		AddOutputField(data.TestField{Name: "4EyesPrinciple", Key: "Employee", Typ: data.Boolean}).
+		AddInputField(data.TestField{Name: "claim", Key: "TypeOfClaim", Typ: data.String}).
+		AddInputField(data.TestField{Name: "claim", Key: "ExpenditureOfClaim", Typ: data.Integer}).
+		AddOutputField(data.TestField{Name: "Employee", Key: "ResponsibleEmployee", Typ: data.String}).
+		AddOutputField(data.TestField{Name: "Employee", Key: "4EyesPrinciple", Typ: data.Boolean}).
 		AddRule("R1").
 		AddInputEntry(`"Car Accident"`, data.SFEEL).
 		AddInputEntry("<1000", data.SFEEL).
@@ -45,9 +45,9 @@ func TestDecisionTable_Convert(t *testing.T) {
 			name:   "DecisionTable To GruleRuleSet",
 			fields: testTable,
 			want: []string{
-				"rule row_0 \"R1\" salience 0  {\n when \n   claim.TypeOfClaim == \"Car Accident\"\n   && claim.ExpenditureOfClaim < 1000 \n then \n  Employee.ResponsibleEmployee = \"Müller\";\n  Employee.4EyesPrinciple = false; \n  Complete();\n}",
-				"rule row_1 \"R2\" salience 1  {\n when \n   claim.TypeOfClaim == \"Car Accident\"\n   && ((claim.ExpenditureOfClaim >= 1000) && (claim.ExpenditureOfClaim <= 10000)) \n then \n  Employee.ResponsibleEmployee = \"Meier\";\n  Employee.4EyesPrinciple = false; \n  Complete();\n}",
-				"rule row_2 \"R3\" salience 2  {\n when \n   claim.ExpenditureOfClaim >= 10000 \n then \n  Employee.4EyesPrinciple = true; \n  Complete();\n}",
+				"rule row_0 \"R1\" salience 0 {\n when \n\t(claim.TypeOfClaim == \"Car Accident\")\n\t&& (claim.ExpenditureOfClaim < 1000)\n then \n\tEmployee.ResponsibleEmployee = \"Müller\";\n\tEmployee.4EyesPrinciple = false;\n Complete();\n}",
+				"rule row_1 \"R2\" salience 1 {\n when \n\t(claim.TypeOfClaim == \"Car Accident\")\n\t&& ((claim.ExpenditureOfClaim >= 1000) && (claim.ExpenditureOfClaim <= 10000))\n then \n\tEmployee.ResponsibleEmployee = \"Meier\";\n\tEmployee.4EyesPrinciple = false;\n Complete();\n}",
+				"rule row_2 \"R3\" salience 2 {\n when \n\t(claim.ExpenditureOfClaim >= 10000)\n then \n\tEmployee.4EyesPrinciple = true;\n Complete();\n}",
 			},
 			wantErr: false,
 		},

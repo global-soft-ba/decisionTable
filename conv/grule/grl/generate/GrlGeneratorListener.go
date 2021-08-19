@@ -22,7 +22,8 @@ func CreateGrlGeneratorListener() (GrlGeneratorListener, error) {
 	return GrlGeneratorListener{
 		OperationsTemplates: tpl,
 		OperatorTable:       templates.OperatorTable,
-		stack:               ast.NewStack()}, nil
+		stack:               ast.NewStack(),
+	}, nil
 }
 
 type operation struct {
@@ -57,7 +58,9 @@ func (g *GrlGeneratorListener) executeTemplate(op int, tmplName string) string {
 		Right: rightVal.(string),
 	}
 
-	g.OperationsTemplates.ExecuteTemplate(&tpl, tmplName, data)
+	if err := g.OperationsTemplates.ExecuteTemplate(&tpl, tmplName, data); err != nil {
+		g.Errors = append(g.Errors, err)
+	}
 
 	return tpl.String()
 }
@@ -81,10 +84,65 @@ func (g *GrlGeneratorListener) ExitComparisonOperations(ctx grl.ComparisonOperat
 	g.stack.Push(r)
 }
 
+func (g *GrlGeneratorListener) ExitMathOperations(ctx grl.MathOperations) {
+	r := g.executeTemplate(ctx.Operator, templates.BinaryOperation)
+	g.stack.Push(r)
+}
+
+func (g *GrlGeneratorListener) ExitAssignmentOperations(ctx grl.AssignmentOperations) {
+	r := g.executeTemplate(ctx.Operator, templates.AssignmentOperation)
+	g.stack.Push(r)
+}
+
+func (g *GrlGeneratorListener) ExitPowOperation(ctx grl.PowOperation) {
+	var tpl bytes.Buffer
+
+	rightVal := g.stack.Pop()
+	leftVal := g.stack.Pop()
+
+	if err := g.OperationsTemplates.ExecuteTemplate(&tpl, templates.PowOperation, struct {
+		Base string
+		Exp  string
+	}{
+		Base: leftVal.(string),
+		Exp:  rightVal.(string),
+	}); err != nil {
+		g.Errors = append(g.Errors, err)
+	}
+
+	g.stack.Push(tpl.String())
+}
+
+func (g *GrlGeneratorListener) ExitParentheses(ctx grl.Parentheses) {
+	parentheses := g.stack.Pop().(grl.Parentheses)
+	g.stack.Push(parentheses.String())
+}
+
+func (g *GrlGeneratorListener) ExitArithmeticNegation(ctx grl.ArithmeticNegation) {
+	negation := g.stack.Pop().(grl.ArithmeticNegation)
+	g.stack.Push(negation.String())
+}
+
 func (g *GrlGeneratorListener) ExitInteger(ctx grl.Integer) {
 	g.stack.Push(ctx.String())
 }
 
 func (g *GrlGeneratorListener) ExitString(ctx grl.String) {
+	g.stack.Push(ctx.String())
+}
+
+func (g *GrlGeneratorListener) ExitBoolean(ctx grl.Boolean) {
+	g.stack.Push(ctx.String())
+}
+
+func (g *GrlGeneratorListener) ExitDateTime(ctx grl.DateTime) {
+	g.stack.Push(ctx.String())
+}
+
+func (g *GrlGeneratorListener) ExitEmptyStatement(ctx grl.EmptyStatement) {
+
+}
+
+func (g *GrlGeneratorListener) ExitFloat(ctx grl.Float) {
 	g.stack.Push(ctx.String())
 }

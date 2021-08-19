@@ -10,8 +10,12 @@ import (
 	"reflect"
 )
 
+var (
+	ErrInvalidAst = errors.New("invalid ast, can not be null in Validate() method")
+)
+
 func CreateInputEntry(exp string) data.EntryInterface {
-	tree, err := antlr.CreateParser(exp).Parse()
+	tree, err := antlr.CreateParser(exp).ParseInput()
 	evl := eval.CreateInputEntryEvaluator()
 	if err != nil {
 		return Entry{ast: nil, evaluator: evl, expression: exp}
@@ -20,7 +24,7 @@ func CreateInputEntry(exp string) data.EntryInterface {
 }
 
 func CreateOutputEntry(exp string) data.EntryInterface {
-	tree, err := antlr.CreateParser(exp).Parse()
+	tree, err := antlr.CreateParser(exp).ParseOutput()
 	evl := eval.CreateOutputEntryEvaluator()
 	if err != nil {
 		return Entry{ast: nil, evaluator: evl, expression: exp}
@@ -43,8 +47,7 @@ func (e Entry) ExpressionLanguage() data.ExpressionLanguage {
 
 func (e Entry) Validate() (bool, []error) {
 	if e.ast == nil {
-		_, err := antlr.CreateParser(e.expression).Parse()
-		return false, err
+		return false, []error{ErrInvalidAst}
 	}
 	return e.evaluator.Eval(e.ast)
 }
@@ -78,6 +81,18 @@ func (e Entry) ValidateDataTypeOfExpression(varType data.DataTyp) (bool, error) 
 		if varType == data.DateTime {
 			return true, nil
 		}
+	case reflect.TypeOf(sfeel.UnaryTests{}):
+		return true, nil
+	case reflect.TypeOf(sfeel.UnaryTest{}):
+		return true, nil
+	case reflect.TypeOf(sfeel.Interval{}):
+		return true, nil
+	case reflect.TypeOf(sfeel.Parentheses{}):
+		return true, nil
+	case reflect.TypeOf(sfeel.SimpleExpression{}):
+		return true, nil
+	case reflect.TypeOf(sfeel.SimpleValue{}):
+		return true, nil
 	}
 
 	return false, errors.New(fmt.Sprintf("given data type %s is not compatible with %s", varType, e.ast.GetOperandDataType()))
@@ -86,7 +101,6 @@ func (e Entry) ValidateExistenceOfFieldReferencesInExpression(fields []data.Fiel
 	qualifiedFields := sfeel.GetAllQualifiedNames(e.ast)
 	var errOut []error
 	var out []data.FieldInterface
-
 	for _, val := range qualifiedFields {
 		qf, err := e.getFieldUsingQualifiedName(val, fields)
 		if err != nil {

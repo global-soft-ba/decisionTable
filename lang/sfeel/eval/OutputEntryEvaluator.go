@@ -23,7 +23,12 @@ func (e OutputEntryEvaluator) Eval(node ast.Node) (bool, []error) {
 	case ast.EmptyStatement:
 		// No additional evaluation necessary
 		return true, nil
-
+	case ast.SimpleExpressions:
+		// No additional Evaluation necessary
+		return true, nil
+	case ast.SimpleExpression:
+		// No additional Evaluation necessary
+		return true, nil
 	}
 
 	return false, []error{errors.New(fmt.Sprintf("given node type %s is not allowed as output entry", reflect.TypeOf(e.node)))}

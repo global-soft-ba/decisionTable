@@ -1,9 +1,13 @@
 package conv
 
 import (
+	"errors"
 	"github.com/global-soft-ba/decisionTable/ast"
+	ast2 "github.com/global-soft-ba/decisionTable/conv/grule/grl/ast"
 	"github.com/global-soft-ba/decisionTable/data"
 )
+
+var ErrEmptyStatement = errors.New("empty statement")
 
 func CreateSFeelToGrlAstConverter() SFeelToGrlAstConverter {
 	listener := CreateSFeelToGrlAstConverterListener()
@@ -18,6 +22,10 @@ func (c SFeelToGrlAstConverter) ConvertToGrlAst(field data.FieldInterface, sfeel
 	c.listener.field = field
 	sfeelEntry.Convert(&c.listener)
 	grlTree := c.listener.GetAST()
+	switch grlTree.(type) {
+	case ast2.EmptyStatement:
+		return grlTree, ErrEmptyStatement
+	}
 
 	return grlTree, nil
 }

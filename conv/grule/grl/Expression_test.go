@@ -25,7 +25,7 @@ func TestCreateExpression(t *testing.T) {
 				field: dTable.TestField{Name: "X", Key: "Y", Typ: dTable.Integer},
 				entry: sfeel.CreateInputEntry("[1..6]"),
 			},
-			want:    "((X.Y :6: 1) :0: (X.Y :4: 6))",
+			want:    "((X.Y :7: 1) :0: (X.Y :5: 6))",
 			wantErr: false,
 		},
 	}
