@@ -166,7 +166,7 @@ func TestValidate_InvalidTables(t *testing.T) {
 				BuildRule().
 				BuildWithoutValidation(),
 			want: false,
-			err:  errors.New("given node type ast.UnaryTests is not allowed as output entry"),
+			err:  errors.New("couldn't find qualified name x.s in field list"),
 		},
 	}
 

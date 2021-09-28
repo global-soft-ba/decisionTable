@@ -20,6 +20,7 @@ func CreateInputEntry(exp string) data.EntryInterface {
 	if err != nil {
 		return Entry{ast: nil, evaluator: evl, expression: exp}
 	}
+	//Todo: integrate type checking between entry type and input field type (SemanticEvaluator)
 	return Entry{ast: tree, evaluator: evl, expression: exp}
 }
 
@@ -29,6 +30,7 @@ func CreateOutputEntry(exp string) data.EntryInterface {
 	if err != nil {
 		return Entry{ast: nil, evaluator: evl, expression: exp}
 	}
+	//Todo: integrate type checking between entry type and output field type (SemanticEvaluator)
 	return Entry{ast: tree, evaluator: evl, expression: exp}
 }
 
