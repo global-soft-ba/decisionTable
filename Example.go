@@ -2,8 +2,7 @@ package decisionTable
 
 import (
 	"fmt"
-	conv "github.com/global-soft-ba/decisionTable/converters"
-	"github.com/global-soft-ba/decisionTable/model"
+	"github.com/global-soft-ba/decisionTable/data"
 	"github.com/hyperjumptech/grule-rule-engine/ast"
 	"github.com/hyperjumptech/grule-rule-engine/builder"
 	"github.com/hyperjumptech/grule-rule-engine/engine"
@@ -50,43 +49,42 @@ func main() {
 	table, _ := CreateDecisionTable().
 		SetName("Determine Employee").
 		SetDefinitionKey("determineEmployee").
-		SetNotationStandard(model.GRULE).
-		SetHitPolicy(model.Unique).
-		AddInputField("TypeOfClaim", "Claim", model.String).
-		AddInputField("ExpenditureOfClaim", "Claim", model.Integer).
-		AddInputField("TimeOfClaim", "Claim", model.DateTime).
-		AddOutputField("ResponsibleEmployee", "Employee", model.String).
-		AddOutputField("FourEyesPrinciple", "Employee", model.Boolean).
-		AddOutputField("LastTime", "Employee", model.DateTime).
+		SetNotationStandard(data.GRULE).
+		SetHitPolicy(data.Unique).
+		AddInputField(data.TestField{Name: "TypeOfClaim", Key: "Claim", Typ: data.String}).
+		AddInputField(data.TestField{Name: "ExpenditureOfClaim", Key: "Claim", Typ: data.Integer}).
+		AddInputField(data.TestField{Name: "TimeOfClaim", Key: "Claim", Typ: data.DateTime}).
+		AddOutputField(data.TestField{Name: "ResponsibleEmployee", Key: "Employee", Typ: data.String}).
+		AddOutputField(data.TestField{Name: "FourEyesPrinciple", Key: "Employee", Typ: data.Boolean}).
+		AddOutputField(data.TestField{Name: "LastTime", Key: "Employee", Typ: data.DateTime}).
 		AddRule("R1").
-		AddInputEntry(`"Car Accident"`, model.SFEEL).
-		AddInputEntry("<1000", model.SFEEL).
-		AddInputEntry(`>=DateAndTime("2021-01-02T12:00:00")`, model.SFEEL).
-		AddOutputEntry(`"Müller"`, model.SFEEL).
-		AddOutputEntry("false", model.SFEEL).
-		AddOutputEntry(`DateAndTime("2023-01-03T23:59:59")`, model.SFEEL).
+		AddInputEntry(`"Car Accident"`, data.SFEEL).
+		AddInputEntry("<1000", data.SFEEL).
+		AddInputEntry(`>=DateAndTime("2021-01-02T12:00:00")`, data.SFEEL).
+		AddOutputEntry(`"Müller"`, data.SFEEL).
+		AddOutputEntry("false", data.SFEEL).
+		AddOutputEntry(`DateAndTime("2023-01-03T23:59:59")`, data.SFEEL).
 		BuildRule().
 		AddRule("R2").
-		AddInputEntry(`"Car Accident"`, model.SFEEL).
-		AddInputEntry("[1000..10000]", model.SFEEL).
-		AddInputEntry("-", model.SFEEL).
-		AddOutputEntry(`"Schulz"`, model.SFEEL).
-		AddOutputEntry("false", model.SFEEL).
-		AddOutputEntry("-", model.SFEEL).
+		AddInputEntry(`"Car Accident"`, data.SFEEL).
+		AddInputEntry("[1000..10000]", data.SFEEL).
+		AddInputEntry("-", data.SFEEL).
+		AddOutputEntry(`"Schulz"`, data.SFEEL).
+		AddOutputEntry("false", data.SFEEL).
+		AddOutputEntry("-", data.SFEEL).
 		BuildRule().
 		AddRule("R3").
-		AddInputEntry("-", model.SFEEL).
-		AddInputEntry(">=10000", model.SFEEL).
-		AddInputEntry("-", model.SFEEL).
-		AddOutputEntry("-", model.SFEEL).
-		AddOutputEntry("true", model.SFEEL).
-		AddOutputEntry("-", model.SFEEL).
+		AddInputEntry("-", data.SFEEL).
+		AddInputEntry(">=10000", data.SFEEL).
+		AddInputEntry("-", data.SFEEL).
+		AddOutputEntry("-", data.SFEEL).
+		AddOutputEntry("true", data.SFEEL).
+		AddOutputEntry("-", data.SFEEL).
 		BuildRule().
 		Build()
 
-	// Convert Table Into Grule Rules
-	converter, _ := conv.CreateTableConverterFactory().GetTableConverter(model.GRULE, model.GRL)
-	rules, err := table.Convert(converter)
+	// ConvertToGrlAst Table Into Grule Rules
+	rules, err := table.Convert(string(data.GRULE))
 	if err != nil {
 		fmt.Print("Error:", err)
 	}
@@ -112,6 +110,11 @@ func main() {
 	}
 	employee := Employee{}
 
+	// CreateEngine Instance
+	ruleEngine := engine.NewGruleEngine()
+	kb := kl.Library.NewKnowledgeBaseInstance("#exampleBase", "0.0.1")
+
+	now := time.Now()
 	// Load example
 	dataCtx := ast.NewDataContext()
 	err = dataCtx.Add("Claim", &claim)
@@ -120,13 +123,7 @@ func main() {
 		fmt.Println("Error:", err)
 	}
 
-	// CreateEngine Instance
-	ruleEngine := engine.NewGruleEngine()
-	kb := kl.Library.NewKnowledgeBaseInstance("#exampleBase", "0.0.1")
-
 	//Execution
-	//ruleEntries, _ := ruleEngine.FetchMatchingRules(dataCtx,kb)
-	now := time.Now()
 	err = ruleEngine.Execute(dataCtx, kb)
 	fmt.Println("--------------OutCome------------------------")
 	fmt.Println("time elapse:", time.Since(now))

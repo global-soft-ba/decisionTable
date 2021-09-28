@@ -1,23 +1,24 @@
 package decisionTable
 
 import (
-	"github.com/global-soft-ba/decisionTable/model"
+	"github.com/global-soft-ba/decisionTable/data"
 )
 
 type DecisionTableBuilderInterface interface {
 	Build() (DecisionTable, []error)
+	BuildWithoutValidation() DecisionTable
 	SetDefinitionKey(key string) DecisionTableBuilderInterface
 	SetName(name string) DecisionTableBuilderInterface
-	SetNotationStandard(lang model.DTableStandard) DecisionTableBuilderInterface
-	SetHitPolicy(policy model.HitPolicy) DecisionTableBuilderInterface
-	SetCollectOperator(collector model.CollectOperator) DecisionTableBuilderInterface
-	AddInputField(name string, label string, typ model.VariableTyp) DecisionTableBuilderInterface
-	AddOutputField(name string, label string, typ model.VariableTyp) DecisionTableBuilderInterface
+	SetNotationStandard(lang data.DTableStandard) DecisionTableBuilderInterface
+	SetHitPolicy(policy data.HitPolicy) DecisionTableBuilderInterface
+	SetCollectOperator(collector data.CollectOperator) DecisionTableBuilderInterface
+	AddInputField(field data.FieldInterface) DecisionTableBuilderInterface
+	AddOutputField(field data.FieldInterface) DecisionTableBuilderInterface
 	AddRule(description string) DecisionTableRuleBuilderInterface
 }
 
 type DecisionTableRuleBuilderInterface interface {
-	AddInputEntry(expr string, exprLang model.ExpressionLanguage) DecisionTableRuleBuilderInterface
-	AddOutputEntry(expr string, exprLang model.ExpressionLanguage) DecisionTableRuleBuilderInterface
+	AddInputEntry(expr string, exprLang data.ExpressionLanguage) DecisionTableRuleBuilderInterface
+	AddOutputEntry(expr string, exprLang data.ExpressionLanguage) DecisionTableRuleBuilderInterface
 	BuildRule() DecisionTableBuilderInterface
 }

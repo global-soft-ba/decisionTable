@@ -2,8 +2,9 @@ package decisionTable
 
 import (
 	"errors"
-	"github.com/global-soft-ba/decisionTable/converters/interfaces"
-	"github.com/global-soft-ba/decisionTable/model"
+	"github.com/global-soft-ba/decisionTable/conv"
+	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/valid"
 )
 
 var (
@@ -16,75 +17,67 @@ func CreateDecisionTable() DecisionTableBuilderInterface {
 }
 
 type DecisionTable struct {
-	key              string
-	name             string
-	hitPolicy        model.HitPolicy
-	collectOperator  model.CollectOperator
-	notationStandard model.DTableStandard
-	interferences    bool
-	valid            bool
-
-	inputFields  []model.Field
-	outputFields []model.Field
-	rules        []model.Rule
+	data data.Table
 }
 
 func (d DecisionTable) Key() string {
-	return d.key
+	return d.data.Key
 }
 
 func (d DecisionTable) Name() string {
-	return d.name
+	return d.data.Name
 }
 
-func (d DecisionTable) HitPolicy() model.HitPolicy {
-	return d.hitPolicy
+func (d DecisionTable) HitPolicy() data.HitPolicy {
+	return d.data.HitPolicy
 }
 
-func (d DecisionTable) CollectOperator() model.CollectOperator {
-	return d.collectOperator
+func (d DecisionTable) CollectOperator() data.CollectOperator {
+	return d.data.CollectOperator
 }
 
-func (d DecisionTable) NotationStandard() model.DTableStandard {
-	return d.notationStandard
+func (d DecisionTable) NotationStandard() data.DTableStandard {
+	return d.data.NotationStandard
 }
 
-func (d DecisionTable) Valid() bool {
-	return d.valid
+func (d DecisionTable) InputFields() []data.FieldInterface {
+	return d.data.InputFields
 }
 
-func (d DecisionTable) InputFields() []model.Field {
-	return d.inputFields
+func (d DecisionTable) OutputFields() []data.FieldInterface {
+	return d.data.OutputFields
 }
 
-func (d DecisionTable) OutputFields() []model.Field {
-	return d.outputFields
-}
-
-func (d DecisionTable) Rules() []model.Rule {
-	return d.rules
+func (d DecisionTable) Rules() []data.Rule {
+	return d.data.Rules
 }
 
 func (d DecisionTable) Interferences() bool {
-	return d.interferences
+	return d.data.Interferences
 }
 
-func (d DecisionTable) Convert(converter interfaces.ConverterInterface) (interface{}, error) {
-
-	if !d.valid {
+//ToDo define explicit output format type (instead of string) into engine standard (notation standard)
+func (d DecisionTable) Convert(format string) (interface{}, error) {
+	if ok, _ := d.Validate(); !ok {
 		return []string{}, ErrDTableNotValid
 	}
 
-	dTable := model.TableData{
-		Key:              d.key,
-		Name:             d.name,
-		HitPolicy:        d.hitPolicy,
-		CollectOperator:  d.collectOperator,
-		NotationStandard: d.notationStandard,
-		InputFields:      d.inputFields,
-		OutputFields:     d.outputFields,
-		Interferences:    d.interferences,
-		Rules:            d.rules,
+	tableConverter := conv.CreateConverter()
+
+	res, err := tableConverter.Convert(d.data, format)
+	if err != nil {
+		return nil, err
 	}
-	return converter.Convert(dTable)
+
+	return res, nil
+}
+
+func (d *DecisionTable) Validate() (bool, []error) {
+	validator := valid.CreateDecisionTableValidator()
+	val, err := validator.Validate(d.data)
+	if val != true {
+		return false, err
+	}
+	d.data.Interferences = validator.ValidateContainsInterferences(d.data)
+	return true, []error(nil)
 }
