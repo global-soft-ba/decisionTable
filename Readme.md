@@ -15,32 +15,32 @@ The library allows:
 
 # Decision Table Builder (Code Example)
 ```
-table, _ := CreateDecisionTable().
+table, _ := decisionTable.CreateDecisionTable().
 		SetName("Determine Employee").
 		SetDefinitionKey("determineEmployee").
-		SetNotationStandard(model.GRULE).
-		SetHitPolicy(model.Unique).
-		AddInputField("TypeOfClaim", "Claim", model.String).
-		AddInputField("ExpenditureOfClaim", "Claim", model.Integer).
-		AddOutputField("ResponsibleEmployee", "Employee", model.String).
-		AddOutputField("FourEyesPrinciple", "Employee", model.Boolean).
+		SetNotationStandard(data.GRULE).
+		SetHitPolicy(data.Unique).
+		AddInputField(data.TestField{Name: "Claim", Key: "TypeOfClaim", Typ: data.String}).
+		AddInputField(data.TestField{Name: "Claim", Key: "ExpenditureOfClaim", Typ: data.Integer}).
+		AddOutputField(data.TestField{Name: "Employee", Key: "ResponsibleEmployee", Typ: data.String}).
+		AddOutputField(data.TestField{Name: "Employee", Key: "FourEyesPrinciple", Typ: data.Boolean}).
 		AddRule("R1").
-          AddInputEntry(`"Car Accident"`, model.SFEEL).
-          AddInputEntry("<1000", model.SFEEL).
-          AddOutputEntry(`"Müller"`, model.SFEEL).
-          AddOutputEntry("false", model.SFEEL).
+		AddInputEntry(`"Car Accident"`, data.SFEEL).
+		AddInputEntry("<1000", data.SFEEL).
+		AddOutputEntry(`"Müller"`, data.SFEEL).
+		AddOutputEntry("false", data.SFEEL).
 		BuildRule().
 		AddRule("R2").
-          AddInputEntry(`"Car Accident"`, model.SFEEL).
-          AddInputEntry("[1000..10000]", model.SFEEL).
-          AddOutputEntry(`"Schulz"`, model.SFEEL).
-          AddOutputEntry("false", model.SFEEL).
+		AddInputEntry(`"Car Accident"`, data.SFEEL).
+		AddInputEntry("[1000..10000]", data.SFEEL).
+		AddOutputEntry(`"Schulz"`, data.SFEEL).
+		AddOutputEntry("false", data.SFEEL).
 		BuildRule().
-          AddRule("R3").
-          AddInputEntry("-", model.SFEEL).
-          AddInputEntry(">=10000", model.SFEEL).
-          AddOutputEntry("-", model.SFEEL).
-          AddOutputEntry("true", model.SFEEL).
+		AddRule("R3").
+		AddInputEntry("-", data.SFEEL).
+		AddInputEntry(">=10000", data.SFEEL).
+		AddOutputEntry("-", data.SFEEL).
+		AddOutputEntry("true", data.SFEEL).
 		BuildRule().
 		Build()
 ```

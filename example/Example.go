@@ -1,7 +1,8 @@
-package decisionTable
+package main
 
 import (
 	"fmt"
+	"github.com/global-soft-ba/decisionTable"
 	"github.com/global-soft-ba/decisionTable/data"
 	"github.com/hyperjumptech/grule-rule-engine/ast"
 	"github.com/hyperjumptech/grule-rule-engine/builder"
@@ -46,40 +47,32 @@ type Employee struct {
 
 func main() {
 
-	table, _ := CreateDecisionTable().
+	table, _ := decisionTable.CreateDecisionTable().
 		SetName("Determine Employee").
 		SetDefinitionKey("determineEmployee").
 		SetNotationStandard(data.GRULE).
 		SetHitPolicy(data.Unique).
-		AddInputField(data.TestField{Name: "TypeOfClaim", Key: "Claim", Typ: data.String}).
-		AddInputField(data.TestField{Name: "ExpenditureOfClaim", Key: "Claim", Typ: data.Integer}).
-		AddInputField(data.TestField{Name: "TimeOfClaim", Key: "Claim", Typ: data.DateTime}).
-		AddOutputField(data.TestField{Name: "ResponsibleEmployee", Key: "Employee", Typ: data.String}).
-		AddOutputField(data.TestField{Name: "FourEyesPrinciple", Key: "Employee", Typ: data.Boolean}).
-		AddOutputField(data.TestField{Name: "LastTime", Key: "Employee", Typ: data.DateTime}).
+		AddInputField(data.TestField{Name: "Claim", Key: "TypeOfClaim", Typ: data.String}).
+		AddInputField(data.TestField{Name: "Claim", Key: "ExpenditureOfClaim", Typ: data.Integer}).
+		AddOutputField(data.TestField{Name: "Employee", Key: "ResponsibleEmployee", Typ: data.String}).
+		AddOutputField(data.TestField{Name: "Employee", Key: "FourEyesPrinciple", Typ: data.Boolean}).
 		AddRule("R1").
 		AddInputEntry(`"Car Accident"`, data.SFEEL).
 		AddInputEntry("<1000", data.SFEEL).
-		AddInputEntry(`>=DateAndTime("2021-01-02T12:00:00")`, data.SFEEL).
 		AddOutputEntry(`"Müller"`, data.SFEEL).
 		AddOutputEntry("false", data.SFEEL).
-		AddOutputEntry(`DateAndTime("2023-01-03T23:59:59")`, data.SFEEL).
 		BuildRule().
 		AddRule("R2").
 		AddInputEntry(`"Car Accident"`, data.SFEEL).
 		AddInputEntry("[1000..10000]", data.SFEEL).
-		AddInputEntry("-", data.SFEEL).
 		AddOutputEntry(`"Schulz"`, data.SFEEL).
 		AddOutputEntry("false", data.SFEEL).
-		AddOutputEntry("-", data.SFEEL).
 		BuildRule().
 		AddRule("R3").
 		AddInputEntry("-", data.SFEEL).
 		AddInputEntry(">=10000", data.SFEEL).
-		AddInputEntry("-", data.SFEEL).
 		AddOutputEntry("-", data.SFEEL).
 		AddOutputEntry("true", data.SFEEL).
-		AddOutputEntry("-", data.SFEEL).
 		BuildRule().
 		Build()
 
