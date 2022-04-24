@@ -6,6 +6,7 @@ type GrlListenerInterface interface {
 	ExitFloat(ctx Float)
 	ExitBoolean(ctx Boolean)
 	ExitDateTime(ctx DateTime)
+	ExitQualifiedName(ctx QualifiedName)
 
 	ExitParentheses(ctx Parentheses)
 	ExitArithmeticNegation(ctx ArithmeticNegation)

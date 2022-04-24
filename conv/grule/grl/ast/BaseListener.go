@@ -17,6 +17,8 @@ func (l *BaseListener) ExitNode(node ast.Node) {
 	switch node.(type) {
 	case EmptyStatement:
 		l.grl.ExitEmptyStatement(node.(EmptyStatement))
+	case QualifiedName:
+		l.grl.ExitQualifiedName(node.(QualifiedName))
 	case Boolean:
 		l.grl.ExitBoolean(node.(Boolean))
 	case Integer:
