@@ -19,3 +19,4 @@ func (g GrlListener) ExitComparisonOperations(ctx ComparisonOperations) {}
 func (g GrlListener) ExitEmptyStatement(ctx EmptyStatement)             {}
 func (g GrlListener) ExitAssignmentOperations(ctx AssignmentOperations) {}
 func (g GrlListener) ExitPowOperation(ctx PowOperation)                 {}
+func (g GrlListener) ExitQualifiedName(ctx QualifiedName)               {}

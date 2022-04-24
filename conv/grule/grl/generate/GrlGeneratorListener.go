@@ -143,6 +143,10 @@ func (g *GrlGeneratorListener) ExitEmptyStatement(ctx grl.EmptyStatement) {
 
 }
 
+func (g *GrlGeneratorListener) ExitQualifiedName(ctx grl.QualifiedName) {
+	g.stack.Push(ctx.GetQualifiedName())
+}
+
 func (g *GrlGeneratorListener) ExitFloat(ctx grl.Float) {
 	g.stack.Push(ctx.String())
 }
