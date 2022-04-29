@@ -97,7 +97,7 @@ func TestDecisionTable_Convert(t *testing.T) {
 		AddRule(NewRuleBuilder().
 			SetAnnotation("R1").
 			AddInputEntry(`"Car Accident"`).
-			AddInputEntry("< claim.ExpenditureOfClaim").
+			AddInputEntry("< 1000").
 			AddOutputEntry(`"Müller"`).
 			AddOutputEntry("false").
 			Build(),
