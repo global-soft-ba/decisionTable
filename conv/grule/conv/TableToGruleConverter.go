@@ -19,13 +19,13 @@ func CreateTableToGruleConverter() TableToGruleConverter {
 
 type TableToGruleConverter struct{}
 
-func (c TableToGruleConverter) Convert(table dtable.Table) (grule.RuleSet, error) {
+func (c TableToGruleConverter) Convert(table dtable.DecisionTable) (grule.RuleSet, error) {
 	return c.convertTableToRuleSet(table)
 }
 
-func (c TableToGruleConverter) convertTableToRuleSet(table dtable.Table) (grule.RuleSet, error) {
+func (c TableToGruleConverter) convertTableToRuleSet(table dtable.DecisionTable) (grule.RuleSet, error) {
 	result := grule.RuleSet{
-		Key:             table.Key,
+		Key:             table.ID,
 		Name:            table.Name,
 		HitPolicy:       table.HitPolicy,
 		CollectOperator: table.CollectOperator,
@@ -42,7 +42,7 @@ func (c TableToGruleConverter) convertTableToRuleSet(table dtable.Table) (grule.
 	return result, nil
 }
 
-func (c TableToGruleConverter) convertIntoGruleRules(table dtable.Table) ([]grule.Rule, error) {
+func (c TableToGruleConverter) convertIntoGruleRules(table dtable.DecisionTable) ([]grule.Rule, error) {
 	var res []grule.Rule
 
 	maxRules := len(table.Rules)

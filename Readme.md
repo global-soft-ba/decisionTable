@@ -1,7 +1,7 @@
 # Decision Table 
 
 This library enables the creation and conversion of decision tables in Golang programming language. Inspired by the JBOSS Drools or Camunda DMN Suite. 
-Decions table are commonly used or rather visualized as a table in a UI to represent complex decisions in a more human-readable way. The library can be used as a data representation in Golang for such frontend/UI components. 
+Decision tables are commonly used or rather visualized as a table in a UI to represent complex decisions in a more human-readable way. The library can be used as a data representation in Golang for such frontend/UI components. 
 
 Each table represents a complex system of rules. Such systems describe a decision for which input, which output is to be generated. 
 The library allows:
@@ -15,34 +15,44 @@ The library allows:
 
 # Decision Table Builder (Code Example)
 ```
-table, _ := decisionTable.CreateDecisionTable().
-		SetName("Determine Employee").
-		SetDefinitionKey("determineEmployee").
-		SetNotationStandard(data.GRULE).
-		SetHitPolicy(data.Unique).
-		AddInputField(data.TestField{Name: "Claim", Key: "TypeOfClaim", Typ: data.String}).
-		AddInputField(data.TestField{Name: "Claim", Key: "ExpenditureOfClaim", Typ: data.Integer}).
-		AddOutputField(data.TestField{Name: "Employee", Key: "ResponsibleEmployee", Typ: data.String}).
-		AddOutputField(data.TestField{Name: "Employee", Key: "FourEyesPrinciple", Typ: data.Boolean}).
-		AddRule("R1").
-		AddInputEntry(`"Car Accident"`, data.SFEEL).
-		AddInputEntry("<1000", data.SFEEL).
-		AddOutputEntry(`"Müller"`, data.SFEEL).
-		AddOutputEntry("false", data.SFEEL).
-		BuildRule().
-		AddRule("R2").
-		AddInputEntry(`"Car Accident"`, data.SFEEL).
-		AddInputEntry("[1000..10000]", data.SFEEL).
-		AddOutputEntry(`"Schulz"`, data.SFEEL).
-		AddOutputEntry("false", data.SFEEL).
-		BuildRule().
-		AddRule("R3").
-		AddInputEntry("-", data.SFEEL).
-		AddInputEntry(">=10000", data.SFEEL).
-		AddOutputEntry("-", data.SFEEL).
-		AddOutputEntry("true", data.SFEEL).
-		BuildRule().
-		Build()
+table, _ := decisionTable.NewDecisionTableBuilder().
+    SetID("determineEmployee").
+    SetName("Determine Employee").
+    SetHitPolicy(data.Unique).
+    SetExpressionLanguage(data.SFEEL).
+    SetStandard(data.GRULE).
+    AddInputField(data.TestField{Name: "Claim", Key: "TypeOfClaim", Type: data.String}).
+    AddInputField(data.TestField{Name: "Claim", Key: "ExpenditureOfClaim", Type: data.Integer}).
+    AddOutputField(data.TestField{Name: "Employee", Key: "ResponsibleEmployee", Type: data.String}).
+    AddOutputField(data.TestField{Name: "Employee", Key: "FourEyesPrinciple", Type: data.Boolean}).
+    AddRule(decisionTable.NewRuleBuilder().
+        SetAnnotation("R1").
+        AddInputEntry(`"Car Accident"`).
+        AddInputEntry("<1000").
+        AddOutputEntry(`"Müller"`).
+        AddOutputEntry("false").
+        Build(),
+    ).
+    AddRule(decisionTable.NewRuleBuilder().
+        SetAnnotation("R2").
+        AddInputEntry(`"Car Accident"`).
+        AddInputEntry("[1000..10000]").
+        AddOutputEntry(`"Schulz"`).
+        AddOutputEntry("false").
+        Build(),
+    ).
+    AddRule(decisionTable.NewRuleBuilder().
+        SetAnnotation("R3").
+        AddInputEntry("-").
+        AddInputEntry(">=10000").
+        AddOutputEntry("-").
+        AddOutputEntry("true").
+        Build(),
+    ).
+    Build()
+    
+rules, _ := table.Convert(data.GRULE)
+fmt.Print(rules)
 ```
 
 We assume that the frontend will represent a decision table as a kind of table. In case, that a user changes something in the frontend table, we assume that the old decision table representation will be dropped and then rebuild from the new 
@@ -103,9 +113,5 @@ So far we support the SFEEL Standard partially.
 
 # Converter for Standards/Engines
 The following converter are supported, so far:
-## ["Gopher Holds The Rules (GRULE)"](http://hyperjumptech.viewdocs.io/grule-rule-engine/GRL_en/)
-```
-// Convert Table Into Grule Rules
-converter, _ := conv.CreateTableConverterFactory().GetTableConverter(model.GRULE, model.GRL)
-rules, err := table.Convert(converter)
-```
+* ["Gopher Holds The Rules (GRULE)"](http://hyperjumptech.viewdocs.io/grule-rule-engine/GRL_en/)
+

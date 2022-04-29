@@ -7,34 +7,44 @@ import (
 )
 
 func TestDecisionTable_ConvertWithExpressionOutput(t *testing.T) {
-	testTable, _ := CreateDecisionTable().
+	testTable, _ := NewDecisionTableBuilder().
+		SetID("determineEmployee").
 		SetName("Determine Employee").
-		SetDefinitionKey("determineEmployee").
-		SetNotationStandard(data.GRULE).
 		SetHitPolicy(data.Unique).
-		AddInputField(data.TestField{Name: "claim", Key: "TypeOfClaim", Typ: data.String}).
-		AddInputField(data.TestField{Name: "claim", Key: "ExpenditureOfClaim", Typ: data.Integer}).
-		AddOutputField(data.TestField{Name: "Employee", Key: "ResponsibleEmployee", Typ: data.String}).
-		AddOutputField(data.TestField{Name: "Employee", Key: "4EyesPrinciple", Typ: data.Boolean}).
-		AddOutputField(data.TestField{Name: "Score", Key: "score", Typ: data.Integer}).
-		AddRule("R1").
-		AddInputEntry(`"Car Accident"`, data.SFEEL).
-		AddInputEntry("<1000", data.SFEEL).
-		AddOutputEntry(`"Müller"`, data.SFEEL).
-		AddOutputEntry("false", data.SFEEL).
-		AddOutputEntry("1+2", data.SFEEL).BuildRule().
-		AddRule("R2").
-		AddInputEntry(`"Car Accident"`, data.SFEEL).
-		AddInputEntry("[1000..10000]", data.SFEEL).
-		AddOutputEntry(`"Meier"`, data.SFEEL).
-		AddOutputEntry("false", data.SFEEL).
-		AddOutputEntry("1-2", data.SFEEL).BuildRule().
-		AddRule("R3").
-		AddInputEntry("-", data.SFEEL).
-		AddInputEntry(">=10000", data.SFEEL).
-		AddOutputEntry("-", data.SFEEL).
-		AddOutputEntry("true", data.SFEEL).
-		AddOutputEntry("1**2", data.SFEEL).BuildRule().
+		SetExpressionLanguage(data.SFEEL).
+		SetStandard(data.GRULE).
+		AddInputField(data.TestField{Name: "claim", Key: "TypeOfClaim", Type: data.String}).
+		AddInputField(data.TestField{Name: "claim", Key: "ExpenditureOfClaim", Type: data.Integer}).
+		AddOutputField(data.TestField{Name: "Employee", Key: "ResponsibleEmployee", Type: data.String}).
+		AddOutputField(data.TestField{Name: "Employee", Key: "4EyesPrinciple", Type: data.Boolean}).
+		AddOutputField(data.TestField{Name: "Score", Key: "score", Type: data.Integer}).
+		AddRule(NewRuleBuilder().
+			SetAnnotation("R1").
+			AddInputEntry(`"Car Accident"`).
+			AddInputEntry("<1000").
+			AddOutputEntry(`"Müller"`).
+			AddOutputEntry("false").
+			AddOutputEntry("1+2").
+			Build(),
+		).
+		AddRule(NewRuleBuilder().
+			SetAnnotation("R2").
+			AddInputEntry(`"Car Accident"`).
+			AddInputEntry("[1000..10000]").
+			AddOutputEntry(`"Meier"`).
+			AddOutputEntry("false").
+			AddOutputEntry("1-2").
+			Build(),
+		).
+		AddRule(NewRuleBuilder().
+			SetAnnotation("R3").
+			AddInputEntry("-").
+			AddInputEntry(">=10000").
+			AddOutputEntry("-").
+			AddOutputEntry("true").
+			AddOutputEntry("1**2").
+			Build(),
+		).
 		Build()
 
 	tests := []struct {
@@ -59,7 +69,7 @@ func TestDecisionTable_ConvertWithExpressionOutput(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			d := tt.fields
 
-			got, err := d.Convert(string(data.GRULE))
+			got, err := d.Convert(data.GRULE)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ConvertToGrlAst() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -74,30 +84,40 @@ func TestDecisionTable_ConvertWithExpressionOutput(t *testing.T) {
 
 func TestDecisionTable_Convert(t *testing.T) {
 
-	testTable, _ := CreateDecisionTable().
+	testTable, _ := NewDecisionTableBuilder().
+		SetID("determineEmployee").
 		SetName("Determine Employee").
-		SetDefinitionKey("determineEmployee").
-		SetNotationStandard(data.GRULE).
 		SetHitPolicy(data.Unique).
-		AddInputField(data.TestField{Name: "claim", Key: "TypeOfClaim", Typ: data.String}).
-		AddInputField(data.TestField{Name: "claim", Key: "ExpenditureOfClaim", Typ: data.Integer}).
-		AddOutputField(data.TestField{Name: "Employee", Key: "ResponsibleEmployee", Typ: data.String}).
-		AddOutputField(data.TestField{Name: "Employee", Key: "4EyesPrinciple", Typ: data.Boolean}).
-		AddRule("R1").
-		AddInputEntry(`"Car Accident"`, data.SFEEL).
-		AddInputEntry("< claim.ExpenditureOfClaim", data.SFEEL).
-		AddOutputEntry(`"Müller"`, data.SFEEL).
-		AddOutputEntry("false", data.SFEEL).BuildRule().
-		AddRule("R2").
-		AddInputEntry(`"Car Accident"`, data.SFEEL).
-		AddInputEntry("[1000..10000]", data.SFEEL).
-		AddOutputEntry(`"Meier"`, data.SFEEL).
-		AddOutputEntry("false", data.SFEEL).BuildRule().
-		AddRule("R3").
-		AddInputEntry("-", data.SFEEL).
-		AddInputEntry(">=10000", data.SFEEL).
-		AddOutputEntry("-", data.SFEEL).
-		AddOutputEntry("true", data.SFEEL).BuildRule().
+		SetExpressionLanguage(data.SFEEL).
+		SetStandard(data.GRULE).
+		AddInputField(data.TestField{Name: "claim", Key: "TypeOfClaim", Type: data.String}).
+		AddInputField(data.TestField{Name: "claim", Key: "ExpenditureOfClaim", Type: data.Integer}).
+		AddOutputField(data.TestField{Name: "Employee", Key: "ResponsibleEmployee", Type: data.String}).
+		AddOutputField(data.TestField{Name: "Employee", Key: "4EyesPrinciple", Type: data.Boolean}).
+		AddRule(NewRuleBuilder().
+			SetAnnotation("R1").
+			AddInputEntry(`"Car Accident"`).
+			AddInputEntry("< claim.ExpenditureOfClaim").
+			AddOutputEntry(`"Müller"`).
+			AddOutputEntry("false").
+			Build(),
+		).
+		AddRule(NewRuleBuilder().
+			SetAnnotation("R2").
+			AddInputEntry(`"Car Accident"`).
+			AddInputEntry("[1000..10000]").
+			AddOutputEntry(`"Meier"`).
+			AddOutputEntry("false").
+			Build(),
+		).
+		AddRule(NewRuleBuilder().
+			SetAnnotation("R3").
+			AddInputEntry("-").
+			AddInputEntry(">=10000").
+			AddOutputEntry("-").
+			AddOutputEntry("true").
+			Build(),
+		).
 		Build()
 
 	tests := []struct {
@@ -122,7 +142,7 @@ func TestDecisionTable_Convert(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			d := tt.fields
 
-			got, err := d.Convert(string(data.GRULE))
+			got, err := d.Convert(data.GRULE)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ConvertToGrlAst() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -136,19 +156,22 @@ func TestDecisionTable_Convert(t *testing.T) {
 
 func TestDecisionTable_ConvertQualifiedName(t *testing.T) {
 
-	testTable, _ := CreateDecisionTable().
+	testTable, _ := NewDecisionTableBuilder().
+		SetID("determineEmployee").
 		SetName("Determine Name").
-		SetDefinitionKey("determineEmployee").
-		SetNotationStandard(data.GRULE).
 		SetHitPolicy(data.Unique).
-		AddInputField(data.TestField{Name: "name", Key: "lastname", Typ: data.String}).
-		AddInputField(data.TestField{Name: "name", Key: "surname", Typ: data.String}).
-		AddOutputField(data.TestField{Name: "Name", Key: "equal", Typ: data.Boolean}).
-		AddRule("R1").
-		AddInputEntry(`name.surname`, data.SFEEL).
-		AddInputEntry(`"xyz"`, data.SFEEL).
-		AddOutputEntry(`true`, data.SFEEL).
-		BuildRule().
+		SetExpressionLanguage(data.SFEEL).
+		SetStandard(data.GRULE).
+		AddInputField(data.TestField{Name: "name", Key: "lastname", Type: data.String}).
+		AddInputField(data.TestField{Name: "name", Key: "surname", Type: data.String}).
+		AddOutputField(data.TestField{Name: "Name", Key: "equal", Type: data.Boolean}).
+		AddRule(NewRuleBuilder().
+			SetAnnotation("R1").
+			AddInputEntry(`name.surname`).
+			AddInputEntry(`"xyz"`).
+			AddOutputEntry(`true`).
+			Build(),
+		).
 		Build()
 
 	tests := []struct {
@@ -171,7 +194,7 @@ func TestDecisionTable_ConvertQualifiedName(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			d := tt.fields
 
-			got, err := d.Convert(string(data.GRULE))
+			got, err := d.Convert(data.GRULE)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ConvertToGrlAst() error = %v, wantErr %v", err, tt.wantErr)
 				return

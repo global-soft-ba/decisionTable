@@ -16,9 +16,9 @@ func CreateConverter() Converter {
 
 type Converter struct{}
 
-func (c Converter) Convert(table data.Table, format string) (interface{}, error) {
+func (c Converter) Convert(table data.DecisionTable, format string) (interface{}, error) {
 
-	switch table.NotationStandard {
+	switch table.Standard {
 	case data.GRULE:
 		conv := grule.CreateConverter()
 		res, err := conv.Convert(table, format)

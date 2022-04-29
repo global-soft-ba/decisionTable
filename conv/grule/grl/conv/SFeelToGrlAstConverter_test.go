@@ -23,7 +23,7 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 				data.TestField{
 					Name: "X",
 					Key:  "Y",
-					Typ:  data.Integer,
+					Type: data.Integer,
 				},
 				sfeel.CreateInputEntry("[1..6]"), // ((X.Y >= 1) && (X.Y <= 6))
 			},
@@ -35,7 +35,7 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 				data.TestField{
 					Name: "X",
 					Key:  "Y",
-					Typ:  data.Integer,
+					Type: data.Integer,
 				},
 				sfeel.CreateInputEntry("8"),
 			},
@@ -47,7 +47,7 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 				data.TestField{
 					Name: "X",
 					Key:  "Y",
-					Typ:  data.Integer,
+					Type: data.Integer,
 				},
 				sfeel.CreateOutputEntry("8"),
 			},
@@ -59,7 +59,7 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 				data.TestField{
 					Name: "X",
 					Key:  "Y",
-					Typ:  data.Integer,
+					Type: data.Integer,
 				},
 				sfeel.CreateOutputEntry("(8)"),
 			},
@@ -71,7 +71,7 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 				data.TestField{
 					Name: "X",
 					Key:  "Y",
-					Typ:  data.Integer,
+					Type: data.Integer,
 				},
 				sfeel.CreateOutputEntry(`-"asd"`),
 			},
@@ -83,7 +83,7 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 				data.TestField{
 					Name: "X",
 					Key:  "Y",
-					Typ:  data.Integer,
+					Type: data.Integer,
 				},
 				sfeel.CreateOutputEntry(`-1`),
 			},
@@ -95,7 +95,7 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 				data.TestField{
 					Name: "X",
 					Key:  "Y",
-					Typ:  data.Integer,
+					Type: data.Integer,
 				},
 				sfeel.CreateOutputEntry(`--1`),
 			},
@@ -107,7 +107,7 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 				data.TestField{
 					Name: "X",
 					Key:  "Y",
-					Typ:  data.Integer,
+					Type: data.Integer,
 				},
 				sfeel.CreateOutputEntry(`1**2`),
 			},
@@ -119,7 +119,7 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 				data.TestField{
 					Name: "X",
 					Key:  "Y",
-					Typ:  data.Integer,
+					Type: data.Integer,
 				},
 				sfeel.CreateOutputEntry(`2+2`),
 			},

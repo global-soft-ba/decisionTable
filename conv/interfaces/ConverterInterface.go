@@ -5,5 +5,5 @@ import (
 )
 
 type ConverterInterface interface {
-	Convert(data data.Table, outputFormat string) (interface{}, error)
+	Convert(data data.DecisionTable, standard string) (interface{}, error)
 }

@@ -13,7 +13,7 @@ func CreateConverter() interfaces.ConverterInterface {
 
 type Converter struct{}
 
-func (c Converter) Convert(data data.Table, format string) (interface{}, error) {
+func (c Converter) Convert(data data.DecisionTable, format string) (interface{}, error) {
 
 	converter := conv.CreateTableToGruleConverter()
 	grule, err := converter.Convert(data)

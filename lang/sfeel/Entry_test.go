@@ -90,7 +90,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 		expression string
 	}
 	type args struct {
-		varType data.DataTyp
+		varType data.DataType
 	}
 	tests := []struct {
 		name    string
@@ -218,11 +218,11 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 				ast: sfeel.QualifiedName{Value: []string{"b", "c"}},
 			},
 			args: args{fields: []data.FieldInterface{
-				data.TestField{Name: "a", Key: "b", Typ: data.Integer},
-				data.TestField{Name: "b", Key: "c", Typ: data.Integer},
-				data.TestField{Name: "a", Key: "c", Typ: data.Integer},
+				data.TestField{Name: "a", Key: "b", Type: data.Integer},
+				data.TestField{Name: "b", Key: "c", Type: data.Integer},
+				data.TestField{Name: "a", Key: "c", Type: data.Integer},
 			}},
-			want:    []data.FieldInterface{data.TestField{Name: "b", Key: "c", Typ: data.Integer}},
+			want:    []data.FieldInterface{data.TestField{Name: "b", Key: "c", Type: data.Integer}},
 			wantErr: false,
 		},
 		{
@@ -231,11 +231,11 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 				ast: sfeel.UnaryTest{Value: sfeel.QualifiedName{Value: []string{"a", "b"}}},
 			},
 			args: args{fields: []data.FieldInterface{
-				data.TestField{Name: "a", Key: "b", Typ: data.Integer},
-				data.TestField{Name: "b", Key: "c", Typ: data.Integer},
-				data.TestField{Name: "a", Key: "c", Typ: data.Integer},
+				data.TestField{Name: "a", Key: "b", Type: data.Integer},
+				data.TestField{Name: "b", Key: "c", Type: data.Integer},
+				data.TestField{Name: "a", Key: "c", Type: data.Integer},
 			}},
-			want:    []data.FieldInterface{data.TestField{Name: "a", Key: "b", Typ: data.Integer}},
+			want:    []data.FieldInterface{data.TestField{Name: "a", Key: "b", Type: data.Integer}},
 			wantErr: false,
 		},
 		{
@@ -252,16 +252,16 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 				},
 			},
 			args: args{fields: []data.FieldInterface{
-				data.TestField{Name: "a", Key: "b", Typ: data.Integer},
-				data.TestField{Name: "b", Key: "c", Typ: data.Integer},
-				data.TestField{Name: "a", Key: "c", Typ: data.Integer},
+				data.TestField{Name: "a", Key: "b", Type: data.Integer},
+				data.TestField{Name: "b", Key: "c", Type: data.Integer},
+				data.TestField{Name: "a", Key: "c", Type: data.Integer},
 			}},
 			want: []data.FieldInterface{
-				data.TestField{Name: "b", Key: "c", Typ: data.Integer},
-				data.TestField{Name: "a", Key: "c", Typ: data.Integer},
-				data.TestField{Name: "a", Key: "b", Typ: data.Integer},
-				data.TestField{Name: "a", Key: "b", Typ: data.Integer},
-				data.TestField{Name: "a", Key: "c", Typ: data.Integer},
+				data.TestField{Name: "b", Key: "c", Type: data.Integer},
+				data.TestField{Name: "a", Key: "c", Type: data.Integer},
+				data.TestField{Name: "a", Key: "b", Type: data.Integer},
+				data.TestField{Name: "a", Key: "b", Type: data.Integer},
+				data.TestField{Name: "a", Key: "c", Type: data.Integer},
 			},
 			wantErr: false,
 		},
@@ -271,9 +271,9 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 				ast: sfeel.UnaryTest{Value: sfeel.QualifiedName{Value: []string{"x", "x"}}},
 			},
 			args: args{fields: []data.FieldInterface{
-				data.TestField{Name: "a", Key: "b", Typ: data.Integer},
-				data.TestField{Name: "b", Key: "c", Typ: data.Integer},
-				data.TestField{Name: "a", Key: "c", Typ: data.Integer},
+				data.TestField{Name: "a", Key: "b", Type: data.Integer},
+				data.TestField{Name: "b", Key: "c", Type: data.Integer},
+				data.TestField{Name: "a", Key: "c", Type: data.Integer},
 			}},
 			want:    nil,
 			wantErr: true,
