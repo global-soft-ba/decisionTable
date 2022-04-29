@@ -53,7 +53,7 @@ func (e Entry) Validate() (bool, []error) {
 	}
 	return e.evaluator.Eval(e.ast)
 }
-func (e Entry) ValidateDataTypeOfExpression(varType data.DataTyp) (bool, error) {
+func (e Entry) ValidateDataTypeOfExpression(varType data.DataType) (bool, error) {
 	if e.ast == nil {
 		return false, nil
 	}

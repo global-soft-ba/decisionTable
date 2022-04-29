@@ -9,7 +9,7 @@ func GenerateTemplates(hitPolicy dTable.HitPolicy, interference bool) (*template
 	/*
 		t, err := template.New(RULE).Funcs(
 				template.FuncMap{
-					"getFormat": func() data.OutputFormat {
+					"getFormat": func() data.Standard {
 						return data.JSON
 					},
 				},

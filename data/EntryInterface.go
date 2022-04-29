@@ -9,7 +9,7 @@ type EntryInterface interface {
 	ExpressionLanguage() ExpressionLanguage
 
 	Validate() (bool, []error)
-	ValidateDataTypeOfExpression(varType DataTyp) (bool, error)
+	ValidateDataTypeOfExpression(varType DataType) (bool, error)
 	ValidateExistenceOfFieldReferencesInExpression(fields []FieldInterface) ([]FieldInterface, []error)
 
 	Convert(listener ast.SFeelListenerInterface)

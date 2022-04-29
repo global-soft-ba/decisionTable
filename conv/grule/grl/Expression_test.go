@@ -22,7 +22,7 @@ func TestCreateExpression(t *testing.T) {
 		{
 			name: "convert sfeel.interval  to ast",
 			args: args{
-				field: dTable.TestField{Name: "X", Key: "Y", Typ: dTable.Integer},
+				field: dTable.TestField{Name: "X", Key: "Y", Type: dTable.Integer},
 				entry: sfeel.CreateInputEntry("[1..6]"),
 			},
 			want:    "((X.Y :7: 1) :0: (X.Y :5: 6))",
@@ -61,7 +61,7 @@ func TestExpression_Convert(t *testing.T) {
 		{
 			name: "convert interval to grl",
 			fields: fields{
-				field: dTable.TestField{Name: "X", Key: "Y", Typ: dTable.Integer},
+				field: dTable.TestField{Name: "X", Key: "Y", Type: dTable.Integer},
 				entry: sfeel.CreateInputEntry("[1..6]"),
 			},
 			args:    args{targetFormat: data.GRL},
@@ -71,7 +71,7 @@ func TestExpression_Convert(t *testing.T) {
 		{
 			name: "convert interval to grl",
 			fields: fields{
-				field: dTable.TestField{Name: "X", Key: "Y", Typ: dTable.Integer},
+				field: dTable.TestField{Name: "X", Key: "Y", Type: dTable.Integer},
 				entry: sfeel.CreateInputEntry("[1..6]"),
 			},
 			args:    args{targetFormat: data.JSON},

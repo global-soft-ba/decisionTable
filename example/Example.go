@@ -47,37 +47,41 @@ type Employee struct {
 
 func main() {
 
-	table, _ := decisionTable.CreateDecisionTable().
+	table, _ := decisionTable.NewDecisionTableBuilder().
+		SetID("determineEmployee").
 		SetName("Determine Employee").
-		SetDefinitionKey("determineEmployee").
-		SetNotationStandard(data.GRULE).
 		SetHitPolicy(data.Unique).
-		AddInputField(data.TestField{Name: "Claim", Key: "TypeOfClaim", Typ: data.String}).
-		AddInputField(data.TestField{Name: "Claim", Key: "ExpenditureOfClaim", Typ: data.Integer}).
-		AddOutputField(data.TestField{Name: "Employee", Key: "ResponsibleEmployee", Typ: data.String}).
-		AddOutputField(data.TestField{Name: "Employee", Key: "FourEyesPrinciple", Typ: data.Boolean}).
-		AddRule("R1").
-		AddInputEntry(`"Car Accident"`, data.SFEEL).
-		AddInputEntry("<1000", data.SFEEL).
-		AddOutputEntry(`"Müller"`, data.SFEEL).
-		AddOutputEntry("false", data.SFEEL).
-		BuildRule().
-		AddRule("R2").
-		AddInputEntry(`"Car Accident"`, data.SFEEL).
-		AddInputEntry("[1000..10000]", data.SFEEL).
-		AddOutputEntry(`"Schulz"`, data.SFEEL).
-		AddOutputEntry("false", data.SFEEL).
-		BuildRule().
-		AddRule("R3").
-		AddInputEntry("-", data.SFEEL).
-		AddInputEntry(">=10000", data.SFEEL).
-		AddOutputEntry("-", data.SFEEL).
-		AddOutputEntry("true", data.SFEEL).
-		BuildRule().
+		SetExpressionLanguage(data.SFEEL).
+		SetStandard(data.GRULE).
+		AddInputField(data.TestField{Name: "Claim", Key: "TypeOfClaim", Type: data.String}).
+		AddInputField(data.TestField{Name: "Claim", Key: "ExpenditureOfClaim", Type: data.Integer}).
+		AddOutputField(data.TestField{Name: "Employee", Key: "ResponsibleEmployee", Type: data.String}).
+		AddOutputField(data.TestField{Name: "Employee", Key: "FourEyesPrinciple", Type: data.Boolean}).
+		AddRule(decisionTable.NewRuleBuilder().SetAnnotation("R1").
+			AddInputEntry(`"Car Accident"`).
+			AddInputEntry("<1000").
+			AddOutputEntry(`"Müller"`).
+			AddOutputEntry("false").
+			Build(),
+		).
+		AddRule(decisionTable.NewRuleBuilder().SetAnnotation("R2").
+			AddInputEntry(`"Car Accident"`).
+			AddInputEntry("[1000..10000]").
+			AddOutputEntry(`"Schulz"`).
+			AddOutputEntry("false").
+			Build(),
+		).
+		AddRule(decisionTable.NewRuleBuilder().SetAnnotation("R3").
+			AddInputEntry("-").
+			AddInputEntry(">=10000").
+			AddOutputEntry("-").
+			AddOutputEntry("true").
+			Build(),
+		).
 		Build()
 
 	// ConvertToGrlAst Table Into Grule Rules
-	rules, err := table.Convert(string(data.GRULE))
+	rules, err := table.Convert(data.GRULE)
 	if err != nil {
 		fmt.Print("Error:", err)
 	}

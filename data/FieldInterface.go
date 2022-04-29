@@ -1,8 +1,8 @@
 package data
 
 type FieldInterface interface {
-	Id() string
-	DataTyp() DataTyp
+	ID() string
+	DataType() DataType
 	String() string
 	GetQualifiedName() string
 }

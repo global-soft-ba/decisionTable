@@ -1,14 +1,14 @@
 package data
 
-// This is just a example implementation of the FieldInterface used in test cases
+// This is just an example implementation of the FieldInterface used in test cases
 
 type TestField struct {
 	Name string
 	Key  string
-	Typ  DataTyp
+	Type DataType
 }
 
-func (f TestField) Id() string {
+func (f TestField) ID() string {
 	if f.Key == "" && f.Name == "" {
 		return ""
 	}
@@ -16,12 +16,12 @@ func (f TestField) Id() string {
 	return f.Key + "." + f.Name
 }
 
-func (f TestField) DataTyp() DataTyp {
-	return f.Typ
+func (f TestField) DataType() DataType {
+	return f.Type
 }
 
 func (f TestField) String() string {
-	return f.Id()
+	return f.ID()
 }
 func (f TestField) GetQualifiedName() string {
 	return f.Name + "." + f.Key

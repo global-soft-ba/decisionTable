@@ -40,14 +40,14 @@ func TestGruleGenerator_Generate(t *testing.T) {
 							Description: "R1",
 							Expressions: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "I1", Key: "L1", Typ: dtable.String},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "I1", Key: "L1", Typ: dtable.String}, sfeel.CreateInputEntry("8")),
+									Field:              dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String},
+									Expression:         CreateTestExpression(dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String}, sfeel.CreateInputEntry("8")),
 									ExpressionLanguage: dtable.SFEEL},
 							},
 							Assignments: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "O1", Key: "L1", Typ: dtable.Float},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "O1", Key: "L1", Typ: dtable.Float}, sfeel.CreateOutputEntry("4")),
+									Field:              dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float},
+									Expression:         CreateTestExpression(dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float}, sfeel.CreateOutputEntry("4")),
 									ExpressionLanguage: dtable.SFEEL,
 								},
 							},
@@ -76,14 +76,14 @@ func TestGruleGenerator_Generate(t *testing.T) {
 							InvSalience: 1,
 							Expressions: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "I1", Key: "L1", Typ: dtable.String},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "I1", Key: "L1", Typ: dtable.String}, sfeel.CreateInputEntry("8")),
+									Field:              dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String},
+									Expression:         CreateTestExpression(dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String}, sfeel.CreateInputEntry("8")),
 									ExpressionLanguage: dtable.SFEEL},
 							},
 							Assignments: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "O1", Key: "L1", Typ: dtable.Float},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "O1", Key: "L1", Typ: dtable.Float}, sfeel.CreateOutputEntry("4")),
+									Field:              dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float},
+									Expression:         CreateTestExpression(dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float}, sfeel.CreateOutputEntry("4")),
 									ExpressionLanguage: dtable.SFEEL,
 								},
 							},
@@ -95,14 +95,14 @@ func TestGruleGenerator_Generate(t *testing.T) {
 							InvSalience: 0,
 							Expressions: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "I1", Key: "L1", Typ: dtable.String},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "I1", Key: "L1", Typ: dtable.String}, sfeel.CreateInputEntry("10")),
+									Field:              dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String},
+									Expression:         CreateTestExpression(dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String}, sfeel.CreateInputEntry("10")),
 									ExpressionLanguage: dtable.SFEEL},
 							},
 							Assignments: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "O1", Key: "L1", Typ: dtable.Float},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "O1", Key: "L1", Typ: dtable.Float}, sfeel.CreateOutputEntry("100")),
+									Field:              dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float},
+									Expression:         CreateTestExpression(dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float}, sfeel.CreateOutputEntry("100")),
 									ExpressionLanguage: dtable.SFEEL,
 								},
 							},
@@ -131,14 +131,14 @@ func TestGruleGenerator_Generate(t *testing.T) {
 							Description: "R1",
 							Expressions: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "I1", Key: "L1", Typ: dtable.String},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "I1", Key: "L1", Typ: dtable.String}, sfeel.CreateInputEntry("[1..6)")),
+									Field:              dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String},
+									Expression:         CreateTestExpression(dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String}, sfeel.CreateInputEntry("[1..6)")),
 									ExpressionLanguage: dtable.SFEEL},
 							},
 							Assignments: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "O1", Key: "L1", Typ: dtable.Float},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "O1", Key: "L1", Typ: dtable.Float}, sfeel.CreateOutputEntry("4")),
+									Field:              dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float},
+									Expression:         CreateTestExpression(dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float}, sfeel.CreateOutputEntry("4")),
 									ExpressionLanguage: dtable.SFEEL,
 								},
 							},

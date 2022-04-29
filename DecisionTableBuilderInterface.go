@@ -5,20 +5,15 @@ import (
 )
 
 type DecisionTableBuilderInterface interface {
-	Build() (DecisionTable, []error)
-	BuildWithoutValidation() DecisionTable
-	SetDefinitionKey(key string) DecisionTableBuilderInterface
+	SetID(id string) DecisionTableBuilderInterface
 	SetName(name string) DecisionTableBuilderInterface
-	SetNotationStandard(lang data.DTableStandard) DecisionTableBuilderInterface
-	SetHitPolicy(policy data.HitPolicy) DecisionTableBuilderInterface
-	SetCollectOperator(collector data.CollectOperator) DecisionTableBuilderInterface
-	AddInputField(field data.FieldInterface) DecisionTableBuilderInterface
-	AddOutputField(field data.FieldInterface) DecisionTableBuilderInterface
-	AddRule(description string) DecisionTableRuleBuilderInterface
-}
-
-type DecisionTableRuleBuilderInterface interface {
-	AddInputEntry(expr string, exprLang data.ExpressionLanguage) DecisionTableRuleBuilderInterface
-	AddOutputEntry(expr string, exprLang data.ExpressionLanguage) DecisionTableRuleBuilderInterface
-	BuildRule() DecisionTableBuilderInterface
+	SetHitPolicy(hitPolicy data.HitPolicy) DecisionTableBuilderInterface
+	SetCollectOperator(collectOperator data.CollectOperator) DecisionTableBuilderInterface
+	SetExpressionLanguage(expressionLanguage data.ExpressionLanguage) DecisionTableBuilderInterface
+	SetStandard(standard data.Standard) DecisionTableBuilderInterface
+	AddInputField(inputField data.FieldInterface) DecisionTableBuilderInterface
+	AddOutputField(outputField data.FieldInterface) DecisionTableBuilderInterface
+	AddRule(rule Rule) DecisionTableBuilderInterface
+	Build() (DecisionTable, error)
+	BuildWithoutValidation() DecisionTable
 }

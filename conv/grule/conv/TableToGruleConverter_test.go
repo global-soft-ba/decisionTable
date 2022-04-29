@@ -17,7 +17,7 @@ func CreateTestExpression(field dtable.FieldInterface, entry dtable.EntryInterfa
 func TestTableToGruleConverter_Convert(t *testing.T) {
 
 	type args struct {
-		table dtable.Table
+		table dtable.DecisionTable
 	}
 	tests := []struct {
 		name    string
@@ -27,22 +27,22 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 	}{
 		{name: "Validate Table",
 			args: args{
-				table: dtable.Table{
-					Key:              "test1",
-					Name:             "TableOne",
-					HitPolicy:        dtable.Priority,
-					CollectOperator:  dtable.List,
-					NotationStandard: dtable.GRULE,
+				table: dtable.DecisionTable{
+					ID:              "test1",
+					Name:            "TableOne",
+					HitPolicy:       dtable.Priority,
+					CollectOperator: dtable.List,
+					Standard:        dtable.GRULE,
 					InputFields: []dtable.FieldInterface{dtable.TestField{
 						Name: "I1",
 						Key:  "L1",
-						Typ:  dtable.String,
+						Type: dtable.String,
 					},
 					},
 					OutputFields: []dtable.FieldInterface{dtable.TestField{
 						Name: "O1",
 						Key:  "L1",
-						Typ:  dtable.Float,
+						Type: dtable.Float,
 					}},
 					Rules: []dtable.Rule{{
 						Description: "R1",
@@ -110,20 +110,20 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 					InputFields: []model.TestField{{
 						TestField: "I1",
 						Key:  "L1",
-						Typ:  model.String,
+						Type:  model.String,
 					},
 					},
 					OutputFields: []model.TestField{{
 						TestField: "O1",
 						Key:  "L1",
-						Typ:  model.Float,
+						Type:  model.Float,
 					}},
 					Rules: []model.Rule{{
 						Description: "R1",
-						InputEntries: []model.Entry{
+						InputEntries: []model.DummyEntry{
 							model.CreateEntry("==3", model.SFEEL),
 						},
-						OutputEntries: []model.Entry{
+						OutputEntries: []model.DummyEntry{
 							model.CreateEntry("4", model.SFEEL),
 						},
 					}},
@@ -159,34 +159,34 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 						{
 							TestField: "I1",
 							Key:  "L1",
-							Typ:  model.String,
+							Type:  model.String,
 						},
 						{
 							TestField: "I2",
 							Key:  "L1",
-							Typ:  model.String,
+							Type:  model.String,
 						},
 					},
 					OutputFields: []model.TestField{
 						{
 							TestField: "O1",
 							Key:  "L1",
-							Typ:  model.Float,
+							Type:  model.Float,
 						},
 						{
 							TestField: "O2",
 							Key:  "L1",
-							Typ:  model.Float,
+							Type:  model.Float,
 						},
 					},
 					Rules: []model.Rule{
 						{
 							Description: "R1",
-							InputEntries: []model.Entry{
+							InputEntries: []model.DummyEntry{
 								model.CreateEntry("==3", model.SFEEL),
 								model.CreateEntry("==3", model.SFEEL),
 							},
-							OutputEntries: []model.Entry{
+							OutputEntries: []model.DummyEntry{
 								model.CreateEntry("4", model.SFEEL),
 								model.CreateEntry("4", model.SFEEL),
 							},
@@ -228,45 +228,45 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 						{
 							TestField: "I1",
 							Key:  "L1",
-							Typ:  model.String,
+							Type:  model.String,
 						},
 						{
 							TestField: "I2",
 							Key:  "L1",
-							Typ:  model.String,
+							Type:  model.String,
 						},
 					},
 					OutputFields: []model.TestField{
 						{
 							TestField: "O1",
 							Key:  "L1",
-							Typ:  model.Float,
+							Type:  model.Float,
 						},
 						{
 							TestField: "O2",
 							Key:  "L1",
-							Typ:  model.Float,
+							Type:  model.Float,
 						},
 					},
 					Rules: []model.Rule{
 						{
 							Description: "R1",
-							InputEntries: []model.Entry{
+							InputEntries: []model.DummyEntry{
 								model.CreateEntry("==3", model.SFEEL),
 								model.CreateEntry("==3", model.SFEEL),
 							},
-							OutputEntries: []model.Entry{
+							OutputEntries: []model.DummyEntry{
 								model.CreateEntry("4", model.SFEEL),
 								model.CreateEntry("4", model.SFEEL),
 							},
 						},
 						{
 							Description: "R2",
-							InputEntries: []model.Entry{
+							InputEntries: []model.DummyEntry{
 								model.CreateEntry(">3", model.SFEEL),
 								model.CreateEntry(">3", model.SFEEL),
 							},
-							OutputEntries: []model.Entry{
+							OutputEntries: []model.DummyEntry{
 								model.CreateEntry("5", model.SFEEL),
 								model.CreateEntry("5", model.SFEEL),
 							},
@@ -321,24 +321,24 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 					InputFields: []model.TestField{{
 						TestField: "I1",
 						Key:  "L1",
-						Typ:  model.String,
+						Type:  model.String,
 					}},
 					OutputFields: []model.TestField{{
 						TestField: "O1",
 						Key:  "L1",
-						Typ:  model.Float,
+						Type:  model.Float,
 					}, {
 						TestField: "O2",
 						Key:  "L1",
-						Typ:  model.Float,
+						Type:  model.Float,
 					}},
 					Rules: []model.Rule{{
 						Description: "R1",
-						InputEntries: []model.Entry{
+						InputEntries: []model.DummyEntry{
 							model.CreateEntry("==3", model.SFEEL),
 							model.CreateEntry("==3", model.SFEEL),
 						},
-						OutputEntries: []model.Entry{
+						OutputEntries: []model.DummyEntry{
 							model.CreateEntry("4", model.SFEEL),
 							model.CreateEntry("4", model.SFEEL)},
 					}},
@@ -359,45 +359,45 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 						{
 							TestField: "I1",
 							Key:  "L1",
-							Typ:  model.String,
+							Type:  model.String,
 						},
 						{
 							TestField: "I2",
 							Key:  "L1",
-							Typ:  model.String,
+							Type:  model.String,
 						},
 					},
 					OutputFields: []model.TestField{
 						{
 							TestField: "O1",
 							Key:  "L1",
-							Typ:  model.Float,
+							Type:  model.Float,
 						},
 						{
 							TestField: "O2",
 							Key:  "L1",
-							Typ:  model.Float,
+							Type:  model.Float,
 						},
 					},
 					Rules: []model.Rule{
 						{
 							Description: "R1",
-							InputEntries: []model.Entry{
+							InputEntries: []model.DummyEntry{
 								model.CreateEntry("==3", model.SFEEL),
 								model.CreateEntry("==3", model.SFEEL),
 							},
-							OutputEntries: []model.Entry{
+							OutputEntries: []model.DummyEntry{
 								model.CreateEntry("4", model.SFEEL),
 								model.CreateEntry("4", model.SFEEL),
 							},
 						},
 						{
 							Description: "R2",
-							InputEntries: []model.Entry{
+							InputEntries: []model.DummyEntry{
 								model.CreateEntry(">3", model.SFEEL),
 								model.CreateEntry(">3", model.SFEEL),
 							},
-							OutputEntries: []model.Entry{
+							OutputEntries: []model.DummyEntry{
 								model.CreateEntry("5", model.SFEEL),
 								model.CreateEntry("5", model.SFEEL),
 							},
@@ -453,56 +453,56 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 						{
 							TestField: "I1",
 							Key:  "L1",
-							Typ:  model.String,
+							Type:  model.String,
 						},
 						{
 							TestField: "I2",
 							Key:  "L1",
-							Typ:  model.String,
+							Type:  model.String,
 						},
 					},
 					OutputFields: []model.TestField{
 						{
 							TestField: "O1",
 							Key:  "L1",
-							Typ:  model.Float,
+							Type:  model.Float,
 						},
 						{
 							TestField: "O2",
 							Key:  "L1",
-							Typ:  model.Float,
+							Type:  model.Float,
 						},
 					},
 					Rules: []model.Rule{
 						{
 							Description: "R1",
-							InputEntries: []model.Entry{
+							InputEntries: []model.DummyEntry{
 								model.CreateEntry("==3", model.SFEEL),
 								model.CreateEntry("==3", model.SFEEL),
 							},
-							OutputEntries: []model.Entry{
+							OutputEntries: []model.DummyEntry{
 								model.CreateEntry("4", model.SFEEL),
 								model.CreateEntry("4", model.SFEEL),
 							},
 						},
 						{
 							Description: "R2",
-							InputEntries: []model.Entry{
+							InputEntries: []model.DummyEntry{
 								model.CreateEntry(">3", model.SFEEL),
 								model.CreateEntry(">3", model.SFEEL),
 							},
-							OutputEntries: []model.Entry{
+							OutputEntries: []model.DummyEntry{
 								model.CreateEntry("5", model.SFEEL),
 								model.CreateEntry("5", model.SFEEL),
 							},
 						},
 						{
 							Description: "R3",
-							InputEntries: []model.Entry{
+							InputEntries: []model.DummyEntry{
 								model.CreateEntry(">3", model.SFEEL),
 								model.CreateEntry(">3", model.SFEEL),
 							},
-							OutputEntries: []model.Entry{
+							OutputEntries: []model.DummyEntry{
 								model.CreateEntry("5", model.SFEEL),
 								model.CreateEntry("5", model.SFEEL),
 							},
