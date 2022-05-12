@@ -6,6 +6,7 @@ import (
 	"github.com/global-soft-ba/decisionTable/conv/grule/grl"
 	"github.com/global-soft-ba/decisionTable/conv/grule/grl/conv"
 	dtable "github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/field"
 	"strconv"
 )
 
@@ -57,10 +58,10 @@ func (c TableToGruleConverter) convertIntoGruleRules(table dtable.DecisionTable)
 	return res, nil
 }
 
-func (c TableToGruleConverter) convertEntriesToRule(columId int, maxRules int, rule dtable.Rule, inputFields []dtable.FieldInterface, outputFields []dtable.FieldInterface) (grule.Rule, error) {
+func (c TableToGruleConverter) convertEntriesToRule(columId int, maxRules int, rule dtable.Rule, inputFields []field.Field, outputFields []field.Field) (grule.Rule, error) {
 	r := grule.Rule{
 		Name:        strconv.Itoa(columId),
-		Description: rule.Description,
+		Annotation:  rule.Annotation,
 		Salience:    columId,
 		InvSalience: maxRules - columId - 1, //Necessary for HitPolicies
 		Expressions: nil,
@@ -82,7 +83,7 @@ func (c TableToGruleConverter) convertEntriesToRule(columId int, maxRules int, r
 	return r, nil
 }
 
-func (c TableToGruleConverter) convertEntriesToTerms(entries []dtable.EntryInterface, fields []dtable.FieldInterface) ([]grule.Term, error) {
+func (c TableToGruleConverter) convertEntriesToTerms(entries []dtable.EntryInterface, fields []field.Field) ([]grule.Term, error) {
 	var result []grule.Term
 
 	fieldCount := len(fields)
@@ -105,7 +106,7 @@ func (c TableToGruleConverter) convertEntriesToTerms(entries []dtable.EntryInter
 	return result, nil
 }
 
-func (c TableToGruleConverter) convertEntryToExpression(entry dtable.EntryInterface, field dtable.FieldInterface) (grule.Term, error) {
+func (c TableToGruleConverter) convertEntryToExpression(entry dtable.EntryInterface, field field.Field) (grule.Term, error) {
 	term := grule.Term{
 		Field:              field,
 		Expression:         nil,

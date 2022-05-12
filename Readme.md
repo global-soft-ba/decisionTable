@@ -18,13 +18,13 @@ The library allows:
 table, _ := decisionTable.NewDecisionTableBuilder().
     SetID("determineEmployee").
     SetName("Determine Employee").
-    SetHitPolicy(data.Unique).
-    SetExpressionLanguage(data.SFEEL).
-    SetStandard(data.GRULE).
-    AddInputField(data.TestField{Name: "Claim", Key: "TypeOfClaim", Type: data.String}).
-    AddInputField(data.TestField{Name: "Claim", Key: "ExpenditureOfClaim", Type: data.Integer}).
-    AddOutputField(data.TestField{Name: "Employee", Key: "ResponsibleEmployee", Type: data.String}).
-    AddOutputField(data.TestField{Name: "Employee", Key: "FourEyesPrinciple", Type: data.Boolean}).
+    SetHitPolicy(hitPolicy.Unique).
+    SetExpressionLanguage(expressionLanguage.SFEEL).
+    SetStandard(standard.GRULE).
+    AddInputField(field.Field{Name: "Claim.TypeOfClaim", Type: dataType.String}).
+    AddInputField(field.Field{Name: "Claim.ExpenditureOfClaim", Type: dataType.Integer}).
+    AddOutputField(field.Field{Name: "Employee.ResponsibleEmployee", Type: dataType.String}).
+    AddOutputField(field.Field{Name: "Employee.FourEyesPrinciple", Type: dataType.Boolean}).
     AddRule(decisionTable.NewRuleBuilder().
         SetAnnotation("R1").
         AddInputEntry(`"Car Accident"`).
@@ -51,7 +51,7 @@ table, _ := decisionTable.NewDecisionTableBuilder().
     ).
     Build()
     
-rules, _ := table.Convert(data.GRULE)
+rules, _ := table.Convert(standard.GRULE)
 fmt.Print(rules)
 ```
 

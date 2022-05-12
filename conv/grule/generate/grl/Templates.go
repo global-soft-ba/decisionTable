@@ -2,11 +2,11 @@ package grl
 
 import (
 	"github.com/global-soft-ba/decisionTable/conv/grule/data"
-	dTable "github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
 	"text/template"
 )
 
-func GenerateTemplates(hitPolicy dTable.HitPolicy, interference bool) (*template.Template, error) {
+func GenerateTemplates(hp hitPolicy.HitPolicy, interference bool) (*template.Template, error) {
 	var t *template.Template
 
 	t, err := template.New(RULE).Funcs(
@@ -40,7 +40,7 @@ func GenerateTemplates(hitPolicy dTable.HitPolicy, interference bool) (*template
 		return &template.Template{}, err
 	}
 
-	_, err = t.New(SALIENCE).Parse(generatePolicyTemplate(hitPolicy))
+	_, err = t.New(SALIENCE).Parse(generatePolicyTemplate(hp))
 	if err != nil {
 		return &template.Template{}, err
 	}
@@ -53,13 +53,13 @@ func GenerateTemplates(hitPolicy dTable.HitPolicy, interference bool) (*template
 	return t, nil
 }
 
-func generatePolicyTemplate(hitPolicy dTable.HitPolicy) string {
-	switch hitPolicy {
-	case dTable.Unique:
+func generatePolicyTemplate(hp hitPolicy.HitPolicy) string {
+	switch hp {
+	case hitPolicy.Unique:
 		return HitPolicyUnique
-	case dTable.First:
+	case hitPolicy.First:
 		return HitPolicyFirst
-	case dTable.Priority:
+	case hitPolicy.Priority:
 		return HitPolicyPriority
 	default:
 		return HitPolicyDefault
@@ -94,7 +94,7 @@ const RULE = `rule {{ template "RULENAME" . }} {{template "SALIENCE" . }} {
  {{ template "INTERFERENCE" }}
 }`
 
-const RULENAME = `{{define "RULENAME"}}row_{{ .Name }} "{{ .Description }}"{{end}}`
+const RULENAME = `{{define "RULENAME"}}row_{{ .Name }} "{{ .Annotation }}"{{end}}`
 
 const WHEN = `{{define "WHEN" }}
 {{- range $index, $val := .Expressions }}

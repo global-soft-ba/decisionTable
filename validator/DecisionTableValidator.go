@@ -2,17 +2,21 @@ package validator
 
 import (
 	"errors"
-	conf "github.com/global-soft-ba/decisionTable/config" // TODO: Rename package?
+	"fmt"
+	conf "github.com/global-soft-ba/decisionTable/config"
 	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/field"
+	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
+	"github.com/global-soft-ba/decisionTable/data/standard"
 	"go.uber.org/multierr"
 )
 
 var (
 	ErrDecisionTableIdIsRequired                = "decision table ID is required"
 	ErrDecisionTableNameIsRequired              = "decision table name is required"
-	ErrDecisionTableHitPolicyIsInvalid          = "decision table hit policy is invalid"
-	ErrDecisionTableCollectOperatorIsInvalid    = "decision table collect operator is invalid"
-	ErrDecisionTableExpressionLanguageIsInvalid = "decision table expression language is invalid"
+	ErrDecisionTableHitPolicyIsInvalid          = "invalid decision table hit policy"
+	ErrDecisionTableCollectOperatorIsInvalid    = "invalid decision table collect operator"
+	ErrDecisionTableExpressionLanguageIsInvalid = "invalid decision table expression language"
 	ErrDecisionTableInputFieldIsRequired        = "at least one decision table input field is required"
 	ErrDecisionTableOutputFieldIsRequired       = "at least one decision table output field is required"
 
@@ -22,7 +26,7 @@ var (
 
 type DecisionTableValidator struct {
 	decisionTable data.DecisionTable
-	standard      data.Standard
+	standard      standard.Standard
 	errors        []error
 }
 
@@ -30,7 +34,7 @@ func NewDecisionTableValidator() DecisionTableValidatorInterface {
 	return DecisionTableValidator{}
 }
 
-func (v DecisionTableValidator) Validate(decisionTable data.DecisionTable, standard data.Standard) error {
+func (v DecisionTableValidator) Validate(decisionTable data.DecisionTable, standard standard.Standard) error {
 	v.decisionTable = decisionTable
 	v.standard = standard
 
@@ -75,16 +79,16 @@ func (v DecisionTableValidator) validateName() error {
 
 func (v DecisionTableValidator) validateHitPolicy() error {
 	if _, ok := conf.DecisionTableStandards[v.standard].HitPolicies[v.decisionTable.HitPolicy]; !ok {
-		return errors.New(ErrDecisionTableHitPolicyIsInvalid)
+		return fmt.Errorf("%s \"%s\"", ErrDecisionTableHitPolicyIsInvalid, v.decisionTable.HitPolicy)
 	}
 
 	return nil
 }
 
 func (v DecisionTableValidator) validateCollectOperator() error {
-	if v.decisionTable.HitPolicy == data.Collect {
+	if v.decisionTable.HitPolicy == hitPolicy.Collect {
 		if _, ok := conf.DecisionTableStandards[v.standard].CollectOperators[v.decisionTable.CollectOperator]; !ok {
-			return errors.New(ErrDecisionTableCollectOperatorIsInvalid)
+			return fmt.Errorf("%s \"%s\"", ErrDecisionTableCollectOperatorIsInvalid, v.decisionTable.CollectOperator)
 		}
 	}
 
@@ -93,7 +97,7 @@ func (v DecisionTableValidator) validateCollectOperator() error {
 
 func (v DecisionTableValidator) validateExpressionLanguage() error {
 	if _, ok := conf.DecisionTableStandards[v.standard].ExpressionLanguages[v.decisionTable.ExpressionLanguage]; !ok {
-		return errors.New(ErrDecisionTableExpressionLanguageIsInvalid)
+		return fmt.Errorf("%s \"%s\"", ErrDecisionTableExpressionLanguageIsInvalid, v.decisionTable.ExpressionLanguage)
 	}
 
 	return nil
@@ -115,13 +119,13 @@ func (v DecisionTableValidator) validateOutputFields() error {
 	return v.validateFields(v.decisionTable.OutputFields)
 }
 
-func (v DecisionTableValidator) validateFields(fields []data.FieldInterface) error {
+func (v DecisionTableValidator) validateFields(fields []field.Field) error {
 	var validationErrors []error
 
 	fieldValidator := NewFieldValidator()
 
-	for _, field := range fields {
-		if err := fieldValidator.Validate(field, v.standard); err != nil {
+	for _, f := range fields {
+		if err := fieldValidator.Validate(f, v.standard); err != nil {
 			validationErrors = append(validationErrors, err)
 		}
 	}

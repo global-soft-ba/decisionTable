@@ -7,13 +7,13 @@ type Rule struct {
 }
 
 func (r Rule) Annotation() string {
-	return r.data.Description
+	return r.data.Annotation
 }
 
-func (r Rule) InputEntries() []data.EntryInterface {
-	return r.data.InputEntries
+func (r Rule) InputEntries() []string {
+	return r.data.InputExpressions
 }
 
-func (r Rule) OutputEntries() []data.EntryInterface {
-	return r.data.OutputEntries
+func (r Rule) OutputEntries() []string {
+	return r.data.OutputExpressions
 }

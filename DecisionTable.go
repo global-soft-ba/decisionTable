@@ -4,6 +4,11 @@ import (
 	"fmt"
 	"github.com/global-soft-ba/decisionTable/conv"
 	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/collectOperator"
+	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
+	"github.com/global-soft-ba/decisionTable/data/field"
+	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
+	"github.com/global-soft-ba/decisionTable/data/standard"
 	"github.com/global-soft-ba/decisionTable/validator"
 )
 
@@ -23,27 +28,27 @@ func (d DecisionTable) Name() string {
 	return d.data.Name
 }
 
-func (d DecisionTable) HitPolicy() data.HitPolicy {
+func (d DecisionTable) HitPolicy() hitPolicy.HitPolicy {
 	return d.data.HitPolicy
 }
 
-func (d DecisionTable) CollectOperator() data.CollectOperator {
+func (d DecisionTable) CollectOperator() collectOperator.CollectOperator {
 	return d.data.CollectOperator
 }
 
-func (d DecisionTable) ExpressionLanguage() data.ExpressionLanguage {
+func (d DecisionTable) ExpressionLanguage() expressionLanguage.ExpressionLanguage {
 	return d.data.ExpressionLanguage
 }
 
-func (d DecisionTable) Standard() data.Standard {
+func (d DecisionTable) Standard() standard.Standard {
 	return d.data.Standard
 }
 
-func (d DecisionTable) InputFields() []data.FieldInterface {
+func (d DecisionTable) InputFields() []field.Field {
 	return d.data.InputFields
 }
 
-func (d DecisionTable) OutputFields() []data.FieldInterface {
+func (d DecisionTable) OutputFields() []field.Field {
 	return d.data.OutputFields
 }
 
@@ -56,10 +61,8 @@ func (d DecisionTable) Interferences() bool {
 }
 
 func (d DecisionTable) CheckIfContainsInterferences() bool {
-	outputFields := d.data.OutputFields
-
 	for _, inputField := range d.data.InputFields {
-		if d.checkIfContainsField(inputField, outputFields) {
+		if d.checkIfContainsField(inputField, d.data.OutputFields) {
 			return true
 		}
 	}
@@ -67,9 +70,9 @@ func (d DecisionTable) CheckIfContainsInterferences() bool {
 	return false
 }
 
-func (d DecisionTable) checkIfContainsField(field data.FieldInterface, fieldSet []data.FieldInterface) bool {
+func (d DecisionTable) checkIfContainsField(field field.Field, fieldSet []field.Field) bool {
 	for _, fieldFromSet := range fieldSet {
-		if field.ID() == fieldFromSet.ID() {
+		if field.Name == fieldFromSet.Name {
 			return true
 		}
 	}
@@ -77,11 +80,11 @@ func (d DecisionTable) checkIfContainsField(field data.FieldInterface, fieldSet 
 	return false
 }
 
-func (d *DecisionTable) Validate(standard data.Standard) error {
+func (d *DecisionTable) Validate(standard standard.Standard) error {
 	v := validator.NewDecisionTableValidator()
 
 	if err := v.Validate(d.data, standard); err != nil {
-		return fmt.Errorf(ErrDecisionTableNotValid+": %w", err)
+		return fmt.Errorf("%s: %w", ErrDecisionTableNotValid, err)
 	}
 
 	d.data.Interferences = d.CheckIfContainsInterferences()
@@ -89,14 +92,14 @@ func (d *DecisionTable) Validate(standard data.Standard) error {
 	return nil
 }
 
-func (d DecisionTable) Convert(standard data.Standard) (interface{}, error) { // TODO: Change return type from interface{} to []string{}?
+func (d DecisionTable) Convert(standard standard.Standard) (interface{}, error) {
 	if err := d.Validate(standard); err != nil {
-		return []string{}, err
+		return nil, err
 	}
 
-	tableConverter := conv.CreateConverter()
+	converter := conv.CreateConverter()
 
-	res, err := tableConverter.Convert(d.data, string(standard)) // TODO: Get rid of casting
+	res, err := converter.Convert(d.data, standard)
 	if err != nil {
 		return nil, err
 	}

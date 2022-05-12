@@ -3,6 +3,8 @@ package grl
 import (
 	"github.com/global-soft-ba/decisionTable/conv/grule/data"
 	dTable "github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/dataType"
+	"github.com/global-soft-ba/decisionTable/data/field"
 	"github.com/global-soft-ba/decisionTable/lang/sfeel"
 	"reflect"
 	"testing"
@@ -10,7 +12,7 @@ import (
 
 func TestCreateExpression(t *testing.T) {
 	type args struct {
-		field dTable.FieldInterface
+		field field.Field
 		entry dTable.EntryInterface
 	}
 	tests := []struct {
@@ -22,7 +24,7 @@ func TestCreateExpression(t *testing.T) {
 		{
 			name: "convert sfeel.interval  to ast",
 			args: args{
-				field: dTable.TestField{Name: "X", Key: "Y", Type: dTable.Integer},
+				field: field.Field{Name: "X.Y", Type: dataType.Integer},
 				entry: sfeel.CreateInputEntry("[1..6]"),
 			},
 			want:    "((X.Y :7: 1) :0: (X.Y :5: 6))",
@@ -45,7 +47,7 @@ func TestCreateExpression(t *testing.T) {
 
 func TestExpression_Convert(t *testing.T) {
 	type fields struct {
-		field dTable.FieldInterface
+		field field.Field
 		entry dTable.EntryInterface
 	}
 	type args struct {
@@ -61,7 +63,7 @@ func TestExpression_Convert(t *testing.T) {
 		{
 			name: "convert interval to grl",
 			fields: fields{
-				field: dTable.TestField{Name: "X", Key: "Y", Type: dTable.Integer},
+				field: field.Field{Name: "X.Y", Type: dataType.Integer},
 				entry: sfeel.CreateInputEntry("[1..6]"),
 			},
 			args:    args{targetFormat: data.GRL},
@@ -71,7 +73,7 @@ func TestExpression_Convert(t *testing.T) {
 		{
 			name: "convert interval to grl",
 			fields: fields{
-				field: dTable.TestField{Name: "X", Key: "Y", Type: dTable.Integer},
+				field: field.Field{Name: "X.Y", Type: dataType.Integer},
 				entry: sfeel.CreateInputEntry("[1..6]"),
 			},
 			args:    args{targetFormat: data.JSON},

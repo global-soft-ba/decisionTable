@@ -4,12 +4,18 @@ import (
 	grule "github.com/global-soft-ba/decisionTable/conv/grule/data"
 	"github.com/global-soft-ba/decisionTable/conv/grule/grl"
 	dtable "github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/collectOperator"
+	"github.com/global-soft-ba/decisionTable/data/dataType"
+	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
+	"github.com/global-soft-ba/decisionTable/data/field"
+	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
+	"github.com/global-soft-ba/decisionTable/data/standard"
 	"github.com/global-soft-ba/decisionTable/lang/sfeel"
 	"reflect"
 	"testing"
 )
 
-func CreateTestExpression(field dtable.FieldInterface, entry dtable.EntryInterface) grule.ExpressionInterface {
+func CreateTestExpression(field field.Field, entry dtable.EntryInterface) grule.ExpressionInterface {
 	res, _ := grl.CreateExpression(field, entry)
 	return res
 }
@@ -28,27 +34,27 @@ func TestGruleGenerator_Generate(t *testing.T) {
 		{
 			name: "integer unary test",
 			args: args{
-				targetFormat: string(dtable.GRULE),
+				targetFormat: string(standard.GRULE),
 				rules: grule.RuleSet{
 					Key:             "test1",
 					Name:            "TableOne",
-					HitPolicy:       dtable.First,
-					CollectOperator: dtable.List,
+					HitPolicy:       hitPolicy.First,
+					CollectOperator: collectOperator.List,
 					Rules: []grule.Rule{
 						{
-							Name:        "0",
-							Description: "R1",
+							Name:       "0",
+							Annotation: "R1",
 							Expressions: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String}, sfeel.CreateInputEntry("8")),
-									ExpressionLanguage: dtable.SFEEL},
+									Field:              field.Field{Name: "I1.L1", Type: dataType.String},
+									Expression:         CreateTestExpression(field.Field{Name: "I1.L1", Type: dataType.String}, sfeel.CreateInputEntry("8")),
+									ExpressionLanguage: expressionLanguage.SFEEL},
 							},
 							Assignments: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float}, sfeel.CreateOutputEntry("4")),
-									ExpressionLanguage: dtable.SFEEL,
+									Field:              field.Field{Name: "O1.L1", Type: dataType.Float},
+									Expression:         CreateTestExpression(field.Field{Name: "O1.L1", Type: dataType.Float}, sfeel.CreateOutputEntry("4")),
+									ExpressionLanguage: expressionLanguage.SFEEL,
 								},
 							},
 						},
@@ -61,49 +67,49 @@ func TestGruleGenerator_Generate(t *testing.T) {
 		{
 			name: "integer unary with first hit policies",
 			args: args{
-				targetFormat: string(dtable.GRULE),
+				targetFormat: string(standard.GRULE),
 				rules: grule.RuleSet{
 					Key:             "test1",
 					Name:            "TableOne",
-					HitPolicy:       dtable.First,
+					HitPolicy:       hitPolicy.First,
 					Interference:    true,
-					CollectOperator: dtable.List,
+					CollectOperator: collectOperator.List,
 					Rules: []grule.Rule{
 						{
 							Name:        "0",
-							Description: "R1",
+							Annotation:  "R1",
 							Salience:    0,
 							InvSalience: 1,
 							Expressions: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String}, sfeel.CreateInputEntry("8")),
-									ExpressionLanguage: dtable.SFEEL},
+									Field:              field.Field{Name: "I1.L1", Type: dataType.String},
+									Expression:         CreateTestExpression(field.Field{Name: "I1.L1", Type: dataType.String}, sfeel.CreateInputEntry("8")),
+									ExpressionLanguage: expressionLanguage.SFEEL},
 							},
 							Assignments: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float}, sfeel.CreateOutputEntry("4")),
-									ExpressionLanguage: dtable.SFEEL,
+									Field:              field.Field{Name: "O1.L1", Type: dataType.Float},
+									Expression:         CreateTestExpression(field.Field{Name: "O1.L1", Type: dataType.Float}, sfeel.CreateOutputEntry("4")),
+									ExpressionLanguage: expressionLanguage.SFEEL,
 								},
 							},
 						},
 						{
 							Name:        "1",
-							Description: "R2",
+							Annotation:  "R2",
 							Salience:    1,
 							InvSalience: 0,
 							Expressions: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String}, sfeel.CreateInputEntry("10")),
-									ExpressionLanguage: dtable.SFEEL},
+									Field:              field.Field{Name: "I1.L1", Type: dataType.String},
+									Expression:         CreateTestExpression(field.Field{Name: "I1.L1", Type: dataType.String}, sfeel.CreateInputEntry("10")),
+									ExpressionLanguage: expressionLanguage.SFEEL},
 							},
 							Assignments: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float}, sfeel.CreateOutputEntry("100")),
-									ExpressionLanguage: dtable.SFEEL,
+									Field:              field.Field{Name: "O1.L1", Type: dataType.Float},
+									Expression:         CreateTestExpression(field.Field{Name: "O1.L1", Type: dataType.Float}, sfeel.CreateOutputEntry("100")),
+									ExpressionLanguage: expressionLanguage.SFEEL,
 								},
 							},
 						},
@@ -119,27 +125,27 @@ func TestGruleGenerator_Generate(t *testing.T) {
 		{
 			name: "integer interval test",
 			args: args{
-				targetFormat: string(dtable.GRULE),
+				targetFormat: string(standard.GRULE),
 				rules: grule.RuleSet{
 					Key:             "test1",
 					Name:            "TableOne",
-					HitPolicy:       dtable.Priority,
-					CollectOperator: dtable.List,
+					HitPolicy:       hitPolicy.Priority,
+					CollectOperator: collectOperator.List,
 					Rules: []grule.Rule{
 						{
-							Name:        "0",
-							Description: "R1",
+							Name:       "0",
+							Annotation: "R1",
 							Expressions: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "I1", Key: "L1", Type: dtable.String}, sfeel.CreateInputEntry("[1..6)")),
-									ExpressionLanguage: dtable.SFEEL},
+									Field:              field.Field{Name: "I1.L1", Type: dataType.String},
+									Expression:         CreateTestExpression(field.Field{Name: "I1.L1", Type: dataType.String}, sfeel.CreateInputEntry("[1..6)")),
+									ExpressionLanguage: expressionLanguage.SFEEL},
 							},
 							Assignments: []grule.Term{
 								{
-									Field:              dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float},
-									Expression:         CreateTestExpression(dtable.TestField{Name: "O1", Key: "L1", Type: dtable.Float}, sfeel.CreateOutputEntry("4")),
-									ExpressionLanguage: dtable.SFEEL,
+									Field:              field.Field{Name: "O1.L1", Type: dataType.Float},
+									Expression:         CreateTestExpression(field.Field{Name: "O1.L1", Type: dataType.Float}, sfeel.CreateOutputEntry("4")),
+									ExpressionLanguage: expressionLanguage.SFEEL,
 								},
 							},
 						},

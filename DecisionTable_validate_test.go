@@ -1,7 +1,12 @@
 package decisionTable
 
 import (
-	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/collectOperator"
+	"github.com/global-soft-ba/decisionTable/data/dataType"
+	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
+	"github.com/global-soft-ba/decisionTable/data/field"
+	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
+	"github.com/global-soft-ba/decisionTable/data/standard"
 	"github.com/global-soft-ba/decisionTable/validator"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -15,16 +20,16 @@ func TestValidate_InvalidTables(t *testing.T) {
 		errContains   string
 	}{
 		{
-			name: "Happy Path create valid table",
+			name: "Happy path - create valid table",
 			decisionTable: NewDecisionTableBuilder().
 				SetID("test1").
-				SetName("ABC").
-				SetHitPolicy(data.First).
-				SetCollectOperator(data.List).
-				SetStandard(data.GRULE).
-				SetExpressionLanguage(data.SFEEL).
-				AddInputField(data.TestField{Name: "I1", Key: "L1", Type: data.Integer}).
-				AddOutputField(data.TestField{Name: "O1", Key: "L1", Type: data.Integer}).
+				SetName("Test 1").
+				SetHitPolicy(hitPolicy.First).
+				SetCollectOperator(collectOperator.List).
+				SetExpressionLanguage(expressionLanguage.SFEEL).
+				SetStandard(standard.GRULE).
+				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
+				AddOutputField(field.Field{Name: "O1.L1", Type: dataType.Integer}).
 				AddRule(NewRuleBuilder().
 					SetAnnotation("R1").
 					AddInputEntry("<3").
@@ -35,25 +40,22 @@ func TestValidate_InvalidTables(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name: "Name is missing",
-			decisionTable: NewDecisionTableBuilder().
-				SetID("id").
-				BuildWithoutValidation(),
-			wantErr:     true,
-			errContains: validator.ErrDecisionTableNameIsRequired,
+			name:          "Name is missing",
+			decisionTable: NewDecisionTableBuilder().BuildWithoutValidation(),
+			wantErr:       true,
+			errContains:   validator.ErrDecisionTableNameIsRequired,
 		},
 		{
-			name: "ID is missing",
-			decisionTable: NewDecisionTableBuilder().
-				BuildWithoutValidation(),
-			wantErr:     true,
-			errContains: validator.ErrDecisionTableIdIsRequired,
+			name:          "ID is missing",
+			decisionTable: NewDecisionTableBuilder().BuildWithoutValidation(),
+			wantErr:       true,
+			errContains:   validator.ErrDecisionTableIdIsRequired,
 		},
 		{
 			name: "HitPolicy not valid for standard",
 			decisionTable: NewDecisionTableBuilder().
-				SetHitPolicy(data.Any).
-				SetStandard(data.GRULE).
+				SetHitPolicy(hitPolicy.Any).
+				SetStandard(standard.GRULE).
 				BuildWithoutValidation(),
 			wantErr:     true,
 			errContains: validator.ErrDecisionTableHitPolicyIsInvalid,
@@ -61,61 +63,57 @@ func TestValidate_InvalidTables(t *testing.T) {
 		{
 			name: "CollectOperator not valid for standard",
 			decisionTable: NewDecisionTableBuilder().
-				SetHitPolicy(data.Collect).
-				SetStandard(data.DMN).
+				SetHitPolicy(hitPolicy.Collect).
+				SetStandard(standard.DMN).
 				SetCollectOperator("XYZ").
 				BuildWithoutValidation(),
 			wantErr:     true,
 			errContains: validator.ErrDecisionTableCollectOperatorIsInvalid,
 		},
 		{
+			name:          "InputField is missing",
+			decisionTable: NewDecisionTableBuilder().BuildWithoutValidation(),
+			wantErr:       true,
+			errContains:   validator.ErrDecisionTableInputFieldIsRequired,
+		},
+		{
+			name:          "OutputField is missing",
+			decisionTable: NewDecisionTableBuilder().BuildWithoutValidation(),
+			wantErr:       true,
+			errContains:   validator.ErrDecisionTableOutputFieldIsRequired,
+		},
+		{
+			name: "InputField name is missing ",
+			decisionTable: NewDecisionTableBuilder().
+				SetStandard(standard.DMN).
+				AddInputField(field.Field{Type: dataType.Float}).
+				BuildWithoutValidation(),
+			wantErr:     true,
+			errContains: validator.ErrDecisionTableFieldNameIsRequired,
+		},
+		{
+			name: "OutputField bname is missing",
+			decisionTable: NewDecisionTableBuilder().
+				SetStandard(standard.DMN).
+				AddOutputField(field.Field{Type: dataType.Float}).
+				BuildWithoutValidation(),
+			wantErr:     true,
+			errContains: validator.ErrDecisionTableFieldNameIsRequired,
+		},
+		{
 			name: "InputField datatype does not match standard",
 			decisionTable: NewDecisionTableBuilder().
-				SetStandard(data.DMN).
-				AddInputField(data.TestField{Name: "I1", Key: "L1", Type: data.Float}).
+				SetStandard(standard.DMN).
+				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Float}).
 				BuildWithoutValidation(),
 			wantErr:     true,
 			errContains: validator.ErrDecisionTableFieldTypeIsInvalid,
 		},
 		{
-			name: "InputField is missing",
-			decisionTable: NewDecisionTableBuilder().
-				SetStandard(data.DMN).
-				BuildWithoutValidation(),
-			wantErr:     true,
-			errContains: validator.ErrDecisionTableInputFieldIsRequired,
-		},
-		{
-			name: "InputField ID is missing ",
-			decisionTable: NewDecisionTableBuilder().
-				SetStandard(data.DMN).
-				AddInputField(data.TestField{Type: data.Float}).
-				BuildWithoutValidation(),
-			wantErr:     true,
-			errContains: validator.ErrDecisionTableFieldIdIsRequired,
-		},
-		{
-			name: "OutputField ID is missing",
-			decisionTable: NewDecisionTableBuilder().
-				SetStandard(data.DMN).
-				AddOutputField(data.TestField{Type: data.Float}).
-				BuildWithoutValidation(),
-			wantErr:     true,
-			errContains: validator.ErrDecisionTableFieldIdIsRequired,
-		},
-		{
-			name: "OutputField is missing",
-			decisionTable: NewDecisionTableBuilder().
-				SetStandard(data.DMN).
-				BuildWithoutValidation(),
-			wantErr:     true,
-			errContains: validator.ErrDecisionTableOutputFieldIsRequired,
-		},
-		{
 			name: "OutputField datatype does not match standard",
 			decisionTable: NewDecisionTableBuilder().
-				SetStandard(data.DMN).
-				AddOutputField(data.TestField{Name: "I1", Key: "L1", Type: data.Float}).
+				SetStandard(standard.DMN).
+				AddOutputField(field.Field{Name: "I1.L1", Type: dataType.Float}).
 				BuildWithoutValidation(),
 			wantErr:     true,
 			errContains: validator.ErrDecisionTableFieldTypeIsInvalid,
@@ -123,11 +121,10 @@ func TestValidate_InvalidTables(t *testing.T) {
 		{
 			name: "Amount of rules does not match amount of input fields",
 			decisionTable: NewDecisionTableBuilder().
-				SetStandard(data.DMN).
-				AddInputField(data.TestField{Name: "I1", Key: "L1", Type: data.Float}).
-				AddOutputField(data.TestField{Name: "I1", Key: "L1", Type: data.Float}).
+				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Float}).
+				AddOutputField(field.Field{Name: "I1.L1", Type: dataType.Float}).
 				AddRule(NewRuleBuilder().
-					SetAnnotation("Rule").
+					SetAnnotation("R1").
 					AddInputEntry("-").
 					AddInputEntry("-").
 					AddOutputEntry("-").
@@ -140,11 +137,10 @@ func TestValidate_InvalidTables(t *testing.T) {
 		{
 			name: "Amount of rules does not match amount of output fields",
 			decisionTable: NewDecisionTableBuilder().
-				SetStandard(data.DMN).
-				AddInputField(data.TestField{Name: "I1", Key: "L1", Type: data.Float}).
-				AddOutputField(data.TestField{Name: "I1", Key: "L1", Type: data.Float}).
+				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Float}).
+				AddOutputField(field.Field{Name: "I1.L1", Type: dataType.Float}).
 				AddRule(NewRuleBuilder().
-					SetAnnotation("Rule").
+					SetAnnotation("R1").
 					AddInputEntry("-").
 					AddOutputEntry("-").
 					AddOutputEntry("-").
@@ -159,12 +155,12 @@ func TestValidate_InvalidTables(t *testing.T) {
 			decisionTable: NewDecisionTableBuilder().
 				SetID("1").
 				SetName("Test").
-				SetHitPolicy(data.First).
-				SetStandard(data.GRULE).
-				AddInputField(data.TestField{Name: "I1", Key: "L1", Type: data.Integer}).
-				AddOutputField(data.TestField{Name: "I1", Key: "L1", Type: data.Integer}).
+				SetHitPolicy(hitPolicy.First).
+				SetStandard(standard.GRULE).
+				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
+				AddOutputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
 				AddRule(NewRuleBuilder().
-					SetAnnotation("Rule").
+					SetAnnotation("R1").
 					AddInputEntry("xyz").
 					AddOutputEntry("-").
 					Build(),
@@ -177,12 +173,12 @@ func TestValidate_InvalidTables(t *testing.T) {
 			decisionTable: NewDecisionTableBuilder().
 				SetID("1").
 				SetName("Test").
-				SetHitPolicy(data.First).
-				SetStandard(data.GRULE).
-				AddInputField(data.TestField{Name: "I1", Key: "L1", Type: data.Integer}).
-				AddOutputField(data.TestField{Name: "I1", Key: "L1", Type: data.Integer}).
+				SetHitPolicy(hitPolicy.First).
+				SetStandard(standard.GRULE).
+				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
+				AddOutputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
 				AddRule(NewRuleBuilder().
-					SetAnnotation("Rule").
+					SetAnnotation("R1").
 					AddInputEntry("-").
 					AddOutputEntry("x.s").
 					Build(),
@@ -196,10 +192,10 @@ func TestValidate_InvalidTables(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			err := tt.decisionTable.Validate(tt.decisionTable.Standard())
 			if (err != nil) != tt.wantErr {
-				t.Errorf("validate() got = %v, want %v", err, tt.wantErr)
+				t.Errorf("validate() got = %v, wantErr = %v", err, tt.wantErr)
 			}
 			if tt.wantErr == true && !assert.Contains(t, err.Error(), tt.errContains) {
-				t.Errorf("validate() got = %v, want nil", err)
+				t.Errorf("validate() got = %v, want = %s", err, tt.errContains)
 			}
 		})
 	}
@@ -214,12 +210,13 @@ func TestValidate_InvalidTableEntries(t *testing.T) {
 		{
 			name: "Input rule entry contains wrong expression",
 			decisionTable: NewDecisionTableBuilder().
-				SetID("1").
-				SetName("Test").
-				SetHitPolicy(data.First).
-				SetStandard(data.GRULE).
-				AddInputField(data.TestField{Name: "I1", Key: "L1", Type: data.Integer}).
-				AddOutputField(data.TestField{Name: "I1", Key: "L1", Type: data.Integer}).
+				SetID("test1").
+				SetName("Test 1").
+				SetHitPolicy(hitPolicy.First).
+				SetExpressionLanguage(expressionLanguage.SFEEL).
+				SetStandard(standard.GRULE).
+				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
+				AddOutputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
 				AddRule(NewRuleBuilder().
 					SetAnnotation("Rule").
 					AddInputEntry("xyz").
@@ -234,10 +231,11 @@ func TestValidate_InvalidTableEntries(t *testing.T) {
 			decisionTable: NewDecisionTableBuilder().
 				SetID("1").
 				SetName("Test").
-				SetHitPolicy(data.First).
-				SetStandard(data.GRULE).
-				AddInputField(data.TestField{Name: "I1", Key: "L1", Type: data.Integer}).
-				AddOutputField(data.TestField{Name: "I1", Key: "L1", Type: data.Integer}).
+				SetHitPolicy(hitPolicy.First).
+				SetExpressionLanguage(expressionLanguage.SFEEL).
+				SetStandard(standard.GRULE).
+				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
+				AddOutputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
 				AddRule(NewRuleBuilder().
 					SetAnnotation("Rule").
 					AddInputEntry("\"ABC\"").
@@ -248,17 +246,17 @@ func TestValidate_InvalidTableEntries(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			// TODO: Output Evaluation is not completed, the test case must be adapted/checked to provoke "ErrDTableEntryReferencedFieldTypInvalid"
-			name: "Output rule entry contains wrong entry reference field",
+			// TODO: Output evaluation is not completed, the test case must be adapted/checked to provoke "ErrDTableEntryReferencedFieldTypInvalid"
+			name: "Output data entry contains wrong entry reference field",
 			decisionTable: NewDecisionTableBuilder().
 				SetID("1").
 				SetName("Test").
-				SetHitPolicy(data.First).
-				SetStandard(data.GRULE).
-				AddInputField(data.TestField{Name: "I1", Key: "L1", Type: data.Integer}).
-				AddOutputField(data.TestField{Name: "I1", Key: "L1", Type: data.Integer}).
+				SetHitPolicy(hitPolicy.First).
+				SetStandard(standard.GRULE).
+				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
+				AddOutputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
 				AddRule(NewRuleBuilder().
-					SetAnnotation("Rule").
+					SetAnnotation("R1").
 					AddInputEntry(">2").
 					AddOutputEntry("I2.L1").
 					Build(),
@@ -271,11 +269,8 @@ func TestValidate_InvalidTableEntries(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			err := tt.decisionTable.Validate(tt.decisionTable.Standard())
-			if err == nil && tt.wantErr == true {
-				t.Errorf("validate() got = nil, want error{}")
-			}
-			if err != nil && tt.wantErr == false {
-				t.Errorf("validate() got = %v, want nil", err)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("validate() got = %v, wantErr = %v", err, tt.wantErr)
 			}
 		})
 	}
@@ -288,15 +283,15 @@ func TestValidate_CheckForInterferences(t *testing.T) {
 		want          bool
 	}{
 		{
-			name: "valid2 table without interferences",
+			name: "Valid table without interferences",
 			decisionTable: NewDecisionTableBuilder().
 				SetID("test1").
-				SetName("ABC").
-				SetHitPolicy(data.First).
-				SetCollectOperator(data.List).
-				SetStandard(data.GRULE).
-				AddInputField(data.TestField{Name: "I1", Key: "L1", Type: data.Integer}).
-				AddOutputField(data.TestField{Name: "I2", Key: "L1", Type: data.Integer}).
+				SetName("Test 1").
+				SetHitPolicy(hitPolicy.First).
+				SetCollectOperator(collectOperator.List).
+				SetStandard(standard.GRULE).
+				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
+				AddOutputField(field.Field{Name: "I2.L1", Type: dataType.Integer}).
 				AddRule(NewRuleBuilder().
 					SetAnnotation("R1").
 					AddInputEntry("<3").
@@ -307,15 +302,15 @@ func TestValidate_CheckForInterferences(t *testing.T) {
 			want: false,
 		},
 		{
-			name: "valid2 table with interferences",
+			name: "Valid table with interferences",
 			decisionTable: NewDecisionTableBuilder().
 				SetID("test1").
 				SetName("ABC").
-				SetHitPolicy(data.First).
-				SetCollectOperator(data.List).
-				SetStandard(data.GRULE).
-				AddInputField(data.TestField{Name: "I1", Key: "L1", Type: data.Integer}).
-				AddOutputField(data.TestField{Name: "I1", Key: "L1", Type: data.Integer}).
+				SetHitPolicy(hitPolicy.First).
+				SetCollectOperator(collectOperator.List).
+				SetStandard(standard.GRULE).
+				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
+				AddOutputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
 				AddRule(NewRuleBuilder().
 					SetAnnotation("R1").
 					AddInputEntry("<3").

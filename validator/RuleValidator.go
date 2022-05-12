@@ -3,6 +3,8 @@ package validator
 import (
 	"errors"
 	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/field"
+	"github.com/global-soft-ba/decisionTable/data/standard"
 	"go.uber.org/multierr"
 )
 
@@ -14,7 +16,7 @@ var (
 type RuleValidator struct {
 	rule          data.Rule
 	decisionTable data.DecisionTable
-	standard      data.Standard
+	standard      standard.Standard
 	errors        []error
 }
 
@@ -22,7 +24,7 @@ func NewRuleValidator() RuleValidatorInterface {
 	return RuleValidator{}
 }
 
-func (v RuleValidator) Validate(rule data.Rule, decisionTable data.DecisionTable, standard data.Standard) error {
+func (v RuleValidator) Validate(rule data.Rule, decisionTable data.DecisionTable, standard standard.Standard) error {
 	v.rule = rule
 	v.decisionTable = decisionTable
 	v.standard = standard
@@ -45,7 +47,7 @@ func (v *RuleValidator) executeValidation(validate func() error) {
 }
 
 func (v RuleValidator) validateAnnotation() error {
-	if len(v.rule.Description) == 0 {
+	if len(v.rule.Annotation) == 0 {
 		return errors.New(ErrDecisionTableRuleAnnotationIsRequired)
 	}
 
@@ -88,12 +90,12 @@ func (v RuleValidator) validateOutputEntries() error {
 	return nil
 }
 
-func (v RuleValidator) validateEntry(entry data.EntryInterface, field data.FieldInterface) error {
+func (v RuleValidator) validateEntry(entry data.EntryInterface, field field.Field) error {
 	if ok, err := entry.Validate(); !ok {
 		return multierr.Combine(err...)
 	}
 
-	if ok, err := entry.ValidateDataTypeOfExpression(field.DataType()); !ok {
+	if ok, err := entry.ValidateDataTypeOfExpression(field.Type); !ok {
 		return err
 	}
 
@@ -103,7 +105,7 @@ func (v RuleValidator) validateEntry(entry data.EntryInterface, field data.Field
 	}
 
 	for _, referencedField := range referencedFields {
-		if referencedField.DataType() != field.DataType() {
+		if referencedField.Type != field.Type {
 			return errors.New(ErrDecisionTableEntryReferencedFieldTypeIsInvalid)
 		}
 	}

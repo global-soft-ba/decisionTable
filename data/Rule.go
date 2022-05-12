@@ -1,10 +1,10 @@
 package data
 
 type Rule struct {
-	Description   string
-	InputEntries  []EntryInterface
-	OutputEntries []EntryInterface
+	Annotation        string   `json:"annotation"`
+	InputExpressions  []string `json:"inputEntries"`
+	OutputExpressions []string `json:"outputEntries"`
 
-	InputExpressions  []string
-	OutputExpressions []string
+	InputEntries  []EntryInterface `json:"-"`
+	OutputEntries []EntryInterface `json:"-"`
 }

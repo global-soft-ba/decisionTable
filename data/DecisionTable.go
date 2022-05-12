@@ -1,16 +1,24 @@
 package data
 
+import (
+	"github.com/global-soft-ba/decisionTable/data/collectOperator"
+	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
+	"github.com/global-soft-ba/decisionTable/data/field"
+	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
+	"github.com/global-soft-ba/decisionTable/data/standard"
+)
+
 type DecisionTable struct {
-	ID                 string
-	Name               string
-	HitPolicy          HitPolicy
-	CollectOperator    CollectOperator
-	ExpressionLanguage ExpressionLanguage
-	Standard           Standard
+	ID                 string                                `json:"id"`
+	Name               string                                `json:"name"`
+	HitPolicy          hitPolicy.HitPolicy                   `json:"hitPolicy"`
+	CollectOperator    collectOperator.CollectOperator       `json:"collectOperator"`
+	ExpressionLanguage expressionLanguage.ExpressionLanguage `json:"expressionLanguage"`
+	Standard           standard.Standard                     `json:"standard"`
 
-	InputFields  []FieldInterface
-	OutputFields []FieldInterface
-	Rules        []Rule
+	InputFields  []field.Field `json:"inputFields"`
+	OutputFields []field.Field `json:"outputFields"`
+	Rules        []Rule        `json:"rules"`
 
-	Interferences bool
+	Interferences bool `json:"-"`
 }

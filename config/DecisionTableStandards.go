@@ -1,70 +1,76 @@
 package types
 
-import "github.com/global-soft-ba/decisionTable/data"
+import (
+	"github.com/global-soft-ba/decisionTable/data/collectOperator"
+	"github.com/global-soft-ba/decisionTable/data/dataType"
+	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
+	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
+	"github.com/global-soft-ba/decisionTable/data/standard"
+)
 
 type DecisionTableStandard struct {
-	ExpressionLanguages map[data.ExpressionLanguage]bool
-	HitPolicies         map[data.HitPolicy]bool
-	CollectOperators    map[data.CollectOperator]bool
-	VariableTypes       map[data.DataType]bool
+	ExpressionLanguages map[expressionLanguage.ExpressionLanguage]bool
+	HitPolicies         map[hitPolicy.HitPolicy]bool
+	CollectOperators    map[collectOperator.CollectOperator]bool
+	VariableTypes       map[dataType.DataType]bool
 }
 
-var DecisionTableStandards = map[data.Standard]DecisionTableStandard{
-	data.GRULE: grule,
-	data.DMN:   dmn,
+var DecisionTableStandards = map[standard.Standard]DecisionTableStandard{
+	standard.GRULE: grule,
+	standard.DMN:   dmn,
 }
 
 var dmn = DecisionTableStandard{
-	ExpressionLanguages: map[data.ExpressionLanguage]bool{
-		data.FEEL: true,
+	ExpressionLanguages: map[expressionLanguage.ExpressionLanguage]bool{
+		expressionLanguage.FEEL: true,
 	},
 
-	HitPolicies: map[data.HitPolicy]bool{
-		data.Unique:      true,
-		data.First:       true,
-		data.Priority:    true,
-		data.Any:         true,
-		data.Collect:     true,
-		data.RuleOrder:   true,
-		data.OutputOrder: true,
+	HitPolicies: map[hitPolicy.HitPolicy]bool{
+		hitPolicy.Unique:      true,
+		hitPolicy.First:       true,
+		hitPolicy.Priority:    true,
+		hitPolicy.Any:         true,
+		hitPolicy.Collect:     true,
+		hitPolicy.RuleOrder:   true,
+		hitPolicy.OutputOrder: true,
 	},
 
-	CollectOperators: map[data.CollectOperator]bool{
-		data.List:  true,
-		data.Sum:   true,
-		data.Min:   true,
-		data.Max:   true,
-		data.Count: true,
+	CollectOperators: map[collectOperator.CollectOperator]bool{
+		collectOperator.List:  true,
+		collectOperator.Sum:   true,
+		collectOperator.Min:   true,
+		collectOperator.Max:   true,
+		collectOperator.Count: true,
 	},
 
-	VariableTypes: map[data.DataType]bool{
-		data.Boolean:  true,
-		data.Integer:  true,
-		data.Long:     true,
-		data.Double:   true,
-		data.String:   true,
-		data.DateTime: true,
+	VariableTypes: map[dataType.DataType]bool{
+		dataType.Boolean:  true,
+		dataType.Integer:  true,
+		dataType.Long:     true,
+		dataType.Double:   true,
+		dataType.String:   true,
+		dataType.DateTime: true,
 	},
 }
 
 var grule = DecisionTableStandard{
-	ExpressionLanguages: map[data.ExpressionLanguage]bool{
-		data.SFEEL: true,
+	ExpressionLanguages: map[expressionLanguage.ExpressionLanguage]bool{
+		expressionLanguage.SFEEL: true,
 	},
 
-	HitPolicies: map[data.HitPolicy]bool{
-		data.Unique:   true,
-		data.First:    true,
-		data.Priority: true,
+	HitPolicies: map[hitPolicy.HitPolicy]bool{
+		hitPolicy.Unique:   true,
+		hitPolicy.First:    true,
+		hitPolicy.Priority: true,
 	},
 
-	CollectOperators: map[data.CollectOperator]bool{},
+	CollectOperators: map[collectOperator.CollectOperator]bool{},
 
-	VariableTypes: map[data.DataType]bool{
-		data.Boolean:  true,
-		data.Integer:  true,
-		data.Float:    true, // TODO: In GRL, Float is REAL
-		data.String:   true,
-		data.DateTime: true,
+	VariableTypes: map[dataType.DataType]bool{
+		dataType.Boolean:  true,
+		dataType.Integer:  true,
+		dataType.Float:    true, // In GRL, Float is REAL
+		dataType.String:   true,
+		dataType.DateTime: true,
 	},
 }

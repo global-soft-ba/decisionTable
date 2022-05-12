@@ -1,7 +1,10 @@
 package validator
 
-import "github.com/global-soft-ba/decisionTable/data"
+import (
+	"github.com/global-soft-ba/decisionTable/data/field"
+	"github.com/global-soft-ba/decisionTable/data/standard"
+)
 
 type FieldValidatorInterface interface {
-	Validate(field data.FieldInterface, standard data.Standard) error
+	Validate(field field.Field, standard standard.Standard) error
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type RuleBuilder struct {
-	rule data.Rule
+	data data.Rule
 }
 
 func NewRuleBuilder() RuleBuilderInterface {
@@ -13,20 +13,20 @@ func NewRuleBuilder() RuleBuilderInterface {
 }
 
 func (r RuleBuilder) SetAnnotation(annotation string) RuleBuilderInterface {
-	r.rule.Description = annotation
+	r.data.Annotation = annotation
 	return r
 }
 
 func (r RuleBuilder) AddInputEntry(expression string) RuleBuilderInterface {
-	r.rule.InputExpressions = append(r.rule.InputExpressions, expression)
+	r.data.InputExpressions = append(r.data.InputExpressions, expression)
 	return r
 }
 
 func (r RuleBuilder) AddOutputEntry(expression string) RuleBuilderInterface {
-	r.rule.OutputExpressions = append(r.rule.OutputExpressions, expression)
+	r.data.OutputExpressions = append(r.data.OutputExpressions, expression)
 	return r
 }
 
 func (r RuleBuilder) Build() Rule {
-	return Rule{data: r.rule}
+	return Rule{data: r.data}
 }

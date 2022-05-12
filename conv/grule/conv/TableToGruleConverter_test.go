@@ -4,12 +4,18 @@ import (
 	grule "github.com/global-soft-ba/decisionTable/conv/grule/data"
 	"github.com/global-soft-ba/decisionTable/conv/grule/grl"
 	dtable "github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/collectOperator"
+	"github.com/global-soft-ba/decisionTable/data/dataType"
+	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
+	"github.com/global-soft-ba/decisionTable/data/field"
+	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
+	"github.com/global-soft-ba/decisionTable/data/standard"
 	"github.com/global-soft-ba/decisionTable/lang/sfeel"
 	"reflect"
 	"testing"
 )
 
-func CreateTestExpression(field dtable.FieldInterface, entry dtable.EntryInterface) grule.ExpressionInterface {
+func CreateTestExpression(field field.Field, entry dtable.EntryInterface) grule.ExpressionInterface {
 	res, _ := grl.CreateExpression(field, entry)
 	return res
 }
@@ -30,22 +36,20 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 				table: dtable.DecisionTable{
 					ID:              "test1",
 					Name:            "TableOne",
-					HitPolicy:       dtable.Priority,
-					CollectOperator: dtable.List,
-					Standard:        dtable.GRULE,
-					InputFields: []dtable.FieldInterface{dtable.TestField{
-						Name: "I1",
-						Key:  "L1",
-						Type: dtable.String,
+					HitPolicy:       hitPolicy.Priority,
+					CollectOperator: collectOperator.List,
+					Standard:        standard.GRULE,
+					InputFields: []field.Field{{
+						Name: "I1.L1",
+						Type: dataType.String,
 					},
 					},
-					OutputFields: []dtable.FieldInterface{dtable.TestField{
-						Name: "O1",
-						Key:  "L1",
-						Type: dtable.Float,
+					OutputFields: []field.Field{{
+						Name: "O1.L1",
+						Type: dataType.Float,
 					}},
 					Rules: []dtable.Rule{{
-						Description: "R1",
+						Annotation: "R1",
 						InputEntries: []dtable.EntryInterface{
 							sfeel.CreateInputEntry("3"),
 						},
@@ -57,23 +61,23 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 			want: grule.RuleSet{
 				Key:             "test1",
 				Name:            "TableOne",
-				HitPolicy:       dtable.Priority,
-				CollectOperator: dtable.List,
+				HitPolicy:       hitPolicy.Priority,
+				CollectOperator: collectOperator.List,
 				Rules: []grule.Rule{
 					{
-						Name:        "0",
-						Description: "R1",
+						Name:       "0",
+						Annotation: "R1",
 						Expressions: []grule.Term{
 							{
-								dtable.TestField{"I1", "L1", dtable.String},
-								CreateTestExpression(dtable.TestField{"I1", "L1", dtable.String}, sfeel.CreateInputEntry("3")),
-								dtable.SFEEL},
+								Field:              field.Field{Name: "I1.L1", Type: dataType.String},
+								Expression:         CreateTestExpression(field.Field{Name: "I1.L1", Type: dataType.String}, sfeel.CreateInputEntry("3")),
+								ExpressionLanguage: expressionLanguage.SFEEL},
 						},
 						Assignments: []grule.Term{
 							{
-								Field:              dtable.TestField{"O1", "L1", dtable.Float},
-								Expression:         CreateTestExpression(dtable.TestField{"O1", "L1", dtable.Float}, sfeel.CreateOutputEntry("4")),
-								ExpressionLanguage: dtable.SFEEL,
+								Field:              field.Field{Name: "O1.L1", Type: dataType.Float},
+								Expression:         CreateTestExpression(field.Field{Name: "O1.L1", Type: dataType.Float}, sfeel.CreateOutputEntry("4")),
+								ExpressionLanguage: expressionLanguage.SFEEL,
 							},
 						},
 					},
@@ -103,23 +107,23 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 			args: args{
 				data: model.TableData{
 					Key:              "test1",
-					TestField:             "TableOne",
+					Field:             "TableOne",
 					HitPolicy:        model.Priority,
 					CollectOperator:  model.List,
 					NotationStandard: model.GRULE,
-					InputFields: []model.TestField{{
-						TestField: "I1",
+					InputFields: []model.Field{{
+						Field: "I1",
 						Key:  "L1",
 						Type:  model.String,
 					},
 					},
-					OutputFields: []model.TestField{{
-						TestField: "O1",
+					OutputFields: []model.Field{{
+						Field: "O1",
 						Key:  "L1",
 						Type:  model.Float,
 					}},
 					Rules: []model.Rule{{
-						Description: "R1",
+						Annotation: "R1",
 						InputEntries: []model.DummyEntry{
 							model.CreateEntry("==3", model.SFEEL),
 						},
@@ -130,7 +134,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 				}},
 			want: grlmodel.RuleSet{
 				Key:             "test1",
-				TestField:            "TableOne",
+				Field:            "TableOne",
 				HitPolicy:       model.Priority,
 				CollectOperator: model.List,
 				Rules: []grlmodel.Rule{
@@ -151,37 +155,37 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 			args: args{
 				data: model.TableData{
 					Key:              "test1",
-					TestField:             "TableOne",
+					Field:             "TableOne",
 					HitPolicy:        model.First,
 					CollectOperator:  model.List,
 					NotationStandard: model.GRULE,
-					InputFields: []model.TestField{
+					InputFields: []model.Field{
 						{
-							TestField: "I1",
+							Field: "I1",
 							Key:  "L1",
 							Type:  model.String,
 						},
 						{
-							TestField: "I2",
+							Field: "I2",
 							Key:  "L1",
 							Type:  model.String,
 						},
 					},
-					OutputFields: []model.TestField{
+					OutputFields: []model.Field{
 						{
-							TestField: "O1",
+							Field: "O1",
 							Key:  "L1",
 							Type:  model.Float,
 						},
 						{
-							TestField: "O2",
+							Field: "O2",
 							Key:  "L1",
 							Type:  model.Float,
 						},
 					},
 					Rules: []model.Rule{
 						{
-							Description: "R1",
+							Annotation: "R1",
 							InputEntries: []model.DummyEntry{
 								model.CreateEntry("==3", model.SFEEL),
 								model.CreateEntry("==3", model.SFEEL),
@@ -194,7 +198,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 				}},
 			want: grlmodel.RuleSet{
 				Key:             "test1",
-				TestField:            "TableOne",
+				Field:            "TableOne",
 				HitPolicy:       model.First,
 				CollectOperator: model.List,
 				Rules: []grlmodel.Rule{
@@ -220,37 +224,37 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 			args: args{
 				data: model.TableData{
 					Key:              "test1",
-					TestField:             "TableOne",
+					Field:             "TableOne",
 					HitPolicy:        model.First,
 					CollectOperator:  model.List,
 					NotationStandard: model.GRULE,
-					InputFields: []model.TestField{
+					InputFields: []model.Field{
 						{
-							TestField: "I1",
+							Field: "I1",
 							Key:  "L1",
 							Type:  model.String,
 						},
 						{
-							TestField: "I2",
+							Field: "I2",
 							Key:  "L1",
 							Type:  model.String,
 						},
 					},
-					OutputFields: []model.TestField{
+					OutputFields: []model.Field{
 						{
-							TestField: "O1",
+							Field: "O1",
 							Key:  "L1",
 							Type:  model.Float,
 						},
 						{
-							TestField: "O2",
+							Field: "O2",
 							Key:  "L1",
 							Type:  model.Float,
 						},
 					},
 					Rules: []model.Rule{
 						{
-							Description: "R1",
+							Annotation: "R1",
 							InputEntries: []model.DummyEntry{
 								model.CreateEntry("==3", model.SFEEL),
 								model.CreateEntry("==3", model.SFEEL),
@@ -261,7 +265,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 							},
 						},
 						{
-							Description: "R2",
+							Annotation: "R2",
 							InputEntries: []model.DummyEntry{
 								model.CreateEntry(">3", model.SFEEL),
 								model.CreateEntry(">3", model.SFEEL),
@@ -275,7 +279,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 				}},
 			want: grlmodel.RuleSet{
 				Key:             "test1",
-				TestField:            "TableOne",
+				Field:            "TableOne",
 				HitPolicy:       model.First,
 				CollectOperator: model.List,
 				Rules: []grlmodel.Rule{
@@ -314,26 +318,26 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 			args: args{
 				data: model.TableData{
 					Key:              "test1",
-					TestField:             "TableOne",
+					Field:             "TableOne",
 					HitPolicy:        model.First,
 					CollectOperator:  model.List,
 					NotationStandard: model.GRULE,
-					InputFields: []model.TestField{{
-						TestField: "I1",
+					InputFields: []model.Field{{
+						Field: "I1",
 						Key:  "L1",
 						Type:  model.String,
 					}},
-					OutputFields: []model.TestField{{
-						TestField: "O1",
+					OutputFields: []model.Field{{
+						Field: "O1",
 						Key:  "L1",
 						Type:  model.Float,
 					}, {
-						TestField: "O2",
+						Field: "O2",
 						Key:  "L1",
 						Type:  model.Float,
 					}},
 					Rules: []model.Rule{{
-						Description: "R1",
+						Annotation: "R1",
 						InputEntries: []model.DummyEntry{
 							model.CreateEntry("==3", model.SFEEL),
 							model.CreateEntry("==3", model.SFEEL),
@@ -351,37 +355,37 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 			args: args{
 				data: model.TableData{
 					Key:              "test1",
-					TestField:             "TableOne",
+					Field:             "TableOne",
 					HitPolicy:        model.Priority,
 					CollectOperator:  model.List,
 					NotationStandard: model.GRULE,
-					InputFields: []model.TestField{
+					InputFields: []model.Field{
 						{
-							TestField: "I1",
+							Field: "I1",
 							Key:  "L1",
 							Type:  model.String,
 						},
 						{
-							TestField: "I2",
+							Field: "I2",
 							Key:  "L1",
 							Type:  model.String,
 						},
 					},
-					OutputFields: []model.TestField{
+					OutputFields: []model.Field{
 						{
-							TestField: "O1",
+							Field: "O1",
 							Key:  "L1",
 							Type:  model.Float,
 						},
 						{
-							TestField: "O2",
+							Field: "O2",
 							Key:  "L1",
 							Type:  model.Float,
 						},
 					},
 					Rules: []model.Rule{
 						{
-							Description: "R1",
+							Annotation: "R1",
 							InputEntries: []model.DummyEntry{
 								model.CreateEntry("==3", model.SFEEL),
 								model.CreateEntry("==3", model.SFEEL),
@@ -392,7 +396,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 							},
 						},
 						{
-							Description: "R2",
+							Annotation: "R2",
 							InputEntries: []model.DummyEntry{
 								model.CreateEntry(">3", model.SFEEL),
 								model.CreateEntry(">3", model.SFEEL),
@@ -406,7 +410,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 				}},
 			want: grlmodel.RuleSet{
 				Key:             "test1",
-				TestField:            "TableOne",
+				Field:            "TableOne",
 				HitPolicy:       model.Priority,
 				CollectOperator: model.List,
 				Rules: []grlmodel.Rule{
@@ -445,37 +449,37 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 			args: args{
 				data: model.TableData{
 					Key:              "test1",
-					TestField:             "TableOne",
+					Field:             "TableOne",
 					HitPolicy:        model.First,
 					CollectOperator:  model.List,
 					NotationStandard: model.GRULE,
-					InputFields: []model.TestField{
+					InputFields: []model.Field{
 						{
-							TestField: "I1",
+							Field: "I1",
 							Key:  "L1",
 							Type:  model.String,
 						},
 						{
-							TestField: "I2",
+							Field: "I2",
 							Key:  "L1",
 							Type:  model.String,
 						},
 					},
-					OutputFields: []model.TestField{
+					OutputFields: []model.Field{
 						{
-							TestField: "O1",
+							Field: "O1",
 							Key:  "L1",
 							Type:  model.Float,
 						},
 						{
-							TestField: "O2",
+							Field: "O2",
 							Key:  "L1",
 							Type:  model.Float,
 						},
 					},
 					Rules: []model.Rule{
 						{
-							Description: "R1",
+							Annotation: "R1",
 							InputEntries: []model.DummyEntry{
 								model.CreateEntry("==3", model.SFEEL),
 								model.CreateEntry("==3", model.SFEEL),
@@ -486,7 +490,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 							},
 						},
 						{
-							Description: "R2",
+							Annotation: "R2",
 							InputEntries: []model.DummyEntry{
 								model.CreateEntry(">3", model.SFEEL),
 								model.CreateEntry(">3", model.SFEEL),
@@ -497,7 +501,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 							},
 						},
 						{
-							Description: "R3",
+							Annotation: "R3",
 							InputEntries: []model.DummyEntry{
 								model.CreateEntry(">3", model.SFEEL),
 								model.CreateEntry(">3", model.SFEEL),
@@ -511,7 +515,7 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 				}},
 			want: grlmodel.RuleSet{
 				Key:             "test1",
-				TestField:            "TableOne",
+				Field:            "TableOne",
 				HitPolicy:       model.First,
 				CollectOperator: model.List,
 				Rules: []grlmodel.Rule{

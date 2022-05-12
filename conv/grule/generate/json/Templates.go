@@ -1,11 +1,11 @@
 package json
 
 import (
-	dTable "github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
 	"text/template"
 )
 
-func GenerateTemplates(hitPolicy dTable.HitPolicy, interference bool) (*template.Template, error) {
+func GenerateTemplates(hp hitPolicy.HitPolicy, interference bool) (*template.Template, error) {
 	/*
 		t, err := template.New(RULE).Funcs(
 				template.FuncMap{

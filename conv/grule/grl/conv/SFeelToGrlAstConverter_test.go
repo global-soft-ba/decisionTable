@@ -2,6 +2,8 @@ package conv
 
 import (
 	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/dataType"
+	"github.com/global-soft-ba/decisionTable/data/field"
 	"github.com/global-soft-ba/decisionTable/lang/sfeel"
 	"testing"
 )
@@ -9,7 +11,7 @@ import (
 func TestSFeelToGrlConverter_Convert(t *testing.T) {
 
 	type args struct {
-		field      data.FieldInterface
+		field      field.Field
 		sfeelEntry data.EntryInterface
 	}
 	tests := []struct {
@@ -20,10 +22,9 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 		{
 			name: "simple interval convert",
 			args: args{
-				data.TestField{
-					Name: "X",
-					Key:  "Y",
-					Type: data.Integer,
+				field.Field{
+					Name: "X.Y",
+					Type: dataType.Integer,
 				},
 				sfeel.CreateInputEntry("[1..6]"), // ((X.Y >= 1) && (X.Y <= 6))
 			},
@@ -32,10 +33,9 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 		{
 			name: "simple unary test convert",
 			args: args{
-				data.TestField{
-					Name: "X",
-					Key:  "Y",
-					Type: data.Integer,
+				field.Field{
+					Name: "X.Y",
+					Type: dataType.Integer,
 				},
 				sfeel.CreateInputEntry("8"),
 			},
@@ -44,10 +44,9 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 		{
 			name: "simple expression simple value test convert",
 			args: args{
-				data.TestField{
-					Name: "X",
-					Key:  "Y",
-					Type: data.Integer,
+				field.Field{
+					Name: "X.Y",
+					Type: dataType.Integer,
 				},
 				sfeel.CreateOutputEntry("8"),
 			},
@@ -56,10 +55,9 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 		{
 			name: "simple expression parentheses test convert",
 			args: args{
-				data.TestField{
-					Name: "X",
-					Key:  "Y",
-					Type: data.Integer,
+				field.Field{
+					Name: "X.Y",
+					Type: dataType.Integer,
 				},
 				sfeel.CreateOutputEntry("(8)"),
 			},
@@ -68,10 +66,9 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 		{
 			name: "simple expression arithmetic negation test convert",
 			args: args{
-				data.TestField{
-					Name: "X",
-					Key:  "Y",
-					Type: data.Integer,
+				field.Field{
+					Name: "X.Y",
+					Type: dataType.Integer,
 				},
 				sfeel.CreateOutputEntry(`-"asd"`),
 			},
@@ -80,10 +77,9 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 		{
 			name: "simple expression arithmetic negation of integer test convert",
 			args: args{
-				data.TestField{
-					Name: "X",
-					Key:  "Y",
-					Type: data.Integer,
+				field.Field{
+					Name: "X.Y",
+					Type: dataType.Integer,
 				},
 				sfeel.CreateOutputEntry(`-1`),
 			},
@@ -92,10 +88,9 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 		{
 			name: "simple expression arithmetic negation of negative integer test convert",
 			args: args{
-				data.TestField{
-					Name: "X",
-					Key:  "Y",
-					Type: data.Integer,
+				field.Field{
+					Name: "X.Y",
+					Type: dataType.Integer,
 				},
 				sfeel.CreateOutputEntry(`--1`),
 			},
@@ -104,10 +99,9 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 		{
 			name: "simple expression arithmetic power operation test convert",
 			args: args{
-				data.TestField{
-					Name: "X",
-					Key:  "Y",
-					Type: data.Integer,
+				field.Field{
+					Name: "X.Y",
+					Type: dataType.Integer,
 				},
 				sfeel.CreateOutputEntry(`1**2`),
 			},
@@ -116,10 +110,9 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 		{
 			name: "simple expression arithmetic multiplication test convert",
 			args: args{
-				data.TestField{
-					Name: "X",
-					Key:  "Y",
-					Type: data.Integer,
+				field.Field{
+					Name: "X.Y",
+					Type: dataType.Integer,
 				},
 				sfeel.CreateOutputEntry(`2+2`),
 			},

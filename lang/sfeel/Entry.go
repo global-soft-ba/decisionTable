@@ -4,6 +4,9 @@ import (
 	"errors"
 	"fmt"
 	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/dataType"
+	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
+	"github.com/global-soft-ba/decisionTable/data/field"
 	"github.com/global-soft-ba/decisionTable/lang/sfeel/antlr"
 	sfeel "github.com/global-soft-ba/decisionTable/lang/sfeel/ast"
 	"github.com/global-soft-ba/decisionTable/lang/sfeel/eval"
@@ -43,8 +46,8 @@ type Entry struct {
 func (e Entry) String() string {
 	return e.expression
 }
-func (e Entry) ExpressionLanguage() data.ExpressionLanguage {
-	return data.SFEEL
+func (e Entry) ExpressionLanguage() expressionLanguage.ExpressionLanguage {
+	return expressionLanguage.SFEEL
 }
 
 func (e Entry) Validate() (bool, []error) {
@@ -53,7 +56,7 @@ func (e Entry) Validate() (bool, []error) {
 	}
 	return e.evaluator.Eval(e.ast)
 }
-func (e Entry) ValidateDataTypeOfExpression(varType data.DataType) (bool, error) {
+func (e Entry) ValidateDataTypeOfExpression(varType dataType.DataType) (bool, error) {
 	if e.ast == nil {
 		return false, nil
 	}
@@ -64,23 +67,23 @@ func (e Entry) ValidateDataTypeOfExpression(varType data.DataType) (bool, error)
 	case reflect.TypeOf(sfeel.QualifiedName{}):
 		return true, nil
 	case reflect.TypeOf(sfeel.Integer{}):
-		if varType == data.Integer {
+		if varType == dataType.Integer {
 			return true, nil
 		}
 	case reflect.TypeOf(sfeel.Float{}):
-		if varType == data.Float {
+		if varType == dataType.Float {
 			return true, nil
 		}
 	case reflect.TypeOf(sfeel.String{}):
-		if varType == data.String {
+		if varType == dataType.String {
 			return true, nil
 		}
 	case reflect.TypeOf(sfeel.Boolean{}):
-		if varType == data.Boolean {
+		if varType == dataType.Boolean {
 			return true, nil
 		}
 	case reflect.TypeOf(sfeel.DateTime{}):
-		if varType == data.DateTime {
+		if varType == dataType.DateTime {
 			return true, nil
 		}
 	case reflect.TypeOf(sfeel.UnaryTests{}):
@@ -99,10 +102,10 @@ func (e Entry) ValidateDataTypeOfExpression(varType data.DataType) (bool, error)
 
 	return false, errors.New(fmt.Sprintf("given data type %s is not compatible with %s", varType, e.ast.GetOperandDataType()))
 }
-func (e Entry) ValidateExistenceOfFieldReferencesInExpression(fields []data.FieldInterface) ([]data.FieldInterface, []error) {
+func (e Entry) ValidateExistenceOfFieldReferencesInExpression(fields []field.Field) ([]field.Field, []error) {
 	qualifiedFields := sfeel.GetAllQualifiedNames(e.ast)
 	var errOut []error
-	var out []data.FieldInterface
+	var out []field.Field
 	for _, val := range qualifiedFields {
 		qf, err := e.getFieldUsingQualifiedName(val, fields)
 		if err != nil {
@@ -115,13 +118,13 @@ func (e Entry) ValidateExistenceOfFieldReferencesInExpression(fields []data.Fiel
 	return out, errOut
 }
 
-func (e Entry) getFieldUsingQualifiedName(name sfeel.QualifiedName, fields []data.FieldInterface) (data.FieldInterface, error) {
-	for _, val := range fields {
-		if val.GetQualifiedName() == name.GetQualifiedName() {
-			return val, nil
+func (e Entry) getFieldUsingQualifiedName(name sfeel.QualifiedName, fields []field.Field) (field.Field, error) {
+	for _, f := range fields {
+		if f.Name == name.GetQualifiedName() {
+			return f, nil
 		}
 	}
-	return nil, errors.New(fmt.Sprintf("couldn't find qualified name %s in field list", name.String()))
+	return field.Field{}, errors.New(fmt.Sprintf("couldn't find qualified name %s in field list", name.String()))
 }
 
 func (e Entry) Convert(listener sfeel.SFeelListenerInterface) {
