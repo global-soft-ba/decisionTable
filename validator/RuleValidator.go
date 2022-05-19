@@ -3,7 +3,9 @@ package validator
 import (
 	"errors"
 	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/decisionTable"
 	"github.com/global-soft-ba/decisionTable/data/field"
+	"github.com/global-soft-ba/decisionTable/data/rule"
 	"github.com/global-soft-ba/decisionTable/data/standard"
 	"go.uber.org/multierr"
 )
@@ -14,8 +16,8 @@ var (
 )
 
 type RuleValidator struct {
-	rule          data.Rule
-	decisionTable data.DecisionTable
+	rule          rule.Rule
+	decisionTable decisionTable.DecisionTable
 	standard      standard.Standard
 	errors        []error
 }
@@ -24,7 +26,7 @@ func NewRuleValidator() RuleValidatorInterface {
 	return RuleValidator{}
 }
 
-func (v RuleValidator) Validate(rule data.Rule, decisionTable data.DecisionTable, standard standard.Standard) error {
+func (v RuleValidator) Validate(rule rule.Rule, decisionTable decisionTable.DecisionTable, standard standard.Standard) error {
 	v.rule = rule
 	v.decisionTable = decisionTable
 	v.standard = standard
@@ -59,7 +61,7 @@ func (v RuleValidator) validateInputEntries() error {
 
 	for i, inputEntry := range v.rule.InputEntries {
 		if i < len(v.decisionTable.InputFields) {
-			if err := v.validateEntry(inputEntry, v.decisionTable.InputFields[i]); err != nil {
+			if err := v.validateInputEntry(inputEntry, v.decisionTable.InputFields[i]); err != nil {
 				validationErrors = append(validationErrors, err)
 			}
 		}
@@ -77,7 +79,7 @@ func (v RuleValidator) validateOutputEntries() error {
 
 	for i, outputEntry := range v.rule.OutputEntries {
 		if i < len(v.decisionTable.OutputFields) {
-			if err := v.validateEntry(outputEntry, v.decisionTable.OutputFields[i]); err != nil {
+			if err := v.validateOutputEntry(outputEntry, v.decisionTable.OutputFields[i]); err != nil {
 				validationErrors = append(validationErrors, err)
 			}
 		}
@@ -90,16 +92,34 @@ func (v RuleValidator) validateOutputEntries() error {
 	return nil
 }
 
-func (v RuleValidator) validateEntry(entry data.EntryInterface, field field.Field) error {
-	if ok, err := entry.Validate(); !ok {
-		return multierr.Combine(err...)
-	}
-
-	if ok, err := entry.ValidateDataTypeOfExpression(field.Type); !ok {
+func (v RuleValidator) validateInputEntry(entry string, field field.Field) error {
+	validator, err := CreateInputEntryValidator(v.decisionTable.ExpressionLanguage, entry)
+	if err != nil {
 		return err
 	}
 
-	referencedFields, err := entry.ValidateExistenceOfFieldReferencesInExpression(append(v.decisionTable.InputFields, v.decisionTable.OutputFields...))
+	return v.validateEntry(validator, entry, field)
+}
+
+func (v RuleValidator) validateOutputEntry(entry string, field field.Field) error {
+	validator, err := CreateOutputEntryValidator(v.decisionTable.ExpressionLanguage, entry)
+	if err != nil {
+		return err
+	}
+
+	return v.validateEntry(validator, entry, field)
+}
+
+func (v RuleValidator) validateEntry(validator data.EntryValidatorInterface, entry string, field field.Field) error {
+	if ok, err := validator.Validate(); !ok {
+		return multierr.Combine(err...)
+	}
+
+	if ok, err := validator.ValidateDataTypeOfExpression(field.Type); !ok {
+		return err
+	}
+
+	referencedFields, err := validator.ValidateExistenceOfFieldReferencesInExpression(append(v.decisionTable.InputFields, v.decisionTable.OutputFields...))
 	if err != nil {
 		return multierr.Combine(err...)
 	}

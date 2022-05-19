@@ -121,6 +121,7 @@ func TestValidate_InvalidTables(t *testing.T) {
 		{
 			name: "Amount of rules does not match amount of input fields",
 			decisionTable: NewDecisionTableBuilder().
+				SetExpressionLanguage(expressionLanguage.SFEEL).
 				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Float}).
 				AddOutputField(field.Field{Name: "I1.L1", Type: dataType.Float}).
 				AddRule(NewRuleBuilder().
@@ -137,6 +138,7 @@ func TestValidate_InvalidTables(t *testing.T) {
 		{
 			name: "Amount of rules does not match amount of output fields",
 			decisionTable: NewDecisionTableBuilder().
+				SetExpressionLanguage(expressionLanguage.SFEEL).
 				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Float}).
 				AddOutputField(field.Field{Name: "I1.L1", Type: dataType.Float}).
 				AddRule(NewRuleBuilder().
@@ -156,6 +158,7 @@ func TestValidate_InvalidTables(t *testing.T) {
 				SetID("1").
 				SetName("Test").
 				SetHitPolicy(hitPolicy.First).
+				SetExpressionLanguage(expressionLanguage.SFEEL).
 				SetStandard(standard.GRULE).
 				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
 				AddOutputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
@@ -174,6 +177,7 @@ func TestValidate_InvalidTables(t *testing.T) {
 				SetID("1").
 				SetName("Test").
 				SetHitPolicy(hitPolicy.First).
+				SetExpressionLanguage(expressionLanguage.SFEEL).
 				SetStandard(standard.GRULE).
 				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
 				AddOutputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
@@ -252,6 +256,7 @@ func TestValidate_InvalidTableEntries(t *testing.T) {
 				SetID("1").
 				SetName("Test").
 				SetHitPolicy(hitPolicy.First).
+				SetExpressionLanguage(expressionLanguage.SFEEL).
 				SetStandard(standard.GRULE).
 				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
 				AddOutputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
@@ -271,62 +276,6 @@ func TestValidate_InvalidTableEntries(t *testing.T) {
 			err := tt.decisionTable.Validate(tt.decisionTable.Standard())
 			if (err != nil) != tt.wantErr {
 				t.Errorf("validate() got = %v, wantErr = %v", err, tt.wantErr)
-			}
-		})
-	}
-}
-
-func TestValidate_CheckForInterferences(t *testing.T) {
-	tests := []struct {
-		name          string
-		decisionTable DecisionTable
-		want          bool
-	}{
-		{
-			name: "Valid table without interferences",
-			decisionTable: NewDecisionTableBuilder().
-				SetID("test1").
-				SetName("Test 1").
-				SetHitPolicy(hitPolicy.First).
-				SetCollectOperator(collectOperator.List).
-				SetStandard(standard.GRULE).
-				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
-				AddOutputField(field.Field{Name: "I2.L1", Type: dataType.Integer}).
-				AddRule(NewRuleBuilder().
-					SetAnnotation("R1").
-					AddInputEntry("<3").
-					AddOutputEntry("-").
-					Build(),
-				).
-				BuildWithoutValidation(),
-			want: false,
-		},
-		{
-			name: "Valid table with interferences",
-			decisionTable: NewDecisionTableBuilder().
-				SetID("test1").
-				SetName("ABC").
-				SetHitPolicy(hitPolicy.First).
-				SetCollectOperator(collectOperator.List).
-				SetStandard(standard.GRULE).
-				AddInputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
-				AddOutputField(field.Field{Name: "I1.L1", Type: dataType.Integer}).
-				AddRule(NewRuleBuilder().
-					SetAnnotation("R1").
-					AddInputEntry("<3").
-					AddOutputEntry("-").
-					Build(),
-				).
-				BuildWithoutValidation(),
-			want: true,
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			result := tt.decisionTable.CheckIfContainsInterferences()
-			if !assert.Equal(t, tt.want, result) {
-				t.Errorf("CheckIfContainsInterferences() got = %v, want %v", result, tt.want)
 			}
 		})
 	}

@@ -3,27 +3,29 @@ package conv
 import (
 	grule "github.com/global-soft-ba/decisionTable/conv/grule/data"
 	"github.com/global-soft-ba/decisionTable/conv/grule/grl"
-	dtable "github.com/global-soft-ba/decisionTable/data"
 	"github.com/global-soft-ba/decisionTable/data/collectOperator"
 	"github.com/global-soft-ba/decisionTable/data/dataType"
+	"github.com/global-soft-ba/decisionTable/data/decisionTable"
+	"github.com/global-soft-ba/decisionTable/data/entryType"
 	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
 	"github.com/global-soft-ba/decisionTable/data/field"
 	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
+	"github.com/global-soft-ba/decisionTable/data/rule"
 	"github.com/global-soft-ba/decisionTable/data/standard"
-	"github.com/global-soft-ba/decisionTable/lang/sfeel"
+	"github.com/stretchr/testify/assert"
 	"reflect"
 	"testing"
 )
 
-func CreateTestExpression(field field.Field, entry dtable.EntryInterface) grule.ExpressionInterface {
-	res, _ := grl.CreateExpression(field, entry)
+func CreateTestExpression(field field.Field, expressionLanguage expressionLanguage.ExpressionLanguage, entryType entryType.EntryType, entry string) grule.ExpressionInterface {
+	res, _ := grl.CreateExpression(field, expressionLanguage, entryType, entry)
 	return res
 }
 
 func TestTableToGruleConverter_Convert(t *testing.T) {
 
 	type args struct {
-		table dtable.DecisionTable
+		table decisionTable.DecisionTable
 	}
 	tests := []struct {
 		name    string
@@ -33,12 +35,13 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 	}{
 		{name: "Validate Table",
 			args: args{
-				table: dtable.DecisionTable{
-					ID:              "test1",
-					Name:            "TableOne",
-					HitPolicy:       hitPolicy.Priority,
-					CollectOperator: collectOperator.List,
-					Standard:        standard.GRULE,
+				table: decisionTable.DecisionTable{
+					ID:                 "test1",
+					Name:               "TableOne",
+					HitPolicy:          hitPolicy.Priority,
+					CollectOperator:    collectOperator.List,
+					ExpressionLanguage: expressionLanguage.SFEEL,
+					Standard:           standard.GRULE,
 					InputFields: []field.Field{{
 						Name: "I1.L1",
 						Type: dataType.String,
@@ -48,13 +51,13 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 						Name: "O1.L1",
 						Type: dataType.Float,
 					}},
-					Rules: []dtable.Rule{{
+					Rules: []rule.Rule{{
 						Annotation: "R1",
-						InputEntries: []dtable.EntryInterface{
-							sfeel.CreateInputEntry("3"),
+						InputEntries: []string{
+							"3",
 						},
-						OutputEntries: []dtable.EntryInterface{
-							sfeel.CreateOutputEntry("4"),
+						OutputEntries: []string{
+							"4",
 						},
 					}},
 				}},
@@ -70,13 +73,13 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 						Expressions: []grule.Term{
 							{
 								Field:              field.Field{Name: "I1.L1", Type: dataType.String},
-								Expression:         CreateTestExpression(field.Field{Name: "I1.L1", Type: dataType.String}, sfeel.CreateInputEntry("3")),
+								Expression:         CreateTestExpression(field.Field{Name: "I1.L1", Type: dataType.String}, expressionLanguage.SFEEL, entryType.Input, "3"),
 								ExpressionLanguage: expressionLanguage.SFEEL},
 						},
 						Assignments: []grule.Term{
 							{
 								Field:              field.Field{Name: "O1.L1", Type: dataType.Float},
-								Expression:         CreateTestExpression(field.Field{Name: "O1.L1", Type: dataType.Float}, sfeel.CreateOutputEntry("4")),
+								Expression:         CreateTestExpression(field.Field{Name: "O1.L1", Type: dataType.Float}, expressionLanguage.SFEEL, entryType.Output, "4"),
 								ExpressionLanguage: expressionLanguage.SFEEL,
 							},
 						},
@@ -96,6 +99,61 @@ func TestTableToGruleConverter_Convert(t *testing.T) {
 			}
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Convert() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestTableToGruleConverter_CheckForInterferences(t *testing.T) {
+	tests := []struct {
+		name          string
+		decisionTable decisionTable.DecisionTable
+		want          bool
+	}{
+		{
+			name: "Valid table without interferences",
+			decisionTable: decisionTable.DecisionTable{
+				InputFields: []field.Field{
+					{
+						Name: "I1.L1",
+						Type: dataType.Integer,
+					},
+				},
+				OutputFields: []field.Field{
+					{
+						Name: "I2.L1",
+						Type: dataType.Integer,
+					},
+				},
+			},
+			want: false,
+		},
+		{
+			name: "Valid table with interferences",
+			decisionTable: decisionTable.DecisionTable{
+				InputFields: []field.Field{
+					{
+						Name: "I1.L1",
+						Type: dataType.Integer,
+					},
+				},
+				OutputFields: []field.Field{
+					{
+						Name: "I1.L1",
+						Type: dataType.Integer,
+					},
+				},
+			},
+			want: true,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := TableToGruleConverter{}
+			result := c.checkIfContainsInterferences(tt.decisionTable)
+			if !assert.Equal(t, tt.want, result) {
+				t.Errorf("CheckIfContainsInterferences() got = %v, want %v", result, tt.want)
 			}
 		})
 	}

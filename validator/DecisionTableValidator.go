@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 	conf "github.com/global-soft-ba/decisionTable/config"
-	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/decisionTable"
 	"github.com/global-soft-ba/decisionTable/data/field"
 	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
 	"github.com/global-soft-ba/decisionTable/data/standard"
@@ -25,7 +25,7 @@ var (
 )
 
 type DecisionTableValidator struct {
-	decisionTable data.DecisionTable
+	decisionTable decisionTable.DecisionTable
 	standard      standard.Standard
 	errors        []error
 }
@@ -34,7 +34,7 @@ func NewDecisionTableValidator() DecisionTableValidatorInterface {
 	return DecisionTableValidator{}
 }
 
-func (v DecisionTableValidator) Validate(decisionTable data.DecisionTable, standard standard.Standard) error {
+func (v DecisionTableValidator) Validate(decisionTable decisionTable.DecisionTable, standard standard.Standard) error {
 	v.decisionTable = decisionTable
 	v.standard = standard
 

@@ -20,5 +20,4 @@ type DecisionTableBuilderInterface interface {
 	AddRule(rule Rule) DecisionTableBuilderInterface
 	Build() (DecisionTable, error)
 	BuildWithoutValidation() DecisionTable
-	Serialize() (string, error)
 }

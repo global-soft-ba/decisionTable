@@ -1,9 +1,11 @@
 package decisionTable
 
-import "github.com/global-soft-ba/decisionTable/data"
+import (
+	"github.com/global-soft-ba/decisionTable/data/rule"
+)
 
 type Rule struct {
-	data data.Rule
+	data rule.Rule
 }
 
 func (r Rule) Annotation() string {
@@ -11,9 +13,9 @@ func (r Rule) Annotation() string {
 }
 
 func (r Rule) InputEntries() []string {
-	return r.data.InputExpressions
+	return r.data.InputEntries
 }
 
 func (r Rule) OutputEntries() []string {
-	return r.data.OutputExpressions
+	return r.data.OutputEntries
 }

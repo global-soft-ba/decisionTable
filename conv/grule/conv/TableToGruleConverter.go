@@ -5,8 +5,11 @@ import (
 	grule "github.com/global-soft-ba/decisionTable/conv/grule/data"
 	"github.com/global-soft-ba/decisionTable/conv/grule/grl"
 	"github.com/global-soft-ba/decisionTable/conv/grule/grl/conv"
-	dtable "github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/decisionTable"
+	"github.com/global-soft-ba/decisionTable/data/entryType"
+	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
 	"github.com/global-soft-ba/decisionTable/data/field"
+	"github.com/global-soft-ba/decisionTable/data/rule"
 	"strconv"
 )
 
@@ -20,19 +23,20 @@ func CreateTableToGruleConverter() TableToGruleConverter {
 
 type TableToGruleConverter struct{}
 
-func (c TableToGruleConverter) Convert(table dtable.DecisionTable) (grule.RuleSet, error) {
+func (c TableToGruleConverter) Convert(table decisionTable.DecisionTable) (grule.RuleSet, error) {
 	return c.convertTableToRuleSet(table)
 }
 
-func (c TableToGruleConverter) convertTableToRuleSet(table dtable.DecisionTable) (grule.RuleSet, error) {
+func (c TableToGruleConverter) convertTableToRuleSet(table decisionTable.DecisionTable) (grule.RuleSet, error) {
 	result := grule.RuleSet{
 		Key:             table.ID,
 		Name:            table.Name,
 		HitPolicy:       table.HitPolicy,
 		CollectOperator: table.CollectOperator,
-		Interference:    table.Interferences,
 		Rules:           []grule.Rule{},
 	}
+
+	result.Interference = c.checkIfContainsInterferences(table)
 
 	res, err := c.convertIntoGruleRules(table)
 	if err != nil {
@@ -43,22 +47,24 @@ func (c TableToGruleConverter) convertTableToRuleSet(table dtable.DecisionTable)
 	return result, nil
 }
 
-func (c TableToGruleConverter) convertIntoGruleRules(table dtable.DecisionTable) ([]grule.Rule, error) {
+func (c TableToGruleConverter) convertIntoGruleRules(table decisionTable.DecisionTable) ([]grule.Rule, error) {
 	var res []grule.Rule
+
+	el := table.ExpressionLanguage
 
 	maxRules := len(table.Rules)
 	for i, val := range table.Rules {
-		rule, err := c.convertEntriesToRule(i, maxRules, val, table.InputFields, table.OutputFields)
+		r, err := c.convertEntriesToRule(el, i, maxRules, val, table.InputFields, table.OutputFields)
 		if err != nil {
 			return []grule.Rule{}, err
 		}
-		res = append(res, rule)
+		res = append(res, r)
 	}
 
 	return res, nil
 }
 
-func (c TableToGruleConverter) convertEntriesToRule(columId int, maxRules int, rule dtable.Rule, inputFields []field.Field, outputFields []field.Field) (grule.Rule, error) {
+func (c TableToGruleConverter) convertEntriesToRule(expressionLanguage expressionLanguage.ExpressionLanguage, columId int, maxRules int, rule rule.Rule, inputFields []field.Field, outputFields []field.Field) (grule.Rule, error) {
 	r := grule.Rule{
 		Name:        strconv.Itoa(columId),
 		Annotation:  rule.Annotation,
@@ -68,12 +74,12 @@ func (c TableToGruleConverter) convertEntriesToRule(columId int, maxRules int, r
 		Assignments: nil,
 	}
 
-	expr, err := c.convertEntriesToTerms(rule.InputEntries, inputFields)
+	expr, err := c.convertEntriesToTerms(expressionLanguage, entryType.Input, rule.InputEntries, inputFields)
 	if err != nil {
 		return grule.Rule{}, err
 	}
 
-	asst, err := c.convertEntriesToTerms(rule.OutputEntries, outputFields)
+	asst, err := c.convertEntriesToTerms(expressionLanguage, entryType.Output, rule.OutputEntries, outputFields)
 	if err != nil {
 		return grule.Rule{}, err
 	}
@@ -83,7 +89,7 @@ func (c TableToGruleConverter) convertEntriesToRule(columId int, maxRules int, r
 	return r, nil
 }
 
-func (c TableToGruleConverter) convertEntriesToTerms(entries []dtable.EntryInterface, fields []field.Field) ([]grule.Term, error) {
+func (c TableToGruleConverter) convertEntriesToTerms(expressionLanguage expressionLanguage.ExpressionLanguage, entryType entryType.EntryType, entries []string, fields []field.Field) ([]grule.Term, error) {
 	var result []grule.Term
 
 	fieldCount := len(fields)
@@ -92,7 +98,7 @@ func (c TableToGruleConverter) convertEntriesToTerms(entries []dtable.EntryInter
 			return []grule.Term{}, ErrMapperIndexOutOfBound
 		}
 
-		entry, err := c.convertEntryToExpression(val, fields[i])
+		entry, err := c.convertEntryToExpression(expressionLanguage, entryType, val, fields[i])
 
 		if err != nil {
 			if errors.Is(err, conv.ErrEmptyStatement) {
@@ -106,18 +112,38 @@ func (c TableToGruleConverter) convertEntriesToTerms(entries []dtable.EntryInter
 	return result, nil
 }
 
-func (c TableToGruleConverter) convertEntryToExpression(entry dtable.EntryInterface, field field.Field) (grule.Term, error) {
+func (c TableToGruleConverter) convertEntryToExpression(expressionLanguage expressionLanguage.ExpressionLanguage, entryType entryType.EntryType, entry string, field field.Field) (grule.Term, error) {
 	term := grule.Term{
 		Field:              field,
 		Expression:         nil,
-		ExpressionLanguage: entry.ExpressionLanguage(),
+		ExpressionLanguage: expressionLanguage,
 	}
 
-	res, err := grl.CreateExpression(field, entry)
+	res, err := grl.CreateExpression(field, expressionLanguage, entryType, entry)
 	if err != nil {
 		return grule.Term{}, err
 	}
 	term.Expression = res
 
 	return term, nil
+}
+
+func (c TableToGruleConverter) checkIfContainsInterferences(decisionTable decisionTable.DecisionTable) bool {
+	for _, inputField := range decisionTable.InputFields {
+		if c.checkIfContainsField(inputField, decisionTable.OutputFields) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (c TableToGruleConverter) checkIfContainsField(field field.Field, fieldSet []field.Field) bool {
+	for _, fieldFromSet := range fieldSet {
+		if field.Name == fieldFromSet.Name {
+			return true
+		}
+	}
+
+	return false
 }

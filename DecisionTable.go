@@ -1,13 +1,15 @@
 package decisionTable
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/global-soft-ba/decisionTable/conv"
-	"github.com/global-soft-ba/decisionTable/data"
 	"github.com/global-soft-ba/decisionTable/data/collectOperator"
+	"github.com/global-soft-ba/decisionTable/data/decisionTable"
 	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
 	"github.com/global-soft-ba/decisionTable/data/field"
 	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
+	"github.com/global-soft-ba/decisionTable/data/rule"
 	"github.com/global-soft-ba/decisionTable/data/standard"
 	"github.com/global-soft-ba/decisionTable/validator"
 )
@@ -17,7 +19,7 @@ var (
 )
 
 type DecisionTable struct {
-	data data.DecisionTable
+	data decisionTable.DecisionTable
 }
 
 func (d DecisionTable) ID() string {
@@ -52,42 +54,16 @@ func (d DecisionTable) OutputFields() []field.Field {
 	return d.data.OutputFields
 }
 
-func (d DecisionTable) Rules() []data.Rule {
+func (d DecisionTable) Rules() []rule.Rule {
 	return d.data.Rules
 }
 
-func (d DecisionTable) Interferences() bool {
-	return d.data.Interferences
-}
-
-func (d DecisionTable) CheckIfContainsInterferences() bool {
-	for _, inputField := range d.data.InputFields {
-		if d.checkIfContainsField(inputField, d.data.OutputFields) {
-			return true
-		}
-	}
-
-	return false
-}
-
-func (d DecisionTable) checkIfContainsField(field field.Field, fieldSet []field.Field) bool {
-	for _, fieldFromSet := range fieldSet {
-		if field.Name == fieldFromSet.Name {
-			return true
-		}
-	}
-
-	return false
-}
-
-func (d *DecisionTable) Validate(standard standard.Standard) error {
+func (d DecisionTable) Validate(standard standard.Standard) error {
 	v := validator.NewDecisionTableValidator()
 
 	if err := v.Validate(d.data, standard); err != nil {
 		return fmt.Errorf("%s: %w", ErrDecisionTableNotValid, err)
 	}
-
-	d.data.Interferences = d.CheckIfContainsInterferences()
 
 	return nil
 }
@@ -105,4 +81,22 @@ func (d DecisionTable) Convert(standard standard.Standard) (interface{}, error) 
 	}
 
 	return res, nil
+}
+
+func (d DecisionTable) Serialize() (string, error) {
+	s, err := json.MarshalIndent(d.data, "", "\t")
+	if err != nil {
+		return "{}", fmt.Errorf("%s: %w", ErrDecisionTableSerializationError, err)
+	}
+
+	return string(s), nil
+}
+
+func Unserialize(s string) (DecisionTable, error) {
+	var dt decisionTable.DecisionTable
+	if err := json.Unmarshal([]byte(s), &dt); err != nil {
+		return DecisionTable{}, fmt.Errorf("%s: %w", ErrDecisionTableUnserializationError, err)
+	}
+
+	return DecisionTable{data: dt}, nil
 }

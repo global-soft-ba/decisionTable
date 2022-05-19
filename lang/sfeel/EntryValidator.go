@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/global-soft-ba/decisionTable/data"
 	"github.com/global-soft-ba/decisionTable/data/dataType"
-	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
 	"github.com/global-soft-ba/decisionTable/data/field"
 	"github.com/global-soft-ba/decisionTable/lang/sfeel/antlr"
 	sfeel "github.com/global-soft-ba/decisionTable/lang/sfeel/ast"
@@ -17,46 +16,40 @@ var (
 	ErrInvalidAst = errors.New("invalid ast, can not be null in Validate() method")
 )
 
-func CreateInputEntry(exp string) data.EntryInterface {
-	tree, err := antlr.CreateParser(exp).ParseInput()
+type EntryValidator struct {
+	ast       sfeel.Node
+	evaluator eval.EvaluatorInterface
+}
+
+func CreateInputEntryValidator(entry string) data.EntryValidatorInterface {
+	tree, err := antlr.CreateParser(entry).ParseInput()
 	evl := eval.CreateInputEntryEvaluator()
 	if err != nil {
-		return Entry{ast: nil, evaluator: evl, expression: exp}
+		return EntryValidator{ast: nil, evaluator: evl}
 	}
-	//Todo: integrate type checking between entry type and input field type (SemanticEvaluator)
-	return Entry{ast: tree, evaluator: evl, expression: exp}
+
+	return EntryValidator{ast: tree, evaluator: evl}
 }
 
-func CreateOutputEntry(exp string) data.EntryInterface {
-	tree, err := antlr.CreateParser(exp).ParseOutput()
+func CreateOutputEntryValidator(entry string) data.EntryValidatorInterface {
+	tree, err := antlr.CreateParser(entry).ParseOutput()
 	evl := eval.CreateOutputEntryEvaluator()
 	if err != nil {
-		return Entry{ast: nil, evaluator: evl, expression: exp}
+		return EntryValidator{ast: nil, evaluator: evl}
 	}
-	//Todo: integrate type checking between entry type and output field type (SemanticEvaluator)
-	return Entry{ast: tree, evaluator: evl, expression: exp}
+
+	return EntryValidator{ast: tree, evaluator: evl}
 }
 
-type Entry struct {
-	ast        sfeel.Node
-	evaluator  eval.EvaluatorInterface
-	expression string
-}
-
-func (e Entry) String() string {
-	return e.expression
-}
-func (e Entry) ExpressionLanguage() expressionLanguage.ExpressionLanguage {
-	return expressionLanguage.SFEEL
-}
-
-func (e Entry) Validate() (bool, []error) {
+func (e EntryValidator) Validate() (bool, []error) {
 	if e.ast == nil {
 		return false, []error{ErrInvalidAst}
 	}
+
 	return e.evaluator.Eval(e.ast)
 }
-func (e Entry) ValidateDataTypeOfExpression(varType dataType.DataType) (bool, error) {
+
+func (e EntryValidator) ValidateDataTypeOfExpression(varType dataType.DataType) (bool, error) {
 	if e.ast == nil {
 		return false, nil
 	}
@@ -102,7 +95,8 @@ func (e Entry) ValidateDataTypeOfExpression(varType dataType.DataType) (bool, er
 
 	return false, errors.New(fmt.Sprintf("given data type %s is not compatible with %s", varType, e.ast.GetOperandDataType()))
 }
-func (e Entry) ValidateExistenceOfFieldReferencesInExpression(fields []field.Field) ([]field.Field, []error) {
+
+func (e EntryValidator) ValidateExistenceOfFieldReferencesInExpression(fields []field.Field) ([]field.Field, []error) {
 	qualifiedFields := sfeel.GetAllQualifiedNames(e.ast)
 	var errOut []error
 	var out []field.Field
@@ -118,16 +112,11 @@ func (e Entry) ValidateExistenceOfFieldReferencesInExpression(fields []field.Fie
 	return out, errOut
 }
 
-func (e Entry) getFieldUsingQualifiedName(name sfeel.QualifiedName, fields []field.Field) (field.Field, error) {
+func (e EntryValidator) getFieldUsingQualifiedName(name sfeel.QualifiedName, fields []field.Field) (field.Field, error) {
 	for _, f := range fields {
 		if f.Name == name.GetQualifiedName() {
 			return f, nil
 		}
 	}
 	return field.Field{}, errors.New(fmt.Sprintf("couldn't find qualified name %s in field list", name.String()))
-}
-
-func (e Entry) Convert(listener sfeel.SFeelListenerInterface) {
-	tree := sfeel.CreateSFeelTreeWalker(listener)
-	tree.Walk(e.ast)
 }

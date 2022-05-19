@@ -1,11 +1,11 @@
 package decisionTable
 
 import (
-	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/rule"
 )
 
 type RuleBuilder struct {
-	data data.Rule
+	data rule.Rule
 }
 
 func NewRuleBuilder() RuleBuilderInterface {
@@ -18,12 +18,12 @@ func (r RuleBuilder) SetAnnotation(annotation string) RuleBuilderInterface {
 }
 
 func (r RuleBuilder) AddInputEntry(expression string) RuleBuilderInterface {
-	r.data.InputExpressions = append(r.data.InputExpressions, expression)
+	r.data.InputEntries = append(r.data.InputEntries, expression)
 	return r
 }
 
 func (r RuleBuilder) AddOutputEntry(expression string) RuleBuilderInterface {
-	r.data.OutputExpressions = append(r.data.OutputExpressions, expression)
+	r.data.OutputEntries = append(r.data.OutputEntries, expression)
 	return r
 }
 

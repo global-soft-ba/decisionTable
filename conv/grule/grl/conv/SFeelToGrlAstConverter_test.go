@@ -1,18 +1,18 @@
 package conv
 
 import (
-	"github.com/global-soft-ba/decisionTable/data"
 	"github.com/global-soft-ba/decisionTable/data/dataType"
+	"github.com/global-soft-ba/decisionTable/data/entryType"
 	"github.com/global-soft-ba/decisionTable/data/field"
-	"github.com/global-soft-ba/decisionTable/lang/sfeel"
 	"testing"
 )
 
 func TestSFeelToGrlConverter_Convert(t *testing.T) {
 
 	type args struct {
-		field      field.Field
-		sfeelEntry data.EntryInterface
+		field     field.Field
+		entryType entryType.EntryType
+		entry     string
 	}
 	tests := []struct {
 		name string
@@ -26,7 +26,8 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 					Name: "X.Y",
 					Type: dataType.Integer,
 				},
-				sfeel.CreateInputEntry("[1..6]"), // ((X.Y >= 1) && (X.Y <= 6))
+				entryType.Input,
+				"[1..6]", // ((X.Y >= 1) && (X.Y <= 6))
 			},
 			want: "((X.Y :7: 1) :0: (X.Y :5: 6))",
 		},
@@ -37,7 +38,8 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 					Name: "X.Y",
 					Type: dataType.Integer,
 				},
-				sfeel.CreateInputEntry("8"),
+				entryType.Input,
+				"8",
 			},
 			want: "(X.Y :2: 8)",
 		},
@@ -48,7 +50,8 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 					Name: "X.Y",
 					Type: dataType.Integer,
 				},
-				sfeel.CreateOutputEntry("8"),
+				entryType.Output,
+				"8",
 			},
 			want: "X.Y -1 8",
 		},
@@ -59,7 +62,8 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 					Name: "X.Y",
 					Type: dataType.Integer,
 				},
-				sfeel.CreateOutputEntry("(8)"),
+				entryType.Output,
+				"(8)",
 			},
 			want: "X.Y -1 (8)",
 		},
@@ -70,7 +74,8 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 					Name: "X.Y",
 					Type: dataType.Integer,
 				},
-				sfeel.CreateOutputEntry(`-"asd"`),
+				entryType.Output,
+				`-"asd"`,
 			},
 			want: `X.Y -1 -"asd"`,
 		},
@@ -81,7 +86,8 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 					Name: "X.Y",
 					Type: dataType.Integer,
 				},
-				sfeel.CreateOutputEntry(`-1`),
+				entryType.Output,
+				`-1`,
 			},
 			want: `X.Y -1 -1`,
 		},
@@ -92,7 +98,8 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 					Name: "X.Y",
 					Type: dataType.Integer,
 				},
-				sfeel.CreateOutputEntry(`--1`),
+				entryType.Output,
+				`--1`,
 			},
 			want: `X.Y -1 --1`,
 		},
@@ -103,7 +110,8 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 					Name: "X.Y",
 					Type: dataType.Integer,
 				},
-				sfeel.CreateOutputEntry(`1**2`),
+				entryType.Output,
+				`1**2`,
 			},
 			want: `X.Y -1 1**2`,
 		},
@@ -114,7 +122,8 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 					Name: "X.Y",
 					Type: dataType.Integer,
 				},
-				sfeel.CreateOutputEntry(`2+2`),
+				entryType.Output,
+				`2+2`,
 			},
 			want: `X.Y -1 282`,
 		},
@@ -122,7 +131,7 @@ func TestSFeelToGrlConverter_Convert(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			c := CreateSFeelToGrlAstConverter()
-			got, _ := c.ConvertToGrlAst(tt.args.field, tt.args.sfeelEntry)
+			got, _ := c.ConvertToGrlAst(tt.args.field, tt.args.entryType, tt.args.entry)
 			if got.String() != tt.want {
 				t.Errorf("ConvertToGrlAst() = %v, want %v", got, tt.want)
 			}

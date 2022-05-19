@@ -74,7 +74,7 @@ var decisionTableJson = `{
 	]
 }`
 
-var decisionTableBuilder = NewDecisionTableBuilder().
+var decisionTableStruct, _ = NewDecisionTableBuilder().
 	SetID("determineEmployee").
 	SetName("Determine Employee").
 	SetHitPolicy(hitPolicy.Unique).
@@ -107,23 +107,24 @@ var decisionTableBuilder = NewDecisionTableBuilder().
 		AddOutputEntry("-").
 		AddOutputEntry("true").
 		Build(),
-	)
+	).
+	Build()
 
 func TestDecisionTable_Serialize(t *testing.T) {
 	tests := []struct {
 		name string
-		dtb  DecisionTableBuilderInterface
+		dt   DecisionTable
 		want string
 	}{
 		{
 			name: "Serialization test",
-			dtb:  decisionTableBuilder,
+			dt:   decisionTableStruct,
 			want: decisionTableJson,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, _ := tt.dtb.Serialize()
+			got, _ := tt.dt.Serialize()
 			assert.Equalf(t, tt.want, got, "Serialize()")
 		})
 	}
@@ -133,12 +134,12 @@ func TestDecisionTable_Unserialize(t *testing.T) {
 	tests := []struct {
 		name string
 		json string
-		want DecisionTableBuilderInterface
+		want DecisionTable
 	}{
 		{
 			name: "Unserialization test",
 			json: decisionTableJson,
-			want: decisionTableBuilder,
+			want: decisionTableStruct,
 		},
 	}
 	for _, tt := range tests {

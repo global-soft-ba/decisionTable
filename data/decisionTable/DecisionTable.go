@@ -1,10 +1,11 @@
-package data
+package decisionTable
 
 import (
 	"github.com/global-soft-ba/decisionTable/data/collectOperator"
 	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
 	"github.com/global-soft-ba/decisionTable/data/field"
 	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
+	"github.com/global-soft-ba/decisionTable/data/rule"
 	"github.com/global-soft-ba/decisionTable/data/standard"
 )
 
@@ -18,7 +19,5 @@ type DecisionTable struct {
 
 	InputFields  []field.Field `json:"inputFields"`
 	OutputFields []field.Field `json:"outputFields"`
-	Rules        []Rule        `json:"rules"`
-
-	Interferences bool `json:"-"`
+	Rules        []rule.Rule   `json:"rules"`
 }

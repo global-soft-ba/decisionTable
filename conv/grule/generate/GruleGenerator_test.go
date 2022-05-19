@@ -3,20 +3,19 @@ package generate
 import (
 	grule "github.com/global-soft-ba/decisionTable/conv/grule/data"
 	"github.com/global-soft-ba/decisionTable/conv/grule/grl"
-	dtable "github.com/global-soft-ba/decisionTable/data"
 	"github.com/global-soft-ba/decisionTable/data/collectOperator"
 	"github.com/global-soft-ba/decisionTable/data/dataType"
+	"github.com/global-soft-ba/decisionTable/data/entryType"
 	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
 	"github.com/global-soft-ba/decisionTable/data/field"
 	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
 	"github.com/global-soft-ba/decisionTable/data/standard"
-	"github.com/global-soft-ba/decisionTable/lang/sfeel"
 	"reflect"
 	"testing"
 )
 
-func CreateTestExpression(field field.Field, entry dtable.EntryInterface) grule.ExpressionInterface {
-	res, _ := grl.CreateExpression(field, entry)
+func CreateTestExpression(field field.Field, expressionLanguage expressionLanguage.ExpressionLanguage, entryType entryType.EntryType, entry string) grule.ExpressionInterface {
+	res, _ := grl.CreateExpression(field, expressionLanguage, entryType, entry)
 	return res
 }
 
@@ -47,13 +46,13 @@ func TestGruleGenerator_Generate(t *testing.T) {
 							Expressions: []grule.Term{
 								{
 									Field:              field.Field{Name: "I1.L1", Type: dataType.String},
-									Expression:         CreateTestExpression(field.Field{Name: "I1.L1", Type: dataType.String}, sfeel.CreateInputEntry("8")),
+									Expression:         CreateTestExpression(field.Field{Name: "I1.L1", Type: dataType.String}, expressionLanguage.SFEEL, entryType.Input, "8"),
 									ExpressionLanguage: expressionLanguage.SFEEL},
 							},
 							Assignments: []grule.Term{
 								{
 									Field:              field.Field{Name: "O1.L1", Type: dataType.Float},
-									Expression:         CreateTestExpression(field.Field{Name: "O1.L1", Type: dataType.Float}, sfeel.CreateOutputEntry("4")),
+									Expression:         CreateTestExpression(field.Field{Name: "O1.L1", Type: dataType.Float}, expressionLanguage.SFEEL, entryType.Output, "4"),
 									ExpressionLanguage: expressionLanguage.SFEEL,
 								},
 							},
@@ -83,13 +82,13 @@ func TestGruleGenerator_Generate(t *testing.T) {
 							Expressions: []grule.Term{
 								{
 									Field:              field.Field{Name: "I1.L1", Type: dataType.String},
-									Expression:         CreateTestExpression(field.Field{Name: "I1.L1", Type: dataType.String}, sfeel.CreateInputEntry("8")),
+									Expression:         CreateTestExpression(field.Field{Name: "I1.L1", Type: dataType.String}, expressionLanguage.SFEEL, entryType.Input, "8"),
 									ExpressionLanguage: expressionLanguage.SFEEL},
 							},
 							Assignments: []grule.Term{
 								{
 									Field:              field.Field{Name: "O1.L1", Type: dataType.Float},
-									Expression:         CreateTestExpression(field.Field{Name: "O1.L1", Type: dataType.Float}, sfeel.CreateOutputEntry("4")),
+									Expression:         CreateTestExpression(field.Field{Name: "O1.L1", Type: dataType.Float}, expressionLanguage.SFEEL, entryType.Output, "4"),
 									ExpressionLanguage: expressionLanguage.SFEEL,
 								},
 							},
@@ -102,13 +101,13 @@ func TestGruleGenerator_Generate(t *testing.T) {
 							Expressions: []grule.Term{
 								{
 									Field:              field.Field{Name: "I1.L1", Type: dataType.String},
-									Expression:         CreateTestExpression(field.Field{Name: "I1.L1", Type: dataType.String}, sfeel.CreateInputEntry("10")),
+									Expression:         CreateTestExpression(field.Field{Name: "I1.L1", Type: dataType.String}, expressionLanguage.SFEEL, entryType.Input, "10"),
 									ExpressionLanguage: expressionLanguage.SFEEL},
 							},
 							Assignments: []grule.Term{
 								{
 									Field:              field.Field{Name: "O1.L1", Type: dataType.Float},
-									Expression:         CreateTestExpression(field.Field{Name: "O1.L1", Type: dataType.Float}, sfeel.CreateOutputEntry("100")),
+									Expression:         CreateTestExpression(field.Field{Name: "O1.L1", Type: dataType.Float}, expressionLanguage.SFEEL, entryType.Output, "100"),
 									ExpressionLanguage: expressionLanguage.SFEEL,
 								},
 							},
@@ -138,13 +137,13 @@ func TestGruleGenerator_Generate(t *testing.T) {
 							Expressions: []grule.Term{
 								{
 									Field:              field.Field{Name: "I1.L1", Type: dataType.String},
-									Expression:         CreateTestExpression(field.Field{Name: "I1.L1", Type: dataType.String}, sfeel.CreateInputEntry("[1..6)")),
+									Expression:         CreateTestExpression(field.Field{Name: "I1.L1", Type: dataType.String}, expressionLanguage.SFEEL, entryType.Input, "[1..6)"),
 									ExpressionLanguage: expressionLanguage.SFEEL},
 							},
 							Assignments: []grule.Term{
 								{
 									Field:              field.Field{Name: "O1.L1", Type: dataType.Float},
-									Expression:         CreateTestExpression(field.Field{Name: "O1.L1", Type: dataType.Float}, sfeel.CreateOutputEntry("4")),
+									Expression:         CreateTestExpression(field.Field{Name: "O1.L1", Type: dataType.Float}, expressionLanguage.SFEEL, entryType.Output, "4"),
 									ExpressionLanguage: expressionLanguage.SFEEL,
 								},
 							},
