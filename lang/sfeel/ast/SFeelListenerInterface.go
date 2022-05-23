@@ -14,6 +14,7 @@ type SFeelListenerInterface interface {
 	ExitUnaryTests(ctx UnaryTests)
 	ExitSimpleValue(ctx SimpleValue)
 	ExitSimpleExpression(ctx SimpleExpression)
+	ExitSimpleExpressions(ctx SimpleExpressions)
 	ExitParentheses(ctx Parentheses)
 	ExitArithmeticNegation(ctx ArithmeticNegation)
 	ExitArithmeticExpression(ctx ArithmeticExpression)

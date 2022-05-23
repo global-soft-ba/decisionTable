@@ -94,7 +94,7 @@ NOTEQUAL: '!=';
 
 // General Datatypes
 INTEGER:  '0'..'9'DIGIT*;
-REAL:     DIGIT+ '.' DIGIT*'1'..'9';
+REAL:     DIGIT+ '.' DIGIT*'0'..'9';
 
 
 STRING: '"' NONCONTROL_CHAR* '"';

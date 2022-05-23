@@ -67,6 +67,32 @@ func (l *SFeelToGrlAstConverterListener) ExitInterval(ctx sfeel.Interval) {
 	l.stack.Push(logicOp)
 }
 
+func (l *SFeelToGrlAstConverterListener) ExitUnaryTests(ctx sfeel.UnaryTests) {
+	stackLength := len(ctx.GetChildren())
+
+	if stackLength > 1 {
+		var nodes []ast.Node
+		for i := 0; i < stackLength; i++ {
+			nodes = append(nodes, l.stack.Pop().(ast.Node))
+		}
+
+		newNode := createDisjunction(nodes, stackLength-1)
+		l.stack.Push(newNode)
+	}
+}
+
+func createDisjunction(nodes []ast.Node, index int) ast.Node {
+	if index == 0 {
+		return nodes[index]
+	} else {
+		return grl.LogicalOperations{
+			Left:     nodes[index],
+			Operator: grl.LogicalOR,
+			Right:    createDisjunction(nodes, index-1),
+		}
+	}
+}
+
 func (l *SFeelToGrlAstConverterListener) ExitUnaryTest(ctx sfeel.UnaryTest) {
 	rightVal := l.stack.Pop()
 	comp := grl.ComparisonOperations{
@@ -76,6 +102,10 @@ func (l *SFeelToGrlAstConverterListener) ExitUnaryTest(ctx sfeel.UnaryTest) {
 	}
 
 	l.stack.Push(comp)
+}
+
+func (l *SFeelToGrlAstConverterListener) ExitSimpleExpressions(ctx sfeel.SimpleExpressions) {
+	// TODO: Implement
 }
 
 func (l *SFeelToGrlAstConverterListener) ExitSimpleExpression(ctx sfeel.SimpleExpression) {
