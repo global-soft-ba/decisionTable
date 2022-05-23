@@ -1,12 +1,21 @@
 package decisionTable
 
 import (
-	"github.com/global-soft-ba/decisionTable/data"
-	"github.com/global-soft-ba/decisionTable/lang/sfeel"
+	"github.com/global-soft-ba/decisionTable/data/collectOperator"
+	"github.com/global-soft-ba/decisionTable/data/decisionTable"
+	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
+	"github.com/global-soft-ba/decisionTable/data/field"
+	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
+	"github.com/global-soft-ba/decisionTable/data/standard"
+)
+
+var (
+	ErrDecisionTableSerializationError   = "decision table serialization error"
+	ErrDecisionTableUnserializationError = "decision table unserialization error"
 )
 
 type DecisionTableBuilder struct {
-	decisionTable data.DecisionTable
+	data decisionTable.DecisionTable
 }
 
 func NewDecisionTableBuilder() DecisionTableBuilderInterface {
@@ -14,84 +23,60 @@ func NewDecisionTableBuilder() DecisionTableBuilderInterface {
 }
 
 func (d DecisionTableBuilder) SetID(id string) DecisionTableBuilderInterface {
-	d.decisionTable.ID = id
+	d.data.ID = id
 	return d
 }
 
 func (d DecisionTableBuilder) SetName(name string) DecisionTableBuilderInterface {
-	d.decisionTable.Name = name
+	d.data.Name = name
 	return d
 }
 
-func (d DecisionTableBuilder) SetHitPolicy(hitPolicy data.HitPolicy) DecisionTableBuilderInterface {
-	d.decisionTable.HitPolicy = hitPolicy
+func (d DecisionTableBuilder) SetHitPolicy(hitPolicy hitPolicy.HitPolicy) DecisionTableBuilderInterface {
+	d.data.HitPolicy = hitPolicy
 	return d
 }
 
-func (d DecisionTableBuilder) SetCollectOperator(collectOperator data.CollectOperator) DecisionTableBuilderInterface {
-	d.decisionTable.CollectOperator = collectOperator
+func (d DecisionTableBuilder) SetCollectOperator(collectOperator collectOperator.CollectOperator) DecisionTableBuilderInterface {
+	d.data.CollectOperator = collectOperator
 	return d
 }
 
-func (d DecisionTableBuilder) SetExpressionLanguage(expressionLanguage data.ExpressionLanguage) DecisionTableBuilderInterface {
-	d.decisionTable.ExpressionLanguage = expressionLanguage
+func (d DecisionTableBuilder) SetExpressionLanguage(expressionLanguage expressionLanguage.ExpressionLanguage) DecisionTableBuilderInterface {
+	d.data.ExpressionLanguage = expressionLanguage
 	return d
 }
 
-func (d DecisionTableBuilder) SetStandard(standard data.Standard) DecisionTableBuilderInterface {
-	d.decisionTable.Standard = standard
+func (d DecisionTableBuilder) SetStandard(standard standard.Standard) DecisionTableBuilderInterface {
+	d.data.Standard = standard
 	return d
 }
 
-func (d DecisionTableBuilder) AddInputField(inputField data.FieldInterface) DecisionTableBuilderInterface {
-	d.decisionTable.InputFields = append(d.decisionTable.InputFields, inputField)
+func (d DecisionTableBuilder) AddInputField(inputField field.Field) DecisionTableBuilderInterface {
+	d.data.InputFields = append(d.data.InputFields, inputField)
 	return d
 }
 
-func (d DecisionTableBuilder) AddOutputField(outputField data.FieldInterface) DecisionTableBuilderInterface {
-	d.decisionTable.OutputFields = append(d.decisionTable.OutputFields, outputField)
+func (d DecisionTableBuilder) AddOutputField(outputField field.Field) DecisionTableBuilderInterface {
+	d.data.OutputFields = append(d.data.OutputFields, outputField)
 	return d
 }
 
 func (d DecisionTableBuilder) AddRule(rule Rule) DecisionTableBuilderInterface {
-	d.decisionTable.Rules = append(d.decisionTable.Rules, rule.data)
+	d.data.Rules = append(d.data.Rules, rule.data)
 	return d
 }
 
-func (d DecisionTableBuilder) covertExpressionsIntoEntries(decisionTable data.DecisionTable, expressionLanguage data.ExpressionLanguage) data.DecisionTable {
-	for i, rule := range decisionTable.Rules {
-		for _, inputExpression := range rule.InputExpressions {
-			switch expressionLanguage {
-			case data.SFEEL:
-				inputEntry := sfeel.CreateInputEntry(inputExpression)
-				decisionTable.Rules[i].InputEntries = append(decisionTable.Rules[i].InputEntries, inputEntry)
-			}
-		}
-
-		for _, outputExpression := range rule.OutputExpressions {
-			switch expressionLanguage {
-			case data.SFEEL:
-				outputEntry := sfeel.CreateOutputEntry(outputExpression)
-				decisionTable.Rules[i].OutputEntries = append(decisionTable.Rules[i].OutputEntries, outputEntry)
-			}
-		}
-	}
-
-	return decisionTable
-}
-
 func (d DecisionTableBuilder) Build() (DecisionTable, error) {
-	d.decisionTable = d.covertExpressionsIntoEntries(d.decisionTable, d.decisionTable.ExpressionLanguage)
-	decisionTable := DecisionTable{data: d.decisionTable}
+	dt := DecisionTable{data: d.data}
 
-	if err := decisionTable.Validate(decisionTable.Standard()); err != nil {
+	if err := dt.Validate(dt.Standard()); err != nil {
 		return DecisionTable{}, err
 	}
 
-	return decisionTable, nil
+	return dt, nil
 }
 
 func (d DecisionTableBuilder) BuildWithoutValidation() DecisionTable {
-	d.decisionTable = d.covertExpressionsIntoEntries(d.decisionTable, d.decisionTable.ExpressionLanguage)
-	return DecisionTable{data: d.decisionTable}
+	return DecisionTable{data: d.data}
 }

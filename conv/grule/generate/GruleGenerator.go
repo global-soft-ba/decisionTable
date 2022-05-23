@@ -6,7 +6,7 @@ import (
 	grule "github.com/global-soft-ba/decisionTable/conv/grule/data"
 	"github.com/global-soft-ba/decisionTable/conv/grule/generate/grl"
 	"github.com/global-soft-ba/decisionTable/conv/grule/generate/json"
-	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/standard"
 	"text/template"
 )
 
@@ -25,7 +25,7 @@ type GruleGenerator struct {
 
 func (g *GruleGenerator) Generate(rules grule.RuleSet, targetFormat string) (interface{}, error) {
 	switch targetFormat {
-	case string(data.GRULE):
+	case string(standard.GRULE):
 		tmpl, err := grl.GenerateTemplates(rules.HitPolicy, rules.Interference)
 		if err != nil {
 			return nil, err

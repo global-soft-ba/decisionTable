@@ -1,9 +1,12 @@
 package data
 
-import "github.com/global-soft-ba/decisionTable/data"
+import (
+	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
+	"github.com/global-soft-ba/decisionTable/data/field"
+)
 
 type Term struct {
-	Field              data.FieldInterface
+	Field              field.Field
 	Expression         ExpressionInterface
-	ExpressionLanguage data.ExpressionLanguage
+	ExpressionLanguage expressionLanguage.ExpressionLanguage
 }

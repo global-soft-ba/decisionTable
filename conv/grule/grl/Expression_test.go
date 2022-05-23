@@ -2,51 +2,18 @@ package grl
 
 import (
 	"github.com/global-soft-ba/decisionTable/conv/grule/data"
-	dTable "github.com/global-soft-ba/decisionTable/data"
-	"github.com/global-soft-ba/decisionTable/lang/sfeel"
-	"reflect"
+	"github.com/global-soft-ba/decisionTable/data/dataType"
+	"github.com/global-soft-ba/decisionTable/data/entryType"
+	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
+	"github.com/global-soft-ba/decisionTable/data/field"
 	"testing"
 )
 
-func TestCreateExpression(t *testing.T) {
-	type args struct {
-		field dTable.FieldInterface
-		entry dTable.EntryInterface
-	}
-	tests := []struct {
-		name    string
-		args    args
-		want    string
-		wantErr bool
-	}{
-		{
-			name: "convert sfeel.interval  to ast",
-			args: args{
-				field: dTable.TestField{Name: "X", Key: "Y", Type: dTable.Integer},
-				entry: sfeel.CreateInputEntry("[1..6]"),
-			},
-			want:    "((X.Y :7: 1) :0: (X.Y :5: 6))",
-			wantErr: false,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := CreateExpression(tt.args.field, tt.args.entry)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("CreateExpression() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if !reflect.DeepEqual(got.String(), tt.want) {
-				t.Errorf("CreateExpression() got = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
 func TestExpression_Convert(t *testing.T) {
 	type fields struct {
-		field dTable.FieldInterface
-		entry dTable.EntryInterface
+		field     field.Field
+		entryType entryType.EntryType
+		entry     string
 	}
 	type args struct {
 		targetFormat data.OutputFormat
@@ -59,10 +26,132 @@ func TestExpression_Convert(t *testing.T) {
 		wantErr bool
 	}{
 		{
+			name: "convert string to grl",
+			fields: fields{
+				field:     field.Field{Name: "X.Y", Type: dataType.String},
+				entryType: entryType.Input,
+				entry:     `"ABC"`,
+			},
+			args:    args{targetFormat: data.GRL},
+			want:    `(X.Y == "ABC")`,
+			wantErr: false,
+		},
+		{
+			name: "convert positive integer to grl",
+			fields: fields{
+				field:     field.Field{Name: "X.Y", Type: dataType.Integer},
+				entryType: entryType.Input,
+				entry:     `10`,
+			},
+			args:    args{targetFormat: data.GRL},
+			want:    "(X.Y == 10)",
+			wantErr: false,
+		},
+		{
+			name: "convert negative integer to grl",
+			fields: fields{
+				field:     field.Field{Name: "X.Y", Type: dataType.Integer},
+				entryType: entryType.Input,
+				entry:     `-10`,
+			},
+			args:    args{targetFormat: data.GRL},
+			want:    "(X.Y == -10)",
+			wantErr: false,
+		},
+		{
+			name: "convert positive float to grl",
+			fields: fields{
+				field:     field.Field{Name: "X.Y", Type: dataType.Float},
+				entryType: entryType.Input,
+				entry:     `10.1`,
+			},
+			args:    args{targetFormat: data.GRL},
+			want:    "(X.Y == 10.1)",
+			wantErr: false,
+		},
+		{
+			name: "convert negative float to grl",
+			fields: fields{
+				field:     field.Field{Name: "X.Y", Type: dataType.Float},
+				entryType: entryType.Input,
+				entry:     `-10.1`,
+			},
+			args:    args{targetFormat: data.GRL},
+			want:    "(X.Y == -10.1)",
+			wantErr: false,
+		},
+		{
+			name: "convert boolean to grl",
+			fields: fields{
+				field:     field.Field{Name: "X.Y", Type: dataType.Boolean},
+				entryType: entryType.Input,
+				entry:     `true`,
+			},
+			args:    args{targetFormat: data.GRL},
+			want:    "(X.Y == true)",
+			wantErr: false,
+		},
+		{
+			name: "convert date to grl",
+			fields: fields{
+				field:     field.Field{Name: "X.Y", Type: dataType.DateTime},
+				entryType: entryType.Input,
+				entry:     `date and time(“2016-03-16T12:00:00”)`,
+			},
+			args:    args{targetFormat: data.GRL},
+			want:    "",
+			wantErr: false,
+		},
+		{
+			name: "convert comparison (less than) to grl",
+			fields: fields{
+				field:     field.Field{Name: "X.Y", Type: dataType.Integer},
+				entryType: entryType.Input,
+				entry:     `<10`,
+			},
+			args:    args{targetFormat: data.GRL},
+			want:    "(X.Y < 10)",
+			wantErr: false,
+		},
+		{
+			name: "convert comparison (less than or equal) to grl",
+			fields: fields{
+				field:     field.Field{Name: "X.Y", Type: dataType.Integer},
+				entryType: entryType.Input,
+				entry:     `<=10`,
+			},
+			args:    args{targetFormat: data.GRL},
+			want:    "(X.Y <= 10)",
+			wantErr: false,
+		},
+		{
+			name: "convert comparison (greater than) to grl",
+			fields: fields{
+				field:     field.Field{Name: "X.Y", Type: dataType.Integer},
+				entryType: entryType.Input,
+				entry:     `>10`,
+			},
+			args:    args{targetFormat: data.GRL},
+			want:    "(X.Y > 10)",
+			wantErr: false,
+		},
+		{
+			name: "convert comparison (greater than or equal) to grl",
+			fields: fields{
+				field:     field.Field{Name: "X.Y", Type: dataType.Integer},
+				entryType: entryType.Input,
+				entry:     `>=10`,
+			},
+			args:    args{targetFormat: data.GRL},
+			want:    "(X.Y >= 10)",
+			wantErr: false,
+		},
+		{
 			name: "convert interval to grl",
 			fields: fields{
-				field: dTable.TestField{Name: "X", Key: "Y", Type: dTable.Integer},
-				entry: sfeel.CreateInputEntry("[1..6]"),
+				field:     field.Field{Name: "X.Y", Type: dataType.Integer},
+				entryType: entryType.Input,
+				entry:     "[1..6]",
 			},
 			args:    args{targetFormat: data.GRL},
 			want:    "((X.Y >= 1) && (X.Y <= 6))",
@@ -71,24 +160,47 @@ func TestExpression_Convert(t *testing.T) {
 		{
 			name: "convert interval to grl",
 			fields: fields{
-				field: dTable.TestField{Name: "X", Key: "Y", Type: dTable.Integer},
-				entry: sfeel.CreateInputEntry("[1..6]"),
+				field:     field.Field{Name: "X.Y", Type: dataType.Integer},
+				entryType: entryType.Input,
+				entry:     "[1..6]",
 			},
 			args:    args{targetFormat: data.JSON},
 			want:    "",
 			wantErr: true,
 		},
+		{
+			name: "convert negation to grl",
+			fields: fields{
+				field:     field.Field{Name: "X.Y", Type: dataType.Integer},
+				entryType: entryType.Input,
+				entry:     "not(10)",
+			},
+			args:    args{targetFormat: data.GRL},
+			want:    "(X.Y != 10)",
+			wantErr: false,
+		},
+		{
+			name: "convert disjunction to grl",
+			fields: fields{
+				field:     field.Field{Name: "X.Y", Type: dataType.Integer},
+				entryType: entryType.Input,
+				entry:     "<200, -100, 0, 100, >200",
+			},
+			args:    args{targetFormat: data.GRL},
+			want:    "((X.Y < 200) || ((X.Y == -100) || ((X.Y == 0) || ((X.Y == 100) || (X.Y > 200))))), want = ((X.Y == -100) || ((X.Y == 0) || (X.Y == 100)))",
+			wantErr: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			e, _ := CreateExpression(tt.fields.field, tt.fields.entry)
+			e, _ := CreateExpression(tt.fields.field, expressionLanguage.SFEEL, tt.fields.entryType, tt.fields.entry)
 			got, err := e.Convert(tt.args.targetFormat)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("Convert() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("Convert() error = %v, wantErr = %v", err, tt.wantErr)
 				return
 			}
 			if got != tt.want {
-				t.Errorf("Convert() got = %v, want %v", got, tt.want)
+				t.Errorf("Convert() got = %v, want = %v", got, tt.want)
 			}
 		})
 	}

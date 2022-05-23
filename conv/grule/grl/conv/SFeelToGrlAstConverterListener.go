@@ -3,7 +3,7 @@ package conv
 import (
 	"github.com/global-soft-ba/decisionTable/ast"
 	grl "github.com/global-soft-ba/decisionTable/conv/grule/grl/ast"
-	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/field"
 	sfeel "github.com/global-soft-ba/decisionTable/lang/sfeel/ast"
 )
 
@@ -31,7 +31,7 @@ func CreateSFeelToGrlAstConverterListener() SFeelToGrlAstConverterListener {
 
 type SFeelToGrlAstConverterListener struct {
 	sfeel.SFeelListener
-	field         data.FieldInterface
+	field         field.Field
 	stack         *ast.Stack
 	symbolMapping map[int]int
 	Errors        []error
@@ -47,13 +47,13 @@ func (l *SFeelToGrlAstConverterListener) ExitInterval(ctx sfeel.Interval) {
 	leftVal := l.stack.Pop()
 
 	left := grl.ComparisonOperations{
-		Left:     grl.String{Val: l.field.GetQualifiedName()},
+		Left:     grl.String{Val: l.field.Name},
 		Operator: l.symbolMapping[ctx.StartIntervalRule.Type],
 		Right:    leftVal.(ast.Node),
 	}
 
 	right := grl.ComparisonOperations{
-		Left:     grl.String{Val: l.field.GetQualifiedName()},
+		Left:     grl.String{Val: l.field.Name},
 		Operator: l.symbolMapping[ctx.EndIntervalRule.Type],
 		Right:    rightVal.(ast.Node),
 	}
@@ -67,10 +67,36 @@ func (l *SFeelToGrlAstConverterListener) ExitInterval(ctx sfeel.Interval) {
 	l.stack.Push(logicOp)
 }
 
+func (l *SFeelToGrlAstConverterListener) ExitUnaryTests(ctx sfeel.UnaryTests) {
+	stackLength := len(ctx.GetChildren())
+
+	if stackLength > 1 {
+		var nodes []ast.Node
+		for i := 0; i < stackLength; i++ {
+			nodes = append(nodes, l.stack.Pop().(ast.Node))
+		}
+
+		newNode := createDisjunction(nodes, stackLength-1)
+		l.stack.Push(newNode)
+	}
+}
+
+func createDisjunction(nodes []ast.Node, index int) ast.Node {
+	if index == 0 {
+		return nodes[index]
+	} else {
+		return grl.LogicalOperations{
+			Left:     nodes[index],
+			Operator: grl.LogicalOR,
+			Right:    createDisjunction(nodes, index-1),
+		}
+	}
+}
+
 func (l *SFeelToGrlAstConverterListener) ExitUnaryTest(ctx sfeel.UnaryTest) {
 	rightVal := l.stack.Pop()
 	comp := grl.ComparisonOperations{
-		Left:     grl.String{Val: l.field.GetQualifiedName()},
+		Left:     grl.String{Val: l.field.Name},
 		Operator: l.symbolMapping[ctx.Operator.Type],
 		Right:    rightVal.(ast.Node),
 	}
@@ -78,10 +104,14 @@ func (l *SFeelToGrlAstConverterListener) ExitUnaryTest(ctx sfeel.UnaryTest) {
 	l.stack.Push(comp)
 }
 
+func (l *SFeelToGrlAstConverterListener) ExitSimpleExpressions(ctx sfeel.SimpleExpressions) {
+	// TODO: Implement
+}
+
 func (l *SFeelToGrlAstConverterListener) ExitSimpleExpression(ctx sfeel.SimpleExpression) {
 	rightVal := l.stack.Pop()
 	comp := grl.AssignmentOperations{
-		Left:     grl.String{Val: l.field.GetQualifiedName()},
+		Left:     grl.String{Val: l.field.Name},
 		Operator: l.symbolMapping[ctx.Operator.Type],
 		Right:    rightVal.(ast.Node),
 	}

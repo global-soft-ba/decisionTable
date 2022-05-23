@@ -2,19 +2,21 @@ package validator
 
 import (
 	"errors"
+	"fmt"
 	conf "github.com/global-soft-ba/decisionTable/config"
-	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/field"
+	"github.com/global-soft-ba/decisionTable/data/standard"
 	"go.uber.org/multierr"
 )
 
 var (
-	ErrDecisionTableFieldIdIsRequired  = "field id is required"
-	ErrDecisionTableFieldTypeIsInvalid = "field type is invalid"
+	ErrDecisionTableFieldNameIsRequired = "field name is required"
+	ErrDecisionTableFieldTypeIsInvalid  = "invalid field type"
 )
 
 type FieldValidator struct {
-	field    data.FieldInterface
-	standard data.Standard
+	field    field.Field
+	standard standard.Standard
 	errors   []error
 }
 
@@ -22,11 +24,11 @@ func NewFieldValidator() FieldValidatorInterface {
 	return FieldValidator{}
 }
 
-func (v FieldValidator) Validate(field data.FieldInterface, standard data.Standard) error {
+func (v FieldValidator) Validate(field field.Field, standard standard.Standard) error {
 	v.field = field
 	v.standard = standard
 
-	v.executeValidation(v.validateID)
+	v.executeValidation(v.validateName)
 	v.executeValidation(v.validateType)
 
 	if len(v.errors) > 0 {
@@ -42,17 +44,17 @@ func (v *FieldValidator) executeValidation(validate func() error) {
 	}
 }
 
-func (v FieldValidator) validateID() error {
-	if len(v.field.ID()) == 0 {
-		return errors.New(ErrDecisionTableFieldIdIsRequired)
+func (v FieldValidator) validateName() error {
+	if len(v.field.Name) == 0 {
+		return errors.New(ErrDecisionTableFieldNameIsRequired)
 	}
 
 	return nil
 }
 
 func (v FieldValidator) validateType() error {
-	if _, ok := conf.DecisionTableStandards[v.standard].VariableTypes[v.field.DataType()]; !ok {
-		return errors.New(ErrDecisionTableFieldTypeIsInvalid)
+	if _, ok := conf.DecisionTableStandards[v.standard].VariableTypes[v.field.Type]; !ok {
+		return fmt.Errorf("%s \"%s\"", ErrDecisionTableFieldTypeIsInvalid, v.field.Type)
 	}
 
 	return nil

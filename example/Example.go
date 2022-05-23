@@ -3,7 +3,11 @@ package main
 import (
 	"fmt"
 	"github.com/global-soft-ba/decisionTable"
-	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/dataType"
+	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
+	"github.com/global-soft-ba/decisionTable/data/field"
+	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
+	"github.com/global-soft-ba/decisionTable/data/standard"
 	"github.com/hyperjumptech/grule-rule-engine/ast"
 	"github.com/hyperjumptech/grule-rule-engine/builder"
 	"github.com/hyperjumptech/grule-rule-engine/engine"
@@ -50,13 +54,13 @@ func main() {
 	table, _ := decisionTable.NewDecisionTableBuilder().
 		SetID("determineEmployee").
 		SetName("Determine Employee").
-		SetHitPolicy(data.Unique).
-		SetExpressionLanguage(data.SFEEL).
-		SetStandard(data.GRULE).
-		AddInputField(data.TestField{Name: "Claim", Key: "TypeOfClaim", Type: data.String}).
-		AddInputField(data.TestField{Name: "Claim", Key: "ExpenditureOfClaim", Type: data.Integer}).
-		AddOutputField(data.TestField{Name: "Employee", Key: "ResponsibleEmployee", Type: data.String}).
-		AddOutputField(data.TestField{Name: "Employee", Key: "FourEyesPrinciple", Type: data.Boolean}).
+		SetHitPolicy(hitPolicy.Unique).
+		SetExpressionLanguage(expressionLanguage.SFEEL).
+		SetStandard(standard.GRULE).
+		AddInputField(field.Field{Name: "Claim.TypeOfClaim", Type: dataType.String}).
+		AddInputField(field.Field{Name: "Claim.ExpenditureOfClaim", Type: dataType.Integer}).
+		AddOutputField(field.Field{Name: "Employee.ResponsibleEmployee", Type: dataType.String}).
+		AddOutputField(field.Field{Name: "Employee.FourEyesPrinciple", Type: dataType.Boolean}).
 		AddRule(decisionTable.NewRuleBuilder().SetAnnotation("R1").
 			AddInputEntry(`"Car Accident"`).
 			AddInputEntry("<1000").
@@ -81,7 +85,7 @@ func main() {
 		Build()
 
 	// ConvertToGrlAst Table Into Grule Rules
-	rules, err := table.Convert(data.GRULE)
+	rules, err := table.Convert(standard.GRULE)
 	if err != nil {
 		fmt.Print("Error:", err)
 	}

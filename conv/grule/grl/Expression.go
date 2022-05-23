@@ -7,7 +7,9 @@ import (
 	grl "github.com/global-soft-ba/decisionTable/conv/grule/grl/ast"
 	conv "github.com/global-soft-ba/decisionTable/conv/grule/grl/conv"
 	"github.com/global-soft-ba/decisionTable/conv/grule/grl/generate"
-	dTable "github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/entryType"
+	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
+	"github.com/global-soft-ba/decisionTable/data/field"
 )
 
 var (
@@ -15,13 +17,11 @@ var (
 	ErrGruleOutputFormatNotSupported       = errors.New("output format not supported")
 )
 
-func CreateExpression(field dTable.FieldInterface, entry dTable.EntryInterface) (grule.ExpressionInterface, error) {
+func CreateExpression(field field.Field, el expressionLanguage.ExpressionLanguage, entryType entryType.EntryType, entry string) (grule.ExpressionInterface, error) {
 
-	lang := entry.ExpressionLanguage()
-
-	switch lang {
-	case dTable.SFEEL:
-		res, err := conv.CreateSFeelToGrlAstConverter().ConvertToGrlAst(field, entry)
+	switch el {
+	case expressionLanguage.SFEEL:
+		res, err := conv.CreateSFeelToGrlAstConverter().ConvertToGrlAst(field, entryType, entry)
 		if err != nil {
 			return nil, err
 		}

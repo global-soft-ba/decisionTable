@@ -3,7 +3,8 @@ package conv
 import (
 	"errors"
 	"github.com/global-soft-ba/decisionTable/conv/grule"
-	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/decisionTable"
+	"github.com/global-soft-ba/decisionTable/data/standard"
 )
 
 var (
@@ -16,21 +17,23 @@ func CreateConverter() Converter {
 
 type Converter struct{}
 
-func (c Converter) Convert(table data.DecisionTable, format string) (interface{}, error) {
+func (c Converter) Convert(decisionTable decisionTable.DecisionTable, s standard.Standard) (interface{}, error) {
 
-	switch table.Standard {
-	case data.GRULE:
+	switch decisionTable.Standard {
+	case standard.GRULE:
 		conv := grule.CreateConverter()
-		res, err := conv.Convert(table, format)
+		res, err := conv.Convert(decisionTable, s)
 		if err != nil {
 			return nil, err
 		}
 		return res, nil
 
-	case data.DROOLS:
+	case standard.DROOLS:
 		panic("implement me")
-	case data.DMN:
+
+	case standard.DMN:
 		panic("implement me")
+
 	default:
 		return nil, ErrDTableNoConverterFoundForTableStandard
 	}

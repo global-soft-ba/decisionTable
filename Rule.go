@@ -1,19 +1,21 @@
 package decisionTable
 
-import "github.com/global-soft-ba/decisionTable/data"
+import (
+	"github.com/global-soft-ba/decisionTable/data/rule"
+)
 
 type Rule struct {
-	data data.Rule
+	data rule.Rule
 }
 
 func (r Rule) Annotation() string {
-	return r.data.Description
+	return r.data.Annotation
 }
 
-func (r Rule) InputEntries() []data.EntryInterface {
+func (r Rule) InputEntries() []string {
 	return r.data.InputEntries
 }
 
-func (r Rule) OutputEntries() []data.EntryInterface {
+func (r Rule) OutputEntries() []string {
 	return r.data.OutputEntries
 }

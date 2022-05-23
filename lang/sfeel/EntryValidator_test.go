@@ -2,87 +2,12 @@ package sfeel
 
 import (
 	"github.com/global-soft-ba/decisionTable/ast"
-	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/dataType"
+	"github.com/global-soft-ba/decisionTable/data/field"
 	sfeel "github.com/global-soft-ba/decisionTable/lang/sfeel/ast"
 	"reflect"
 	"testing"
 )
-
-func TestEvalInputEntry(t *testing.T) {
-	type args struct {
-		exp string
-	}
-	tests := []struct {
-		name    string
-		args    args
-		want    string
-		wantErr bool
-	}{
-		{
-			name:    "Correct input expression",
-			args:    args{exp: "<1,<2"},
-			want:    "<1,<2",
-			wantErr: false,
-		},
-		{
-			name:    "Incorrect input expression",
-			args:    args{exp: "1+1"},
-			want:    "1+1",
-			wantErr: true,
-		},
-		{
-			name:    "Incorrect input expression",
-			args:    args{exp: "1<<<<+1"},
-			want:    "1<<<<+1",
-			wantErr: true,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got := CreateInputEntry(tt.args.exp)
-			_, err := got.Validate()
-			if (err != nil) != tt.wantErr {
-				t.Errorf("Eval() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if !reflect.DeepEqual(got.String(), tt.want) {
-				t.Errorf("CreateInputEntry() got = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func TestCreateOutputEntry(t *testing.T) {
-	type args struct {
-		exp string
-	}
-	tests := []struct {
-		name    string
-		args    args
-		want    string
-		wantErr bool
-	}{
-		{
-			name:    "incorrect output expression",
-			args:    args{exp: "<1,<2"},
-			want:    "<1,<2",
-			wantErr: true,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got := CreateOutputEntry(tt.args.exp)
-			_, err := got.Validate()
-			if (err != nil) != tt.wantErr {
-				t.Errorf("Eval() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if !reflect.DeepEqual(got.String(), tt.want) {
-				t.Errorf("CreateOutputEntry() got = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
 
 func TestExpression_ValidateDataType(t *testing.T) {
 	type fields struct {
@@ -90,7 +15,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 		expression string
 	}
 	type args struct {
-		varType data.DataType
+		varType dataType.DataType
 	}
 	tests := []struct {
 		name    string
@@ -102,21 +27,21 @@ func TestExpression_ValidateDataType(t *testing.T) {
 		{
 			name:    "correct validation integer",
 			fields:  fields{ast: sfeel.Integer{}},
-			args:    args{data.Integer},
+			args:    args{dataType.Integer},
 			want:    true,
 			wantErr: false,
 		},
 		{
 			name:    "correct validation string",
 			fields:  fields{ast: sfeel.String{}},
-			args:    args{data.String},
+			args:    args{dataType.String},
 			want:    true,
 			wantErr: false,
 		},
 		{
 			name:    "incorrect validation string",
 			fields:  fields{ast: sfeel.String{}},
-			args:    args{data.Float},
+			args:    args{dataType.Float},
 			want:    false,
 			wantErr: true,
 		},
@@ -125,7 +50,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 			fields: fields{
 				ast: sfeel.Interval{StartValue: sfeel.Integer{}, EndValue: sfeel.Float{}},
 			},
-			args:    args{data.Float},
+			args:    args{dataType.Float},
 			want:    true,
 			wantErr: false,
 		},
@@ -134,7 +59,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 			fields: fields{
 				ast: sfeel.Interval{StartValue: sfeel.Integer{}, EndValue: sfeel.Float{}},
 			},
-			args:    args{data.Integer},
+			args:    args{dataType.Integer},
 			want:    false,
 			wantErr: true,
 		},
@@ -143,7 +68,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 			fields: fields{
 				ast: sfeel.UnaryTest{Value: sfeel.Integer{}},
 			},
-			args:    args{data.Integer},
+			args:    args{dataType.Integer},
 			want:    true,
 			wantErr: false,
 		},
@@ -152,7 +77,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 			fields: fields{
 				ast: sfeel.UnaryTest{Value: sfeel.Integer{}},
 			},
-			args:    args{data.Boolean},
+			args:    args{dataType.Boolean},
 			want:    false,
 			wantErr: true,
 		},
@@ -166,7 +91,7 @@ func TestExpression_ValidateDataType(t *testing.T) {
 						sfeel.UnaryTest{Value: sfeel.Boolean{}},
 					},
 				}},
-			args:    args{data.Boolean},
+			args:    args{dataType.Boolean},
 			want:    true,
 			wantErr: false,
 		},
@@ -174,16 +99,15 @@ func TestExpression_ValidateDataType(t *testing.T) {
 			name: "empty unary validation",
 			fields: fields{
 				ast: sfeel.EmptyStatement{}},
-			args:    args{data.Boolean},
+			args:    args{dataType.Boolean},
 			want:    true,
 			wantErr: false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			e := Entry{
-				ast:        tt.fields.ast,
-				expression: tt.fields.expression,
+			e := EntryValidator{
+				ast: tt.fields.ast,
 			}
 			got, err := e.ValidateDataTypeOfExpression(tt.args.varType)
 			if (err != nil) != tt.wantErr {
@@ -203,13 +127,13 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 		expression string
 	}
 	type args struct {
-		fields []data.FieldInterface
+		fields []field.Field
 	}
 	tests := []struct {
 		name    string
 		fields  fields
 		args    args
-		want    []data.FieldInterface
+		want    []field.Field
 		wantErr bool
 	}{
 		{
@@ -217,12 +141,12 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 			fields: fields{
 				ast: sfeel.QualifiedName{Value: []string{"b", "c"}},
 			},
-			args: args{fields: []data.FieldInterface{
-				data.TestField{Name: "a", Key: "b", Type: data.Integer},
-				data.TestField{Name: "b", Key: "c", Type: data.Integer},
-				data.TestField{Name: "a", Key: "c", Type: data.Integer},
+			args: args{fields: []field.Field{
+				{Name: "a.b", Type: dataType.Integer},
+				{Name: "b.c", Type: dataType.Integer},
+				{Name: "a.c", Type: dataType.Integer},
 			}},
-			want:    []data.FieldInterface{data.TestField{Name: "b", Key: "c", Type: data.Integer}},
+			want:    []field.Field{{Name: "b.c", Type: dataType.Integer}},
 			wantErr: false,
 		},
 		{
@@ -230,12 +154,12 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 			fields: fields{
 				ast: sfeel.UnaryTest{Value: sfeel.QualifiedName{Value: []string{"a", "b"}}},
 			},
-			args: args{fields: []data.FieldInterface{
-				data.TestField{Name: "a", Key: "b", Type: data.Integer},
-				data.TestField{Name: "b", Key: "c", Type: data.Integer},
-				data.TestField{Name: "a", Key: "c", Type: data.Integer},
+			args: args{fields: []field.Field{
+				{Name: "a.b", Type: dataType.Integer},
+				{Name: "b.c", Type: dataType.Integer},
+				{Name: "a.c", Type: dataType.Integer},
 			}},
-			want:    []data.FieldInterface{data.TestField{Name: "a", Key: "b", Type: data.Integer}},
+			want:    []field.Field{{Name: "a.b", Type: dataType.Integer}},
 			wantErr: false,
 		},
 		{
@@ -251,17 +175,17 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 					},
 				},
 			},
-			args: args{fields: []data.FieldInterface{
-				data.TestField{Name: "a", Key: "b", Type: data.Integer},
-				data.TestField{Name: "b", Key: "c", Type: data.Integer},
-				data.TestField{Name: "a", Key: "c", Type: data.Integer},
+			args: args{fields: []field.Field{
+				{Name: "a.b", Type: dataType.Integer},
+				{Name: "b.c", Type: dataType.Integer},
+				{Name: "a.c", Type: dataType.Integer},
 			}},
-			want: []data.FieldInterface{
-				data.TestField{Name: "b", Key: "c", Type: data.Integer},
-				data.TestField{Name: "a", Key: "c", Type: data.Integer},
-				data.TestField{Name: "a", Key: "b", Type: data.Integer},
-				data.TestField{Name: "a", Key: "b", Type: data.Integer},
-				data.TestField{Name: "a", Key: "c", Type: data.Integer},
+			want: []field.Field{
+				{Name: "b.c", Type: dataType.Integer},
+				{Name: "a.c", Type: dataType.Integer},
+				{Name: "a.b", Type: dataType.Integer},
+				{Name: "a.b", Type: dataType.Integer},
+				{Name: "a.c", Type: dataType.Integer},
 			},
 			wantErr: false,
 		},
@@ -270,10 +194,10 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 			fields: fields{
 				ast: sfeel.UnaryTest{Value: sfeel.QualifiedName{Value: []string{"x", "x"}}},
 			},
-			args: args{fields: []data.FieldInterface{
-				data.TestField{Name: "a", Key: "b", Type: data.Integer},
-				data.TestField{Name: "b", Key: "c", Type: data.Integer},
-				data.TestField{Name: "a", Key: "c", Type: data.Integer},
+			args: args{fields: []field.Field{
+				{Name: "a.b", Type: dataType.Integer},
+				{Name: "b.c", Type: dataType.Integer},
+				{Name: "a.c", Type: dataType.Integer},
 			}},
 			want:    nil,
 			wantErr: true,
@@ -281,9 +205,8 @@ func TestExpression_ValidateFieldReferences(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			e := Entry{
-				ast:        tt.fields.ast,
-				expression: tt.fields.expression,
+			e := EntryValidator{
+				ast: tt.fields.ast,
 			}
 			got, err := e.ValidateExistenceOfFieldReferencesInExpression(tt.args.fields)
 			if (err != nil) != tt.wantErr {

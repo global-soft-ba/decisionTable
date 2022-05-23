@@ -1,7 +1,11 @@
 package decisionTable
 
 import (
-	"github.com/global-soft-ba/decisionTable/data"
+	"github.com/global-soft-ba/decisionTable/data/dataType"
+	"github.com/global-soft-ba/decisionTable/data/expressionLanguage"
+	"github.com/global-soft-ba/decisionTable/data/field"
+	"github.com/global-soft-ba/decisionTable/data/hitPolicy"
+	"github.com/global-soft-ba/decisionTable/data/standard"
 	"reflect"
 	"testing"
 )
@@ -10,14 +14,14 @@ func TestDecisionTable_ConvertWithExpressionOutput(t *testing.T) {
 	testTable, _ := NewDecisionTableBuilder().
 		SetID("determineEmployee").
 		SetName("Determine Employee").
-		SetHitPolicy(data.Unique).
-		SetExpressionLanguage(data.SFEEL).
-		SetStandard(data.GRULE).
-		AddInputField(data.TestField{Name: "claim", Key: "TypeOfClaim", Type: data.String}).
-		AddInputField(data.TestField{Name: "claim", Key: "ExpenditureOfClaim", Type: data.Integer}).
-		AddOutputField(data.TestField{Name: "Employee", Key: "ResponsibleEmployee", Type: data.String}).
-		AddOutputField(data.TestField{Name: "Employee", Key: "4EyesPrinciple", Type: data.Boolean}).
-		AddOutputField(data.TestField{Name: "Score", Key: "score", Type: data.Integer}).
+		SetHitPolicy(hitPolicy.Unique).
+		SetExpressionLanguage(expressionLanguage.SFEEL).
+		SetStandard(standard.GRULE).
+		AddInputField(field.Field{Name: "claim.TypeOfClaim", Type: dataType.String}).
+		AddInputField(field.Field{Name: "claim.ExpenditureOfClaim", Type: dataType.Integer}).
+		AddOutputField(field.Field{Name: "Employee.ResponsibleEmployee", Type: dataType.String}).
+		AddOutputField(field.Field{Name: "Employee.4EyesPrinciple", Type: dataType.Boolean}).
+		AddOutputField(field.Field{Name: "Score.score", Type: dataType.Integer}).
 		AddRule(NewRuleBuilder().
 			SetAnnotation("R1").
 			AddInputEntry(`"Car Accident"`).
@@ -48,9 +52,8 @@ func TestDecisionTable_ConvertWithExpressionOutput(t *testing.T) {
 		Build()
 
 	tests := []struct {
-		name   string
-		fields DecisionTable
-
+		name    string
+		fields  DecisionTable
 		want    []string
 		wantErr bool
 	}{
@@ -69,13 +72,13 @@ func TestDecisionTable_ConvertWithExpressionOutput(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			d := tt.fields
 
-			got, err := d.Convert(data.GRULE)
+			got, err := d.Convert(standard.GRULE)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("ConvertToGrlAst() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("ConvertToGrlAst() error = %v, wantErr = %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("ConvertToGrlAst() got = %v, want %v", got, tt.want)
+				t.Errorf("ConvertToGrlAst() got = %v, want = %v", got, tt.want)
 			}
 		})
 	}
@@ -87,13 +90,13 @@ func TestDecisionTable_Convert(t *testing.T) {
 	testTable, _ := NewDecisionTableBuilder().
 		SetID("determineEmployee").
 		SetName("Determine Employee").
-		SetHitPolicy(data.Unique).
-		SetExpressionLanguage(data.SFEEL).
-		SetStandard(data.GRULE).
-		AddInputField(data.TestField{Name: "claim", Key: "TypeOfClaim", Type: data.String}).
-		AddInputField(data.TestField{Name: "claim", Key: "ExpenditureOfClaim", Type: data.Integer}).
-		AddOutputField(data.TestField{Name: "Employee", Key: "ResponsibleEmployee", Type: data.String}).
-		AddOutputField(data.TestField{Name: "Employee", Key: "4EyesPrinciple", Type: data.Boolean}).
+		SetHitPolicy(hitPolicy.Unique).
+		SetExpressionLanguage(expressionLanguage.SFEEL).
+		SetStandard(standard.GRULE).
+		AddInputField(field.Field{Name: "claim.TypeOfClaim", Type: dataType.String}).
+		AddInputField(field.Field{Name: "claim.ExpenditureOfClaim", Type: dataType.Integer}).
+		AddOutputField(field.Field{Name: "Employee.ResponsibleEmployee", Type: dataType.String}).
+		AddOutputField(field.Field{Name: "Employee.4EyesPrinciple", Type: dataType.Boolean}).
 		AddRule(NewRuleBuilder().
 			SetAnnotation("R1").
 			AddInputEntry(`"Car Accident"`).
@@ -121,9 +124,8 @@ func TestDecisionTable_Convert(t *testing.T) {
 		Build()
 
 	tests := []struct {
-		name   string
-		fields DecisionTable
-
+		name    string
+		fields  DecisionTable
 		want    []string
 		wantErr bool
 	}{
@@ -142,13 +144,13 @@ func TestDecisionTable_Convert(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			d := tt.fields
 
-			got, err := d.Convert(data.GRULE)
+			got, err := d.Convert(standard.GRULE)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("ConvertToGrlAst() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("ConvertToGrlAst() error = %v, wantErr = %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("ConvertToGrlAst() got = %v, want %v", got, tt.want)
+				t.Errorf("ConvertToGrlAst() got = %v, want = %v", got, tt.want)
 			}
 		})
 	}
@@ -159,12 +161,12 @@ func TestDecisionTable_ConvertQualifiedName(t *testing.T) {
 	testTable, _ := NewDecisionTableBuilder().
 		SetID("determineEmployee").
 		SetName("Determine Name").
-		SetHitPolicy(data.Unique).
-		SetExpressionLanguage(data.SFEEL).
-		SetStandard(data.GRULE).
-		AddInputField(data.TestField{Name: "name", Key: "lastname", Type: data.String}).
-		AddInputField(data.TestField{Name: "name", Key: "surname", Type: data.String}).
-		AddOutputField(data.TestField{Name: "Name", Key: "equal", Type: data.Boolean}).
+		SetHitPolicy(hitPolicy.Unique).
+		SetExpressionLanguage(expressionLanguage.SFEEL).
+		SetStandard(standard.GRULE).
+		AddInputField(field.Field{Name: "name.lastname", Type: dataType.String}).
+		AddInputField(field.Field{Name: "name.surname", Type: dataType.String}).
+		AddOutputField(field.Field{Name: "Name.equal", Type: dataType.Boolean}).
 		AddRule(NewRuleBuilder().
 			SetAnnotation("R1").
 			AddInputEntry(`name.surname`).
@@ -175,9 +177,8 @@ func TestDecisionTable_ConvertQualifiedName(t *testing.T) {
 		Build()
 
 	tests := []struct {
-		name   string
-		fields DecisionTable
-
+		name    string
+		fields  DecisionTable
 		want    []string
 		wantErr bool
 	}{
@@ -194,13 +195,13 @@ func TestDecisionTable_ConvertQualifiedName(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			d := tt.fields
 
-			got, err := d.Convert(data.GRULE)
+			got, err := d.Convert(standard.GRULE)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("ConvertToGrlAst() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("ConvertToGrlAst() error = %v, wantErr = %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("ConvertToGrlAst() got = %v, want %v", got, tt.want)
+				t.Errorf("ConvertToGrlAst() got = %v, want = %v", got, tt.want)
 			}
 		})
 	}
