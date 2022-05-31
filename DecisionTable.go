@@ -83,6 +83,20 @@ func (d DecisionTable) Convert(standard standard.Standard) (interface{}, error) 
 	return res, nil
 }
 
+func (d DecisionTable) MarshalJSON() ([]byte, error) {
+	return json.Marshal(d.data)
+}
+
+func (d *DecisionTable) UnmarshalJSON(data []byte) error {
+	var dt decisionTable.DecisionTable
+	if err := json.Unmarshal(data, &dt); err != nil {
+		return err
+	}
+	d.data = dt
+
+	return nil
+}
+
 func (d DecisionTable) Serialize() (string, error) {
 	s, err := json.MarshalIndent(d.data, "", "\t")
 	if err != nil {
