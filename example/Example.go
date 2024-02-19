@@ -113,7 +113,10 @@ func main() {
 
 	// CreateEngine Instance
 	ruleEngine := engine.NewGruleEngine()
-	kb := kl.Library.NewKnowledgeBaseInstance("#exampleBase", "0.0.1")
+	kb, err := kl.Library.NewKnowledgeBaseInstance("#exampleBase", "0.0.1")
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
 
 	now := time.Now()
 	// Load example

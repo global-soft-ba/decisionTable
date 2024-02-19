@@ -3,7 +3,7 @@ package errors
 import (
 	"errors"
 	"fmt"
-	"github.com/antlr/antlr4/runtime/Go/antlr"
+	"github.com/antlr4-go/antlr/v4"
 )
 
 func NewError(format string, a ...interface{}) error {
