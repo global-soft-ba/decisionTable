@@ -1,6 +1,6 @@
 module github.com/global-soft-ba/decisionTable
 
-go 1.24.4
+go 1.26.4
 
 require (
 	github.com/antlr4-go/antlr/v4 v4.13.1
